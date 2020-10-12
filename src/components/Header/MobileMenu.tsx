@@ -12,10 +12,14 @@ const MobileMenu: React.FC<MobileMenuProps> = (): JSX.Element => {
           <a className="mobile__menu-login-link">Увійти</a>
         </Link>
         <Link href="/">
-          <a className="mobile__menu-login-link">Увійти</a>
+          <a className="mobile__menu-login-link">Зареєструватись</a>
         </Link>
       </div>
-      <div className="mobile__menu-catalog"></div>
+      <div className="mobile__menu-catalog">
+        <Link href="/">
+          <a className="mobile__menu-catalog-link">Каталог</a>
+        </Link>
+      </div>
       <div className="mobile__menu-lang"></div>
     </div>
   )
