@@ -1,6 +1,5 @@
 import React from 'react'
 import Head from 'next/head'
-import { CssBaseline } from '@material-ui/core'
 import Header from '../src/components/Header/Header'
 
 type MainLayoutProps = {
@@ -21,7 +20,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, title }) => {
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <CssBaseline />
       <Header />
       <main>{children}</main>
     </>

@@ -24,5 +24,6 @@ module.exports = {
     'prettier/prettier': ['error', {}, { usePrettierrc: true }],
     'jsx-a11y/anchor-is-valid': 0,
     'react/prop-types': 'off',
+    'typescript-eslint/no-var-requires': 0,
   },
 }
