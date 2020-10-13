@@ -1,5 +1,7 @@
 @import './variables';
 @import './layouts/header';
+@import './layouts/loginForm';
+@import './layouts/registrationForm';
 
 @media screen and (min-width: 1200px) {
   .container {
