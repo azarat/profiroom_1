@@ -1,0 +1,138 @@
+.wrapper {
+  height: 280px;
+  padding: 60px 20px;
+  text-align: center;
+  background-image: url('/pseudo-elements3.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: auto 100%;
+
+  &__title {
+    color: $white-trans-color;
+    font-size: $font-9;
+  }
+
+  &__description {
+    color: $white-color;
+    font-size: $font-16;
+  }
+
+  &__button {
+    color: $white-trans-color;
+    font-size: $font-13;
+    border: 1px solid $white-color;
+    border-radius: 3px;
+  }
+}
+
+//todo: add background color
+.main-description {
+  position: relative;
+  height: 100px;
+  margin-top: -20px;
+  padding: 10px 15px;
+  background-image: url('/dots-advantages.svg');
+  background-repeat: no-repeat;
+  background-size: 25% 80%;
+
+  &__subtitle {
+    color: $error-color;
+    font-size: $font-9;
+  }
+
+  &__title {
+    font-size: $font-24;
+  }
+
+  &__card {
+    width: 275px;
+    max-height: 75px;
+    margin: 20px auto;
+    padding: 20px 20px;
+    overflow: hidden;
+    background-color: $white-color;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(128, 152, 213, 0.3);
+    transition: $transition-height;
+  }
+
+  &__card-close {
+    max-height: 76px;
+    transition: $transition-height;
+  }
+
+  &__card-open {
+    max-height: 300px;
+    transition: $transition-height;
+  }
+
+  &__card-title {
+    margin-top: 5px;
+    font-size: $font-16;
+  }
+
+  &__card-button {
+    margin-top: 10px;
+    color: $primary-color;
+    font-size: $font-12;
+  }
+
+  &__card-button-open {
+    transform: rotate(30deg);
+  }
+
+  //todo: add gray color
+  &__card-description {
+    height: 100%;
+    margin-top: 20px;
+  }
+}
+
+.main-description__title::after {
+  position: absolute;
+  z-index: -1;
+  display: block;
+  width: 250px;
+  height: 250px;
+  margin-top: 40px;
+  margin-left: -40px;
+  border-radius: 70px;
+  box-shadow: 0 0 40px rgba(128, 152, 213, 0.2);
+  transform: rotate(30deg);
+  content: '';
+}
+
+.button {
+  display: block;
+  width: 224px;
+  margin: 15px auto;
+  padding: 10px 10px;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    height: 360px;
+    padding-top: 70px;
+    text-align: center;
+    background-image: url('/search-bg.png');
+    background-size: cover;
+
+    &__title {
+      width: 50%;
+      margin: 10px auto;
+      font-size: $font-10;
+    }
+    &__description {
+      display: block;
+      width: 60%;
+      margin: 0 auto;
+      font-size: $font-22;
+    }
+  }
+
+  .main-info::after {
+    width: 375px;
+    height: 375px;
+    margin-top: -200px;
+  }
+}

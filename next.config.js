@@ -8,7 +8,7 @@ const isProd = process.env.NODE_ENV === 'production'
 
 // fix: prevents error when .less files are required by node
 if (typeof require !== 'undefined') {
-  require.extensions['.less'] = (file) => {}
+  require.extensions['.less'] = (file) => { }
 }
 
 module.exports = withCSS({
