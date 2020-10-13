@@ -1,0 +1,133 @@
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 5px 15px;
+
+  &__menu-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    margin-right: 10px;
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  &__logo-wrapper {
+    width: 120px;
+    height: 28px;
+    margin-right: auto;
+  }
+
+  &__nav-wrapper {
+    display: none;
+    margin: auto;
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      width: 150px;
+      height: 50px;
+
+      &__item {
+        color: $black-color;
+      }
+    }
+  }
+
+  &__search-wrapper {
+    display: none;
+    width: 100%;
+    margin-right: 10px;
+  }
+
+  &__language-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    color: $secondary-color;
+    font-weight: $font-weight-600;
+    font-size: $font-16;
+    font-style: normal;
+    line-height: 20px;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+  }
+
+  &__current-lang {
+    margin-right: 10px;
+  }
+
+  &__popper-lang {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 60px;
+    height: 80px;
+    background-color: $white-color;
+    border-radius: 5px;
+  }
+
+  &__login-anchor {
+    font-weight: $font-weight-600;
+    font-size: $font-16;
+    font-style: normal;
+  }
+
+  &__login {
+    color: $secondary-color;
+  }
+
+  &__register-anchor {
+    display: none;
+    margin-left: 10px;
+    padding: 4px 12px 6px;
+    font-weight: $font-weight-600;
+    font-size: $font-14;
+    line-height: 18px;
+    text-align: center;
+    background: #3c7eea;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(60, 9, 179, 0.3);
+  }
+  &__register {
+    color: $white-color;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    &__menu-wrapper {
+      display: none;
+    }
+
+    &__logo-wrapper {
+      margin: 0;
+    }
+
+    &__nav-wrapper {
+      display: flex;
+    }
+
+    &__search-wrapper {
+      display: flex;
+    }
+
+    &__register-anchor {
+      display: flex;
+    }
+  }
+}
+@media screen and (min-width: 1200px) {
+  .header {
+    max-width: 1110px;
+    margin: 0 auto;
+  }
+}
