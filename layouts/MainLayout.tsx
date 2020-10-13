@@ -1,13 +1,16 @@
 import React from 'react'
 import Head from 'next/head'
 import Header from '../src/components/Header/Header'
+import Categories from '../src/components/Categories/Categories'
 
 type MainLayoutProps = {
   children: React.ReactNode
   title?: string
+  categories: any
 }
 
-const MainLayout: React.FC<MainLayoutProps> = ({ children, title }) => {
+const MainLayout: React.FC<MainLayoutProps> = ({ children, title, categories }) => {
+  // console.log(categories)
   return (
     <>
       <Head>
@@ -21,6 +24,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, title }) => {
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <Header />
+      <Categories categories={categories} />
       <main>{children}</main>
     </>
   )

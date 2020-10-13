@@ -1,6 +1,7 @@
 @import './variables';
 @import './layouts/header';
 @import './layouts//mobile-menu';
+@import './layouts/categories';
 
 @media screen and (min-width: 1200px) {
   .container {
