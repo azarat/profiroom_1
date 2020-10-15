@@ -36,6 +36,10 @@
 
       &__item {
         color: $black-color;
+        transition: opacity 1s ease;
+        &:hover {
+          opacity: 0.6;
+        }
       }
     }
   }
