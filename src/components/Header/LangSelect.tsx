@@ -7,20 +7,22 @@ const LangSelect: React.FC<LangSelectProps> = ({ language, updateLanguage }): JS
 
   const handleLanguage: MouseEventHandler = (e) => {
     const target = e.target as HTMLParagraphElement
-    updateLanguage(target.innerText)
+    updateLanguage(target.innerText.toLocaleLowerCase())
   }
 
   return (
     <div tabIndex={0} role="button" className="header__language-box" onClick={() => setOpen(!open)}>
-      <span className="header__current-lang">{language}</span>
+      <span style={{ textTransform: 'uppercase' }} className="header__current-lang">
+        {language}
+      </span>
       <img src="/assets/img/arrow-down.svg" alt="language selector" />
       {open && (
         <div className="header__popper-lang">
-          <p role="presentation" onClick={handleLanguage}>
-            RU
+          <p style={{ textTransform: 'uppercase' }} role="presentation" onClick={handleLanguage}>
+            ru
           </p>
-          <p role="presentation" onClick={handleLanguage}>
-            UK
+          <p style={{ textTransform: 'uppercase' }} role="presentation" onClick={handleLanguage}>
+            uk
           </p>
         </div>
       )}

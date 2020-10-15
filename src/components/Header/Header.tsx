@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 // Components
@@ -6,12 +6,13 @@ import MobileMenu from './MobileMenu'
 import LangSelect from './LangSelect'
 // Antd
 import { Input } from 'antd'
+import { MainContext } from '../../context/MainContext'
 
 const Header = (): JSX.Element => {
   const [openMenu, setOpenMenu] = useState<boolean>(false)
-  const [updateLang, setUpdatelang] = useState<string>('UK')
   const router = useRouter()
 
+  const { lang: updateLang, setLang: setUpdateLang } = useContext(MainContext)
   const { Search } = Input
 
   const handleMenu = () => {
@@ -19,7 +20,7 @@ const Header = (): JSX.Element => {
   }
 
   const updateLanguage = (value: string) => {
-    setUpdatelang(value)
+    setUpdateLang(value)
   }
 
   return (
