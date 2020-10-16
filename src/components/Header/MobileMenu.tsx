@@ -49,7 +49,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
               role="presentation"
               className="mobile__menu-lang-item"
               onClick={() => {
-                updateLanguage('UK')
+                updateLanguage('uk')
                 closeMenu()
               }}
             >
@@ -59,7 +59,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
               className="mobile__menu-lang-item"
               role="presentation"
               onClick={() => {
-                updateLanguage('RU')
+                updateLanguage('ru')
                 closeMenu()
               }}
             >

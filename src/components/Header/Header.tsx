@@ -1,19 +1,19 @@
 import React, { useContext, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+//context
+import { MainContext } from '../../context/MainContext'
 // Components
 import MobileMenu from './MobileMenu'
 import LangSelect from './LangSelect'
 // Antd
 import { Input } from 'antd'
-import { MainContext } from '../../context/MainContext'
 
 const Header = (): JSX.Element => {
   const [openMenu, setOpenMenu] = useState<boolean>(false)
   const router = useRouter()
 
   const { lang: updateLang, setLang: setUpdateLang } = useContext(MainContext)
-  const { Search } = Input
 
   const handleMenu = () => {
     setOpenMenu((prev) => !prev)
@@ -47,7 +47,7 @@ const Header = (): JSX.Element => {
             </div>
 
             <div className="header__search-wrapper">
-              <Search
+              <Input.Search
                 placeholder="Розпочати пошук..."
                 onSearch={(value) => console.log(value)}
                 enterButton

@@ -9,12 +9,19 @@ import { MainContext } from '../../context/MainContext'
 
 const Categories: React.FC<CategoriesProps> = ({ categories }): JSX.Element => {
   const { lang } = useContext(MainContext)
-  console.log(lang)
-
   const [trigger, setTrigger] = useState<string>('hover')
 
+  const {
+    json: { category },
+  } = categories
+
   useEffect(() => {
-    if (window.innerWidth > 768 && window.innerWidth <= 1024 && window.innerHeight > 850) {
+    if (
+      typeof window !== undefined &&
+      window.innerWidth > 768 &&
+      window.innerWidth <= 1024 &&
+      window.innerHeight > 850
+    ) {
       setTrigger('click')
     }
   })
@@ -24,7 +31,7 @@ const Categories: React.FC<CategoriesProps> = ({ categories }): JSX.Element => {
       <div className="container">
         <div className="categories__wrapper">
           {/* TODO : Добавить ссылки в href */}
-          {categories.json.category.map((category) => (
+          {category.map((category) => (
             <Link key={category.id} href="">
               <Popover
                 arrowPointAtCenter

@@ -12,7 +12,6 @@ type MainLayoutProps = {
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children, title, categories }) => {
   const [lang, setLang] = React.useState('uk')
-  // console.log(categories)
   return (
     <>
       <MainContext.Provider value={{ lang, setLang }}>
