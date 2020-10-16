@@ -1,0 +1,227 @@
+.footer {
+  position: relative;
+  background-image: url(/assets/img/footer-bg.svg);
+  background-position: 40%;
+  background-size: cover;
+  &::after {
+    position: absolute;
+    background-image: url(/assets/img/pseudo-elements.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    content: '';
+  }
+  &__wrapper {
+    display: flex;
+    flex-direction: column-reverse;
+    margin: auto;
+    padding-top: 90px;
+  }
+
+  &__info-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__title {
+    margin: 0 auto 25px;
+    color: $white-color;
+    font-weight: $font-weight-700;
+    font-size: $font-24;
+    line-height: 24px;
+  }
+
+  &__about {
+    padding: 0 30px;
+    color: $white-trans-color;
+    text-align: center;
+  }
+
+  &__footer-about-text {
+    margin: 0;
+    padding: 0;
+  }
+
+  &__categories {
+    margin-bottom: 20px;
+    padding: 0 0 0 20px;
+  }
+
+  &__categories-title {
+    margin-right: 15px;
+    color: $white-color;
+    font-weight: $font-weight-700;
+    font-size: $font-16;
+    line-height: 20px;
+  }
+
+  &__categories-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__categories-list-item {
+    margin-right: 15px;
+    padding: 10px 0px;
+    font-size: $font-14;
+    line-height: 18px;
+  }
+
+  &__categories-list-link {
+    color: $white-color;
+  }
+
+  &__payment-cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0 20px;
+  }
+
+  &__payments-cards-wrapper {
+    width: 90px;
+    height: 40px;
+  }
+
+  &__bank-card {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__additional-pages {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    font-size: $font-13;
+  }
+  &__additional-pages-link {
+    color: $white-color;
+    font-size: $font-13;
+    line-height: 16px;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  &__contacts {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__contacts-link {
+    color: $white-color;
+    text-align: center;
+  }
+
+  &__rights {
+    margin-top: 20px;
+    padding-bottom: 20px;
+    color: $gray-trans-color;
+    font-size: $font-13;
+    line-height: 16px;
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 320px) {
+  .footer {
+    &__categories-list {
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+    }
+
+    &__additional-pages {
+      margin-top: 10px;
+      padding: 0 25px;
+    }
+
+    &__about {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+@media screen and (min-width: 425px) {
+  .footer {
+    &__additional-pages {
+      padding: 0 50px;
+    }
+
+    &__payment-cards {
+      justify-content: space-around;
+      padding: 0 20px;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .footer {
+    background-position: 55%;
+
+    &::after {
+      top: 10%;
+      left: -6%;
+      width: 35%;
+      height: 100%;
+    }
+
+    &__categories {
+      padding: 0 30px;
+    }
+
+    &__categories-title {
+      font-size: $font-20;
+      text-align: center;
+    }
+
+    &__categories-list {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      margin: 0;
+      padding: 0;
+    }
+    &__categories-list-item {
+      margin: 0;
+      padding: 0;
+    }
+
+    &__additional-pages {
+      justify-content: space-around;
+      margin-top: 20px;
+      padding: 0 25px;
+    }
+
+    &__payment-cards {
+      justify-content: center;
+    }
+
+    &__info-contact-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    &__about {
+      margin-right: auto;
+      text-align: left;
+    }
+
+    &__contacts-link {
+      text-align: left;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .footer {
+    &__wrapper {
+      background-position: 60%;
+    }
+  }
+}
