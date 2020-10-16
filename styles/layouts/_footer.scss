@@ -1,10 +1,12 @@
 .footer {
   position: relative;
+  overflow: hidden;
   background-image: url(/assets/img/footer-bg.svg);
   background-position: 40%;
   background-size: cover;
   &::after {
     position: absolute;
+    z-index: 1;
     background-image: url(/assets/img/pseudo-elements.svg);
     background-repeat: no-repeat;
     background-position: center;
@@ -45,12 +47,11 @@
   }
 
   &__categories {
-    margin-bottom: 20px;
-    padding: 0 0 0 20px;
+    padding: 0 10px;
   }
 
   &__categories-title {
-    margin-right: 15px;
+    padding: 0 10px;
     color: $white-color;
     font-weight: $font-weight-700;
     font-size: $font-16;
@@ -67,13 +68,14 @@
   }
 
   &__categories-list-item {
-    margin-right: 15px;
-    padding: 10px 0px;
+    z-index: 2;
+    margin-bottom: 10px;
     font-size: $font-14;
     line-height: 18px;
   }
 
   &__categories-list-link {
+    padding: 10px;
     color: $white-color;
   }
 
@@ -140,9 +142,15 @@
       margin-top: 10px;
       padding: 0 25px;
     }
+    &__additional-pages-link {
+      padding: 10px;
+    }
 
     &__about {
       margin-bottom: 10px;
+    }
+    &__contacts-link {
+      padding: 10px;
     }
   }
 }
@@ -162,7 +170,7 @@
 
 @media screen and (min-width: 768px) {
   .footer {
-    background-position: 55%;
+    background-position: 70%;
 
     &::after {
       top: 10%;
@@ -172,7 +180,7 @@
     }
 
     &__categories {
-      padding: 0 30px;
+      margin-bottom: 15px;
     }
 
     &__categories-title {
@@ -222,6 +230,9 @@
   .footer {
     &__wrapper {
       background-position: 60%;
+    }
+    &__categories-list-item {
+      font-size: $font-16;
     }
   }
 }

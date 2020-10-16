@@ -8,6 +8,7 @@ const Footer = (): JSX.Element => {
         <div className="footer__wrapper">
           <span className="footer__rights">© Profiroom, всі права захищені, 2019</span>
           <div className="footer__additional-pages">
+            {/* TODO : Добавить ссылки в href */}
             <Link href="">
               <a className="footer__additional-pages-link">Публічний договір (ОФЕРТА)</a>
             </Link>
@@ -50,6 +51,7 @@ const Footer = (): JSX.Element => {
             <nav className="footer__nav">
               <ul className="footer__categories-list">
                 <li className="footer__categories-list-item">
+                  {/* TODO : Добавить ссылки в href */}
                   <Link href="">
                     <a className="footer__categories-list-link">Графіка і Дизайн </a>
                   </Link>
