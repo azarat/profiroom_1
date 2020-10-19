@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 //types
 import { LangSelectProps } from './Types'
 
-const languageOptions = ['ru', 'uk', 'en']
+export const languageOptions = ['ru', 'uk', 'en']
 
 const LangSelect: React.FC<LangSelectProps> = ({ language, updateLanguage }): JSX.Element => {
   const [open, setOpen] = useState<boolean>(false)

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import Link from 'next/link'
 // Contexts
 import { CategoriesProps } from './Types'
@@ -9,22 +9,10 @@ import { MainContext } from '../../context/MainContext'
 
 const Categories: React.FC<CategoriesProps> = ({ categories }): JSX.Element => {
   const { lang } = useContext(MainContext)
-  const [trigger, setTrigger] = useState<string>('hover')
 
   const {
     json: { category },
   } = categories
-
-  useEffect(() => {
-    if (
-      typeof window !== undefined &&
-      window.innerWidth > 768 &&
-      window.innerWidth <= 1024 &&
-      window.innerHeight > 850
-    ) {
-      setTrigger('click')
-    }
-  })
 
   return (
     <div className="categories">
@@ -38,7 +26,7 @@ const Categories: React.FC<CategoriesProps> = ({ categories }): JSX.Element => {
                 className="categories__popover"
                 key={category.id}
                 placement="bottom"
-                trigger={trigger}
+                trigger="hover"
                 content={category.groups.map((group: string, index: number) => (
                   <div className="categories__item" key={index}>
                     <h4 className="categories__name">{group}</h4>
@@ -46,7 +34,7 @@ const Categories: React.FC<CategoriesProps> = ({ categories }): JSX.Element => {
                       .filter((sub) => sub.group === group)
                       .map((subFiltered) => {
                         return (
-                          <Link href="" key={subFiltered.id}>
+                          <Link href="/" key={subFiltered.id}>
                             <a className="categories__sub-link">{subFiltered[`name_${lang}`]}</a>
                           </Link>
                         )

@@ -4,6 +4,9 @@ import Link from 'next/link'
 // Types
 import { MobileMenuProps } from './Types'
 
+//Components
+import { languageOptions } from './LangSelect'
+
 const MobileMenu: React.FC<MobileMenuProps> = ({
   isOpen,
   closeMenu,
@@ -19,11 +22,12 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
     <div className={`mobile__menu-wrapper ${isOpen && 'active'}`}>
       <div className="mobile__menu">
         <div className="mobile__menu-login">
+          {/* TODO : Добавить ссылки в href */}
           <Link href="/">
-            <a className="mobile__menu-login-link">УВІЙТИ</a>
+            <a className="mobile__menu-login-link">Увійти</a>
           </Link>
           <Link href="/">
-            <a className="mobile__menu-register-link">ЗАРЕЄСТРУВАТИСЬ</a>
+            <a className="mobile__menu-register-link">Зареєструватись</a>
           </Link>
         </div>
         <div className="mobile__menu-catalog">
@@ -45,26 +49,18 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
             Змінити мову
           </button>
           <ul className={`mobile__menu-lang-list ${isLangOpen && 'active-lang'}`}>
-            <li
-              role="presentation"
-              className="mobile__menu-lang-item"
-              onClick={() => {
-                updateLanguage('uk')
-                closeMenu()
-              }}
-            >
-              Українська
-            </li>
-            <li
-              className="mobile__menu-lang-item"
-              role="presentation"
-              onClick={() => {
-                updateLanguage('ru')
-                closeMenu()
-              }}
-            >
-              Російська
-            </li>
+            {languageOptions.map((lang, index) => (
+              <li
+                key={`${index}_${lang}`}
+                role="presentation"
+                onClick={() => {
+                  updateLanguage(lang)
+                  closeMenu()
+                }}
+              >
+                {lang === 'uk' ? 'Українська' : lang === 'ru' ? 'Російська' : 'Англійська'}
+              </li>
+            ))}
           </ul>
         </div>
         <div role="presentation" onClick={handleClose} className="mobile__menu-close">
