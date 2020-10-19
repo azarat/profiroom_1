@@ -1,6 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import Header from '../src/components/Header/Header'
+import Footer from '../src/components/Footer/Footer'
 import Categories from '../src/components/Categories/Categories'
 import { MainContext } from '../src/context/MainContext'
 
@@ -13,7 +14,6 @@ type MainLayoutProps = {
 const MainLayout: React.FC<MainLayoutProps> = ({ children, title, categories }) => {
   const [lang, setLang] = React.useState('uk')
   return (
-    <>
       <MainContext.Provider value={{ lang, setLang }}>
         <Head>
           <title>{`${title ? `${title} | Profiroom` : 'Profiroom - фриланс биржа'}`}</title>
@@ -27,8 +27,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, title, categories }) 
         <Header />
         <Categories categories={categories} />
         <main>{children}</main>
+        <Footer />
       </MainContext.Provider>
-    </>
   )
 }
 
