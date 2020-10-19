@@ -7,6 +7,12 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 // Types
 import { LoginFormProps, LoginValues } from './Types'
 
+const decodeFunc = (token: string): any => {
+  const tokenSplit = token.split('.')[1]
+  const decodeToken = JSON.parse(atob(tokenSplit))
+  return decodeToken.sub
+}
+
 const LoginForm: React.FC<LoginFormProps> = ({ registrationHandler }): JSX.Element => {
   const [form] = Form.useForm()
   const router = useRouter()
@@ -46,9 +52,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ registrationHandler }): JSX.Eleme
       },
       body: JSON.stringify(values),
     })
-    const data = await response.json()
-    console.log(data)
-    // document.cookie = `jwt_token=${token}`
+    const { token } = await response.json()
+    decodeFunc(token)
+    // document.cookie = `jwt_token=${token}`m
     // router.push('/dashboard')
   }
 

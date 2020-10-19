@@ -4,6 +4,10 @@
 @import './layouts/registrationForm';
 @import './layouts/mobile-menu';
 @import './pages/loginPage';
+@import './layouts//mobile-menu';
+@import './layouts/footer';
+@import './layouts/categories';
+@import './pages/loginPage.scss';
 
 body {
   font-family: $font-roboto;
