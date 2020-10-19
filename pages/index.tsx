@@ -1,9 +1,11 @@
+import { NextPage } from 'next'
 import React from 'react'
 import MainLayout from '../layouts/MainLayout'
 
-export default function Index(): JSX.Element {
+
+const Index: NextPage = (): JSX.Element => {
   return (
-    <MainLayout>
+    <MainLayout categories={props}>
       obcaecati sequi velit in consequuntur nesciunt tempore. Eum modi porro deleniti fugit cum,
       consequatur ullam architecto deserunt laboriosam dignissimos et consectetur quidem, minima
       ipsa voluptas unde aliquid corrupti. Exercitationem sequi magni sint ipsum quisquam! Provident
@@ -66,3 +68,8 @@ export default function Index(): JSX.Element {
     </MainLayout>
   )
 }
+
+
+export { getStaticProps } from '../src/utils/service'
+
+export default Index
