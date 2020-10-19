@@ -12,6 +12,7 @@ import { Input } from 'antd'
 const Header = (): JSX.Element => {
   const [openMenu, setOpenMenu] = useState<boolean>(false)
   const router = useRouter()
+  const [isLogined, setIsLogined] = useState<boolean>(true)
 
   const { lang: updateLang, setLang: setUpdateLang } = useContext(MainContext)
 
@@ -37,10 +38,11 @@ const Header = (): JSX.Element => {
 
             <div className="header__nav-wrapper">
               <nav className="nav">
-                <Link href="">
+                {/* TODO : Добавить ссылки в href */}
+                <Link href="/">
                   <a className="nav__item">Головна</a>
                 </Link>
-                <Link href="">
+                <Link href="/">
                   <a className="nav__item">Каталог</a>
                 </Link>
               </nav>
@@ -53,20 +55,44 @@ const Header = (): JSX.Element => {
                 enterButton
               />
             </div>
-            <LangSelect updateLanguage={updateLanguage} language={updateLang} />
-            {router.pathname !== '/login' && (
-              <div className="header__login-anchor">
-                <Link href="">
-                  <a className="header__login">Увійти</a>
-                </Link>
+
+            {isLogined && (
+              <div className="header__user-panel">
+                <div className="header__user-notification">
+                  <div className="header__user-notification-icon">
+                    <img src="/assets/img/notification-icon.svg" alt="notification icon" />
+                  </div>
+                </div>
+                <span className="header__user-greetings">Привіт, username</span>
+                <div className="header__user-avatar-wrapper">
+                  <img
+                    className="header__user-avatar"
+                    src="/assets/img/avatar.svg"
+                    alt="user avatar"
+                  />
+                </div>
               </div>
             )}
-            {router.pathname !== '/login' && (
-              <div className="header__register-anchor">
-                <Link href="">
-                  <a className="header__register">Зареєструватися</a>
-                </Link>
-              </div>
+
+            <LangSelect updateLanguage={updateLanguage} language={updateLang} />
+
+            {!isLogined && (
+              <>
+                {router.pathname !== '/login' && (
+                  <div className="header__login-anchor">
+                    <Link href="/">
+                      <a className="header__login">Увійти</a>
+                    </Link>
+                  </div>
+                )}
+                {router.pathname !== '/login' && (
+                  <div className="header__register-anchor">
+                    <Link href="/">
+                      <a className="header__register">Зареєструватися</a>
+                    </Link>
+                  </div>
+                )}
+              </>
             )}
           </div>
           <MobileMenu isOpen={openMenu} closeMenu={handleMenu} updateLanguage={updateLanguage} />
