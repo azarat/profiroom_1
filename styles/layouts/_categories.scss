@@ -80,6 +80,13 @@
 }
 
 @media screen and (min-width: 1200px) {
+  .categories {
+    &__wrapper {
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+
   .ant-popover-arrow {
     display: block;
   }

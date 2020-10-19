@@ -20,7 +20,7 @@ const Categories: React.FC<CategoriesProps> = ({ categories }): JSX.Element => {
         <div className="categories__wrapper">
           {/* TODO : Добавить ссылки в href */}
           {category.map((category) => (
-            <Link key={category.id} href="">
+            <Link key={category.id} href="/">
               <Popover
                 arrowPointAtCenter
                 className="categories__popover"

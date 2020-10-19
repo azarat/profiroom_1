@@ -6,13 +6,15 @@ import { MainContext } from '../../context/MainContext'
 // Components
 import MobileMenu from './MobileMenu'
 import LangSelect from './LangSelect'
+import UserDrowDown from './UserDrowDown'
+
 // Antd
 import { Input } from 'antd'
 
 const Header = (): JSX.Element => {
   const [openMenu, setOpenMenu] = useState<boolean>(false)
-  const router = useRouter()
   const [isLogined, setIsLogined] = useState<boolean>(true)
+  const router = useRouter()
 
   const { lang: updateLang, setLang: setUpdateLang } = useContext(MainContext)
 
@@ -55,27 +57,8 @@ const Header = (): JSX.Element => {
                 enterButton
               />
             </div>
-
-            {isLogined && (
-              <div className="header__user-panel">
-                <div className="header__user-notification">
-                  <div className="header__user-notification-icon">
-                    <img src="/assets/img/notification-icon.svg" alt="notification icon" />
-                  </div>
-                </div>
-                <span className="header__user-greetings">Привіт, username</span>
-                <div className="header__user-avatar-wrapper">
-                  <img
-                    className="header__user-avatar"
-                    src="/assets/img/avatar.svg"
-                    alt="user avatar"
-                  />
-                </div>
-              </div>
-            )}
-
+            <UserDrowDown isLogined={isLogined} />
             <LangSelect updateLanguage={updateLanguage} language={updateLang} />
-
             {!isLogined && (
               <>
                 {router.pathname !== '/login' && (
@@ -85,10 +68,16 @@ const Header = (): JSX.Element => {
                     </Link>
                   </div>
                 )}
-                {router.pathname !== '/login' && (
+                {router.pathname !== '/login' ? (
                   <div className="header__register-anchor">
                     <Link href="/">
                       <a className="header__register">Зареєструватися</a>
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="header__register-anchor">
+                    <Link href="/">
+                      <a className="header__register">На головну</a>
                     </Link>
                   </div>
                 )}
