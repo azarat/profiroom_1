@@ -11,11 +11,13 @@ const login: NextPage = (): JSX.Element => {
   const [isRegistration, setIsRegistration] = useState<boolean>(false)
   const [mobile, setMobile] = useState<boolean>(false)
 
+  const windowWidth = typeof window !== 'undefined' && window.innerWidth
+
   useEffect(() => {
-    if (window.innerWidth > 767) {
+    if (windowWidth > 767) {
       setMobile(true)
     }
-  })
+  }, [windowWidth])
 
   const handleRegistration = (): void => {
     setIsRegistration((prev) => !prev)
