@@ -6,6 +6,8 @@ import { Row, Col } from 'antd'
 //types
 import { CardContent } from './Types'
 
+import Image from '../../assets/svg/shevron-blue.inline.svg'
+
 export default function Card({ image, title, description }: CardContent): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
@@ -24,14 +26,21 @@ export default function Card({ image, title, description }: CardContent): JSX.El
       onClick={openCard}
     >
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-        <Col span={6}>
+        <Col span={4}>
           <img src={image} alt="icon" />
         </Col>
         <Col span={16}>
           <p className="main-description__card-title">{title}</p>
         </Col>
         <Col>
-          <p className="main-description__card-button">&#5167;</p>
+          <Image
+            className={
+              isOpen
+                ? 'main-description__card-button main-description__card-button-open'
+                : 'main-description__card-button'
+            }
+            role="presentation"
+          />
         </Col>
       </Row>
       <Row>

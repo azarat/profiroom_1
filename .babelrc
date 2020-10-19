@@ -9,6 +9,8 @@
                 "libraryName": "antd",
                 "style": true
             }
-        ]
+        ],
+        "inline-react-svg",
+        "@babel/syntax-dynamic-import"
     ]
 }
