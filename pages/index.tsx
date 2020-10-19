@@ -1,7 +1,8 @@
+import { NextPage } from 'next'
 import React from 'react'
 import MainLayout from '../layouts/MainLayout'
 
-export default function Index(): JSX.Element {
+const Index: NextPage = (): JSX.Element => {
   return (
     <MainLayout>
       obcaecati sequi velit in consequuntur nesciunt tempore. Eum modi porro deleniti fugit cum,
@@ -66,3 +67,5 @@ export default function Index(): JSX.Element {
     </MainLayout>
   )
 }
+
+export default Index

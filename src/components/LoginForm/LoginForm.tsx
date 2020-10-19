@@ -1,17 +1,55 @@
-import React, { MouseEventHandler } from 'react'
+import React from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 // Style
 import { Input, Space, Form, Button, Checkbox } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
-
 // Types
-import { LoginFormProps } from './Types'
+import { LoginFormProps, LoginValues } from './Types'
 
 const LoginForm: React.FC<LoginFormProps> = ({ registrationHandler }): JSX.Element => {
   const [form] = Form.useForm()
+  const router = useRouter()
 
-  const onFinish = (values: any): void => {
-    console.log('received values :', values)
+  const formItemLayout = {
+    labelCol: {
+      xs: { span: 24 },
+      sm: { span: 8 },
+    },
+    wrapperCol: {
+      xs: { span: 24 },
+      sm: { span: 16 },
+    },
+  }
+  const tailFormItemLayout = {
+    wrapperCol: {
+      xs: {
+        span: 24,
+        offset: 0,
+      },
+      sm: {
+        span: 16,
+        offset: 8,
+      },
+    },
+  }
+
+  const onFinish = async (values: LoginValues): Promise<void> => {
+    if (values.foreignComp === undefined) {
+      values.foreignComp = !!values.foreignComp
+    }
+    const url = `${process.env.NEXT_PUBLIC_API}api/login`
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(values),
+    })
+    const { token } = await response.json()
+    console.log(token)
+    document.cookie = `jwt_token=${token}`
+    router.push('/dashboard')
   }
 
   const handleRegistration = (): void => {
@@ -22,7 +60,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ registrationHandler }): JSX.Eleme
     <>
       <h1 className="login__title">Ви можете увійти</h1>
       <h4 className="login__subtitle">Раді бачити вас знову</h4>
-      <Form name="login" className="login__form" form={form} onFinish={onFinish}>
+      <Form
+        {...formItemLayout}
+        name="login"
+        className="login__form"
+        form={form}
+        onFinish={onFinish}
+      >
         <Space direction="vertical">
           <Form.Item
             label="Ваш E-mail"
@@ -39,20 +83,20 @@ const LoginForm: React.FC<LoginFormProps> = ({ registrationHandler }): JSX.Eleme
           </Form.Item>
           <Form.Item
             label="Ваш пароль"
-            name="login_password"
+            name="password"
             rules={[{ required: true, message: 'Поле пароль є обовʼязковим' }]}
           >
             <Input.Password size="large" placeholder="Пароль" prefix={<LockOutlined />} />
           </Form.Item>
-          <Form.Item>
-            <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Чужий комп'ютер</Checkbox>
+          <Form.Item {...tailFormItemLayout}>
+            <Form.Item name="foreignComp" valuePropName="checked" noStyle>
+              <Checkbox>Чужий комп&apos;ютер</Checkbox>
             </Form.Item>
             <Link href="/">
               <a className="login-form-forgot">Забули пароль?</a>
             </Link>
           </Form.Item>
-          <Form.Item>
+          <Form.Item {...tailFormItemLayout}>
             <Space direction="horizontal">
               <Button type="primary" htmlType="submit" className="login-form-button">
                 Увійти

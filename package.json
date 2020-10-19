@@ -10,8 +10,10 @@
     "antd": "^4.7.0",
     "babel-plugin-import": "^1.13.1",
     "clsx": "latest",
+    "js-cookie": "^2.2.1",
     "less": "^3.12.2",
     "next": "latest",
+    "next-cookies": "^2.0.3",
     "react": "latest",
     "react-dom": "latest",
     "sass": "^1.27.0"

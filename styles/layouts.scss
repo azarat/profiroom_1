@@ -2,6 +2,11 @@
 @import './layouts/header';
 @import './layouts/loginForm';
 @import './layouts/registrationForm';
+@import './pages/loginPage.scss';
+
+body {
+  font-family: $font-roboto;
+}
 
 @media screen and (min-width: 1200px) {
   .container {
