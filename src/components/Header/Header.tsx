@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+//context
+import { MainContext } from '../../context/MainContext'
 // Components
 import MobileMenu from './MobileMenu'
 import LangSelect from './LangSelect'
@@ -9,17 +11,16 @@ import { Input } from 'antd'
 
 const Header = (): JSX.Element => {
   const [openMenu, setOpenMenu] = useState<boolean>(false)
-  const [updateLang, setUpdatelang] = useState<string>('UK')
   const router = useRouter()
 
-  const { Search } = Input
+  const { lang: updateLang, setLang: setUpdateLang } = useContext(MainContext)
 
   const handleMenu = () => {
     setOpenMenu((prev) => !prev)
   }
 
   const updateLanguage = (value: string) => {
-    setUpdatelang(value)
+    setUpdateLang(value)
   }
 
   return (
@@ -46,7 +47,7 @@ const Header = (): JSX.Element => {
             </div>
 
             <div className="header__search-wrapper">
-              <Search
+              <Input.Search
                 placeholder="Розпочати пошук..."
                 onSearch={(value) => console.log(value)}
                 enterButton
