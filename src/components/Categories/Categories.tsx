@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 // Contexts
 import { CategoriesProps } from './Types'
 //Antd
@@ -14,6 +15,10 @@ const Categories: React.FC<CategoriesProps> = ({ categories }): JSX.Element => {
     json: { category },
   } = categories
 
+  const router = useRouter()
+
+  console.log(router.pathname)
+
   return (
     <div className="categories">
       <div className="container">
@@ -27,20 +32,26 @@ const Categories: React.FC<CategoriesProps> = ({ categories }): JSX.Element => {
                 key={category.id}
                 placement="bottom"
                 trigger="hover"
-                content={category.groups.map((group: string, index: number) => (
-                  <div className="categories__item" key={index}>
-                    <h4 className="categories__name">{group}</h4>
-                    {category.sub_categories
-                      .filter((sub) => sub.group === group)
-                      .map((subFiltered) => {
-                        return (
-                          <Link href="/" key={subFiltered.id}>
-                            <a className="categories__sub-link">{subFiltered[`name_${lang}`]}</a>
-                          </Link>
-                        )
-                      })}
-                  </div>
-                ))}
+                content={
+                  router.pathname === '/catalog'
+                    ? category.groups.map((group: string, index: number) => (
+                        <div className="categories__item" key={index}>
+                          <h4 className="categories__name">{group}</h4>
+                          {category.sub_categories
+                            .filter((sub) => sub.group === group)
+                            .map((subFiltered) => {
+                              return (
+                                <Link href="/" key={subFiltered.id}>
+                                  <a className="categories__sub-link">
+                                    {subFiltered[`name_${lang}`]}
+                                  </a>
+                                </Link>
+                              )
+                            })}
+                        </div>
+                      ))
+                    : null
+                }
               >
                 <a className="categories__link">{category[`name_${lang}`]}</a>
               </Popover>
