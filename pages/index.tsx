@@ -6,6 +6,10 @@ import Link from 'next/link'
 import Card from '../src/components/Landing/Card'
 import Slider from '../src/components/Landing/Slider'
 
+//images
+import Advantages from '../public/svg/arow-advantages.svg'
+import Advantages2 from '../public/svg/arow-advantages2.svg'
+
 //todo: relocate to new file
 const dataArray = [
   {
@@ -79,13 +83,55 @@ const data = [
   },
 ]
 
+//todo: relocate to new file
+const categories = [
+  {
+    id: 1,
+    title: 'Графіка і дизайн',
+    description: 'Створюємо дизайн логотипів, сайтів, моб. додатків, дизайн поліграфії, брендбук.',
+    image: '/specialist-designer.svg',
+  },
+  {
+    id: 2,
+    title: 'Розробка та верстка',
+    description: 'Розробка вебсайтів, мобільних додатків, програм та онлайн-сервісів, верстка, QA.',
+    image: '/specialist-web.svg',
+  },
+  {
+    id: 3,
+    title: 'Робота з текстами',
+    description: 'Рерайт, художній текст, веб-контент, реферати, курсові, дипломи, статті.',
+    image: '/specialist-copyright.svg',
+  },
+  {
+    id: 4,
+    title: 'SEO',
+    description:
+      'Дослідження ринку та опитування, пошукове просування, продаж посилань, SERM, генерація лідів.',
+    image: '/specialist-seo.svg',
+  },
+  {
+    id: 5,
+    title: 'Інтернет маркетинг',
+    description:
+      'Просування сайту і блогу, реклама в соціальних медіа, пошукові системи, SMM, e-mail маркетинг.',
+    image: '/specialist-marketing.svg',
+  },
+  {
+    id: 6,
+    title: 'Відео та анімація',
+    description:
+      '2D Анімація, 3D Анімація, музика/звуки, відео, віртуальні тури, розкадровики, гейм-арт.',
+    image: '/specialist-video.svg',
+  },
+]
+
 export default function Index(): JSX.Element {
   const [client, setClient] = useState<boolean>(true)
   const [activeSlide, setActiveSlide] = useState<number>(0)
   const [fadeIn, setFadeIn] = useState<boolean>(false)
 
   const selectRole: MouseEventHandler = (event: React.MouseEvent<Element, MouseEvent>): void => {
-    // const x = document.querySelector('.how-its-work__card-flipper')
     const y = document.getElementsByClassName('how-its-work__card-flipper')
     for (let i of y) {
       if (event === 'client') {
@@ -115,31 +161,37 @@ export default function Index(): JSX.Element {
   }
   return (
     <MainLayout>
-      <div className="wrapper container">
-        <h5 className="wrapper__title">PROFIROOM ДЛЯ БІЗНЕСУ - БІРЖА ФРІЛАНСУ</h5>
-        <strong className="wrapper__description">
-          Найміть фрілансера швидко з будь-якої точки по оптимальній для вас ціні
-        </strong>
-        <Link href="/">
-          <a className="button wrapper__button">ПЕРЕЙТИ ДО КАТАЛОГУ</a>
-        </Link>
-      </div>
-      <div className="main-description">
-        <p className="main-description__subtitle">ПЕРЕВАГИ</p>
-        <strong className="main-description__title">Чому Profiroom?</strong>
-        <p className="main-description__description">
-          Біржа фрілансерів допомагає замовнику заощадити час і гроші для свого бізнесу. Адже
-          розробник, дизайнер або копірайтер, творець графіки / аудіо або відео, перекладач або
-          диктор зроблять роботу якісно, швидко і вам не потрібно облаштовувати робоче місце зі
-          сплатою податків і внесків до фондів.
-          <a className="button main-description__button">ЗАРЕЄСТРУВАТИСЯ</a>
-        </p>
-        <div className="main-description__card-container">
-          {dataArray.map(
-            ({ id, image, title, description }): JSX.Element => (
-              <Card key={id} id={id} image={image} title={title} description={description} />
-            )
-          )}
+      <div style={{ boxSizing: 'border-box', overflowX: 'hidden' }}>
+        <div className="wrapper">
+          <h5 className="wrapper__title">PROFIROOM ДЛЯ БІЗНЕСУ - БІРЖА ФРІЛАНСУ</h5>
+          <strong className="wrapper__description">
+            Найміть фрілансера швидко з будь-якої точки по оптимальній для вас ціні
+          </strong>
+          <Link href="/">
+            <a className="button wrapper__button">ПЕРЕЙТИ ДО КАТАЛОГУ</a>
+          </Link>
+        </div>
+        <div className="decoration">
+          <Advantages2 width="100%" className="decoration__prev-image" />
+          <Advantages width="100%" className="decoration__next-image" />
+        </div>
+        <div className="main-description">
+          <p className="main-description__subtitle">ПЕРЕВАГИ</p>
+          <strong className="main-description__title">Чому Profiroom?</strong>
+          <p className="main-description__description">
+            Біржа фрілансерів допомагає замовнику заощадити час і гроші для свого бізнесу. Адже
+            розробник, дизайнер або копірайтер, творець графіки / аудіо або відео, перекладач або
+            диктор зроблять роботу якісно, швидко і вам не потрібно облаштовувати робоче місце зі
+            сплатою податків і внесків до фондів.
+            <a className="button main-description__button">ЗАРЕЄСТРУВАТИСЯ</a>
+          </p>
+          <div className="main-description__card-container">
+            {dataArray.map(
+              ({ id, image, title, description }): JSX.Element => (
+                <Card key={id} id={id} image={image} title={title} description={description} />
+              )
+            )}
+          </div>
         </div>
         <div className="how-its-work">
           <div className="how-its-work__test">
@@ -179,6 +231,65 @@ export default function Index(): JSX.Element {
               </div>
             ))}
           </div>
+        </div>
+        <div className="categories">
+          <p className="categories__subtitle">КАТЕГОРІЇ РОБІТ</p>
+          <strong className="categories__title">
+            На біржі працюють фрілансери в наступних категоріях
+          </strong>
+          <div className="categories__card-container">
+            {categories.map((el) => (
+              <div className="categories__card" key={el.id}>
+                <div className="categories__card-top">
+                  <img src={el.image} className="categories__card-image" />
+                  <p className="categories__card-title">{el.title}</p>
+                </div>
+                <p className="categories__card-description">{el.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="questions">
+          <p className="questions__subtitle">З'ЯВИЛИСЯ ПИТАННЯ?</p>
+          <strong className="questions__title">Поширені запитання</strong>
+          <div className="questions__description">
+            {' '}
+            <p>Виберіть необхідну категорію: Замовникам / фрілансерам</p>
+            <br />
+            <p>Якщо ви не знайшли потрібної відповіді, задайте своє питання технічної підтримки</p>
+          </div>
+          <div className="how-its-work__select-role">
+            <p
+              className={
+                client
+                  ? 'how-its-work__slider-title-active how-its-work__slider-title'
+                  : 'how-its-work__slider-title'
+              }
+              onClick={() => selectRole('client')}
+              role="presentation"
+            >
+              Для замовника
+            </p>
+            <p
+              className={
+                client
+                  ? 'how-its-work__slider-title'
+                  : 'how-its-work__slider-title how-its-work__slider-title-active'
+              }
+              onClick={() => selectRole('freelancer')}
+              role="presentation"
+            >
+              Для фрілансера
+            </p>
+          </div>
+          <div
+            className={
+              client
+                ? 'how-its-work__indicator'
+                : ' how-its-work__indicator how-its-work__indicator-active'
+            }
+          ></div>
+          <hr className="how-its-work__indicator-bottom" />
         </div>
       </div>
     </MainLayout>

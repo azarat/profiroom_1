@@ -73,7 +73,7 @@ export default function Slider({
       ></div>
       <hr className="how-its-work__indicator-bottom" />
       {client ? (
-        <div>
+        <div className="how-its-work__description">
           <p>
             Виберіть категорію послуг вашого проекту. Потім визначтеся з фрілансером виходячи з
             портфоліо, відгуків, рейтингу.
@@ -82,7 +82,7 @@ export default function Slider({
           <p> Ці 4 простих правила допоможуть вам знайти найкращого для себе виконавця</p>
         </div>
       ) : (
-        <div>
+        <div className="how-its-work__description">
           <p>
             Фахівцю вигідно презентувати свої послуги на біржі, отримуючи нові замовлення від
             клієнтів. Онлайн платформа дозволяє працювати вам з будь-якого місця без будильників,

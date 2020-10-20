@@ -15,9 +15,9 @@ export type SliderData = {
 
 export type SliderProps = {
   client: boolean
-  selectRole: void
+  selectRole: (event: React.MouseEvent<Element, MouseEvent>) => void
   activeSlide: number
-  nextSlide: void
+  nextSlide: (event: React.MouseEvent<Element, MouseEvent>) => void
   data: Array<SliderData>
   fadeIn: boolean
   setFadeIn: React.Dispatch<React.SetStateAction<boolean>>
