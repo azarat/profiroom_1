@@ -1,0 +1,141 @@
+.card {
+  &__wrapper {
+    padding: 0 10px;
+  }
+
+  &__title {
+    font-size: 18px;
+    line-height: 23px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  &__mobile-filters {
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto 10px;
+    background: #fafbfc;
+    padding: 10px 0;
+    border: none;
+    outline: none;
+  }
+
+  &__mobile-filters-img-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    width: 34px;
+    height: 34px;
+    background: #e9ecf2;
+    border-radius: 3px;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+  }
+
+  &__filter {
+    font-size: 14px;
+    line-height: 21px;
+    color: #323c47;
+    text-transform: uppercase;
+  }
+
+  &__results {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: $gray-color;
+  }
+
+  &__online-switch {
+    display: flex;
+    justify-content: space-between;
+    flex: 0 0 55%;
+  }
+
+  &__list {
+    .item {
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      color: #323c47;
+      box-shadow: 0 0 4px rgba(199, 213, 255, 0.55);
+      border-radius: 3px;
+      background-color: #fff;
+      margin: 0 10px 30px;
+
+      &__img-wrapper {
+        width: 100%;
+      }
+
+      &__img {
+        width: 100%;
+      }
+
+      &__description {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        padding: 0 10px;
+      }
+
+      &__about {
+        text-decoration: none;
+        font-size: 14px;
+        line-height: 16px;
+        color: black;
+        margin-bottom: 35px;
+      }
+
+      &__bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      &__rating {
+        display: flex;
+      }
+
+      &__star-wrapper {
+        width: 20px;
+        display: flex;
+        align-items: center;
+      }
+
+      &__star {
+        width: 100%;
+      }
+
+      &__reviews {
+        margin-left: 30px;
+      }
+
+      &__avatar-wrapper {
+        width: 30px;
+        height: 30px;
+      }
+
+      &__avatar {
+        width: 100%;
+        border-radius: 50%;
+      }
+
+      &__price-block {
+        padding: 10px;
+        border: 1px solid #f4f7fc;
+        margin-top: 10px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+      }
+    }
+  }
+}
