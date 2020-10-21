@@ -1,5 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import Header from '../src/components/Header/Header'
 import Footer from '../src/components/Footer/Footer'
 import Categories from '../src/components/Categories/Categories'
@@ -8,11 +9,13 @@ import { MainContext } from '../src/context/MainContext'
 type MainLayoutProps = {
   children: React.ReactNode
   title?: string
-  categories: any
+  categories?: any
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children, title, categories }) => {
   const [lang, setLang] = React.useState('uk')
+
+  const router = useRouter()
   return (
     <MainContext.Provider value={{ lang, setLang, categories }}>
       <Head>
@@ -25,9 +28,11 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, title, categories }) 
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <Header />
-      <Categories categories={categories} />
+      {router.pathname !== '/login' && router.pathname !== '/dashboard' ? (
+        <Categories categories={categories} />
+      ) : null}
       <main>{children}</main>
-      <Footer />
+      {router.pathname !== '/login' ? <Footer /> : null}
     </MainContext.Provider>
   )
 }
