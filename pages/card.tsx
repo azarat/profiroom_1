@@ -1,18 +1,23 @@
 import { NextPage } from 'next'
-import React from 'react'
+import React, { useState } from 'react'
 import MainLayout from '../layouts/MainLayout'
 import Link from 'next/link'
 
-import { Switch } from 'antd'
+import { Switch, Input, Checkbox } from 'antd'
 
 const card: NextPage = (props): JSX.Element => {
+  const [isFilterOpen, setFilterOpen] = useState<boolean>(false)
+
+  const handleFilters = () => {
+    setFilterOpen((prev) => !prev)
+  }
   return (
     <MainLayout categories={props}>
       <div className="card">
         <div className="container">
           <div className="card__wrapper">
             <h2 className="card__title">1C</h2>
-            <div className="card__mobile-filters">
+            <div className="card__mobile-filters" role="presentation" onClick={handleFilters}>
               <div className="card__mobile-filters-img-wrapper">
                 <img src="/assets/img/show-filters.svg" alt="filters" />
               </div>
@@ -65,6 +70,99 @@ const card: NextPage = (props): JSX.Element => {
                       починаючи від <strong>&#8372; 2222</strong>
                     </span>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className={`card__mobile-filter mobile-filter ${
+              isFilterOpen && ' mobile-filter--open'
+            }`}
+          >
+            <div
+              className="mobile-filter__back"
+              role="presentation"
+              onClick={() => setFilterOpen(false)}
+            >
+              <p className="mobile-filter__top">Фільтр</p>
+            </div>
+            <div className="mobile-filter__budget">
+              <p className="mobile-filter__title">Бюджет</p>
+              <div className="mobile-filter__budget-options">
+                <div className="mobile-filter__option">
+                  <label htmlFor="min-price">Від</label>
+                  <Input
+                    className="mobile-filter__budget-input"
+                    type="text"
+                    placeholder="UAH"
+                    id="min-price"
+                  />
+                </div>
+                <div className="mobile-filter__option">
+                  <label htmlFor="max-price">До</label>
+                  <Input
+                    className="mobile-filter__budget-input"
+                    type="text"
+                    placeholder="UAH"
+                    id="max-price"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="mobile-filter__deadlines">
+              <p className="mobile-filter__title">Термін виконання</p>
+              <div className="mobile-filter__deadline-options">
+                <div className="mobile-filter__deadline-option">
+                  <Checkbox>
+                    <span className="mobile-filter__deadline-checkbox">Не вибрано</span>
+                  </Checkbox>
+                </div>
+                <div className="mobile-filter__deadline-option">
+                  <Checkbox>
+                    <span className="mobile-filter__deadline-checkbox">Експрес за 24 години</span>
+                  </Checkbox>
+                </div>
+                <div className="mobile-filter__deadline-option">
+                  <Checkbox>
+                    <span className="mobile-filter__deadline-checkbox"> До 3 днів</span>
+                  </Checkbox>
+                </div>
+                <div className="mobile-filter__deadline-option">
+                  <Checkbox>
+                    <span className="mobile-filter__deadline-checkbox">До 7 днів</span>
+                  </Checkbox>
+                </div>
+                <div className="mobile-filter__deadline-option">
+                  <Checkbox>
+                    <span className="mobile-filter__deadline-checkbox">До місяця</span>
+                  </Checkbox>
+                </div>
+                <div className="mobile-filter__deadline-option">
+                  <Checkbox>
+                    <span className="mobile-filter__deadline-checkbox">Будь-який час</span>
+                  </Checkbox>
+                </div>
+              </div>
+            </div>
+            <div className="mobile-filter__service">
+              <p className="mobile-filter__title">Сервіс включає</p>
+              <div className="mobile-filter__deadline-options">
+                <div className="mobile-filter__deadline-option">
+                  <Checkbox>
+                    <span className="mobile-filter__deadline-checkbox">Додаткові правки</span>
+                  </Checkbox>
+                </div>
+                <div className="mobile-filter__deadline-option">
+                  <Checkbox>
+                    <span className="mobile-filter__deadline-checkbox">
+                      Комерційне використання
+                    </span>
+                  </Checkbox>
+                </div>
+                <div className="mobile-filter__deadline-option">
+                  <Checkbox>
+                    <span className="mobile-filter__deadline-checkbox">Скорочені терміни</span>
+                  </Checkbox>
                 </div>
               </div>
             </div>
