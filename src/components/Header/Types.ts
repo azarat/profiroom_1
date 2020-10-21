@@ -8,3 +8,7 @@ export type LangSelectProps = {
   language: string
   updateLanguage: (value: string) => void
 }
+
+export type UserDropDownProps = {
+  isLogined: boolean
+}
