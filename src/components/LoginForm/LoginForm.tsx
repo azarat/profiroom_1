@@ -53,9 +53,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ registrationHandler }): JSX.Eleme
       body: JSON.stringify(values),
     })
     const { token } = await response.json()
-    decodeFunc(token)
-    // document.cookie = `jwt_token=${token}`m
-    // router.push('/dashboard')
+    const userId = decodeFunc(token)
+    document.cookie = `jwt_token=${token}`
+    document.cookie = `user_id=${userId}`
+    router.push('/dashboard')
   }
 
   const handleRegistration = (): void => {
