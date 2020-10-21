@@ -40,11 +40,10 @@ const Header = (): JSX.Element => {
 
             <div className="header__nav-wrapper">
               <nav className="nav">
-                {/* TODO : Добавить ссылки в href */}
                 <Link href="/">
                   <a className="nav__item">Головна</a>
                 </Link>
-                <Link href="/">
+                <Link href="/catalog">
                   <a className="nav__item">Каталог</a>
                 </Link>
               </nav>

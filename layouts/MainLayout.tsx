@@ -17,7 +17,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, title, categories }) 
 
   const router = useRouter()
   return (
-    <MainContext.Provider value={{ lang, setLang }}>
+    <MainContext.Provider value={{ lang, setLang, categories }}>
       <Head>
         <title>{`${title ? `${title} | Profiroom` : 'Profiroom - фриланс биржа'}`}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -28,7 +28,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, title, categories }) 
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <Header />
-
       {router.pathname !== '/login' && router.pathname !== '/dashboard' ? (
         <Categories categories={categories} />
       ) : null}
