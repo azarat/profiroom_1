@@ -1,0 +1,93 @@
+.categories {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  background-color: $primary-color;
+
+  .categories__popover {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: auto;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    &:not(:last-child) {
+      margin-bottom: 25px;
+    }
+  }
+
+  &__name {
+    color: $black-color;
+    font-weight: $font-weight-600;
+    font-size: $font-16;
+    line-height: 20px;
+  }
+
+  &__link {
+    padding: 15px;
+    color: $white-color;
+    font-weight: $font-weight-600;
+    font-size: $font-14;
+    line-height: 18px;
+    &:hover {
+      color: $white-color;
+      text-decoration: none;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: opacity 1s ease;
+    }
+  }
+  &__sub-link {
+    padding: 5px 0px;
+    color: $black-color;
+    font-size: $font-14;
+    line-height: 18px;
+    &:hover {
+      color: $black-color;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+}
+
+.ant-popover-inner-content {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(3, auto);
+  align-content: space-between;
+  align-items: flex-start;
+  padding: 20px 50px;
+}
+
+@media screen and (min-width: 768px) {
+  .categories {
+    display: flex;
+  }
+  .ant-popover-arrow {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .categories {
+    &__wrapper {
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+
+  .ant-popover-arrow {
+    display: block;
+  }
+}

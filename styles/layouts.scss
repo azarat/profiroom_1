@@ -1,5 +1,17 @@
 @import './variables';
 @import './layouts/header';
+@import './layouts/loginForm';
+@import './layouts/registrationForm';
+@import './layouts/mobile-menu';
+@import './pages/loginPage';
+@import './layouts//mobile-menu';
+@import './layouts/footer';
+@import './layouts/categories';
+@import './pages/loginPage.scss';
+@import './layouts/catalogList';
+body {
+  font-family: $font-roboto;
+}
 
 @media screen and (min-width: 1200px) {
   .container {
