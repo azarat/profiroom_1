@@ -38,40 +38,26 @@ export default function Slider({
   }
 
   return (
-    <div className="how-its-work__test">
+    <div>
       {' '}
-      <div className="how-its-work__select-role">
+      <div className="select-role">
         <p
-          className={
-            client
-              ? 'how-its-work__slider-title-active how-its-work__slider-title'
-              : 'how-its-work__slider-title'
-          }
+          className={client ? 'slider-title-active slider-title' : 'slider-title'}
           onClick={() => selectRole('client')}
           role="presentation"
         >
           Для замовника
         </p>
         <p
-          className={
-            client
-              ? 'how-its-work__slider-title'
-              : 'how-its-work__slider-title how-its-work__slider-title-active'
-          }
+          className={client ? 'slider-title' : 'slider-title slider-title-active'}
           onClick={() => selectRole('freelancer')}
           role="presentation"
         >
           Для фрілансера
         </p>
       </div>
-      <div
-        className={
-          client
-            ? 'how-its-work__indicator'
-            : ' how-its-work__indicator how-its-work__indicator-active'
-        }
-      ></div>
-      <hr className="how-its-work__indicator-bottom" />
+      <div className={client ? 'indicator' : ' indicator indicator-active'}></div>
+      <hr className="indicator-bottom" />
       {client ? (
         <div className="how-its-work__description">
           <p>
@@ -112,10 +98,10 @@ export default function Slider({
         >
           <div className="how-its-work__card-flipper">
             <div className="how-its-work__card-front">
-              <img src={data[activeSlide].clientImage} width="100%" height="100%" />
+              <img src={data[activeSlide].clientImage} width="100%" height="100%" alt="card" />
             </div>
             <div className="how-its-work__card-back">
-              <img src={data[activeSlide].freelancerImage} width="100%" height="100%" />
+              <img src={data[activeSlide].freelancerImage} width="100%" height="100%" alt="card" />
             </div>
           </div>
         </div>
@@ -128,7 +114,11 @@ export default function Slider({
           <p>{client ? data[activeSlide].clientContent : data[activeSlide].freelancerContent}</p>
         </div>
         <div className="how-its-work__slider-button-container">
-          <div className="how-its-work__slider-button" onClick={() => nextSlide('left')}>
+          <div
+            role="presentation"
+            className="how-its-work__slider-button"
+            onClick={() => nextSlide('left')}
+          >
             <Image
               className={
                 activeSlide <= 0
@@ -137,7 +127,11 @@ export default function Slider({
               }
             />
           </div>
-          <div className="how-its-work__slider-button" onClick={() => nextSlide('right')}>
+          <div
+            role="presentation"
+            className="how-its-work__slider-button"
+            onClick={() => nextSlide('right')}
+          >
             <Image
               className={
                 activeSlide >= data.length - 1

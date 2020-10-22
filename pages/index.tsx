@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useState } from 'react'
+import React, { useState } from 'react'
 import MainLayout from '../layouts/MainLayout'
 import Link from 'next/link'
 
@@ -7,162 +7,67 @@ import Card from '../src/components/Landing/Card'
 import Slider from '../src/components/Landing/Slider'
 
 //images
-import Advantages from '../public/svg/arow-advantages.svg'
-import Advantages2 from '../public/svg/arow-advantages2.svg'
+import PhoneMessageSmall from '../public/app-news-message1.svg'
+import PhoneMessageBig from '../public/app-news-message2.svg'
 
+//constants
+import {
+  cardContent,
+  sliderCardContent,
+  categories,
+  questionMenuData,
+} from '../src/constants/landing'
 //todo: relocate to new file
-const dataArray = [
-  {
-    id: 1,
-    title: 'Захист платежів',
-    image: '/payment-protection.svg',
-    description:
-      'Зарезервуйте кошти на біржі до успішного виконання проекту в повному обсязі. Вибирайте безпечну угоду для отримання якісного результату в строк',
-  },
-  {
-    id: 2,
-    title: 'Прозорість',
-    image: '/opacity.svg',
-    description:
-      'На біржі немає прихованих платежів. Ми не продаємо рейтинги і платні статуси користувачам. Біржа заробляє тільки на комісії за операцію.',
-  },
-  {
-    id: 3,
-    title: 'Швидкі виплати',
-    image: '/quick-payouts.svg',
-    description:
-      'Фрілансер отримує кошти на свій рахунок на протязі 1 години після успішного складання проекту.',
-  },
-  {
-    id: 4,
-    title: 'Кешбек',
-    image: '/cashback.svg',
-    description:
-      'Виконуйте успішно проекти без арбітражу, і отримуйте на рахунок в сервісі відсоток.',
-  },
-  {
-    id: 5,
-    title: 'Зручна система',
-    image: '/convenient-system.svg',
-    description:
-      'Виконуйте успішно проекти без арбітражу, і отримуйте на рахунок в сервісі відсоток.',
-  },
-]
-
-//todo: relocate to new file
-const data = [
-  {
-    id: 1,
-    clientContent: 'Вивчіть профіль фрілансера, особливо приклади робіт',
-    freelancerContent: 'Створіть продающий профіль та заповніть портфоліо.',
-    clientImage: '/step1.svg',
-    freelancerImage: '/step1.svg',
-  },
-  {
-    id: 2,
-    clientContent: 'Створіть продающий профіль та заповніть портфоліо.',
-    freelancerContent: 'Почніть отримувати перші відгуки за успішно виконану роботу.',
-    clientImage: '/step2.1.svg',
-    freelancerImage: '/step2.svg',
-  },
-  {
-    id: 3,
-    clientContent: 'Виберіть зручний для вас пакет послуг.',
-    freelancerContent:
-      'Успішно завершуйте взяті проекти від замовників - це підвищує вашу репутацію на біржі.',
-    clientImage: '/step3.1.svg',
-    freelancerImage: '/step3.svg',
-  },
-  {
-    id: 4,
-    clientContent: `Зв'яжіться безпосередньо з фрілансером і підтвердіть співпрацю.`,
-    freelancerContent:
-      'Чемно спілкуйтеся, виконуйте якісно роботу в строк - це запорука успішної роботи на біржі.',
-    clientImage: '/step4.1.svg',
-    freelancerImage: '/step4.svg',
-  },
-]
-
-//todo: relocate to new file
-const categories = [
-  {
-    id: 1,
-    title: 'Графіка і дизайн',
-    description: 'Створюємо дизайн логотипів, сайтів, моб. додатків, дизайн поліграфії, брендбук.',
-    image: '/specialist-designer.svg',
-  },
-  {
-    id: 2,
-    title: 'Розробка та верстка',
-    description: 'Розробка вебсайтів, мобільних додатків, програм та онлайн-сервісів, верстка, QA.',
-    image: '/specialist-web.svg',
-  },
-  {
-    id: 3,
-    title: 'Робота з текстами',
-    description: 'Рерайт, художній текст, веб-контент, реферати, курсові, дипломи, статті.',
-    image: '/specialist-copyright.svg',
-  },
-  {
-    id: 4,
-    title: 'SEO',
-    description:
-      'Дослідження ринку та опитування, пошукове просування, продаж посилань, SERM, генерація лідів.',
-    image: '/specialist-seo.svg',
-  },
-  {
-    id: 5,
-    title: 'Інтернет маркетинг',
-    description:
-      'Просування сайту і блогу, реклама в соціальних медіа, пошукові системи, SMM, e-mail маркетинг.',
-    image: '/specialist-marketing.svg',
-  },
-  {
-    id: 6,
-    title: 'Відео та анімація',
-    description:
-      '2D Анімація, 3D Анімація, музика/звуки, відео, віртуальні тури, розкадровики, гейм-арт.',
-    image: '/specialist-video.svg',
-  },
-]
 
 export default function Index(): JSX.Element {
   const [client, setClient] = useState<boolean>(true)
   const [activeSlide, setActiveSlide] = useState<number>(0)
   const [fadeIn, setFadeIn] = useState<boolean>(false)
+  const [activeButton, setActiveButton] = useState<number>()
 
-  const selectRole: MouseEventHandler = (event: React.MouseEvent<Element, MouseEvent>): void => {
-    const y = document.getElementsByClassName('how-its-work__card-flipper')
-    for (let i of y) {
-      if (event === 'client') {
-        i.style.transform = 'rotateY(0deg)'
+  const selectRole = (str: string): void => {
+    const y = document.querySelectorAll('.how-its-work__card-flipper')
+    y.forEach((i) => {
+      const t = i as HTMLElement
+      if (str === 'client') {
+        t.style.transform = 'rotateY(0deg)'
       } else {
-        i.style.transform = 'rotateY(180deg)'
+        t.style.transform = 'rotateY(180deg)'
       }
-    }
+    })
 
     setClient(!client)
+    setActiveButton(undefined)
   }
 
-  const nextSlide: MouseEventHandler = (event: React.MouseEvent<Element, MouseEvent>): void => {
-    if (event === 'right') {
-      if (activeSlide < data.length - 1) {
+  const nextSlide = (str: string): void => {
+    console.log(str)
+    if (str === 'right') {
+      if (activeSlide < sliderCardContent.length - 1) {
         setActiveSlide(activeSlide + 1)
         setFadeIn(true)
       }
     }
 
-    if (event === 'left') {
+    if (str === 'left') {
       if (activeSlide > 0) {
         setActiveSlide(activeSlide - 1)
         setFadeIn(true)
       }
     }
   }
+
+  const selectActiveButton = (num: number): void => {
+    if (activeButton === num) {
+      setActiveButton(undefined)
+    } else {
+      setActiveButton(num)
+    }
+  }
   return (
     <MainLayout>
-      <div style={{ boxSizing: 'border-box', overflowX: 'hidden' }}>
-        <div className="wrapper">
+      <div className="wrapper">
+        <div className="container">
           <h5 className="wrapper__title">PROFIROOM ДЛЯ БІЗНЕСУ - БІРЖА ФРІЛАНСУ</h5>
           <strong className="wrapper__description">
             Найміть фрілансера швидко з будь-якої точки по оптимальній для вас ціні
@@ -171,68 +76,76 @@ export default function Index(): JSX.Element {
             <a className="button wrapper__button">ПЕРЕЙТИ ДО КАТАЛОГУ</a>
           </Link>
         </div>
-        <div className="decoration">
-          <Advantages2 width="100%" className="decoration__prev-image" />
-          <Advantages width="100%" className="decoration__next-image" />
-        </div>
-        <div className="main-description">
-          <p className="main-description__subtitle">ПЕРЕВАГИ</p>
-          <strong className="main-description__title">Чому Profiroom?</strong>
-          <p className="main-description__description">
-            Біржа фрілансерів допомагає замовнику заощадити час і гроші для свого бізнесу. Адже
-            розробник, дизайнер або копірайтер, творець графіки / аудіо або відео, перекладач або
-            диктор зроблять роботу якісно, швидко і вам не потрібно облаштовувати робоче місце зі
-            сплатою податків і внесків до фондів.
-            <a className="button main-description__button">ЗАРЕЄСТРУВАТИСЯ</a>
-          </p>
-          <div className="main-description__card-container">
-            {dataArray.map(
-              ({ id, image, title, description }): JSX.Element => (
-                <Card key={id} id={id} image={image} title={title} description={description} />
-              )
-            )}
+      </div>
+      <div className="main-description">
+        <div className="container">
+          <div className="main-description__wrapper">
+            <div className="main-description__text">
+              <p className="main-description__subtitle">ПЕРЕВАГИ</p>
+              <strong className="main-description__title">Чому Profiroom?</strong>
+              <p className="main-description__description">
+                Біржа фрілансерів допомагає замовнику заощадити час і гроші для свого бізнесу. Адже
+                розробник, дизайнер або копірайтер, творець графіки / аудіо або відео, перекладач
+                або диктор зроблять роботу якісно, швидко і вам не потрібно облаштовувати робоче
+                місце зі сплатою податків і внесків до фондів.
+                <a className="button main-description__button">ЗАРЕЄСТРУВАТИСЯ</a>
+              </p>
+            </div>
+            <div className="main-description__card-container">
+              {cardContent.map(
+                ({ id, image, title, description }): JSX.Element => (
+                  <Card key={id} id={id} image={image} title={title} description={description} />
+                )
+              )}
+            </div>
           </div>
         </div>
-        <div className="how-its-work">
-          <div className="how-its-work__test">
-            <p className="how-its-work__subtitle">ПРАЦЮЙ З ВПЕВНЕНІСТЮ</p>
-            <strong className="how-its-work__title">Як це працює?</strong>
-            <Slider
-              client={client}
-              activeSlide={activeSlide}
-              selectRole={selectRole}
-              nextSlide={nextSlide}
-              data={data}
-              fadeIn={fadeIn}
-              setFadeIn={setFadeIn}
-            />
-          </div>
-          <div className="how-its-work__desktop">
-            {data.map((el) => (
-              <div className="how-its-work__test2" key={el.id}>
-                <div className="how-its-work__number-card">
-                  <div className="how-its-work__number-card-child">
-                    <p>{el.id}</p>
-                  </div>
-                </div>
-                <div className="how-its-work__card-container">
-                  <div className="how-its-work__card-flipper">
-                    <div className="how-its-work__card-front">
-                      <img src={el.clientImage} width="100%" height="100%" />
-                    </div>
-                    <div className="how-its-work__card-back">
-                      <img src={el.freelancerImage} width="100%" height="100%" />
+      </div>
+      <div className="how-its-work">
+        <div className="container">
+          <div className="how-its-work__wrapper">
+            <div className="how-its-work__text">
+              <p className="how-its-work__subtitle">ПРАЦЮЙ З ВПЕВНЕНІСТЮ</p>
+              <strong className="how-its-work__title">Як це працює?</strong>
+              <Slider
+                client={client}
+                activeSlide={activeSlide}
+                selectRole={selectRole}
+                nextSlide={nextSlide}
+                data={sliderCardContent}
+                fadeIn={fadeIn}
+                setFadeIn={setFadeIn}
+              />
+            </div>
+            <div className="how-its-work__desktop">
+              {sliderCardContent.map((el) => (
+                <div className="how-its-work__row" key={el.id}>
+                  <div className="how-its-work__number-card">
+                    <div className="how-its-work__number-card-child">
+                      <p>{el.id}</p>
                     </div>
                   </div>
+                  <div className="how-its-work__card-container">
+                    <div className="how-its-work__card-flipper">
+                      <div className="how-its-work__card-front">
+                        <img src={el.clientImage} alt="info-card" width="100%" height="100%" />
+                      </div>
+                      <div className="how-its-work__card-back">
+                        <img src={el.freelancerImage} alt="info-card" width="100%" height="100%" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="how-its-work__slider-card-content">
+                    {client ? el.clientContent : el.freelancerContent}
+                  </div>
                 </div>
-                <div className="how-its-work__slider-card-content">
-                  {client ? el.clientContent : el.freelancerContent}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-        <div className="categories">
+      </div>
+      <div className="categories">
+        <div className="container">
           <p className="categories__subtitle">КАТЕГОРІЇ РОБІТ</p>
           <strong className="categories__title">
             На біржі працюють фрілансери в наступних категоріях
@@ -241,7 +154,7 @@ export default function Index(): JSX.Element {
             {categories.map((el) => (
               <div className="categories__card" key={el.id}>
                 <div className="categories__card-top">
-                  <img src={el.image} className="categories__card-image" />
+                  <img src={el.image} alt="info-card" className="categories__card-image" />
                   <p className="categories__card-title">{el.title}</p>
                 </div>
                 <p className="categories__card-description">{el.description}</p>
@@ -249,47 +162,118 @@ export default function Index(): JSX.Element {
             ))}
           </div>
         </div>
-        <div className="questions">
-          <p className="questions__subtitle">З'ЯВИЛИСЯ ПИТАННЯ?</p>
-          <strong className="questions__title">Поширені запитання</strong>
-          <div className="questions__description">
-            {' '}
-            <p>Виберіть необхідну категорію: Замовникам / фрілансерам</p>
-            <br />
-            <p>Якщо ви не знайшли потрібної відповіді, задайте своє питання технічної підтримки</p>
+      </div>
+      <div className="questions">
+        <div className="container">
+          <div className="questions__wrapper">
+            <div>
+              <p className="questions__subtitle">З&#39;ЯВИЛИСЯ ПИТАННЯ?</p>
+              <strong className="questions__title">Поширені запитання</strong>
+              <div className="questions__description">
+                {' '}
+                <p>Виберіть необхідну категорію: Замовникам / фрілансерам</p>
+                <br />
+                <p>
+                  Якщо ви не знайшли потрібної відповіді, задайте своє питання технічної підтримки
+                </p>
+              </div>
+            </div>
+            <div className="questions__button-block">
+              <div className="select-role">
+                <p
+                  className={client ? 'slider-title-active slider-title' : 'slider-title'}
+                  onClick={() => selectRole('client')}
+                  role="presentation"
+                >
+                  Для замовника
+                </p>
+                <p
+                  className={client ? 'slider-title' : 'slider-title slider-title-active'}
+                  onClick={() => selectRole('freelancer')}
+                  role="presentation"
+                >
+                  Для фрілансера
+                </p>
+              </div>
+              <div className={client ? 'indicator' : ' indicator indicator-active'}></div>
+              <hr className="indicator-bottom" />
+              <div>
+                <div className="questions__button-container">
+                  {client
+                    ? questionMenuData.client.map((el) => (
+                        <div
+                          role="presentation"
+                          onClick={() => selectActiveButton(el.id)}
+                          className={`questions__button ${
+                            activeButton === el.id && 'questions__open-button'
+                          }`}
+                          key={el.id}
+                        >
+                          <div className="questions__button-top">
+                            <strong>{el.title}</strong>
+                          </div>
+                          <div className="questions__button-content">{el.content}</div>
+                        </div>
+                      ))
+                    : questionMenuData.freelancer.map((el) => (
+                        <div
+                          role="presentation"
+                          onClick={() => selectActiveButton(el.id)}
+                          className={`questions__button ${
+                            activeButton === el.id && 'questions__open-button'
+                          }`}
+                          key={el.id}
+                        >
+                          <div className="questions__button-top">
+                            {' '}
+                            <strong>{el.title}</strong>
+                          </div>
+                          <div className="questions__button-content">{el.content}</div>
+                        </div>
+                      ))}
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="how-its-work__select-role">
-            <p
-              className={
-                client
-                  ? 'how-its-work__slider-title-active how-its-work__slider-title'
-                  : 'how-its-work__slider-title'
-              }
-              onClick={() => selectRole('client')}
-              role="presentation"
-            >
-              Для замовника
-            </p>
-            <p
-              className={
-                client
-                  ? 'how-its-work__slider-title'
-                  : 'how-its-work__slider-title how-its-work__slider-title-active'
-              }
-              onClick={() => selectRole('freelancer')}
-              role="presentation"
-            >
-              Для фрілансера
-            </p>
+        </div>
+      </div>
+      <div className="mobile-app">
+        <div className="container">
+          <div className="mobile-app__wrapper">
+            <div>
+              <p className="mobile-app__subtitle">МОБІЛЬНИЙ ДОДАТОК</p>
+              <strong className="mobile-app__title">
+                Зовсім скоро!
+                <br /> Ваш помічник буде завжди під рукою
+              </strong>
+              <p className="mobile-app__description">
+                З мобільним додатком працювати буде набагато зручніше і швидше. <br />
+                Команда Profiroom повідомить вас про запуск
+              </p>
+            </div>
+            <div className="mobile-app__phone">
+              <img src="/phone-screen.png" alt="monile-app" className="mobile-app__phone-screen" />
+              <div className="mobile-app__phone-button"></div>
+              <div className="mobile-app__phone-message-small">
+                <PhoneMessageSmall width="100%" height="100%" />
+              </div>
+              <div className="mobile-app__phone-message-big">
+                <PhoneMessageBig width="100%" height="100%" />
+              </div>
+            </div>
           </div>
-          <div
-            className={
-              client
-                ? 'how-its-work__indicator'
-                : ' how-its-work__indicator how-its-work__indicator-active'
-            }
-          ></div>
-          <hr className="how-its-work__indicator-bottom" />
+        </div>
+      </div>
+      <div className="container">
+        <div className="get-start">
+          <div>
+            <strong className="get-start__title">
+              Зареєструватися зараз і вже через 10 хвилин почніть отримувати перші заявки від
+              фрілансерів.
+            </strong>
+            <p className="get-start__subtitle">Готові почати?</p>
+          </div>
+          <div className="button get-start__button">СТВОРИТИ АКАУНТ</div>
         </div>
       </div>
     </MainLayout>
