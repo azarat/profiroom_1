@@ -1,8 +1,11 @@
 import React from 'react'
-import MainLayout from '../layouts/MainLayout'
+import { NextPage } from 'next'
+// Layout
+import DashboardLayout from '../layouts/DashboardLayout'
 
-const Dashboard = (): JSX.Element => {
-  return <MainLayout>DashBoard</MainLayout>
+const dashboard: NextPage = (): JSX.Element => {
+  return <DashboardLayout>Hello</DashboardLayout>
 }
+
 export { authUser as getServerSideProps } from '../src/utils/auth'
-export default Dashboard
+export default dashboard

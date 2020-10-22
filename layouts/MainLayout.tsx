@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 import Header from '../src/components/Header/Header'
 import Footer from '../src/components/Footer/Footer'
 import Categories from '../src/components/Categories/Categories'
-import { MainContext } from '../src/context/MainContext'
 
 type MainLayoutProps = {
   children: React.ReactNode
@@ -13,11 +12,9 @@ type MainLayoutProps = {
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children, title, categories }) => {
-  const [lang, setLang] = React.useState('uk')
-
   const router = useRouter()
   return (
-    <MainContext.Provider value={{ lang, setLang, categories }}>
+    <>
       <Head>
         <title>{`${title ? `${title} | Profiroom` : 'Profiroom - фриланс биржа'}`}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -33,7 +30,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, title, categories }) 
       ) : null}
       <main>{children}</main>
       {router.pathname !== '/login' ? <Footer /> : null}
-    </MainContext.Provider>
+    </>
   )
 }
 
