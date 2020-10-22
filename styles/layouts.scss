@@ -1,14 +1,16 @@
 @import './variables';
 @import './layouts/header';
-@import './layouts//mobile-menu';
-@import './layouts/footer';
 @import './layouts/loginForm';
 @import './layouts/registrationForm';
 @import './layouts/mobile-menu';
+@import './pages/loginPage';
+@import './layouts//mobile-menu';
+@import './layouts/footer';
 @import './layouts/categories';
 @import './pages/loginPage.scss';
 @import './pages/card';
-
+@import './layouts/catalogList';
+@import './pages/subCatalog';
 body {
   font-family: $font-roboto;
 }

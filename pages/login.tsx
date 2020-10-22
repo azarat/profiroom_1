@@ -7,15 +7,17 @@ import LoginForm from '../src/components/LoginForm/LoginForm'
 import RegistrationForm from '../src/components/RegistrationForm/RegistrationForm'
 // Style
 
-const login: NextPage = (): JSX.Element => {
+const login: NextPage = (props): JSX.Element => {
   const [isRegistration, setIsRegistration] = useState<boolean>(false)
   const [mobile, setMobile] = useState<boolean>(false)
 
+  const windowWidth = typeof window !== 'undefined' && window.innerWidth
+
   useEffect(() => {
-    if (window.innerWidth > 767) {
+    if (windowWidth > 767) {
       setMobile(true)
     }
-  })
+  }, [windowWidth])
 
   const handleRegistration = (): void => {
     setIsRegistration((prev) => !prev)
@@ -28,7 +30,7 @@ const login: NextPage = (): JSX.Element => {
   )
 
   return (
-    <MainLayout>
+    <MainLayout title="Login Page" categories={props}>
       {!mobile && <div className="login">{renderData}</div>}
       {mobile && (
         <div className={`login ${isRegistration && 'right-panel-active'}`}>
@@ -67,5 +69,7 @@ const login: NextPage = (): JSX.Element => {
     </MainLayout>
   )
 }
+
+export { getStaticProps } from '../src/utils/service'
 
 export default login

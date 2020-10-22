@@ -1,13 +1,15 @@
 import { NextPage } from 'next'
 import React, { useState } from 'react'
-import MainLayout from '../layouts/MainLayout'
+import MainLayout from '../../../layouts/MainLayout'
 import Link from 'next/link'
 
 import { Switch, Input, Checkbox } from 'antd'
+import { useRouter } from 'next/router'
 
-const card: NextPage = (props): JSX.Element => {
+const category: NextPage = (props): JSX.Element => {
   const [isFilterOpen, setFilterOpen] = useState<boolean>(false)
-
+  const router = useRouter()
+  console.log(router)
   const handleFilters = () => {
     setFilterOpen((prev) => !prev)
   }
@@ -173,5 +175,5 @@ const card: NextPage = (props): JSX.Element => {
   )
 }
 
-export { getStaticProps } from '../src/utils/service'
-export default card
+export { getStaticProps } from '../../../src/utils/service'
+export default category
