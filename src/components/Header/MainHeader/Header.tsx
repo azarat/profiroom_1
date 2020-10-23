@@ -2,11 +2,11 @@ import React, { useContext, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 // Context
-import { MainContext } from '../../context/MainContext'
+import { MainContext } from '../../../context/MainContext'
 // Components
 import MobileMenu from './MobileMenu'
 import LangSelect from './LangSelect'
-import UserDrowDown from './UserDrowDown'
+import UserDrowDown from './UserDropDown'
 
 // Antd
 import { Input } from 'antd'
@@ -32,7 +32,11 @@ const Header = (): JSX.Element => {
         <div className="container">
           <div className="header">
             <div onClick={handleMenu} role="presentation" className="header__menu-wrapper">
-              <img src="/assets/img/menu.svg" alt="burger" />
+              <Link href="/">
+                <a>
+                  <img src="/assets/img/menu.svg" alt="burger" />
+                </a>
+              </Link>
             </div>
             <div className="header__logo-wrapper">
               <img src="/assets/img/logo.svg" alt="logo" />

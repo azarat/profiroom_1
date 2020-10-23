@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 // Hooks
-import useOutlineClick from '../../hooks/useOutsideClick'
+import useOutlineClick from '../../../hooks/useOutsideClick'
 //types
 import { LangSelectProps } from './Types'
 

@@ -1,7 +1,6 @@
 import {
   GetServerSideProps,
   GetServerSidePropsContext,
-  GetServerSidePropsResult,
   GetStaticPaths,
   GetStaticProps,
   GetStaticPropsContext,
@@ -56,7 +55,6 @@ export const getCategorySideProps: GetServerSideProps = async (
   const url = 'http://test.profiroom.com/Backend/api/catalog'
   const queryParams = context && context.params
   const res = fetch(url)
-  const
 
   return {
     props: {

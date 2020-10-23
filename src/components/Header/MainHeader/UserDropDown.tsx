@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import React, { useRef, useState } from 'react'
 // Hooks
-import useOutsideClick from '../../hooks/useOutsideClick'
+import useOutsideClick from '../../../hooks/useOutsideClick'
 // Types
 import { UserDropDownProps } from './Types'
 
-const UserDrowDown: React.FC<UserDropDownProps> = ({ isLogined }): JSX.Element => {
+const UserDropDown: React.FC<UserDropDownProps> = ({ isLogined }): JSX.Element => {
   const [dropDown, setDropDown] = useState<boolean>(false)
   const [notificationOpen, setNotificationOpen] = useState<boolean>(false)
   const dropDownRef = useRef<HTMLDivElement>(null)
@@ -103,4 +103,4 @@ const UserDrowDown: React.FC<UserDropDownProps> = ({ isLogined }): JSX.Element =
   )
 }
 
-export default UserDrowDown
+export default UserDropDown
