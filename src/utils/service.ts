@@ -1,4 +1,11 @@
-import { GetStaticPaths, GetStaticPathsResult, GetStaticProps, GetStaticPropsContext } from 'next'
+import {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  GetServerSidePropsResult,
+  GetStaticPaths,
+  GetStaticProps,
+  GetStaticPropsContext,
+} from 'next'
 
 export async function getStaticProps(): Promise<any> {
   const res = await fetch('http://test.profiroom.com/Backend/api/categories')
@@ -28,6 +35,7 @@ export const getSubCatalogPaths: GetStaticPaths = async () => {
 export const getSubCatalogProps: GetStaticProps = async (
   context: GetStaticPropsContext
 ): Promise<any> => {
+  console.log(context.params)
   const url = `http://test.profiroom.com/Backend/api/subcategories?catedory=${
     context.params && context.params.subcatalog
   }`
@@ -38,6 +46,21 @@ export const getSubCatalogProps: GetStaticProps = async (
     props: {
       subcatalog,
       categories,
+    },
+  }
+}
+
+export const getCategorySideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+): Promise<any> => {
+  const url = 'http://test.profiroom.com/Backend/api/catalog'
+  const queryParams = context && context.params
+  const res = fetch(url)
+  const
+
+  return {
+    props: {
+      message: 'Hello',
     },
   }
 }

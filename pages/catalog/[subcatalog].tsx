@@ -25,20 +25,20 @@ const subcatalog: NextPage<subCatalogProps> = ({ categories, subcatalog }): JSX.
     <MainLayout categories={categories}>
       <div className="sub-catalog-page">
         <div className="container">
-          <Breadcrumb>
+          <Breadcrumb className="sub-catalog-page__breadcrumb">
             <Breadcrumb.Item>
               <Link href="/">
-                <a className="sub-catalog-page__breadcrumb">Головна</a>
+                <a className="sub-catalog-page__breadcrumb-link">Головна</a>
               </Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item>
               <Link href="/catalog">
-                <a className="sub-catalog-page__breadcrumb">Каталог</a>
+                <a className="sub-catalog-page__breadcrumb-link">Каталог</a>
               </Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item>
               <Link href={`/catalog/${category[0].link}`}>
-                <a className="sub-catalog-page__breadcrumb">{category[0][`name_${lang}`]}</a>
+                <a className="sub-catalog-page__breadcrumb-link">{category[0][`name_${lang}`]}</a>
               </Link>
             </Breadcrumb.Item>
           </Breadcrumb>
@@ -49,7 +49,7 @@ const subcatalog: NextPage<subCatalogProps> = ({ categories, subcatalog }): JSX.
                 {category[0].sub_categories.map((subCategory) => (
                   <li className="sidebar__item" key={subCategory.id}>
                     <Link href={`${category[0].link}/${subCategory.link}`}>
-                      <a className="sidebar__link">{subCategory.name_uk}</a>
+                      <a className="sidebar__link">{subCategory[`name_${lang}`]}</a>
                     </Link>
                   </li>
                 ))}

@@ -2,20 +2,25 @@ import React, { useContext } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 // Contexts
-import { MainContext } from '../../context/MainContext'
 //Antd
 import { Popover } from 'antd'
 // Types
 import { CategoriesProps } from './Types'
+import { MainContext } from '../../context/MainContext'
 
 const Categories: React.FC<CategoriesProps> = ({ categories }): JSX.Element => {
   const { lang } = useContext(MainContext)
-
   const {
     json: { category },
   } = categories
 
   const router = useRouter()
+
+  const widthDevice =
+    typeof window !== 'undefined' &&
+    window.innerWidth > 767 &&
+    window.innerHeight > 850 &&
+    window.innerWidth < 1025
 
   return (
     <div className="categories">
@@ -24,7 +29,7 @@ const Categories: React.FC<CategoriesProps> = ({ categories }): JSX.Element => {
           {/* TODO : Добавить ссылки в href */}
           {category.map((category) => (
             <Link key={category.id} href={`/catalog/${category.link}`}>
-              {router.pathname === '/catalog' ? (
+              {router.pathname === '/catalog' || widthDevice ? (
                 <a className="categories__link">{category[`name_${lang}`]}</a>
               ) : (
                 <Popover
@@ -41,7 +46,7 @@ const Categories: React.FC<CategoriesProps> = ({ categories }): JSX.Element => {
                         .map((subFiltered) => {
                           return (
                             <Link
-                              href={`catalog/${category.link}/${subFiltered.link}`}
+                              href={`/${category.link}/${subFiltered.link}`}
                               key={subFiltered.id}
                             >
                               <a className="categories__sub-link">{subFiltered[`name_${lang}`]}</a>

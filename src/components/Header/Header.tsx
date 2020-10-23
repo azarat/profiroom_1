@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-//context
+// Context
 import { MainContext } from '../../context/MainContext'
 // Components
 import MobileMenu from './MobileMenu'

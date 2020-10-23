@@ -2,6 +2,19 @@
   &__wrapper {
     display: flex;
   }
+
+  &__breadcrumb {
+    margin-top: 25px;
+    padding: 15px;
+  }
+
+  &__breadcrumb-link {
+    color: $black-color;
+    font-weight: $font-weight-400;
+    font-size: $font-14;
+    line-height: 18px;
+    text-decoration: none;
+  }
   &__title {
     margin-bottom: 30px;
     color: $black-color;
@@ -17,7 +30,7 @@
     gap: 15px;
     justify-content: center;
     width: 100%;
-    padding: 0 20px;
+    padding: 10px 0px 30px 0px;
   }
 
   &__img-wrapper {
@@ -47,6 +60,8 @@
 
   & .sidebar {
     display: none;
+    flex: 0 0 30%;
+    padding-left: 15px;
     &__list {
       margin: 0;
       padding: 0;
@@ -89,11 +104,15 @@
 
 @media screen and (min-width: 1024px) {
   .sub-catalog-page {
-    &__img-wrapper {
-      width: 250px;
-    }
     & .sidebar {
       display: block;
+    }
+  }
+}
+@media screen and (min-width: 1200px) {
+  .sub-catalog-page {
+    &__img-wrapper {
+      width: 200px;
     }
   }
 }

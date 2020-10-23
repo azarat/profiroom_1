@@ -1,13 +1,14 @@
 import React from 'react'
 import { NextPage } from 'next'
-
+// Layouts
 import MainLayout from '../../layouts/MainLayout'
+// Components
 import CatalogList from '../../src/components/CatalogList/CatalogList'
 
 const index: NextPage = (props): JSX.Element => {
   return (
     <MainLayout categories={props}>
-      <CatalogList />
+      <CatalogList categories={props} />
     </MainLayout>
   )
 }

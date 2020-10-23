@@ -1,15 +1,26 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
-
-//Types
+import React, { useRef, useState } from 'react'
+// Hooks
+import useOutsideClick from '../../hooks/useOutsideClick'
+// Types
 import { UserDropDownProps } from './Types'
 
 const UserDrowDown: React.FC<UserDropDownProps> = ({ isLogined }): JSX.Element => {
   const [dropDown, setDropDown] = useState<boolean>(false)
   const [notificationOpen, setNotificationOpen] = useState<boolean>(false)
+  const dropDownRef = useRef<HTMLDivElement>(null)
+  const notificationRef = useRef<HTMLDivElement>(null)
+
+  useOutsideClick(notificationRef, () => {
+    setNotificationOpen(false)
+  })
+
+  useOutsideClick(dropDownRef, () => {
+    setDropDown(false)
+  })
 
   const UserMenu = (
-    <div className="header__drop-down">
+    <div ref={dropDownRef} className="header__drop-down">
       <ul className="header__drop-down-list">
         <li className="header__drop-down-item">
           <Link href="/">
@@ -62,7 +73,7 @@ const UserDrowDown: React.FC<UserDropDownProps> = ({ isLogined }): JSX.Element =
     <>
       {isLogined && (
         <div className="header__user-panel">
-          <div className="header__user-notification-wrapper">
+          <div ref={notificationRef} className="header__user-notification-wrapper">
             <div
               className="header__user-notification-icon"
               role="presentation"
