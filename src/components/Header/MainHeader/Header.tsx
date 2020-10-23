@@ -32,14 +32,14 @@ const Header = (): JSX.Element => {
         <div className="container">
           <div className="header">
             <div onClick={handleMenu} role="presentation" className="header__menu-wrapper">
-              <Link href="/">
-                <a>
-                  <img src="/assets/img/menu.svg" alt="burger" />
-                </a>
-              </Link>
+              <img src="/assets/img/menu.svg" alt="burger" />
             </div>
             <div className="header__logo-wrapper">
-              <img src="/assets/img/logo.svg" alt="logo" />
+              <Link href="/">
+                <a>
+                  <img src="/assets/img/logo.svg" alt="logo" />
+                </a>
+              </Link>
             </div>
 
             <div className="header__nav-wrapper">
