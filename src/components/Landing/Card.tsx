@@ -8,7 +8,7 @@ import { CardContent } from './Types'
 
 import Image from '../../assets/svg/shevron-blue.inline.svg'
 
-export default function Card({ image, title, description }: CardContent): JSX.Element {
+const Card: React.FC<CardContent> = ({ id, image, title, description }): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const openCard: MouseEventHandler = (): void => {
@@ -49,3 +49,5 @@ export default function Card({ image, title, description }: CardContent): JSX.El
     </div>
   )
 }
+
+export default Card

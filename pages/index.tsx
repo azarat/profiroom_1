@@ -17,7 +17,6 @@ import {
   categories,
   questionMenuData,
 } from '../src/constants/landing'
-//todo: relocate to new file
 
 export default function Index(): JSX.Element {
   const [client, setClient] = useState<boolean>(true)

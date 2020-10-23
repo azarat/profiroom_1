@@ -4,7 +4,7 @@ import Image from '../../assets/svg/shevron-blue.inline.svg'
 
 import { SliderProps } from './Types'
 
-export default function Slider({
+const Slider: React.FC<SliderProps> = ({
   client,
   selectRole,
   activeSlide,
@@ -12,7 +12,7 @@ export default function Slider({
   data,
   fadeIn,
   setFadeIn,
-}: SliderProps): JSX.Element {
+}): JSX.Element => {
   const [startTouchPosition, setStartTouchPosition] = useState<number>(0)
   const [endTouchPosition, setEndTouchPosition] = useState<number>(0)
 
@@ -24,7 +24,7 @@ export default function Slider({
     setStartTouchPosition(event.touches[0].clientX)
   }
 
-  const touchEnd: TouchEventHandler = (event: React.TouchEvent): void => {
+  const touchEnd: TouchEventHandler = (): void => {
     if (startTouchPosition > endTouchPosition) {
       nextSlide('right')
     } else if (startTouchPosition < endTouchPosition) {
@@ -145,3 +145,5 @@ export default function Slider({
     </div>
   )
 }
+
+export default Slider
