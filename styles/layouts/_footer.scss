@@ -75,7 +75,8 @@
   }
 
   &__categories-list-link {
-    padding: 10px;
+    display: block;
+    padding: 5px 10px;
     color: $white-color;
   }
 
@@ -198,6 +199,10 @@
     &__categories-list-item {
       margin: 0;
       padding: 0;
+    }
+
+    &__categories-list-link {
+      padding: 5px;
     }
 
     &__additional-pages {

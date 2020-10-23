@@ -4,7 +4,7 @@ export type CategoriesProps = {
   }
 }
 
-type jsonTypes = {
+export type jsonTypes = {
   category: categoryTypes[]
 }
 

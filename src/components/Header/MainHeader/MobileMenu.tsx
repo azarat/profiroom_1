@@ -4,7 +4,7 @@ import Link from 'next/link'
 // Types
 import { MobileMenuProps } from './Types'
 
-//Components
+// Components
 import { languageOptions } from './LangSelect'
 
 const MobileMenu: React.FC<MobileMenuProps> = ({
