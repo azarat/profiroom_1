@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { NextPage } from 'next'
 import Link from 'next/link'
 

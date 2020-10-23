@@ -7,6 +7,7 @@
       "dom",
       "es2017"
     ],
+    "declaration": true,
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -29,6 +30,7 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "./src/typings.d.ts",
+    "**/*.tsx",
   ]
 }

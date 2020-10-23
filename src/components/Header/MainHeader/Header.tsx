@@ -13,7 +13,7 @@ import { Input } from 'antd'
 
 const Header = (): JSX.Element => {
   const [openMenu, setOpenMenu] = useState<boolean>(false)
-  const [isLogined, setIsLogined] = useState<boolean>(true)
+  const [isLogined] = useState<boolean>(false)
   const router = useRouter()
 
   const { lang: updateLang, setLang: setUpdateLang } = useContext(MainContext)
@@ -66,14 +66,14 @@ const Header = (): JSX.Element => {
               <>
                 {router.pathname !== '/login' && (
                   <div className="header__login-anchor">
-                    <Link href="/">
+                    <Link href={{ pathname: '/login', query: { isLogin: true } }}>
                       <a className="header__login">Увійти</a>
                     </Link>
                   </div>
                 )}
                 {router.pathname !== '/login' ? (
                   <div className="header__register-anchor">
-                    <Link href="/">
+                    <Link href={{ pathname: '/login', query: { isRegister: true } }}>
                       <a className="header__register">Зареєструватися</a>
                     </Link>
                   </div>

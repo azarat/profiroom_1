@@ -50,11 +50,11 @@ export const getSubCatalogProps: GetStaticProps = async (
 }
 
 export const getCategorySideProps: GetServerSideProps = async (
-  context: GetServerSidePropsContext
+  _: GetServerSidePropsContext
 ): Promise<any> => {
-  const url = 'http://test.profiroom.com/Backend/api/catalog'
-  const queryParams = context && context.params
-  const res = fetch(url)
+  // const url = 'http://test.profiroom.com/Backend/api/catalog'
+  // const queryParams = context && context.params
+  // const res = fetch(url)
 
   return {
     props: {

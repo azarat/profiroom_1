@@ -23,10 +23,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
       <div className="mobile__menu">
         <div className="mobile__menu-login">
           {/* TODO : Добавить ссылки в href */}
-          <Link href="/">
+          <Link href={{ pathname: '/login', query: { isLogin: true } }}>
             <a className="mobile__menu-login-link">Увійти</a>
           </Link>
-          <Link href="/">
+          <Link href={{ pathname: '/login', query: { isRegister: true } }}>
             <a className="mobile__menu-register-link">Зареєструватись</a>
           </Link>
         </div>
