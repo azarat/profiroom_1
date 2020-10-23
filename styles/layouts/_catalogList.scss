@@ -53,6 +53,9 @@
     border-radius: 50%;
     outline: none;
   }
+  &__back {
+    color: $primary-color;
+  }
 
   &__sub-categories-wrapper {
     margin-top: 20px;

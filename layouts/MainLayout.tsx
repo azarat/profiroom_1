@@ -1,7 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import Header from '../src/components/Header/Header'
+import Header from '../src/components/Header/MainHeader/Header'
 import Footer from '../src/components/Footer/Footer'
 import Categories from '../src/components/Categories/Categories'
 
