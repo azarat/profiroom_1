@@ -1,0 +1,112 @@
+.mobile__menu-wrapper {
+  position: absolute;
+  top: 0;
+  left: -1000px;
+  z-index: 20;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(5px);
+  transition: left 1s ease;
+}
+
+.mobile__menu {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: $white-color;
+}
+
+.active {
+  left: 0;
+}
+
+.mobile__menu-login {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  padding: 40px 15px;
+}
+
+.mobile__menu-login-link {
+  padding: 9px 18px 8px;
+  color: $white-color;
+  font-weight: $font-weight-600;
+  font-size: $font-12;
+  line-height: 18px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  background-color: $primary-color;
+  border-radius: 4px;
+}
+
+.mobile__menu-register-link {
+  padding: 9px 0 8px;
+  color: $secondary-color;
+  font-weight: $font-weight-600;
+  font-size: $font-13;
+  font-style: normal;
+  line-height: 19px;
+  text-transform: uppercase;
+  box-shadow: none;
+}
+
+.mobile__menu-catalog {
+  padding: 18px 15px;
+
+  .mobile__menu-catalog-link {
+    color: $black-color;
+    font-size: $font-16;
+    text-transform: uppercase;
+  }
+}
+
+.mobile__menu-lang {
+  padding: 25px 15px;
+
+  .mobile__menu-lang-change {
+    color: $black-color;
+    font-size: $font-16;
+    line-height: 20px;
+    background-color: $transparent;
+    border: none;
+    outline: 0;
+    -webkit-transition: 0.3s ease-out;
+    transition: color 0.3s ease-out;
+
+    &.active-select {
+      color: $secondary-color;
+    }
+  }
+}
+
+.mobile__menu-lang-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100px;
+  margin-top: 10px;
+  padding: 7px 30px;
+  color: $black-color;
+  font-size: $font-16;
+  list-style: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.active-lang {
+  opacity: 1;
+}
+
+.mobile__menu-close {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  font-size: $font-35;
+}
+
+@media screen and (min-width: 768px) {
+  .mobile__menu-wrapper {
+    display: none;
+  }
+}

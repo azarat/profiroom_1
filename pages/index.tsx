@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { NextPage } from 'next'
+
 import MainLayout from '../layouts/MainLayout'
 import Link from 'next/link'
 
@@ -18,7 +20,7 @@ import {
   questionMenuData,
 } from '../src/constants/landing'
 
-export default function Index(): JSX.Element {
+const index: NextPage = (): JSX.Element => {
   const [client, setClient] = useState<boolean>(true)
   const [activeSlide, setActiveSlide] = useState<number>(0)
   const [fadeIn, setFadeIn] = useState<boolean>(false)
@@ -278,3 +280,7 @@ export default function Index(): JSX.Element {
     </MainLayout>
   )
 }
+
+export { getStaticProps } from '../src/utils/service'
+
+export default index
