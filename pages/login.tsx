@@ -5,6 +5,7 @@ import MainLayout from '../layouts/MainLayout'
 // Components
 import LoginForm from '../src/components/LoginForm/LoginForm'
 import RegistrationForm from '../src/components/RegistrationForm/RegistrationForm'
+import { useRouter } from 'next/router'
 // Style
 
 const login: NextPage = (props): JSX.Element => {
@@ -13,11 +14,19 @@ const login: NextPage = (props): JSX.Element => {
 
   const windowWidth = typeof window !== 'undefined' && window.innerWidth
 
+  const router = useRouter()
+
   useEffect(() => {
     if (windowWidth > 767) {
       setMobile(true)
     }
   }, [windowWidth])
+
+  useEffect(() => {
+    if (router.query.isRegister) {
+      setIsRegistration(true)
+    }
+  }, [router.query.isRegister])
 
   const handleRegistration = (): void => {
     setIsRegistration((prev) => !prev)

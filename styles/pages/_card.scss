@@ -1,0 +1,235 @@
+.card {
+  &__wrapper {
+    padding: 0 10px;
+  }
+
+  &__title {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: $font-18;
+    line-height: 23px;
+    text-align: center;
+  }
+
+  &__mobile-filters {
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto 10px;
+    padding: 10px 0;
+    background: #fafbfc;
+    border: none;
+    outline: none;
+  }
+
+  &__mobile-filters-img-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    margin-right: 10px;
+    background: #e9ecf2;
+    border-radius: 3px;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+  }
+
+  &__filter {
+    color: $gray-color;
+    font-size: $font-14;
+    line-height: 21px;
+    text-transform: uppercase;
+  }
+
+  &__results {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0px;
+    color: $gray-color;
+    font-weight: $font-weight-400;
+    font-size: $font-16;
+    line-height: 20px;
+  }
+
+  &__online-switch {
+    display: flex;
+    flex: 0 0 55%;
+    justify-content: space-between;
+  }
+
+  &__list {
+    .item {
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      margin: 0 10px 30px;
+      color: $gray-color;
+      background-color: $white-color;
+      border-radius: 3px;
+      box-shadow: 0 0 4px rgba(199, 213, 255, 0.55);
+
+      &__img-wrapper {
+        width: 100%;
+      }
+
+      &__img {
+        width: 100%;
+      }
+
+      &__description {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        padding: 0 10px;
+      }
+
+      &__about {
+        margin-bottom: 35px;
+        color: $black-color;
+        font-size: $font-14;
+        line-height: 16px;
+        text-decoration: none;
+      }
+
+      &__bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      &__rating {
+        display: flex;
+      }
+
+      &__star-wrapper {
+        display: flex;
+        align-items: center;
+        width: 20px;
+      }
+
+      &__star {
+        width: 100%;
+      }
+
+      &__reviews {
+        margin-left: 30px;
+      }
+
+      &__avatar-wrapper {
+        width: 30px;
+        height: 30px;
+      }
+
+      &__avatar {
+        width: 100%;
+        border-radius: 50%;
+      }
+
+      &__price-block {
+        margin-top: 10px;
+        padding: 10px;
+        font-weight: $font-weight-400;
+        font-size: $font-14;
+        line-height: 18px;
+        border: 1px solid #f4f7fc;
+      }
+    }
+  }
+  .mobile-filter {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    max-height: 100vh;
+    padding: 0 15px;
+    overflow: scroll;
+    background: #fff;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-box-pack: center;
+
+    &--open {
+      display: block;
+    }
+
+    &__back {
+      position: relative;
+      &::after {
+        position: absolute;
+        top: 53%;
+        left: 15px;
+        width: 9px;
+        height: 9px;
+        border-right: 2px solid #4285f4;
+        border-bottom: 2px solid #4285f4;
+        -webkit-transform: translate(-50%, -50%) rotate(135deg);
+        transform: translate(-50%, -50%) rotate(135deg);
+        content: '';
+      }
+    }
+    &__top {
+      margin-bottom: 20px;
+      padding: 22px 22px 18px;
+      color: $gray-color;
+      font-size: $font-14;
+      line-height: 21px;
+      background: #fafbfc;
+    }
+
+    &__title {
+      color: $black-color;
+      font-weight: $font-weight-600;
+      font-size: $font-16;
+      line-height: 21px;
+    }
+    &__budget-options {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__option {
+      display: flex;
+      flex-direction: column;
+    }
+    &__budget-input {
+      width: 50%;
+    }
+
+    &__deadlines {
+      margin-top: 20px;
+    }
+
+    &__deadline-options {
+      display: flex;
+      flex-direction: column;
+      align-items: left;
+    }
+
+    &__deadline-checkbox {
+      color: $black-color;
+      font-size: $font-16;
+    }
+
+    &__deadline-option {
+      padding: 10px;
+      border: 1px solid #f4f7fc;
+    }
+
+    &__service {
+      margin-top: 20px;
+    }
+  }
+}
+
+.ant-checkbox-wrapper + .ant-checkbox-wrapper {
+  margin-left: 0;
+  padding: 0;
+}

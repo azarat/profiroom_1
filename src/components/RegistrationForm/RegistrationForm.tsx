@@ -8,6 +8,7 @@ import { UserOutlined, MailOutlined, LockOutlined, UserAddOutlined } from '@ant-
 
 // Types
 import { RegistrationFormProps, RegistrationValues } from './Types'
+import { RuleObject } from 'antd/lib/form'
 
 const RegistrationForm: React.FC<RegistrationFormProps> = ({
   registrationHandler,
@@ -56,7 +57,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
     },
   }
 
-  const validatePassword = (rule: any, value: string, callback: any) => {
+  const validatePassword = (_: RuleObject, value: string, callback: (arg0?: string) => void) => {
     const regExpPass = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}/g
     if (value && !value.match(regExpPass)) {
       callback('Пароль не валідний')
@@ -65,7 +66,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
     }
   }
 
-  const validateCheckBox = (rule: any, value: boolean, callback: any) => {
+  const validateCheckBox = (_: RuleObject, value: boolean, callback: (arg0?: string) => void) => {
     if (!value) {
       callback('Це поле є обовʼязковим')
     } else {
@@ -195,7 +196,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                 message: 'Будь ласка підтвердіть Ваш пароль!',
               },
               ({ getFieldValue }) => ({
-                validator(rule, value) {
+                validator(_, value) {
                   if (!value || getFieldValue('password') === value) {
                     return Promise.resolve()
                   }

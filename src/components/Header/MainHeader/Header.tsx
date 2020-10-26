@@ -1,19 +1,19 @@
 import React, { useContext, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-//context
-import { MainContext } from '../../context/MainContext'
+// Context
+import { MainContext } from '../../../context/MainContext'
 // Components
 import MobileMenu from './MobileMenu'
 import LangSelect from './LangSelect'
-import UserDrowDown from './UserDrowDown'
+import UserDrowDown from './UserDropDown'
 
 // Antd
 import { Input } from 'antd'
 
 const Header = (): JSX.Element => {
   const [openMenu, setOpenMenu] = useState<boolean>(false)
-  const [isLogined, setIsLogined] = useState<boolean>(true)
+  const [isLogined] = useState<boolean>(false)
   const router = useRouter()
 
   const { lang: updateLang, setLang: setUpdateLang } = useContext(MainContext)
@@ -35,7 +35,11 @@ const Header = (): JSX.Element => {
               <img src="/assets/img/menu.svg" alt="burger" />
             </div>
             <div className="header__logo-wrapper">
-              <img src="/assets/img/logo.svg" alt="logo" />
+              <Link href="/">
+                <a>
+                  <img src="/assets/img/logo.svg" alt="logo" />
+                </a>
+              </Link>
             </div>
 
             <div className="header__nav-wrapper">
@@ -62,14 +66,14 @@ const Header = (): JSX.Element => {
               <>
                 {router.pathname !== '/login' && (
                   <div className="header__login-anchor">
-                    <Link href="/">
+                    <Link href={{ pathname: '/login', query: { isLogin: true } }}>
                       <a className="header__login">Увійти</a>
                     </Link>
                   </div>
                 )}
                 {router.pathname !== '/login' ? (
                   <div className="header__register-anchor">
-                    <Link href="/">
+                    <Link href={{ pathname: '/login', query: { isRegister: true } }}>
                       <a className="header__register">Зареєструватися</a>
                     </Link>
                   </div>

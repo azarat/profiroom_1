@@ -1,3 +1,4 @@
+@import './fonts/roboto';
 @import './variables';
 @import './layouts/header';
 @import './layouts/landing';
@@ -8,7 +9,9 @@
 @import './layouts//mobile-menu';
 @import './layouts/footer';
 @import './layouts/categories';
+@import './pages/card';
 @import './layouts/catalogList';
+@import './pages/subCatalog';
 
 body {
   font-family: $font-roboto;
