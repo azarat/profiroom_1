@@ -260,7 +260,7 @@
   }
 }
 
-.categories {
+.main-categories {
   padding: 10px 15px;
   background-image: url('/find-specialist-bg.svg');
   background-repeat: no-repeat;
@@ -742,7 +742,7 @@
     }
   }
 
-  .categories {
+  .main-categories {
     margin-top: 90px;
     padding: 0 25px;
 
@@ -905,7 +905,7 @@
     }
   }
 
-  .categories {
+  .main-categories {
     &__card {
       width: 250px;
     }
@@ -955,7 +955,7 @@
     }
   }
 
-  .categories {
+  .main-categories {
     &__card {
       width: 350px;
     }
@@ -986,7 +986,7 @@
     }
   }
 
-  .categories {
+  .main-categories {
     &::before {
       left: 70%;
     }

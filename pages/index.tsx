@@ -20,7 +20,7 @@ import {
   questionMenuData,
 } from '../src/constants/landing'
 
-const index: NextPage = (): JSX.Element => {
+const index: NextPage = (props): JSX.Element => {
   const [client, setClient] = useState<boolean>(true)
   const [activeSlide, setActiveSlide] = useState<number>(0)
   const [fadeIn, setFadeIn] = useState<boolean>(false)
@@ -66,7 +66,7 @@ const index: NextPage = (): JSX.Element => {
     }
   }
   return (
-    <MainLayout>
+    <MainLayout categories={props}>
       <div className="wrapper">
         <div className="container">
           <h5 className="wrapper__title">PROFIROOM ДЛЯ БІЗНЕСУ - БІРЖА ФРІЛАНСУ</h5>
@@ -145,20 +145,20 @@ const index: NextPage = (): JSX.Element => {
           </div>
         </div>
       </div>
-      <div className="categories">
+      <div className="main-categories">
         <div className="container">
-          <p className="categories__subtitle">КАТЕГОРІЇ РОБІТ</p>
-          <strong className="categories__title">
+          <p className="main-categories__subtitle">КАТЕГОРІЇ РОБІТ</p>
+          <strong className="main-categories__title">
             На біржі працюють фрілансери в наступних категоріях
           </strong>
-          <div className="categories__card-container">
+          <div className="main-categories__card-container">
             {categories.map((el) => (
-              <div className="categories__card" key={el.id}>
-                <div className="categories__card-top">
+              <div className="main-categories__card" key={el.id}>
+                <div className="main-categories__card-top">
                   <img src={el.image} alt="info-card" className="categories__card-image" />
-                  <p className="categories__card-title">{el.title}</p>
+                  <p className="main-categories__card-title">{el.title}</p>
                 </div>
-                <p className="categories__card-description">{el.description}</p>
+                <p className="main-categories__card-description">{el.description}</p>
               </div>
             ))}
           </div>
