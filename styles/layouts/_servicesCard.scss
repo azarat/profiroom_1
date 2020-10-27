@@ -1,0 +1,128 @@
+.services {
+  & .item {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin: 0 10px 30px;
+    color: $gray-color;
+    background-color: $white-color;
+    border-radius: 3px;
+    box-shadow: 0 0 4px rgba(199, 213, 255, 0.55);
+
+    &__img-wrapper {
+      width: 100%;
+    }
+
+    &__img {
+      width: 100%;
+      height: 100%;
+    }
+
+    &__description {
+      display: flex;
+      flex-direction: column;
+      margin-top: 10px;
+      padding: 0 10px;
+      height: 100px;
+    }
+
+    &__about {
+      margin-bottom: 35px;
+      color: $black-color;
+      font-size: $font-14;
+      line-height: 16px;
+      text-decoration: none;
+    }
+
+    &__bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &__rating {
+      display: flex;
+    }
+
+    &__star-wrapper {
+      display: flex;
+      align-items: center;
+      width: 20px;
+    }
+
+    &__star {
+      width: 100%;
+    }
+
+    &__reviews {
+      margin-left: 30px;
+    }
+
+    &__avatar-wrapper {
+      width: 30px;
+      height: 30px;
+    }
+
+    &__avatar {
+      width: 100%;
+      border-radius: 50%;
+    }
+
+    &__price-block {
+      margin-top: 10px;
+      padding: 10px;
+      font-weight: $font-weight-400;
+      font-size: $font-14;
+      line-height: 18px;
+      border: 1px solid #f4f7fc;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .services {
+    &__list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      justify-content: center;
+      align-items: baseline;
+      margin-top: 40px;
+    }
+
+    & .item {
+      &__img-wrapper {
+        width: 100%;
+        height: 140px;
+      }
+    }
+
+    &__mobile-filters {
+      display: none;
+    }
+
+    &__total-results {
+      display: none;
+    }
+
+    &__online-switch {
+      margin-left: auto;
+      flex: 0 0 auto;
+      padding: 0 10px;
+      align-items: center;
+    }
+
+    &__now-online {
+      padding: 12px 19px;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .services {
+    & .item {
+      &__img-wrapper {
+        height: 165px;
+      }
+    }
+  }
+}
