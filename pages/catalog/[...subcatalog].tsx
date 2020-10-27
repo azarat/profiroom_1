@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { NextPage } from 'next'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
 // Layout
 import MainLayout from '../../layouts/MainLayout'
@@ -8,8 +7,7 @@ import MainLayout from '../../layouts/MainLayout'
 import { Switch, Input, Checkbox } from 'antd'
 const subcatalog: NextPage = (props): JSX.Element => {
   const [isFilterOpen, setFilterOpen] = useState<boolean>(false)
-  const router = useRouter()
-  console.log(router)
+
   const handleFilters = () => {
     setFilterOpen((prev) => !prev)
   }
@@ -175,6 +173,10 @@ const subcatalog: NextPage = (props): JSX.Element => {
   )
 }
 
-export { getStaticProps } from '../../src/utils/service'
+export {
+  getCategorySideProps as GetServerSideProps,
+  getCategoryPaths as getStaticPaths,
+} from '../../src/utils/service'
 
+// export { getStaticProps } from '../../src/utils/service'
 export default subcatalog

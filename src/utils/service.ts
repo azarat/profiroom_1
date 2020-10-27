@@ -50,15 +50,64 @@ export const getSubCatalogProps: GetStaticProps = async (
 }
 
 export const getCategorySideProps: GetServerSideProps = async (
-  _: GetServerSidePropsContext
+  context: GetServerSidePropsContext
 ): Promise<any> => {
-  // const url = 'http://test.profiroom.com/Backend/api/catalog'
-  // const queryParams = context && context.params
-  // const res = fetch(url)
+  const url = 'http://test.profiroom.com/Backend/api/catalog'
+
+  const params = context && context.params && context.params.subcatalog
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      category: params[0],
+      subCategory: params[1],
+    }),
+  })
+  console.log(res)
+  const catalog = await res.json()
+
+  const categoriesRes = await fetch('http://test.profiroom.com/Backend/api/categories')
+  const json = await categoriesRes.json()
 
   return {
     props: {
-      message: 'Hello',
+      catalog,
+      json,
     },
+  }
+}
+
+export const getCategoryPaths: GetStaticPaths = async () => {
+  return {
+    paths: [
+      { params: { subcatalog: 'Programming', catedory: '1C' } },
+      { params: { subcatalog: 'Programming', catedory: 'C#' } },
+      { params: { subcatalog: 'Programming', catedory: 'C%2EC%2B%2B' } },
+      { params: { subcatalog: 'Programming', catedory: 'Java' } },
+      { params: { subcatalog: 'Programming', catedory: 'Javascript' } },
+      { params: { subcatalog: 'Programming', catedory: 'Microsoft.NET' } },
+      { params: { subcatalog: 'Programming', catedory: 'Node.js' } },
+      { params: { subcatalog: 'Programming', catedory: 'PHP' } },
+      { params: { subcatalog: 'Programming', catedory: 'Python' } },
+      { params: { subcatalog: 'Programming', catedory: 'Ruby' } },
+      { params: { subcatalog: 'Programming', catedory: 'Swift' } },
+      { params: { subcatalog: 'Programming', catedory: 'Webprogramming' } },
+      { params: { subcatalog: 'Programming', catedory: 'WebsiteDesignersandCMS' } },
+      { params: { subcatalog: 'Programming', catedory: 'OnlineStoresandE-Commerce' } },
+      { params: { subcatalog: 'Programming', catedory: 'GameDevelopment' } },
+      { params: { subcatalog: 'Programming', catedory: 'Developmentofchatbots' } },
+      { params: { subcatalog: 'Programming', catedory: 'Applicationprogramming' } },
+      { params: { subcatalog: 'Programming', catedory: 'HybridMobileApplications' } },
+      { params: { subcatalog: 'Programming', catedory: 'AndroidDevelopment' } },
+      { params: { subcatalog: 'Programming', catedory: 'DevelopmentforiOS%28iPhone%2FiPad%29' } },
+      { params: { subcatalog: 'Programming', catedory: 'SDatabases' } },
+      { params: { subcatalog: 'Programming', catedory: 'TestingandQA' } },
+      { params: { subcatalog: 'Programming', catedory: 'Systemprogramming' } },
+
+      // See the "paths" section below
+    ],
+    fallback: false, // See the "fallback" section below
   }
 }
