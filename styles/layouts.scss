@@ -11,6 +11,8 @@
 @import './pages/card';
 @import './layouts/catalogList';
 @import './pages/subCatalog';
+@import './layouts/dashboardHeader';
+@import './layouts/dashboardMobileMenu';
 
 body {
   font-family: $font-roboto;

@@ -1,0 +1,106 @@
+.dashboard-header {
+  padding: 10px 15px;
+  background-color: $primary-color;
+
+  &__nav {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &__logo {
+    color: $white-color;
+    font-size: $font-18;
+    font-weight: bold;
+  }
+
+  &__bell-icon {
+    color: $white-color;
+    font-size: $font-22;
+  }
+
+  &__nav-button-group {
+    display: flex;
+  }
+
+  &__link {
+    margin-left: 20px;
+    color: $white-color;
+    text-decoration: none;
+
+    &:hover {
+      color: $white-color;
+    }
+  }
+
+  &__subnav-button-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__menu-button {
+    color: $white-color;
+    margin-right: 30px;
+    font-size: $font-20;
+  }
+
+  &__switch {
+    display: flex;
+  }
+
+  &__switch-desktop {
+    display: none;
+  }
+
+  &__switch-text {
+    margin: 0 5px;
+    color: $white-color;
+    transition: 0.3s;
+  }
+
+  &__switch-text-disabled {
+    color: $white-trans-color;
+    transition: 0.3s;
+  }
+}
+
+.ant-switch {
+  background-color: $white-color;
+}
+
+.ant-switch-handle {
+  &::before {
+    background-color: $secondary-color;
+  }
+}
+
+@media (min-width: 768px) {
+  .dashboard-header {
+    padding: 15px 20px;
+    &__nav {
+      justify-content: space-around;
+    }
+
+    &__logo {
+      font-size: $font-24;
+    }
+
+    &__go-to-main {
+      display: none;
+    }
+
+    &__nav-button-group {
+      margin-top: 10px;
+    }
+
+    &__subnav-button-group {
+      display: none;
+    }
+
+    &__switch-desktop {
+      display: flex;
+      margin: 0 30px;
+    }
+  }
+}
