@@ -28,6 +28,11 @@ const subcatalog: NextPage = (props): JSX.Element => {
   const [filterType, setFilterType] = useState<string>('')
   const [budgetVisible, setBudgetVisible] = useState<boolean>(false)
 
+  const budgetRef = React.useRef<HTMLDivElement>(null)
+  const termRef = React.useRef<HTMLDivElement>(null)
+  const serviceRef = React.useRef<HTMLDivElement>(null)
+  const budgetOptionRef = React.useRef<HTMLDivElement>(null)
+
   const handleMenuClick = (e: any) => {
     if (e.key === '3') {
       setBudgetVisible(false)
@@ -86,14 +91,11 @@ const subcatalog: NextPage = (props): JSX.Element => {
         setFilterOpen((prev) => !prev)
         return setFilterType('service')
       } else {
+        setFilterOpen(false)
         setFilterType('')
       }
     }
   }
-
-  const budgetRef = React.useRef<HTMLDivElement>(null)
-  const termRef = React.useRef<HTMLDivElement>(null)
-  const serviceRef = React.useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     document.addEventListener('click', handleClick)
@@ -350,6 +352,8 @@ const subcatalog: NextPage = (props): JSX.Element => {
                   minPrice={service.minPrice}
                   title={service.title}
                   user={service.user}
+                  id={service.id}
+                  router={router}
                 />
               ))}
             </div>

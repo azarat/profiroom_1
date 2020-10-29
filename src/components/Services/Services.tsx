@@ -8,6 +8,8 @@ const Service: React.FC = ({
   minPrice,
   title,
   user,
+  id,
+  router,
 }): JSX.Element => {
   return (
     <div className="services__item item">
@@ -15,9 +17,14 @@ const Service: React.FC = ({
         <img className="item__img" src={mainImage} alt="img preview" />
       </div>
       <div className="item__description">
-        <Link href="">
-          <a className="item__about">{title}</a>
-        </Link>
+        <h1
+          role="presentation"
+          className="item__about"
+          onClick={() => router.push(`/showOffer/${id}`)}
+        >
+          {title}
+        </h1>
+
         <div className="item__bottom">
           <div className="item__rating">
             <div className="item__star-wrapper">

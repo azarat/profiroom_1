@@ -79,35 +79,28 @@ export const getCategorySideProps: GetServerSideProps = async (
   }
 }
 
-export const getCategoryPaths: GetStaticPaths = async () => {
-  return {
-    paths: [
-      { params: { subcatalog: ['Programming', '1C'] } },
-      { params: { subcatalog: ['Programming', 'C%23'] } },
-      { params: { subcatalog: ['Programming', 'C%2EC%2B%2B'] } },
-      { params: { subcatalog: ['Programming', 'Java'] } },
-      { params: { subcatalog: ['Programming', 'Javascript'] } },
-      { params: { subcatalog: ['Programming', 'Microsoft.NET'] } },
-      { params: { subcatalog: ['Programming', 'Node.js'] } },
-      { params: { subcatalog: ['Programming', 'PHP'] } },
-      { params: { subcatalog: ['Programming', 'Python'] } },
-      { params: { subcatalog: ['Programming', 'Ruby'] } },
-      { params: { subcatalog: ['Programming', 'Swift'] } },
-      { params: { subcatalog: ['Programming', 'Webprogramming'] } },
-      { params: { subcatalog: ['Programming', 'WebsiteDesignersandCMS'] } },
-      { params: { subcatalog: ['Programming', 'OnlineStoresandE-Commerce'] } },
-      { params: { subcatalog: ['Programming', 'GameDevelopment'] } },
-      { params: { subcatalog: ['Programming', 'Developmentofchatbots'] } },
-      { params: { subcatalog: ['Programming', 'Applicationprogramming'] } },
-      { params: { subcatalog: ['Programming', 'HybridMobileApplications'] } },
-      { params: { subcatalog: ['Programming', 'AndroidDevelopment'] } },
-      { params: { subcatalog: ['Programming', 'DevelopmentforiOS%28iPhone%2FiPad%29'] } },
-      { params: { subcatalog: ['Programming', 'SDatabases'] } },
-      { params: { subcatalog: ['Programming', 'TestingandQA'] } },
-      { params: { subcatalog: ['Programming', 'Systemprogramming'] } },
+export const getOfferSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+): Promise<any> => {
+  console.log('SUKABLYa', context)
 
-      // See the "paths" section below
-    ],
-    fallback: false, // See the "fallback" section below
+  const url = 'http://test.profiroom.com/Backend/api/showOffer'
+
+  const params = context && context.params && context.params.offerId
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      offerId: params[0],
+    }),
+  })
+  const offer = await res.json()
+
+  return {
+    props: {
+      offer,
+    },
   }
 }
