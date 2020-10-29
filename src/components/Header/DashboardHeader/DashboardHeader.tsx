@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import nextCookie from 'next-cookies'
 
 //components
 import Menu from './Menu'
@@ -12,6 +13,31 @@ import { BellFilled, MenuOutlined } from '@ant-design/icons'
 const DashboardHeader: React.FC = (): JSX.Element => {
   const [isClient, setIsClient] = useState<boolean>(false)
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
+  const [userData, setUserData] = useState([])
+
+  useEffect(() => {
+    const { jwt_token } = nextCookie('ctx')
+    if (jwt_token) {
+      if (userData.length <= 0) {
+        fetch(`https://profiroom.com/Backend/api/dashboard`, {
+          headers: {
+            Authorization: `Bearer ${jwt_token}`,
+          },
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            console.log(res)
+            setUserData(res)
+          })
+      }
+    }
+
+    const windowW = typeof window !== 'undefined' && window.innerWidth
+
+    if (windowW >= 1200) {
+      setIsOpenMenu(true)
+    }
+  })
 
   const selectRole = (): void => {
     setIsClient(!isClient)
@@ -52,7 +78,7 @@ const DashboardHeader: React.FC = (): JSX.Element => {
           </div>
         </div>
       </header>
-      <Menu isOpenMenu={isOpenMenu} />
+      <Menu isOpenMenu={isOpenMenu} openMenu={openMenu} userData={userData} />
     </div>
   )
 }

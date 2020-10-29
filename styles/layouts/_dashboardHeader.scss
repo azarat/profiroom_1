@@ -104,3 +104,10 @@
     }
   }
 }
+
+@media(min-width: 1200px) {
+  .dashboard-header__nav {
+    justify-content: space-between;
+
+  }
+}

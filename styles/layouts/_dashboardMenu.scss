@@ -39,7 +39,21 @@
   &__avatar {
     display: none;
   }
+
+  &__stars {
+    display: none;
+    color: orange;
+  }
+
+  &__button-text-desktop {
+    display: none;
+  }
+
+  &__open-button-icon {
+    display: none;
+  }
 }
+
 
 @media (min-width: 768px) {
   .dashboard-menu {
@@ -47,6 +61,29 @@
     top: 0;
     width: 75px;
     background-color: $white-color;
+    // border: 1px solid black;
+
+    &__open {
+      width: 250px;
+    }
+
+    &__user-info {
+      margin-left: 5px;
+    }
+
+    &__user-info-open {
+      width: 50%;
+      margin: 0 auto;
+      margin-top: -40px;
+    }
+
+    &__button {
+      margin-left: -5px;
+    }
+
+    &__button-open {
+      margin-left: 20px;
+    }
 
     &__button-text {
       display: none;
@@ -62,16 +99,144 @@
 
     &__button-image {
       display: block;
+      width: 90px;
       margin: 15px auto;
     }
 
     &__avatar {
       display: block;
-      width: 75px;
-      height: 210px;
+      width: 100%;
+      height: 230px;
       padding: 50px 15px;
       background-color: $primary-color;
+      transition: 0.3s;
     }
 
+    &__avatar-image {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+
+    &__avatar-border {
+      width: 70px;
+      height: 70px;
+      margin-top: 0;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    &__avatar-aura {
+      width: 100%;
+      position: absolute;
+      top: 55px;
+      left: -15px;
+      transition: 0.3s;
+    }
+
+    &__avatar-open {
+      padding-top: 0px;
+      transition: 0.3s;
+    }
+
+    &__avatar-image-open {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+
+    &__avatar-border-open {
+      width: 180px;
+      top: 35px;
+      left: -35px;
+      transition: 0.3s;
+    }
+
+    &__username {
+      display: none;
+    }
+
+    &__username-open {
+      display: block;
+      text-align: center;
+      color: $white-color;
+      margin: 15px auto;
+      font-size: $font-13;
+      font-weight: bold;
+    }
+
+    &__open-button {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: 10px;
+      left: 95%;
+      border-radius: 50%;
+      background-color: $secondary-color;
+      color: $white-color;
+      padding-left: 4px;
+    }
+
+    &__button {
+      width: 100px;
+    }
+
+    &__button-container {
+      position: relative;
+      height: 20px;
+    }
+
+    &__stars-open {
+      display: flex;
+      justify-content: space-around;
+      margin-top: -10px;
+    }
+
+    &__button-image-container-open {
+      max-width: 40%;
+      height: 70px;
+      padding: 0 5px;
+      background-color: $white-color;
+      border-radius: 10px;
+      font-size: $font-30;
+      color: $gray-color;
+      // border: 1px solid black;
+    }
+
+    &__button-text-desktop {
+      display: block;
+      text-align: center;
+      font-size: $font-13;
+      margin-top: -10px;
+      width: 90px;
+    }
+
+    &__nav {
+      max-width: 80%;
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 auto;
+    }
+
+    &__open-button-icon {
+      display: inline;
+    }
+  }
+}
+
+.transform-90 {
+  transform: rotate(180deg);
+  transition: 0.7s;
+}
+
+@media (min-width: 1200px) {
+  .dashboard-menu {
+    top: 55px;
+
+    &__open-button {
+      display: none;
+    }
   }
 }
