@@ -8,7 +8,7 @@ import { CardContent } from './Types'
 
 import Image from '../../assets/svg/shevron-blue.inline.svg'
 
-const Card: React.FC<CardContent> = ({ id, image, title, description }): JSX.Element => {
+const Card: React.FC<CardContent> = ({ image, title, description }): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const openCard: MouseEventHandler = (): void => {

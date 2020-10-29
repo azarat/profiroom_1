@@ -71,7 +71,3 @@ export const authUser: GetServerSideProps = async (
   //     Router.push('login')
   //   }
 }
-
-getUser = ()=> {
-  
-} 
