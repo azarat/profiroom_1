@@ -34,7 +34,6 @@ export const getSubCatalogPaths: GetStaticPaths = async () => {
 export const getSubCatalogProps: GetStaticProps = async (
   context: GetStaticPropsContext
 ): Promise<any> => {
-  console.log(context.params)
   const url = `http://test.profiroom.com/Backend/api/subcategories?catedory=${
     context.params && context.params.subcatalog
   }`
@@ -52,6 +51,8 @@ export const getSubCatalogProps: GetStaticProps = async (
 export const getCategorySideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ): Promise<any> => {
+  console.log(context)
+
   const url = 'http://test.profiroom.com/Backend/api/catalog'
 
   const params = context && context.params && context.params.subcatalog
@@ -65,7 +66,6 @@ export const getCategorySideProps: GetServerSideProps = async (
       subCategory: params[1],
     }),
   })
-  console.log(res)
   const catalog = await res.json()
 
   const categoriesRes = await fetch('http://test.profiroom.com/Backend/api/categories')

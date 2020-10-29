@@ -47,6 +47,7 @@
   &__results {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     margin: 10px 0px;
     color: $gray-color;
     font-weight: $font-weight-400;
@@ -150,33 +151,98 @@
     }
   }
   &__desktop-filters {
-    display: flex;
+    display: none;
     justify-content: space-between;
     padding: 0 10px;
   }
+
+  &__desktop-filters-arrow {
+    display: block;
+    width: 12px;
+    height: 8px;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%) rotate(180deg);
+    transform: translateY(-50%) rotate(0);
+    right: 10px;
+    background-image: url('/assets/img/arrow-down.svg');
+    cursor: pointer;
+    -webkit-transition: -webkit-transform 0.3s;
+    transition: -webkit-transform 0.3s;
+    transition: transform 0.3s;
+    transition: transform 0.3s, -webkit-transform 0.3s;
+  }
+
+  &__desktop-filters-arrow--open {
+    transform: translateY(-50%) rotate(180deg);
+  }
+  &__pagination {
+    text-align: center;
+    padding: 20px 0px;
+  }
+}
+
+.mobile-filter__deadline-option {
+  padding: 10px 0px;
+}
+.mobile-filter__option {
+  padding: 10px 0px;
 }
 
 .ant-checkbox-wrapper + .ant-checkbox-wrapper {
   margin-left: 0;
   padding: 0;
 }
+
+.ant-checkbox-group {
+  display: flex;
+  flex-direction: column;
+}
 .ant-dropdown-link {
-  padding: 12px 19px;
+  padding: 12px 40px;
   font-size: 14px;
   line-height: 21px;
   color: #323c47;
   font-weight: 400;
   box-shadow: 0 10px 16px rgba(128, 152, 213, 0.2);
   border-radius: 3px;
+  position: relative;
+  display: block;
 }
 .ant-dropdown {
   background-color: #fff;
   padding: 20px;
   border-radius: 3px;
 }
+.ant-dropdown-menu {
+  box-shadow: none;
+}
+
+.ant-dropdown-menu-item:hover,
+.ant-dropdown-menu-submenu-title:hover {
+  background-color: transparent;
+}
+.mobile-filter__option {
+  display: flex;
+  justify-content: space-around;
+}
+.mobile-filter__budget-input {
+  width: 60%;
+}
+.ant-checkbox-wrapper {
+  padding: 10px;
+}
+.ant-checkbox-wrapper + .ant-checkbox-wrapper {
+  padding: 10px;
+}
 
 @media screen and (min-width: 768px) {
   .services {
+    &__title {
+      font-size: 36px;
+      line-height: 34px;
+      margin-bottom: 60px;
+    }
     & .mobile-filter {
       display: none;
       grid-template-columns: 1fr 1fr 1fr;
@@ -230,6 +296,9 @@
         transform: translateY(-50%) rotate(180deg);
         background-image: url(/assets/img/arrow.png);
       }
+    }
+    &__desktop-filters {
+      display: flex;
     }
   }
 }

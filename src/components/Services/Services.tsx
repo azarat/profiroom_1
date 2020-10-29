@@ -22,9 +22,9 @@ const Service: React.FC = ({
           <div className="item__rating">
             <div className="item__star-wrapper">
               <img className="item__star" src="/assets/img/star.svg" alt="star" />
-              <span>{averageRating.averageMark}</span>
+              <span className="item__star-count">{averageRating.averageMark}</span>
             </div>
-            <span className="item__reviews">{comments_count}</span>
+            <span className="item__reviews">({comments_count} відгуків)</span>
           </div>
           <div className="item__avatar-wrapper">
             <Link href="/">

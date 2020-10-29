@@ -46,7 +46,7 @@ const Categories: React.FC<CategoriesProps> = ({ categories }): JSX.Element => {
                         .map((subFiltered) => {
                           return (
                             <Link
-                              href={`/${category.link}/${subFiltered.link}`}
+                              href={`/catalog/${category.link}/${subFiltered.link}`}
                               key={subFiltered.id}
                             >
                               <a className="categories__sub-link">{subFiltered[`name_${lang}`]}</a>
