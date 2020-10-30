@@ -71,7 +71,15 @@ const DashboardHeader: React.FC = (): JSX.Element => {
                 </div>
               </div>
               <div className="dashboard-header__subnav-button-group">
-                <MenuOutlined className="dashboard-header__menu-button" onClick={openMenu} />
+                {/* <MenuOutlined className="dashboard-header__menu-button" onClick={openMenu} /> */}
+                <div>
+                  <button
+                    className={`c-hamburger c-hamburger--htx ${isOpenMenu && 'is-active'}`}
+                    onClick={openMenu}
+                  >
+                    <span>toggle menu</span>
+                  </button>
+                </div>
                 <SwitchComponent isClient={isClient} selectRole={selectRole} />
               </div>
             </div>
