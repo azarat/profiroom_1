@@ -33,8 +33,11 @@ const CatalogList: React.FC<CatalogListProps> = ({ categories }): JSX.Element =>
                 <h3
                   role="presentation"
                   onClick={() => selectActiveIndex(index)}
-                  className="item__title"
+                  className="item__title-mobile"
                 >
+                  {singleCategory[`name_${lang}`]}
+                </h3>
+                <h3 role="presentation" className="item__title-desktop">
                   {singleCategory[`name_${lang}`]}
                 </h3>
               </div>
