@@ -1,7 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
+import { dataTypes } from '../../../pages/catalog/Types'
+import { useRouter } from 'next/router'
 
-const Service: React.FC = ({
+const Service: React.FC<dataTypes> = ({
   averageRating,
   comments_count,
   mainImage,
@@ -9,8 +11,8 @@ const Service: React.FC = ({
   title,
   user,
   id,
-  router,
 }): JSX.Element => {
+  const router = useRouter()
   return (
     <div className="services__item item">
       <div className="item__img-wrapper">

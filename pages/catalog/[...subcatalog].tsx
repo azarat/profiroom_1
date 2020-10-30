@@ -1,21 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+// Components
+import Service from '../../src/components/Services/Services'
 // Layout
 import MainLayout from '../../layouts/MainLayout'
 // Antd
-import { Switch, Input, Checkbox, Dropdown, Breadcrumb, Menu, Pagination } from 'antd'
-import Service from '../../src/components/Services/Services'
+import { Switch, Input, Checkbox, Breadcrumb, Pagination, Radio } from 'antd'
+import { subcatalogProps } from './Types'
 
-const optionsTerm = [
-  { label: 'Не вибрано', value: '' },
-  { label: 'Експрес за 24 години', value: '1' },
-  { label: 'До 3 днів', value: '3' },
-  { label: 'До 7 днів', value: '7' },
-  { label: 'До місяця', value: '30' },
-  { label: 'Будь-який час', value: '99' },
-]
+//hook
+import useOutsideClick from '../../src/hooks/useOutsideClick'
 
 const optionsService = [
   { label: 'Комерційне використання', value: 'extraCommercial' },
@@ -23,87 +19,45 @@ const optionsService = [
   { label: 'Додаткові правки', value: 'extraChanges' },
 ]
 
-const subcatalog: NextPage = (props): JSX.Element => {
+const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
   const [isFilterOpen, setFilterOpen] = useState<boolean>(false)
-  const [filterType, setFilterType] = useState<string>('')
+
   const [budgetVisible, setBudgetVisible] = useState<boolean>(false)
+  const [termVisible, setTermVisible] = useState<boolean>(false)
+  const [serviceVisible, setServiceVisible] = useState<boolean>(false)
+  const [minPrice, setMinPrice] = useState<string>('')
+  const [maxPrice, setMaxPrice] = useState<string>('')
+  const [radioValue, setRadioValue] = useState(null)
+  const [checkedList, setCheckedList] = useState<[]>([])
 
   const budgetRef = React.useRef<HTMLDivElement>(null)
   const termRef = React.useRef<HTMLDivElement>(null)
   const serviceRef = React.useRef<HTMLDivElement>(null)
-  const budgetOptionRef = React.useRef<HTMLDivElement>(null)
-
-  const handleMenuClick = (e: any) => {
-    if (e.key === '3') {
-      setBudgetVisible(false)
-    }
-  }
-  const handleVisibleChange = (flag: any) => {
-    setBudgetVisible(flag)
-  }
-
-  const budgetMenu = (
-    <Menu onClick={handleMenuClick}>
-      <Menu.Item key="1">
-        {' '}
-        <div className="mobile-filter__option">
-          <label htmlFor="min-price">Від</label>
-          <Input
-            className="mobile-filter__budget-input"
-            type="text"
-            placeholder="UAH"
-            id="min-price"
-          />
-        </div>
-      </Menu.Item>
-      <Menu.Item key="2">
-        {' '}
-        <div className="mobile-filter__option">
-          <label htmlFor="max-price">До</label>
-          <Input
-            className="mobile-filter__budget-input"
-            type="text"
-            placeholder="UAH"
-            id="max-price"
-          />
-        </div>
-      </Menu.Item>
-    </Menu>
-  )
 
   const { catalog } = props
-
-  const handleFilters = () => {
-    setFilterOpen((prev) => !prev)
-  }
-
   const router = useRouter()
 
-  const handleClick = (event: any) => {
-    if (event.path) {
-      if (event.path.includes(budgetRef.current)) {
-        setFilterOpen((prev) => !prev)
-        return setFilterType('budget')
-      } else if (event.path.includes(termRef.current)) {
-        setFilterOpen((prev) => !prev)
-        return setFilterType('term')
-      } else if (event.path.includes(serviceRef.current)) {
-        setFilterOpen((prev) => !prev)
-        return setFilterType('service')
-      } else {
-        setFilterOpen(false)
-        setFilterType('')
-      }
-    }
+  const groupChange = (checkedList: any) => {
+    setCheckedList(checkedList)
   }
 
-  useEffect(() => {
-    document.addEventListener('click', handleClick)
+  useOutsideClick(budgetRef, () => {
+    setBudgetVisible(false)
+  })
+  useOutsideClick(termRef, () => {
+    setTermVisible(false)
+  })
+  useOutsideClick(serviceRef, () => {
+    setServiceVisible(false)
+  })
 
-    return () => {
-      document.removeEventListener('click', handleClick)
-    }
-  }, [catalog])
+  const handleFilters = () => {
+    setFilterOpen(true)
+  }
+  const clearBudgetFilter = () => {
+    setMinPrice('')
+    setMaxPrice('')
+  }
 
   const onlineHandler = (checked: boolean) => {
     console.log(`online: ${checked}`)
@@ -113,29 +67,48 @@ const subcatalog: NextPage = (props): JSX.Element => {
     console.log(page)
   }
 
+  const radioStyle = {
+    display: 'block',
+    height: '30px',
+    lineHeight: '30px',
+  }
+
+  const radioStyleMobile = {
+    display: 'block',
+    width: '100%',
+    border: '1px solid #f4f7fc',
+    padding: '10px',
+    color: ' #272525',
+    fontSize: '16px',
+  }
+
+  const checkBoxStyle = {
+    color: '#ffff',
+  }
+
   return (
     <MainLayout categories={props}>
       <div className="services">
         <div className="container">
-          <Breadcrumb className="sub-catalog-page__breadcrumb">
+          <Breadcrumb className="services__breadcrumb">
             <Breadcrumb.Item>
               <Link href="/">
-                <a className="sub-catalog-page__breadcrumb-link">Головна</a>
+                <a className="services__breadcrumb-link">Головна</a>
               </Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item>
               <Link href="/catalog">
-                <a className="sub-catalog-page__breadcrumb-link">Каталог</a>
+                <a className="services__breadcrumb-link">Каталог</a>
               </Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item>
               <Link href={`/catalog/${router.query.subcatalog![0]}`}>
-                <a className="sub-catalog-page__breadcrumb-link">{router.query.subcatalog![0]}</a>
+                <a className="services__breadcrumb-link">{router.query.subcatalog![0]}</a>
               </Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item>
               <Link href="/catalog">
-                <a className="sub-catalog-page__breadcrumb-link">{router.query.subcatalog![1]}</a>
+                <a className="services__breadcrumb-link">{router.query.subcatalog![1]}</a>
               </Link>
             </Breadcrumb.Item>
           </Breadcrumb>
@@ -145,13 +118,185 @@ const subcatalog: NextPage = (props): JSX.Element => {
               <div className="services__mobile-filters-img-wrapper">
                 <img src="/assets/img/show-filters.svg" alt="filters" />
               </div>
-              <span className="services__filter">Фільтр</span>
+              <span className="services__filter-mobile">Фільтр</span>
             </div>
-            <div className="services__results">
-              <span className="services__total-results"> {catalog.total} знайдено</span>
-              <div className="services__online-switch">
-                <Switch onChange={onlineHandler} />
-                <span className="services__now-online">Зараз онлайн</span>
+            <div className="services__result-filter-wrapper">
+              <div className="services__results">
+                <span className="services__total-results"> {catalog.total} знайдено</span>
+                <div className="services__online-switch">
+                  <Switch onChange={onlineHandler} />
+                  <span className="services__now-online">Зараз онлайн</span>
+                </div>
+              </div>
+              <div className="services__desktop-filters">
+                {/*фильтр бюджета */}
+                <div className="services__filter services__filter--budget" ref={budgetRef}>
+                  <button
+                    className="services__budget-filter-btn"
+                    onClick={() => setBudgetVisible((prev) => !prev)}
+                  >
+                    Бюджет
+                    <img
+                      className={`${
+                        budgetVisible
+                          ? 'services__budget-filter-arrow--open'
+                          : 'services__budget-filter-arrow'
+                      }`}
+                      src="/assets/img/arrow.png"
+                      alt=""
+                    />
+                  </button>
+
+                  <div
+                    className={`services__budget-filter-options ${
+                      budgetVisible && 'services__budget-filter-options--open'
+                    }`}
+                  >
+                    <div className="services__budget-filter-option">
+                      <label htmlFor="min-price">До</label>
+                      <input
+                        className="services__budget-filter-input"
+                        type="text"
+                        id="min-price"
+                        placeholder="UAH"
+                        value={minPrice}
+                        onChange={(e) => setMinPrice(e.target.value)}
+                      />
+                    </div>
+                    <div className="services__budget-filter-option">
+                      <label htmlFor="min-price">Від</label>
+                      <input
+                        className="services__budget-filter-input"
+                        id="max-price"
+                        type="text"
+                        placeholder="UAH"
+                        value={maxPrice}
+                        onChange={(e) => setMaxPrice(e.target.value)}
+                      />
+                    </div>
+                    <div className="services__budget-filter-buttons budget-buttons">
+                      <button
+                        className="budget-buttons__close"
+                        onClick={() => setBudgetVisible(false)}
+                      >
+                        Закрити
+                      </button>
+                      <button className="budget-buttons__clear" onClick={clearBudgetFilter}>
+                        Очистити
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                {/*фильтры срока */}
+                <div className="services__filter services__filter--term" ref={termRef}>
+                  <button
+                    className="services__budget-filter-btn"
+                    onClick={() => setTermVisible((prev) => !prev)}
+                  >
+                    Термін виконання
+                    <img
+                      className={`${
+                        termVisible
+                          ? 'services__budget-filter-arrow--open'
+                          : 'services__budget-filter-arrow'
+                      }`}
+                      src="/assets/img/arrow.png"
+                      alt=""
+                    />
+                  </button>
+
+                  <div
+                    className={`services__term-filter-options ${
+                      termVisible && 'services__term-filter-options--open'
+                    }`}
+                  >
+                    <div className="services__term-filter-option">
+                      <Radio.Group
+                        value={radioValue}
+                        onChange={(e) => setRadioValue(e.target.value)}
+                      >
+                        <Radio style={radioStyle} value={''}>
+                          Не вибрано
+                        </Radio>
+                        <Radio style={radioStyle} value={1}>
+                          Експресс за 24 години
+                        </Radio>
+                        <Radio style={radioStyle} value={3}>
+                          До 3 днів
+                        </Radio>
+                        <Radio style={radioStyle} value={7}>
+                          До 7 днів
+                        </Radio>
+                        <Radio style={radioStyle} value={30}>
+                          До місяця
+                        </Radio>
+                        <Radio style={radioStyle} value={99}>
+                          Будь який час
+                        </Radio>
+                      </Radio.Group>
+                      <div className="service__term-filter-buttons term-buttons">
+                        <button
+                          className="term-buttons__btn-clear"
+                          onClick={() => setRadioValue(null)}
+                        >
+                          Очистити
+                        </button>
+                        <button
+                          className="term-buttons__btn-close"
+                          onClick={() => setTermVisible(false)}
+                        >
+                          Закрити
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/*фильтры сервиса */}
+                <div className="services__filter services__filter--service" ref={serviceRef}>
+                  <button
+                    className="services__budget-filter-btn"
+                    onClick={() => setServiceVisible((prev) => !prev)}
+                  >
+                    Сервіс включає
+                    <img
+                      className={`${
+                        serviceVisible
+                          ? 'services__budget-filter-arrow--open'
+                          : 'services__budget-filter-arrow'
+                      }`}
+                      src="/assets/img/arrow.png"
+                      alt=""
+                    />
+                  </button>
+
+                  <div
+                    className={`services__service-filter-options ${
+                      serviceVisible && 'services__service-filter-options--open'
+                    }`}
+                  >
+                    <div className="services__term-filter-option">
+                      <Checkbox.Group
+                        options={optionsService}
+                        onChange={groupChange}
+                        value={checkedList}
+                      />
+                      <div className="services__service-filter-btn service-buttons">
+                        <button
+                          className="service-buttons__btn-clear"
+                          onClick={() => setCheckedList([])}
+                        >
+                          Очистити
+                        </button>
+                        <button
+                          className="service-buttons__btn-close"
+                          onClick={() => setServiceVisible(false)}
+                        >
+                          Закрити
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             {/*Mobile filters */}
@@ -193,6 +338,7 @@ const subcatalog: NextPage = (props): JSX.Element => {
                     />
                   </div>
                 </div>
+                <div></div>
               </div>
               <div className="mobile-filter__deadlines mobile-filter__filter">
                 <div className="mobile-filter__title-wrapper">
@@ -200,36 +346,32 @@ const subcatalog: NextPage = (props): JSX.Element => {
                   <div className="mobile-filter__arrow"></div>
                 </div>
                 <div className="mobile-filter__deadline-options mobile-filter__options ">
-                  <div className="mobile-filter__deadline-option">
-                    <Checkbox>
-                      <span className="mobile-filter__deadline-checkbox">Не вибрано</span>
-                    </Checkbox>
-                  </div>
-                  <div className="mobile-filter__deadline-option">
-                    <Checkbox>
-                      <span className="mobile-filter__deadline-checkbox">Експрес за 24 години</span>
-                    </Checkbox>
-                  </div>
-                  <div className="mobile-filter__deadline-option">
-                    <Checkbox>
-                      <span className="mobile-filter__deadline-checkbox"> До 3 днів</span>
-                    </Checkbox>
-                  </div>
-                  <div className="mobile-filter__deadline-option">
-                    <Checkbox>
-                      <span className="mobile-filter__deadline-checkbox">До 7 днів</span>
-                    </Checkbox>
-                  </div>
-                  <div className="mobile-filter__deadline-option">
-                    <Checkbox>
-                      <span className="mobile-filter__deadline-checkbox">До місяця</span>
-                    </Checkbox>
-                  </div>
-                  <div className="mobile-filter__deadline-option">
-                    <Checkbox>
-                      <span className="mobile-filter__deadline-checkbox">Будь-який час</span>
-                    </Checkbox>
-                  </div>
+                  <Radio.Group value={radioValue} onChange={(e) => setRadioValue(e.target.value)}>
+                    <Radio style={radioStyleMobile} value={''}>
+                      Не вибрано
+                    </Radio>
+                    <Radio style={radioStyleMobile} value={1}>
+                      Експресс за 24 години
+                    </Radio>
+                    <Radio style={radioStyleMobile} value={3}>
+                      До 3 днів
+                    </Radio>
+                    <Radio style={radioStyleMobile} value={7}>
+                      До 7 днів
+                    </Radio>
+                    <Radio style={radioStyleMobile} value={30}>
+                      До місяця
+                    </Radio>
+                    <Radio style={radioStyleMobile} value={99}>
+                      Будь який час
+                    </Radio>
+                  </Radio.Group>
+                  <button
+                    className="services__btn-clear-mobile"
+                    onClick={() => setRadioValue(null)}
+                  >
+                    Очистити
+                  </button>
                 </div>
               </div>
               <div className="mobile-filter__service mobile-filter__filter">
@@ -238,112 +380,21 @@ const subcatalog: NextPage = (props): JSX.Element => {
                   <div className="mobile-filter__arrow"></div>
                 </div>
                 <div className="mobile-filter__deadline-options mobile-filter__options ">
-                  <div className="mobile-filter__deadline-option">
-                    <Checkbox>
-                      <span className="mobile-filter__deadline-checkbox">Додаткові правки</span>
-                    </Checkbox>
-                  </div>
-                  <div className="mobile-filter__deadline-option">
-                    <Checkbox>
-                      <span className="mobile-filter__deadline-checkbox">
-                        Комерційне використання
-                      </span>
-                    </Checkbox>
-                  </div>
-                  <div className="mobile-filter__deadline-option">
-                    <Checkbox>
-                      <span className="mobile-filter__deadline-checkbox">Скорочені терміни</span>
-                    </Checkbox>
-                  </div>
+                  <Checkbox.Group
+                    style={checkBoxStyle}
+                    options={optionsService}
+                    onChange={groupChange}
+                    value={checkedList}
+                  />
+                  <button className="services__btn-clear-mobile" onClick={() => setCheckedList([])}>
+                    Очистити
+                  </button>
                 </div>
               </div>
             </div>
-            {/* Desktop filters*/}
-            <div className="services__desktop-filters">
-              <Dropdown
-                trigger={['click']}
-                visible={budgetVisible}
-                onVisibleChange={handleVisibleChange}
-                overlay={budgetMenu}
-              >
-                <div role="presentation" onClick={handleClick} ref={budgetRef}>
-                  <a
-                    role="presentation"
-                    className="ant-dropdown-link budget"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Бюджет
-                    <span
-                      className={`services__desktop-filters-arrow ${
-                        filterType === 'budget' &&
-                        isFilterOpen &&
-                        'services__desktop-filters-arrow--open'
-                      }`}
-                    ></span>
-                  </a>
-                </div>
-              </Dropdown>
 
-              <Dropdown
-                trigger={['click']}
-                overlay={
-                  <div className="mobile-filter__deadline-options mobile-filter__options ">
-                    <Checkbox.Group
-                      options={optionsTerm}
-                      onChange={(checkedValues) => console.log(checkedValues)}
-                    />
-                  </div>
-                }
-              >
-                <div role="presentation" onClick={handleClick} ref={termRef}>
-                  <a
-                    role="presentation"
-                    className="ant-dropdown-link"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Термін виконання
-                    <span
-                      className={`services__desktop-filters-arrow ${
-                        filterType === 'term' &&
-                        isFilterOpen &&
-                        'services__desktop-filters-arrow--open'
-                      }`}
-                    ></span>
-                  </a>
-                </div>
-              </Dropdown>
-
-              <Dropdown
-                trigger={['click']}
-                overlay={
-                  <div className="mobile-filter__deadline-options mobile-filter__options ">
-                    <Checkbox.Group
-                      options={optionsService}
-                      onChange={(checkedValues) => console.log(checkedValues)}
-                    />
-                  </div>
-                }
-              >
-                <div role="presentation" onClick={handleClick} ref={serviceRef}>
-                  <a
-                    role="presentation"
-                    className="ant-dropdown-link"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    Сервіс включає
-                    <span
-                      className={`services__desktop-filters-arrow ${
-                        filterType === 'service' &&
-                        isFilterOpen &&
-                        'services__desktop-filters-arrow--open'
-                      }`}
-                    ></span>
-                  </a>
-                </div>
-              </Dropdown>
-            </div>
             <div className="services__list">
-              {catalog.data.map((service: any) => (
+              {catalog.data.map((service) => (
                 <Service
                   key={service.id}
                   averageRating={service.averageRating}
@@ -353,7 +404,6 @@ const subcatalog: NextPage = (props): JSX.Element => {
                   title={service.title}
                   user={service.user}
                   id={service.id}
-                  router={router}
                 />
               ))}
             </div>

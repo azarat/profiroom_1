@@ -97,10 +97,13 @@ export const getOfferSideProps: GetServerSideProps = async (
     }),
   })
   const offer = await res.json()
+  const categoriesRes = await fetch('http://test.profiroom.com/Backend/api/categories')
+  const json = await categoriesRes.json()
 
   return {
     props: {
       offer,
+      json,
     },
   }
 }
