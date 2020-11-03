@@ -15,6 +15,7 @@ const Header = (): JSX.Element => {
   const [openMenu, setOpenMenu] = useState<boolean>(false)
   const [isLogined] = useState<boolean>(false)
   const router = useRouter()
+  console.log(router)
 
   const { lang: updateLang, setLang: setUpdateLang } = useContext(MainContext)
 
@@ -42,7 +43,11 @@ const Header = (): JSX.Element => {
               </Link>
             </div>
 
-            <div className="header__nav-wrapper">
+            <div
+              className={` ${
+                router.pathname === '/login' ? 'header__nav-wrapper--auth' : 'header__nav-wrapper'
+              }`}
+            >
               <nav className="nav">
                 <Link href="/">
                   <a className="nav__item">Головна</a>
@@ -53,7 +58,13 @@ const Header = (): JSX.Element => {
               </nav>
             </div>
 
-            <div className="header__search-wrapper">
+            <div
+              className={`${
+                router.pathname === '/login'
+                  ? 'header__search-wrapper--auth'
+                  : 'header__search-wrapper'
+              }`}
+            >
               <Input.Search
                 placeholder="Розпочати пошук..."
                 onSearch={(value) => console.log(value)}
@@ -61,31 +72,33 @@ const Header = (): JSX.Element => {
               />
             </div>
             <UserDrowDown isLogined={isLogined} />
-            <LangSelect updateLanguage={updateLanguage} language={updateLang} />
-            {!isLogined && (
-              <>
-                {router.pathname !== '/login' && (
-                  <div className="header__login-anchor">
-                    <Link href={{ pathname: '/login', query: { isLogin: true } }}>
-                      <a className="header__login">Увійти</a>
-                    </Link>
-                  </div>
-                )}
-                {router.pathname !== '/login' ? (
-                  <div className="header__register-anchor">
-                    <Link href={{ pathname: '/login', query: { isRegister: true } }}>
-                      <a className="header__register">Зареєструватися</a>
-                    </Link>
-                  </div>
-                ) : (
-                  <div className="header__register-anchor">
-                    <Link href="/">
-                      <a className="header__register">На головну</a>
-                    </Link>
-                  </div>
-                )}
-              </>
-            )}
+            <div className="header__select-auth-wrapper">
+              <LangSelect updateLanguage={updateLanguage} language={updateLang} />
+              {!isLogined && (
+                <>
+                  {router.pathname !== '/login' && (
+                    <div className="header__login-anchor">
+                      <Link href={{ pathname: '/login', query: { isLogin: true } }}>
+                        <a className="header__login">Увійти</a>
+                      </Link>
+                    </div>
+                  )}
+                  {router.pathname !== '/login' ? (
+                    <div className="header__register-anchor">
+                      <Link href={{ pathname: '/login', query: { isRegister: true } }}>
+                        <a className="header__register">Зареєструватися</a>
+                      </Link>
+                    </div>
+                  ) : (
+                    <div className="header__register-anchor">
+                      <Link href="/">
+                        <a className="header__register">На головну</a>
+                      </Link>
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
           </div>
           <MobileMenu isOpen={openMenu} closeMenu={handleMenu} updateLanguage={updateLanguage} />
         </div>
