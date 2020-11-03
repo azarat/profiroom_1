@@ -139,3 +139,37 @@
     url('/styles/fonts/Roboto-Medium.ttf') format('truetype');
   font-display: swap;
 }
+
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('/styles/fonts/icomoon.eot') format('embedded-opentype'),
+    url('/styles/fonts/icomoon.ttf') format('truetype'),
+    url('/styles/fonts/icomoon.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-home:before {
+  content: "\e900";
+  background-color: aliceblue;
+}
+
+
+

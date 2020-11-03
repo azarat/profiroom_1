@@ -148,6 +148,10 @@ const Menu: React.FC<MobileMenuProps> = ({ isOpenMenu, openMenu, userData }): JS
             <p className="dashboard-menu__button-text">НАЛАШТУВАННЯ</p>
           </div>
         </Link>
+        <div
+          className="icon-home"
+          style={{ width: '70px', height: '70px', backgroundColor: 'black', fontSize: '50px' }}
+        ></div>
       </div>
     </div>
   )
