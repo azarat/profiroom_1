@@ -16,26 +16,11 @@ export type subcatalogProps = {
 }
 
 export type dataTypes = {
-  advancedTerm: number
-  allPackages: number
-  basicTerm: number
-  canPublish: number
-  category_id: number
   comments_count: number
-  created_at: string
-  description: string
   id: number
   mainImage: string
   minPrice: number
-  minprice: number
-  premiumTerm: number
-  published: number
-  rating: number
-  sub_category_id: number
   title: string
-  updated_at: string
-  user_id: number
-  views: number
   averageRating: averageTypes
   user: userTypes
 }

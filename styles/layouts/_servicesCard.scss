@@ -9,13 +9,12 @@
   & .item {
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
+    width: 100%;
     margin: 0 10px 30px;
     color: $gray-color;
     background-color: $white-color;
     border-radius: 3px;
     box-shadow: 0 0 4px rgba(199, 213, 255, 0.55);
-    width: 100%;
 
     &__img-wrapper {
       width: 100%;
@@ -30,18 +29,19 @@
     &__description {
       display: flex;
       flex-direction: column;
+      height: 100px;
       margin-top: 10px;
       padding: 0 10px;
-      height: 100px;
     }
 
     &__about {
+      min-height: 30px;
       margin-bottom: 35px;
       color: $black-color;
       font-size: $font-14;
       line-height: 16px;
       text-decoration: none;
-      min-height: 30px;
+      word-break: break-all;
     }
 
     &__bottom {
@@ -96,11 +96,11 @@
   .services {
     &__list {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      justify-content: center;
-      align-items: baseline;
-      margin-top: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 220px));
       gap: 10px;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-top: 40px;
     }
 
     & .item {
@@ -119,10 +119,10 @@
     }
 
     &__online-switch {
-      margin-left: auto;
       flex: 0 0 auto;
-      padding: 0 10px;
       align-items: center;
+      margin-left: auto;
+      padding: 0 10px;
     }
 
     &__now-online {
@@ -134,9 +134,9 @@
 @media screen and (min-width: 1200px) {
   .services {
     &__list {
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      justify-content: space-between;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 270px));
       gap: 30px;
+      justify-content: space-between;
     }
     & .item {
       width: 100%;

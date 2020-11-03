@@ -1,11 +1,13 @@
 .services {
   &__wrapper {
-    padding: 0 15px;
     max-width: 390px;
+    min-height: 480px;
     margin: auto;
+    padding: 0 5px;
   }
 
-  &__breadcrumb {
+  &__breadcrumb.ant-breadcrumb {
+    display: none;
     margin: 35px 0 35px;
   }
 
@@ -52,8 +54,8 @@
 
   &__results {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     margin: 10px 0px;
     color: $gray-color;
     font-weight: $font-weight-400;
@@ -68,13 +70,16 @@
   }
 
   &__btn-clear-mobile {
-    font-size: $font-16;
-    font-weight: $font-weight-600;
     margin-top: 10px;
+    font-weight: $font-weight-600;
+    font-size: $font-16;
     @extend .budget-buttons__clear;
   }
 
   & .mobile-filter {
+    &__option-wrapper {
+      display: flex;
+    }
     position: fixed;
     top: 0;
     right: 0;
@@ -128,6 +133,7 @@
     }
     &__budget-options {
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
     }
 
@@ -170,10 +176,10 @@
   }
 
   &__filter {
-    min-width: 200px;
     position: relative;
-    box-shadow: 0 10px 16px rgba(128, 152, 213, 0.2);
+    min-width: 200px;
     border-radius: 3px;
+    box-shadow: 0 10px 16px rgba(128, 152, 213, 0.2);
 
     &--service {
       min-width: 220px;
@@ -181,42 +187,42 @@
   }
 
   &__budget-filter-btn {
+    z-index: 20;
     display: flex;
-    width: 100%;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
     padding: 10px;
+    color: $black-color;
+    font-weight: $font-weight-400;
+    font-size: $font-16;
+    line-height: 21px;
     background-color: $white-color;
     border: none;
     outline: none;
-    z-index: 20;
     cursor: pointer;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 21px;
-    color: #323c47;
   }
 
   &__budget-filter-options {
-    max-width: 100%;
-    background-color: $white-color;
     position: absolute;
     top: 0;
     right: 0;
     left: 0;
-    padding: 10px;
     display: flex;
     flex-wrap: wrap;
-    opacity: 0;
     justify-content: space-between;
+    max-width: 100%;
+    padding: 10px;
+    background-color: $white-color;
+    border-radius: 3px;
+    opacity: 0;
     transition: all 1s ease;
     pointer-events: none;
-    border-radius: 3px;
 
     &--open {
-      transition: all 1s ease;
-      opacity: 1;
       top: 50px;
+      opacity: 1;
+      transition: all 1s ease;
       pointer-events: auto;
     }
   }
@@ -224,17 +230,17 @@
   &__budget-filter-option {
     display: flex;
     flex-direction: column;
-    padding: 5px 0px;
     width: 40%;
+    padding: 5px 0px;
   }
 
   &__budget-filter-input {
-    padding: 6px 5px;
-    border: 1px solid #dce0e6;
     box-sizing: border-box;
-    border-radius: 2px;
-    font-size: 14px;
     margin-top: 5px;
+    padding: 6px 5px;
+    font-size: $font-14;
+    border: 1px solid #dce0e6;
+    border-radius: 2px;
     outline: none;
     transition: border 0.5s;
 
@@ -257,54 +263,54 @@
   }
 
   &__budget-filter-arrow {
-    transition: all 0.5s ease;
     transform: rotate(180deg);
+    transition: all 0.5s ease;
   }
   &__budget-filter-arrow--open {
-    transition: all 0.5s ease;
     transform: rotate(0deg);
+    transition: all 0.5s ease;
   }
   &__term-filter-options {
-    max-width: 100%;
-    background-color: $white-color;
     position: absolute;
     top: 0;
     right: 0;
     left: 0;
-    padding: 10px;
     display: flex;
-    opacity: 0;
     justify-content: space-between;
+    max-width: 100%;
+    padding: 10px;
+    background-color: $white-color;
+    opacity: 0;
     transition: all 1s ease;
     pointer-events: none;
     &--open {
-      transition: all 1s ease;
-      opacity: 1;
       top: 50px;
-      pointer-events: auto;
       border-radius: 3px;
+      opacity: 1;
+      transition: all 1s ease;
+      pointer-events: auto;
     }
   }
   &__service-filter-options {
-    max-width: 100%;
-    background-color: $white-color;
     position: absolute;
     top: 0;
     right: 0;
     left: 0;
-    padding: 5px;
     display: flex;
-    opacity: 0;
     justify-content: space-between;
+    max-width: 100%;
+    padding: 5px;
+    background-color: $white-color;
+    opacity: 0;
     transition: all 1s ease;
     pointer-events: none;
     &--open {
-      transition: all 1s ease;
-      opacity: 1;
       top: 50px;
-      pointer-events: auto;
-      border-radius: 3px;
       width: 115%;
+      border-radius: 3px;
+      opacity: 1;
+      transition: all 1s ease;
+      pointer-events: auto;
     }
   }
 
@@ -332,48 +338,53 @@
   }
 
   &__pagination {
-    text-align: center;
     padding: 20px 0px;
+    text-align: center;
   }
 
   .ant-checkbox + span {
     padding: 10px;
-    color: #272525;
+    color: $black-color;
     font-size: $font-16;
-  }
-
-  .ant-checkbox-group-item {
-    border: 1px solid #f4f7fc;
-    margin: 0;
   }
 }
 
 @media screen and (min-width: 768px) {
   .services {
+    &__breadcrumb.ant-breadcrumb {
+      display: block;
+    }
     .ant-checkbox + span {
-      font-size: $font-14;
-      color: rgba(0, 0, 0, 0.65);
       display: inline-block;
       padding: 0 0 10px 10px;
+      color: $shadow-color;
+      font-size: $font-14;
     }
 
     .ant-checkbox-wrapper {
       padding: 0px;
     }
 
+    .ant-checkbox-group-item {
+      margin: 0;
+      padding: 10px 0px;
+      border: 1px solid #f4f7fc;
+    }
+
     &__wrapper {
       max-width: 690px;
+      padding: 0;
     }
     &__title {
-      font-size: 36px;
-      line-height: 34px;
       margin-bottom: 60px;
+      font-size: $font-36;
+      line-height: 34px;
     }
     & .mobile-filter {
+      position: static;
       display: none;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 10px;
-      position: static;
       overflow: hidden;
 
       &__back {
@@ -384,8 +395,8 @@
         flex: 0 0 33.33%;
         margin: 0;
         background: #fff;
-        box-shadow: 0px 24px 40px 2px rgba(129, 153, 213, 0.2);
         border-radius: 3px;
+        box-shadow: 0px 24px 40px 2px rgba(129, 153, 213, 0.2);
       }
 
       &__title-wrapper {
@@ -396,31 +407,31 @@
       }
 
       &__title {
-        font-size: 14px;
-        line-height: 21px;
-        font-weight: 400;
         position: relative;
+        font-weight: $font-weight-400;
+        font-size: $font-14;
+        line-height: 21px;
       }
 
       &__options {
         position: absolute;
+        top: 290px;
+        display: none;
+        box-sizing: border-box;
+        width: 33%;
         background: #fff;
         border: 1px solid rgba(220, 224, 230, 0.1);
-        box-sizing: border-box;
-        box-shadow: 0 10px 16px rgba(128, 152, 213, 0.2);
         border-radius: 3px;
+        box-shadow: 0 10px 16px rgba(128, 152, 213, 0.2);
         transition: all 0.5s;
-        top: 290px;
-        width: 33%;
-        display: none;
       }
 
       &__arrow {
         display: block;
         width: 12px;
         height: 8px;
-        transform: translateY(-50%) rotate(180deg);
         background-image: url(/assets/img/arrow.png);
+        transform: translateY(-50%) rotate(180deg);
       }
     }
     &__desktop-filters {
@@ -454,10 +465,10 @@
 ///antd styles
 
 .ant-breadcrumb a {
+  color: $dark-gray-color;
   font-weight: $font-weight-400;
   font-size: $font-14;
   line-height: 18px;
-  color: #323c47;
   cursor: pointer;
 }
 .ant-breadcrumb > span:last-child a {

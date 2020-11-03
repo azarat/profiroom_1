@@ -56,14 +56,31 @@ export const getCategorySideProps: GetServerSideProps = async (
   const url = 'http://test.profiroom.com/Backend/api/catalog'
 
   const params = context && context.params && context.params.subcatalog
+  const page = context.query.page || 1
+  const extraCommercial = context.query.extraCommercial && context.query.extraCommercial
+  const extraTerm = context.query.extraTerm && context.query.extraTerm
+  const extraChanges = context.query.extraChanges && context.query.extraChanges
+  const maxTerm = context.query.maxTerm && context.query.maxTerm
+  const minPrice = context.query.minPrice && context.query.minPrice
+  const maxPrice = context.query.maxPrice && context.query.maxPrice
+  const online = context.query.online && context.query.online
+
   const res = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      category: params[0],
-      subCategory: params[1],
+      category: params![0],
+      subCategory: params![1],
+      extraCommercial,
+      extraTerm,
+      extraChanges,
+      maxTerm,
+      minPrice,
+      maxPrice,
+      page,
+      online,
     }),
   })
   const catalog = await res.json()
@@ -82,8 +99,6 @@ export const getCategorySideProps: GetServerSideProps = async (
 export const getOfferSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ): Promise<any> => {
-  console.log('SUKABLYa', context)
-
   const url = 'http://test.profiroom.com/Backend/api/showOffer'
 
   const params = context && context.params && context.params.offerId
@@ -93,7 +108,7 @@ export const getOfferSideProps: GetServerSideProps = async (
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      offerId: params[0],
+      offerId: params![0],
     }),
   })
   const offer = await res.json()

@@ -3,7 +3,7 @@ import { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 // Components
-import Service from '../../src/components/Services/Services'
+import Service from '../../src/components/OfferCard/OfferCard'
 // Layout
 import MainLayout from '../../layouts/MainLayout'
 // Antd
@@ -13,6 +13,7 @@ import { subcatalogProps } from './Types'
 //hook
 import useOutsideClick from '../../src/hooks/useOutsideClick'
 
+///options for term filter
 const optionsService = [
   { label: 'Комерційне використання', value: 'extraCommercial' },
   { label: 'Скорочені терміни', value: 'extraTerms' },
@@ -21,13 +22,12 @@ const optionsService = [
 
 const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
   const [isFilterOpen, setFilterOpen] = useState<boolean>(false)
-
   const [budgetVisible, setBudgetVisible] = useState<boolean>(false)
   const [termVisible, setTermVisible] = useState<boolean>(false)
   const [serviceVisible, setServiceVisible] = useState<boolean>(false)
   const [minPrice, setMinPrice] = useState<string>('')
   const [maxPrice, setMaxPrice] = useState<string>('')
-  const [radioValue, setRadioValue] = useState(null)
+  const [radioValue, setRadioValue] = useState<string | null>(null)
   const [checkedList, setCheckedList] = useState<[]>([])
 
   const budgetRef = React.useRef<HTMLDivElement>(null)
@@ -35,10 +35,67 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
   const serviceRef = React.useRef<HTMLDivElement>(null)
 
   const { catalog } = props
-  const router = useRouter()
 
+  const router = useRouter()
+  ////Set query for service filter
   const groupChange = (checkedList: any) => {
     setCheckedList(checkedList)
+    const extraCommercial = checkedList.includes('extraCommercial') ? true : ''
+    const extraTerms = checkedList.includes('extraTerms') ? true : ''
+    const extraChanges = checkedList.includes('extraChanges') ? true : ''
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, extraCommercial, extraChanges, extraTerms },
+    })
+  }
+  ///Set query for term filter
+  const radioValueChange = (e: any) => {
+    const value = e.target.value
+    setRadioValue(value)
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, maxTerm: e.target.value },
+    })
+  }
+  ///Set query for min price filter
+  const setMinimalPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const minValue = e.currentTarget.value
+    setMinPrice(minValue)
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, minPrice: minValue },
+    })
+  }
+  ///Set query for max price filter
+
+  const setMaximalPrice = (e: React.FormEvent<HTMLInputElement>) => {
+    const maxValue = e.currentTarget.value
+    setMaxPrice(maxValue)
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, maxPrice: maxValue },
+    })
+  }
+  //clear budget filter
+  const clearBudgetFilter = () => {
+    setMinPrice('')
+    setMaxPrice('')
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, maxPrice: '', minPrice: '' },
+    })
+  }
+  // clear service filter
+  const clearServicesFilter = () => {
+    setCheckedList([])
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, extraCommercial: '', extraChanges: '', extraTerms: '', page: 1 },
+    })
+  }
+
+  const handleFilters = () => {
+    setFilterOpen(true)
   }
 
   useOutsideClick(budgetRef, () => {
@@ -50,21 +107,21 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
   useOutsideClick(serviceRef, () => {
     setServiceVisible(false)
   })
-
-  const handleFilters = () => {
-    setFilterOpen(true)
-  }
-  const clearBudgetFilter = () => {
-    setMinPrice('')
-    setMaxPrice('')
-  }
-
+  ///todo fix
   const onlineHandler = (checked: boolean) => {
-    console.log(`online: ${checked}`)
+    console.log(checked)
+    // router.push({
+    //   pathname: router.pathname,
+    //   query: { ...router.query, online: checked },
+    // })
   }
 
   const handlerPage = (page: number) => {
-    console.log(page)
+    document.body.scrollIntoView()
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, page },
+    })
   }
 
   const radioStyle = {
@@ -78,7 +135,8 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
     width: '100%',
     border: '1px solid #f4f7fc',
     padding: '10px',
-    color: ' #272525',
+    //todo fix
+    color: '#272525',
     fontSize: '16px',
   }
 
@@ -90,29 +148,30 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
     <MainLayout categories={props}>
       <div className="services">
         <div className="container">
-          <Breadcrumb className="services__breadcrumb">
-            <Breadcrumb.Item>
-              <Link href="/">
-                <a className="services__breadcrumb-link">Головна</a>
-              </Link>
-            </Breadcrumb.Item>
-            <Breadcrumb.Item>
-              <Link href="/catalog">
-                <a className="services__breadcrumb-link">Каталог</a>
-              </Link>
-            </Breadcrumb.Item>
-            <Breadcrumb.Item>
-              <Link href={`/catalog/${router.query.subcatalog![0]}`}>
-                <a className="services__breadcrumb-link">{router.query.subcatalog![0]}</a>
-              </Link>
-            </Breadcrumb.Item>
-            <Breadcrumb.Item>
-              <Link href="/catalog">
-                <a className="services__breadcrumb-link">{router.query.subcatalog![1]}</a>
-              </Link>
-            </Breadcrumb.Item>
-          </Breadcrumb>
           <div className="services__wrapper">
+            <Breadcrumb className="services__breadcrumb">
+              <Breadcrumb.Item>
+                <Link href="/">
+                  <a className="services__breadcrumb-link">Головна</a>
+                </Link>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item>
+                <Link href="/catalog">
+                  <a className="services__breadcrumb-link">Каталог</a>
+                </Link>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item>
+                <Link href={`/catalog/${router.query.subcatalog![0]}`}>
+                  <a className="services__breadcrumb-link">{router.query.subcatalog![0]}</a>
+                </Link>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item>
+                <Link href="/catalog">
+                  <a className="services__breadcrumb-link">{router.query.subcatalog![1]}</a>
+                </Link>
+              </Breadcrumb.Item>
+            </Breadcrumb>
+
             <h2 className="services__title">1C</h2>
             <div className="services__mobile-filters" role="presentation" onClick={handleFilters}>
               <div className="services__mobile-filters-img-wrapper">
@@ -160,7 +219,16 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                         id="min-price"
                         placeholder="UAH"
                         value={minPrice}
-                        onChange={(e) => setMinPrice(e.target.value)}
+                        // onChange={(e) => {
+                        //   setMinPrice(e.target.value)
+                        //   router.push({
+                        //     pathname: `/catalog/${router.query.subcatalog![0]}/${
+                        //       router.query.subcatalog![1]
+                        //     }`,
+                        //     query: { ...router.query, minPrice: minPrice },
+                        //   })
+                        // }}
+                        onChange={setMinimalPrice}
                       />
                     </div>
                     <div className="services__budget-filter-option">
@@ -171,7 +239,16 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                         type="text"
                         placeholder="UAH"
                         value={maxPrice}
-                        onChange={(e) => setMaxPrice(e.target.value)}
+                        // onChange={(e) => {
+                        //   setMaxPrice(e.target.value)
+                        //   router.push({
+                        //     pathname: `/catalog/${router.query.subcatalog![0]}/${
+                        //       router.query.subcatalog![1]
+                        //     }`,
+                        //     query: { ...router.query, maxPrice: maxPrice },
+                        //   })
+                        // }}
+                        onChange={setMaximalPrice}
                       />
                     </div>
                     <div className="services__budget-filter-buttons budget-buttons">
@@ -211,33 +288,90 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                     }`}
                   >
                     <div className="services__term-filter-option">
-                      <Radio.Group
-                        value={radioValue}
-                        onChange={(e) => setRadioValue(e.target.value)}
-                      >
-                        <Radio style={radioStyle} value={''}>
+                      <Radio.Group value={radioValue} onChange={radioValueChange}>
+                        <Radio
+                          style={radioStyle}
+                          value={''}
+                          onClick={() =>
+                            router.push({
+                              pathname: router.pathname,
+                              query: { ...router.query, maxTerm: '' },
+                            })
+                          }
+                        >
                           Не вибрано
                         </Radio>
-                        <Radio style={radioStyle} value={1}>
+                        <Radio
+                          style={radioStyle}
+                          value={1}
+                          onClick={() =>
+                            router.push({
+                              pathname: router.pathname,
+                              query: { ...router.query, maxTerm: '1' },
+                            })
+                          }
+                        >
                           Експресс за 24 години
                         </Radio>
-                        <Radio style={radioStyle} value={3}>
+                        <Radio
+                          style={radioStyle}
+                          value={3}
+                          onClick={() =>
+                            router.push({
+                              pathname: router.pathname,
+                              query: { ...router.query, maxTerm: '3' },
+                            })
+                          }
+                        >
                           До 3 днів
                         </Radio>
-                        <Radio style={radioStyle} value={7}>
+                        <Radio
+                          style={radioStyle}
+                          value={7}
+                          onClick={() =>
+                            router.push({
+                              pathname: router.pathname,
+                              query: { ...router.query, maxTerm: '7' },
+                            })
+                          }
+                        >
                           До 7 днів
                         </Radio>
-                        <Radio style={radioStyle} value={30}>
+                        <Radio
+                          style={radioStyle}
+                          value={30}
+                          onClick={() =>
+                            router.push({
+                              pathname: router.pathname,
+                              query: { ...router.query, maxTerm: '30' },
+                            })
+                          }
+                        >
                           До місяця
                         </Radio>
-                        <Radio style={radioStyle} value={99}>
+                        <Radio
+                          style={radioStyle}
+                          value={99}
+                          onClick={() =>
+                            router.push({
+                              pathname: router.pathname,
+                              query: { ...router.query, maxTerm: '99' },
+                            })
+                          }
+                        >
                           Будь який час
                         </Radio>
                       </Radio.Group>
                       <div className="service__term-filter-buttons term-buttons">
                         <button
                           className="term-buttons__btn-clear"
-                          onClick={() => setRadioValue(null)}
+                          onClick={() => {
+                            setRadioValue(null)
+                            router.push({
+                              pathname: router.pathname,
+                              query: { ...router.query, page: 1, maxTerm: '' },
+                            })
+                          }}
                         >
                           Очистити
                         </button>
@@ -283,7 +417,7 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                       <div className="services__service-filter-btn service-buttons">
                         <button
                           className="service-buttons__btn-clear"
-                          onClick={() => setCheckedList([])}
+                          onClick={clearServicesFilter}
                         >
                           Очистити
                         </button>
@@ -319,26 +453,34 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                 </div>
 
                 <div className="mobile-filter__budget-options mobile-filter__options">
-                  <div className="mobile-filter__option">
-                    <label htmlFor="min-price">Від</label>
-                    <Input
-                      className="mobile-filter__budget-input"
-                      type="number"
-                      placeholder="UAH"
-                      id="min-price"
-                    />
+                  <div className="mobile-filter__option-wrapper">
+                    <div className="mobile-filter__option">
+                      <label htmlFor="min-price">Від</label>
+                      <Input
+                        className="mobile-filter__budget-input"
+                        type="number"
+                        placeholder="UAH"
+                        id="min-price"
+                        value={minPrice}
+                        onChange={setMinimalPrice}
+                      />
+                    </div>
+                    <div className="mobile-filter__option">
+                      <label htmlFor="max-price">До</label>
+                      <Input
+                        className="mobile-filter__budget-input"
+                        type="number"
+                        placeholder="UAH"
+                        id="max-price"
+                        value={maxPrice}
+                        onChange={setMaximalPrice}
+                      />
+                    </div>
                   </div>
-                  <div className="mobile-filter__option">
-                    <label htmlFor="max-price">До</label>
-                    <Input
-                      className="mobile-filter__budget-input"
-                      type="number"
-                      placeholder="UAH"
-                      id="max-price"
-                    />
-                  </div>
+                  <button className="services__btn-clear-mobile" onClick={clearBudgetFilter}>
+                    Очистити
+                  </button>
                 </div>
-                <div></div>
               </div>
               <div className="mobile-filter__deadlines mobile-filter__filter">
                 <div className="mobile-filter__title-wrapper">
@@ -346,7 +488,7 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                   <div className="mobile-filter__arrow"></div>
                 </div>
                 <div className="mobile-filter__deadline-options mobile-filter__options ">
-                  <Radio.Group value={radioValue} onChange={(e) => setRadioValue(e.target.value)}>
+                  <Radio.Group value={radioValue} onChange={radioValueChange}>
                     <Radio style={radioStyleMobile} value={''}>
                       Не вибрано
                     </Radio>
@@ -368,7 +510,13 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                   </Radio.Group>
                   <button
                     className="services__btn-clear-mobile"
-                    onClick={() => setRadioValue(null)}
+                    onClick={() => {
+                      setRadioValue(null)
+                      router.push({
+                        pathname: router.pathname,
+                        query: { ...router.query, page: 1, maxTerm: '' },
+                      })
+                    }}
                   >
                     Очистити
                   </button>
@@ -386,7 +534,7 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                     onChange={groupChange}
                     value={checkedList}
                   />
-                  <button className="services__btn-clear-mobile" onClick={() => setCheckedList([])}>
+                  <button className="services__btn-clear-mobile" onClick={clearServicesFilter}>
                     Очистити
                   </button>
                 </div>
@@ -415,6 +563,8 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
               pageSize={12}
               showSizeChanger={false}
               onChange={handlerPage}
+              defaultCurrent={1}
+              current={router.query.page ? Number(router.query.page) : 1}
             />
           </div>
         </div>
