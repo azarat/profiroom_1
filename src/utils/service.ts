@@ -6,8 +6,6 @@ import {
   GetStaticPropsContext,
 } from 'next'
 
-import nextCookie from 'next-cookies'
-
 export async function getStaticProps(): Promise<any> {
   const res = await fetch('http://test.profiroom.com/Backend/api/categories')
   const json = await res.json()

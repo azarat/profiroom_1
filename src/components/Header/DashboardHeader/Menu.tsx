@@ -5,28 +5,36 @@ import Link from 'next/link'
 import { MobileMenuProps } from './Types'
 
 //antd
-import {
-  AppstoreOutlined,
-  ProfileOutlined,
-  MailOutlined,
-  BlockOutlined,
-  LineChartOutlined,
-  SettingOutlined,
-  StarOutlined,
-  RightOutlined,
-} from '@ant-design/icons'
+import { StarOutlined, RightOutlined } from '@ant-design/icons'
 
+const dataArray = [
+  { id: 1, image: 'icon-dashboard', title: 'ДАШБОАРД', link: '/dashboard/' },
+  { id: 2, image: 'icon-projects1', title: 'ПРОЕКТИ', link: '/dashboard/' },
+  {
+    id: 3,
+    image: 'icon-message message',
+    title: 'ЧАТ',
+    link: '/dashboard/',
+    active: 'message-active',
+  },
+  { id: 5, image: 'icon-my-services', title: 'ПОСЛУГИ', link: '/dashboard/' },
+  { id: 6, image: 'icon-finance', title: 'ФІНАНСИ', link: '/dashboard/' },
+  { id: 7, image: 'icon-Settings1', title: 'НАЛАШТУВАННЯ', link: '/dashboard/' },
+]
 //todo: add SVG  loader
 // import Image from '../../../../public/assets/img/aura_lvl0.svg'
 
-//todo: replace icons and delete hard code
 const Menu: React.FC<MobileMenuProps> = ({ isOpenMenu, openMenu, userData }): JSX.Element => {
+  const [activeButton, setActiveButton] = useState<number>()
   const array = new Array(5)
+
+  const selectActiveButton = (id: number) => {
+    setActiveButton(id)
+  }
 
   return (
     <div className={`dashboard-menu ${isOpenMenu && 'dashboard-menu__open'}`}>
       <div className={`dashboard-menu__avatar ${isOpenMenu && 'dashboard-menu__avatar-open'}`}>
-        {/* <Image /> */}
         <div
           className={`dashboard-menu__user-info ${isOpenMenu && 'dashboard-menu__user-info-open'}`}
         >
@@ -53,7 +61,7 @@ const Menu: React.FC<MobileMenuProps> = ({ isOpenMenu, openMenu, userData }): JS
           </p>
           <div className={`dashboard-menu__stars ${isOpenMenu && 'dashboard-menu__stars-open'}`}>
             {array.fill(null).map((el, index) => (
-              <div key={index} style={{ color: 'orange' }}>
+              <div key={index + el}>
                 <StarOutlined />
               </div>
             ))}
@@ -69,89 +77,28 @@ const Menu: React.FC<MobileMenuProps> = ({ isOpenMenu, openMenu, userData }): JS
           <RightOutlined className="dashboard-menu__open-button-icon" />
         </div>
       </div>
-      <div className="dashboard-menu__nav">
-        <Link href="/dashboard/">
-          <div className="dashboard-menu__button">
-            <div
-              className={`dashboard-menu__button-image-container ${
-                isOpenMenu && 'dashboard-menu__button-image-container-open'
-              }`}
-            >
-              <AppstoreOutlined className="dashboard-menu__button-image" />
-              {isOpenMenu && <p className="dashboard-menu__button-text-desktop">ДАШБОАРД</p>}
-            </div>
-            <p className="dashboard-menu__button-text">ДАШБОАРД</p>
+      <div className={`dashboard-menu__nav ${isOpenMenu && 'dashboard-menu__nav-open'}`}>
+        {dataArray.map(({ id, image, title, link, active }) => (
+          <div key={id} onClick={() => selectActiveButton(id)} role="presentation">
+            <Link href={link}>
+              <div className={`dashboard-menu__button ${'dashboard-menu__button-open'}`}>
+                <div
+                  className={`dashboard-menu__button-image-container  ${
+                    activeButton === id && 'dashboard-menu__button-image-container-active'
+                  } ${isOpenMenu && 'dashboard-menu__button-image-container-open'}`}
+                >
+                  <div
+                    className={`dashboard-menu__button-image ${image} ${
+                      activeButton === id && `${active}`
+                    }`}
+                  ></div>
+                  {isOpenMenu && <p className="dashboard-menu__button-text-desktop">{title}</p>}
+                </div>
+                <p className="dashboard-menu__button-text">{title}</p>
+              </div>
+            </Link>
           </div>
-        </Link>
-        <Link href="/dashboard/">
-          <div className="dashboard-menu__button">
-            <div
-              className={`dashboard-menu__button-image-container ${
-                isOpenMenu && 'dashboard-menu__button-image-container-open'
-              }`}
-            >
-              <ProfileOutlined className="dashboard-menu__button-image" />
-              {isOpenMenu && <p className="dashboard-menu__button-text-desktop">ПРОЕКТИ</p>}
-            </div>
-            <p className="dashboard-menu__button-text">ПРОЕКТИ</p>
-          </div>
-        </Link>
-        <Link href="/dashboard/">
-          <div className="dashboard-menu__button">
-            <div
-              className={`dashboard-menu__button-image-container ${
-                isOpenMenu && 'dashboard-menu__button-image-container-open'
-              }`}
-            >
-              <MailOutlined className="dashboard-menu__button-image" />
-              {isOpenMenu && <p className="dashboard-menu__button-text-desktop">ЧАТ</p>}
-            </div>
-            <p className="dashboard-menu__button-text">ЧАТ</p>
-          </div>
-        </Link>
-        <Link href="/dashboard/">
-          <div className="dashboard-menu__button">
-            <div
-              className={`dashboard-menu__button-image-container ${
-                isOpenMenu && 'dashboard-menu__button-image-container-open'
-              }`}
-            >
-              <BlockOutlined className="dashboard-menu__button-image" />
-              {isOpenMenu && <p className="dashboard-menu__button-text-desktop">МОЇ ПОСЛУГИ</p>}
-            </div>
-            <p className="dashboard-menu__button-text">МОЇ ПОСЛУГИ</p>
-          </div>
-        </Link>
-        <Link href="/dashboard/">
-          <div className="dashboard-menu__button">
-            <div
-              className={`dashboard-menu__button-image-container ${
-                isOpenMenu && 'dashboard-menu__button-image-container-open'
-              }`}
-            >
-              <LineChartOutlined className="dashboard-menu__button-image" />
-              {isOpenMenu && <p className="dashboard-menu__button-text-desktop">ФІНАНСИ</p>}
-            </div>
-            <p className="dashboard-menu__button-text">ФІНАНСИ</p>
-          </div>
-        </Link>
-        <Link href="/dashboard/">
-          <div className="dashboard-menu__button">
-            <div
-              className={`dashboard-menu__button-image-container ${
-                isOpenMenu && 'dashboard-menu__button-image-container-open'
-              }`}
-            >
-              <SettingOutlined className="dashboard-menu__button-image" />
-              {isOpenMenu && <p className="dashboard-menu__button-text-desktop">ДАШБОАРД</p>}
-            </div>
-            <p className="dashboard-menu__button-text">НАЛАШТУВАННЯ</p>
-          </div>
-        </Link>
-        <div
-          className="icon-home"
-          style={{ width: '70px', height: '70px', backgroundColor: 'black', fontSize: '50px' }}
-        ></div>
+        ))}
       </div>
     </div>
   )

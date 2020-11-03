@@ -8,7 +8,7 @@ import SwitchComponent from './Switch'
 
 //antd
 import { Popover } from 'antd'
-import { BellFilled, MenuOutlined } from '@ant-design/icons'
+import { BellFilled } from '@ant-design/icons'
 
 const DashboardHeader: React.FC = (): JSX.Element => {
   const [isClient, setIsClient] = useState<boolean>(false)
@@ -17,16 +17,16 @@ const DashboardHeader: React.FC = (): JSX.Element => {
 
   useEffect(() => {
     const { jwt_token } = nextCookie('ctx')
+    //todo: relocate to dashboard page
     if (jwt_token) {
       if (userData.length <= 0) {
-        fetch(`https://profiroom.com/Backend/api/dashboard`, {
+        fetch(`${process.env.NEXT_PUBLIC_API}/api/dashboard`, {
           headers: {
             Authorization: `Bearer ${jwt_token}`,
           },
         })
           .then((res) => res.json())
           .then((res) => {
-            console.log(res)
             setUserData(res)
           })
       }
@@ -71,7 +71,6 @@ const DashboardHeader: React.FC = (): JSX.Element => {
                 </div>
               </div>
               <div className="dashboard-header__subnav-button-group">
-                {/* <MenuOutlined className="dashboard-header__menu-button" onClick={openMenu} /> */}
                 <div>
                   <button
                     className={`c-hamburger c-hamburger--htx ${isOpenMenu && 'is-active'}`}
