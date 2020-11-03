@@ -4,13 +4,12 @@ import { MainContext } from '../../context/MainContext'
 
 //antd
 import { LeftOutlined } from '@ant-design/icons'
-import { CategoriesProps, subCategriesTypes } from '../Categories/Types'
-// Types
-// type CatalogListProps = {
-//   categories: any
-// }
+import { subCategriesTypes } from '../Categories/Types'
+type CatalogListProps = {
+  categories: any
+}
 
-const CatalogList: React.FC<CategoriesProps> = ({ categories }): JSX.Element => {
+const CatalogList: React.FC<CatalogListProps> = ({ categories }): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState<number>(0)
   const [isSubOpen, setSubOpen] = useState<boolean>(false)
   console.log(categories)
@@ -29,7 +28,7 @@ const CatalogList: React.FC<CategoriesProps> = ({ categories }): JSX.Element => 
     <div className="categorie-list">
       <div className="container">
         <div className="categorie-list__wrapper">
-          {category.map((singleCategory, index: number) => (
+          {category.map((singleCategory: any, index: number) => (
             <div className="categorie-list__sub-categories-wrapper" key={singleCategory.id}>
               <div className="categorie-list__item item ">
                 <h3
@@ -50,7 +49,7 @@ const CatalogList: React.FC<CategoriesProps> = ({ categories }): JSX.Element => 
                   <LeftOutlined className="categorie-list__back" />
                 </button>
                 {isSubOpen &&
-                  category[activeIndex].sub_categories.map((subCategory) => (
+                  category[activeIndex].sub_categories.map((subCategory: any) => (
                     <div key={subCategory.id} className="categorie-list-sub-item sub-item">
                       <Link href={`catalog/${singleCategory.link}/${subCategory.link}`}>
                         <a

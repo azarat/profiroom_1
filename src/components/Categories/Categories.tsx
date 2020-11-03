@@ -2,11 +2,11 @@ import React, { useContext } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 // Contexts
+import { MainContext } from '../../context/MainContext'
 //Antd
 import { Popover } from 'antd'
 // Types
 import { CategoriesProps } from './Types'
-import { MainContext } from '../../context/MainContext'
 
 const Categories: React.FC<CategoriesProps> = ({ categories }): JSX.Element => {
   const { lang } = useContext(MainContext)

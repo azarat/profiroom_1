@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { dataTypes } from '../../../pages/catalog/Types'
+import { dataTypes } from './Types'
 import { useRouter } from 'next/router'
 
 const Service: React.FC<dataTypes> = ({

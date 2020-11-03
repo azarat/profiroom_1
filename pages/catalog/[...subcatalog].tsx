@@ -8,7 +8,7 @@ import Service from '../../src/components/OfferCard/OfferCard'
 import MainLayout from '../../layouts/MainLayout'
 // Antd
 import { Switch, Input, Checkbox, Breadcrumb, Pagination, Radio } from 'antd'
-import { subcatalogProps } from './Types'
+import { subcatalogProps } from '../../src/components/OfferCard/Types'
 
 //hook
 import useOutsideClick from '../../src/hooks/useOutsideClick'
