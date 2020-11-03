@@ -22,7 +22,7 @@ export type dataTypes = {
   minPrice: number
   title: string
   averageRating: averageTypes
-  user: userTypes
+  user?: userTypes
 }
 
 type averageTypes = {

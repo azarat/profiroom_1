@@ -3,7 +3,7 @@ import { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 // Components
-import Service from '../../src/components/OfferCard/OfferCard'
+import OfferCard from '../../src/components/OfferCard/OfferCard'
 // Layout
 import MainLayout from '../../layouts/MainLayout'
 // Antd
@@ -543,7 +543,7 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
 
             <div className="services__list">
               {catalog.data.map((service) => (
-                <Service
+                <OfferCard
                   key={service.id}
                   averageRating={service.averageRating}
                   comments_count={service.comments_count}

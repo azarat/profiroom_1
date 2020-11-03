@@ -38,7 +38,7 @@ const Service: React.FC<dataTypes> = ({
           <div className="item__avatar-wrapper">
             <Link href="/">
               <a>
-                <img className="item__avatar" src={user.avatar} alt="avatar" />
+                {user?.avatar && <img className="item__avatar" src={user.avatar} alt="avatar" />}
               </a>
             </Link>
           </div>
