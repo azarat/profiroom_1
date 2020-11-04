@@ -51,11 +51,15 @@
     color: orange;
   }
 
-  &__button-text-desktop {
+  &__button-text-open {
     display: none;
   }
 
   &__open-button-icon {
+    display: none;
+  }
+
+  &__button-text-large {
     display: none;
   }
 }
@@ -94,6 +98,7 @@
     }
 
     &__button {
+      width: 100px;
       margin-left: -5px;
     }
 
@@ -204,10 +209,6 @@
       border-radius: 50%;
     }
 
-    &__button {
-      width: 100px;
-    }
-
     &__button-container {
       position: relative;
       height: 20px;
@@ -227,7 +228,7 @@
       border-radius: 10px;
     }
 
-    &__button-text-desktop {
+    &__button-text-open {
       display: block;
       width: 90px;
       margin-top: -10px;
@@ -264,8 +265,82 @@
 @media (min-width: 1200px) {
   .dashboard-menu {
     top: 55px;
+    width: 250px;
 
     &__open-button {
+      display: none;
+    }
+
+    &__avatar {
+      padding-top: 0px;
+      transition: 0.3s;
+    }
+
+    &__user-info {
+      width: 50%;
+      margin: 0 auto;
+      margin-top: -40px;
+    }
+
+    &__avatar-image-container {
+      width: 110px;
+      height: 110px;
+    }
+
+    &__avatar-border {
+      top: 35px;
+      left: -35px;
+      width: 180px;
+      transition: 0.3s;
+    }
+
+    &__avatar-aura {
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    &__username {
+      display: block;
+      margin: 15px auto;
+      color: $white-color;
+      font-size: $font-13;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    &__stars {
+      display: flex;
+      justify-content: space-around;
+      margin-top: -10px;
+    }
+
+    &__nav {
+      max-width: 90%;
+    }
+
+    &__button {
+      margin-left: 0px;
+    }
+
+    &__button-image-container {
+      width: 90px;
+      height: 70px;
+      margin-left: 20px;
+      font-size: $font-30;
+      border-radius: 10px;
+    }
+
+    &__button-text-large {
+      display: block;
+      width: 90px;
+      margin-top: -10px;
+      font-size: $font-10;
+      text-align: center;
+      user-select: none;
+    }
+
+    &__button-text-open {
       display: none;
     }
   }

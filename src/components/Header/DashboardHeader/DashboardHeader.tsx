@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useCallback } from 'react'
 import Link from 'next/link'
-import nextCookie from 'next-cookies'
 
 //components
 import Menu from './Menu'
@@ -10,42 +9,24 @@ import SwitchComponent from './Switch'
 import { Popover } from 'antd'
 import { BellFilled } from '@ant-design/icons'
 
-const DashboardHeader: React.FC = (): JSX.Element => {
+import { Response } from './Types'
+
+type DashboardProps = {
+  userData: Response
+}
+
+const DashboardHeader: React.FC<DashboardProps> = (props): JSX.Element => {
   const [isClient, setIsClient] = useState<boolean>(false)
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
-  const [userData, setUserData] = useState([])
+  const { userData } = props
 
-  useEffect(() => {
-    const { jwt_token } = nextCookie('ctx')
-    //todo: relocate to dashboard page
-    if (jwt_token) {
-      if (userData.length <= 0) {
-        fetch(`${process.env.NEXT_PUBLIC_API}/api/dashboard`, {
-          headers: {
-            Authorization: `Bearer ${jwt_token}`,
-          },
-        })
-          .then((res) => res.json())
-          .then((res) => {
-            setUserData(res)
-          })
-      }
-    }
-
-    const windowW = typeof window !== 'undefined' && window.innerWidth
-
-    if (windowW >= 1200) {
-      setIsOpenMenu(true)
-    }
-  })
-
-  const selectRole = (): void => {
+  const selectRole = useCallback(() => {
     setIsClient(!isClient)
-  }
+  }, [isClient])
 
-  const openMenu = (): void => {
+  const openMenu = useCallback(() => {
     setIsOpenMenu(!isOpenMenu)
-  }
+  }, [isOpenMenu])
 
   return (
     <div>

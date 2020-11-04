@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import Link from 'next/link'
 
 //types
@@ -15,9 +15,14 @@ const Menu: React.FC<MobileMenuProps> = ({ isOpenMenu, openMenu, userData }): JS
   const [activeButton, setActiveButton] = useState<number>()
   const array = new Array(5)
 
-  const selectActiveButton = (id: number) => {
-    setActiveButton(id)
-  }
+  const { avatar, name, surname } = userData
+
+  const selectActiveButton = useCallback(
+    (id: number) => {
+      setActiveButton(id)
+    },
+    [activeButton]
+  )
 
   return (
     <div className={`dashboard-menu ${isOpenMenu && 'dashboard-menu__open'}`}>
@@ -40,7 +45,7 @@ const Menu: React.FC<MobileMenuProps> = ({ isOpenMenu, openMenu, userData }): JS
             }`}
           >
             <img
-              src={userData.avatar}
+              src={avatar}
               className={`dashboard-menu__avatar-image ${
                 isOpenMenu && 'dashboard-menu__avatar-image-open'
               }`}
@@ -50,7 +55,7 @@ const Menu: React.FC<MobileMenuProps> = ({ isOpenMenu, openMenu, userData }): JS
           <p
             className={`dashboard-menu__username ${isOpenMenu && 'dashboard-menu__username-open'}`}
           >
-            {userData.name} {userData.surname}
+            {name} {surname}
           </p>
           <div className={`dashboard-menu__stars ${isOpenMenu && 'dashboard-menu__stars-open'}`}>
             {array.fill(null).map((el, index) => (
@@ -85,7 +90,8 @@ const Menu: React.FC<MobileMenuProps> = ({ isOpenMenu, openMenu, userData }): JS
                       activeButton === id && `${active}`
                     }`}
                   ></div>
-                  {isOpenMenu && <p className="dashboard-menu__button-text-desktop">{title}</p>}
+                  {isOpenMenu && <p className="dashboard-menu__button-text-open">{title}</p>}
+                  <p className="dashboard-menu__button-text-large">{title}</p>
                 </div>
                 <p className="dashboard-menu__button-text">{title}</p>
               </div>
