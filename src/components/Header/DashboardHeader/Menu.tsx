@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react'
-import Link from 'next/link'
+import ActiveLink from './ActiveLink'
 
 //types
 import { MobileMenuProps } from './Types'
@@ -8,8 +8,6 @@ import { MobileMenuProps } from './Types'
 import { StarOutlined, RightOutlined } from '@ant-design/icons'
 
 import { dataArray } from '../../../constants/dashboardMenu'
-//todo: add SVG  loader
-// import Image from '../../../../public/assets/img/aura_lvl0.svg'
 
 const Menu: React.FC<MobileMenuProps> = ({ isOpenMenu, openMenu, userData }): JSX.Element => {
   const [activeButton, setActiveButton] = useState<number>()
@@ -78,7 +76,11 @@ const Menu: React.FC<MobileMenuProps> = ({ isOpenMenu, openMenu, userData }): JS
       <div className={`dashboard-menu__nav ${isOpenMenu && 'dashboard-menu__nav-open'}`}>
         {dataArray.map(({ id, image, title, link, active }) => (
           <div key={id} onClick={() => selectActiveButton(id)} role="presentation">
-            <Link href={link}>
+            <ActiveLink
+              activeClassName="dashboard-menu__link"
+              href={'/dashboard'}
+              as={`dashboard${link}`}
+            >
               <div className={`dashboard-menu__button ${'dashboard-menu__button-open'}`}>
                 <div
                   className={`dashboard-menu__button-image-container  ${
@@ -95,7 +97,7 @@ const Menu: React.FC<MobileMenuProps> = ({ isOpenMenu, openMenu, userData }): JS
                 </div>
                 <p className="dashboard-menu__button-text">{title}</p>
               </div>
-            </Link>
+            </ActiveLink>
           </div>
         ))}
       </div>
