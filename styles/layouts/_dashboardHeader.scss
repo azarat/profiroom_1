@@ -66,7 +66,11 @@
 }
 
 .ant-switch {
-  background-color: $white-color;
+  background-color: $secondary-color !important;
+}
+
+.ant-switch-checked {
+  background-color: $secondary-color !important;
 }
 
 .ant-switch-handle {
@@ -74,6 +78,7 @@
     background-color: $secondary-color;
   }
 }
+
 
 @media (min-width: 768px) {
   .dashboard-header {
@@ -94,6 +99,7 @@
 
     &__nav-button-group {
       margin-top: 10px;
+      color: $white-color;
     }
 
     &__subnav-button-group {
@@ -124,7 +130,7 @@
   cursor: pointer;
   transition: 0.3s;
 }
- 
+
 .c-hamburger:focus {
   outline: none;
 }
@@ -138,7 +144,7 @@
   height: 2px;
   background: white;
 }
- 
+
 .c-hamburger span::before,
 .c-hamburger span::after {
   position: absolute;
@@ -147,13 +153,13 @@
   width: 100%;
   height: 2px;
   background-color: #fff;
-  content: "";
+  content: '';
 }
- 
+
 .c-hamburger span::before {
   top: -7px;
 }
- 
+
 .c-hamburger span::after {
   bottom: -7px;
 }
@@ -161,53 +167,52 @@
 .c-hamburger--htx {
   background-color: $primary-color;
 }
- 
+
 .c-hamburger--htx span {
-  transition:  0s 0.3s;
+  transition: 0s 0.3s;
 }
- 
+
 .c-hamburger--htx span::before,
 .c-hamburger--htx span::after {
   transition-delay: 0.3s, 0s;
   transition-duration: 0.3s, 0.3s;
 }
- 
+
 .c-hamburger--htx span::before {
   transition-property: top, transform;
 }
- 
+
 .c-hamburger--htx span::after {
   transition-property: bottom, transform;
 }
- 
+
 .c-hamburger--htx.is-active {
   background-color: $primary-color;
 }
- 
+
 .c-hamburger--htx.is-active span {
   background: none;
 }
- 
+
 .c-hamburger--htx.is-active span::before {
   top: 0;
   transform: rotate(45deg);
 }
- 
+
 .c-hamburger--htx.is-active span::after {
   bottom: 0;
   transform: rotate(-45deg);
 }
- 
+
 .c-hamburger--htx.is-active span::before,
 .c-hamburger--htx.is-active span::after {
   transition-delay: 0s, 0.3s;
 }
 
-@media(min-width: 1200px) {
+@media (min-width: 1200px) {
   .dashboard-header {
     &__nav {
       width: 95%;
     }
-
   }
 }
