@@ -7,20 +7,7 @@ import { MobileMenuProps } from './Types'
 //antd
 import { StarOutlined, RightOutlined } from '@ant-design/icons'
 
-const dataArray = [
-  { id: 1, image: 'icon-dashboard', title: 'ДАШБОАРД', link: '/dashboard/' },
-  { id: 2, image: 'icon-projects1', title: 'ПРОЕКТИ', link: '/dashboard/' },
-  {
-    id: 3,
-    image: 'icon-message message',
-    title: 'ЧАТ',
-    link: '/dashboard/',
-    active: 'message-active',
-  },
-  { id: 5, image: 'icon-my-services', title: 'ПОСЛУГИ', link: '/dashboard/' },
-  { id: 6, image: 'icon-finance', title: 'ФІНАНСИ', link: '/dashboard/' },
-  { id: 7, image: 'icon-Settings1', title: 'НАЛАШТУВАННЯ', link: '/dashboard/' },
-]
+import { dataArray } from '../../../constants/dashboardMenu'
 //todo: add SVG  loader
 // import Image from '../../../../public/assets/img/aura_lvl0.svg'
 
@@ -47,13 +34,19 @@ const Menu: React.FC<MobileMenuProps> = ({ isOpenMenu, openMenu, userData }): JS
               alt="aura"
             />
           </div>
-          <img
-            src={userData.avatar}
-            className={`dashboard-menu__avatar-image ${
-              isOpenMenu && 'dashboard-menu__avatar-image-open'
+          <div
+            className={`dashboard-menu__avatar-image-container ${
+              isOpenMenu && 'dashboard-menu__avatar-image-container-open'
             }`}
-            alt="avatar"
-          />
+          >
+            <img
+              src={userData.avatar}
+              className={`dashboard-menu__avatar-image ${
+                isOpenMenu && 'dashboard-menu__avatar-image-open'
+              }`}
+              alt="avatar"
+            />
+          </div>
           <p
             className={`dashboard-menu__username ${isOpenMenu && 'dashboard-menu__username-open'}`}
           >

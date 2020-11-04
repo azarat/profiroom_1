@@ -51,36 +51,34 @@ const DashboardHeader: React.FC = (): JSX.Element => {
     <div>
       <header>
         <div className="dashboard-header">
-          <div className="container">
-            <div className="dashboard-header__nav">
-              <div className="dashboard-header__logo">profiroom</div>
-              <div className="dashboard-header__nav-button-group">
-                <Popover placement="bottom" content={'Тут будут уведомления'} trigger="click">
-                  <BellFilled className="dashboard-header__bell-icon" />
-                </Popover>
-                <div className="dashboard-header__switch-desktop">
-                  <SwitchComponent isClient={isClient} selectRole={selectRole} />
-                </div>
-                <div className="dashboard-header__nav">
-                  <Link href="/">
-                    <a className="dashboard-header__link dashboard-header__go-to-main">Головна</a>
-                  </Link>
-                  <Link href="/">
-                    <a className="dashboard-header__link">Вийти</a>
-                  </Link>
-                </div>
-              </div>
-              <div className="dashboard-header__subnav-button-group">
-                <div>
-                  <button
-                    className={`c-hamburger c-hamburger--htx ${isOpenMenu && 'is-active'}`}
-                    onClick={openMenu}
-                  >
-                    <span>toggle menu</span>
-                  </button>
-                </div>
+          <div className="dashboard-header__nav">
+            <div className="dashboard-header__logo">profiroom</div>
+            <div className="dashboard-header__nav-button-group">
+              <Popover placement="bottom" content={'Тут будут уведомления'} trigger="click">
+                <BellFilled className="dashboard-header__bell-icon" />
+              </Popover>
+              <div className="dashboard-header__switch-desktop">
                 <SwitchComponent isClient={isClient} selectRole={selectRole} />
               </div>
+              <div className="dashboard-header__nav">
+                <Link href="/">
+                  <a className="dashboard-header__link dashboard-header__go-to-main">Головна</a>
+                </Link>
+                <Link href="/">
+                  <a className="dashboard-header__link">Вийти</a>
+                </Link>
+              </div>
+            </div>
+            <div className="dashboard-header__subnav-button-group">
+              <div>
+                <button
+                  className={`c-hamburger c-hamburger--htx ${isOpenMenu && 'is-active'}`}
+                  onClick={openMenu}
+                >
+                  <span>toggle menu</span>
+                </button>
+              </div>
+              <SwitchComponent isClient={isClient} selectRole={selectRole} />
             </div>
           </div>
         </div>

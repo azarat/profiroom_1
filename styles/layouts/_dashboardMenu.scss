@@ -68,8 +68,8 @@
 }
 
 .message-active {
-  background-color: $white-color;
   color: $secondary-color;
+  background-color: $white-color;
 }
 
 @media (min-width: 768px) {
@@ -78,7 +78,6 @@
     left: 0;
     width: 75px;
     background-color: $white-color;
-    // border: 1px solid black;
 
     &__open {
       width: 250px;
@@ -112,6 +111,7 @@
       margin-left: 10px;
       padding: 0 0;
       font-size: $font-22;
+      cursor: pointer;
     }
 
     &__button-image {
@@ -128,10 +128,26 @@
       transition: 0.3s;
     }
 
-    &__avatar-image {
+    &__avatar-image-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 40px;
       height: 40px;
+      overflow: hidden;
       border-radius: 50%;
+      transition: 0.3s;
+    }
+
+    &__avatar-image-container-open {
+      width: 110px;
+      height: 110px;
+    }
+
+    &__avatar-image {
+      width: auto;
+      height: 100%;
+      margin: 0 auto;
       transition: 0.3s;
     }
 
@@ -153,13 +169,6 @@
 
     &__avatar-open {
       padding-top: 0px;
-      transition: 0.3s;
-    }
-
-    &__avatar-image-open {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
       transition: 0.3s;
     }
 
@@ -190,8 +199,8 @@
       width: 20px;
       height: 20px;
       padding-left: 4px;
-      background-color: $secondary-color;
       color: $white-color;
+      background-color: $secondary-color;
       border-radius: 50%;
     }
 

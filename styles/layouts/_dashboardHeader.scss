@@ -79,7 +79,9 @@
   .dashboard-header {
     padding: 15px 20px;
     &__nav {
-      justify-content: space-around;
+      justify-content: space-between;
+      width: 85%;
+      margin: 0 auto;
     }
 
     &__logo {
@@ -178,7 +180,6 @@
   transition-property: bottom, transform;
 }
  
-/* состояние active при открытом меню  */
 .c-hamburger--htx.is-active {
   background-color: $primary-color;
 }
@@ -203,8 +204,10 @@
 }
 
 @media(min-width: 1200px) {
-  .dashboard-header__nav {
-    justify-content: space-between;
+  .dashboard-header {
+    &__nav {
+      width: 95%;
+    }
 
   }
 }
