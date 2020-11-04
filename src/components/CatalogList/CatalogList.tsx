@@ -13,7 +13,6 @@ import { CategoriesProps, subCategriesTypes } from '../Categories/Types'
 const CatalogList: React.FC<CategoriesProps> = ({ categories }): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState<number>(0)
   const [isSubOpen, setSubOpen] = useState<boolean>(false)
-  console.log(categories)
 
   const { lang } = useContext(MainContext)
 

@@ -22,7 +22,9 @@ const Service: React.FC<dataTypes> = ({
         <h1
           role="presentation"
           className="item__about"
-          onClick={() => router.push(`/showOffer/${id}`)}
+          onClick={() => {
+            router.push(`/showOffer/${id}`)
+          }}
         >
           {title}
         </h1>

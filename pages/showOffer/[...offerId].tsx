@@ -1,24 +1,66 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, RefObject, useEffect } from 'react'
 import MainLayout from '../../layouts/MainLayout'
 import { NextPage } from 'next'
 import Link from 'next/link'
 import { Carousel, Checkbox } from 'antd'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
-
-const contentStyle = {
-  height: '160px',
-  color: '#fff',
-  lineHeight: '160px',
-  textAlign: 'center',
-  background: '#364d79',
-}
+import useOutsideClick from '../../src/hooks/useOutsideClick'
+import { useRouter } from 'next/router'
 
 const Offer: NextPage = (props): JSX.Element => {
-  const [checkedList, setCheckedList] = useState<[]>([])
+  const {
+    offer: { userOffer },
+  } = props
 
-  const groupChange = (checkedList: any) => {
-    setCheckedList(checkedList)
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [isExtraOpen, setExtraOpen] = useState<boolean>(false)
+  const [totalPrice, setTotalPrice] = useState<number>(userOffer.basic.price)
+  const [nav1, setNav1] = useState()
+  const [nav2, setNav2] = useState()
+
+  let slider2 = []
+  let slider1 = []
+
+  useEffect(() => {
+    setNav1(slider1)
+    setNav2(slider2)
+  }, [slider1, slider2])
+
+  const router = useRouter()
+
+  const handleActiveIndex = (index: number) => {
+    if (index === activeIndex) {
+      setActiveIndex(null)
+    } else {
+      setActiveIndex(index)
+    }
   }
+
+  const extraCommercialRef = useRef<HTMLParagraphElement>(null)
+  const extraTermRef = useRef<HTMLParagraphElement>(null)
+  const extraChangesRef = useRef<HTMLParagraphElement>(null)
+
+  const handleExtraOptions = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    ref: RefObject<HTMLElement>
+  ) => {
+    let newPrice = totalPrice
+    if (event.target.checked) {
+      newPrice += Number(ref.current?.innerText)
+    } else {
+      newPrice -= Number(ref.current?.innerText)
+    }
+
+    console.log(newPrice)
+    setTotalPrice(newPrice)
+    console.log(event.target.checked)
+  }
+
+  const questionListref = useRef<HTMLDivElement>(null)
+  useOutsideClick(questionListref, () => {
+    setActiveIndex(null)
+  })
+
   const SampleNextArrow = (props) => {
     const { className, style, onClick } = props
     return (
@@ -65,16 +107,18 @@ const Offer: NextPage = (props): JSX.Element => {
       <div className="offer">
         <div className="container">
           <div className="offer__wrapper">
-            <h2 className="offer__title">1C Бугхалтерия</h2>
+            <h2 className="offer__title">{userOffer.title}</h2>
             <div className="offer__user-info">
               <Link href="/">
                 <a className="offer__user-avatar-link">
-                  <img className="offer__user-avatar" src="/assets/img/avatar.svg" alt="" />
+                  <img className="offer__user-avatar" src={userOffer.user.avatar} alt="" />
                 </a>
               </Link>
               <div className="offer__user-text">
                 <Link href="/">
-                  <a className="offer__user-name">Яна Петровская</a>
+                  <a className="offer__user-name">
+                    {userOffer.user.name} {userOffer.user.surname}
+                  </a>
                 </Link>
                 <div className="offer__user-starr-wrapper">
                   <span className="offer__user-star"></span>
@@ -85,39 +129,57 @@ const Offer: NextPage = (props): JSX.Element => {
               <div className="offer__message-wrapper">
                 <Link href="/">
                   <a className="offer__message">
-                    <img src="/assets/img/envelope.svg" alt="" />
+                    <img src="/assets/img/envelope.svg" alt="envelope icon" />
                   </a>
                 </Link>
               </div>
             </div>
             <div className="offer__gallery">
-              <Carousel effect="fade" arrows {...settings}>
-                <div>
-                  <h3 style={contentStyle}>1</h3>
-                </div>
-                <div>
-                  <h3 style={contentStyle}>2</h3>
-                </div>
-                <div>
-                  <h3 style={contentStyle}>3</h3>
-                </div>
-                <div>
-                  <h3 style={contentStyle}>4</h3>
-                </div>
+              <Carousel
+                effect="fade"
+                arrows
+                {...settings}
+                asNavFor={nav2}
+                ref={(slider) => (slider1 = slider)}
+              >
+                {userOffer.files.map((img: string, index: number) => (
+                  <div className="offer__gallery-item-wrapper" key={index}>
+                    <img
+                      className="offer__gallery-img"
+                      src={`https://profiroom.com/Backend/public/storage/offerFiles/big/${img}`}
+                      alt=""
+                    />
+                  </div>
+                ))}
+              </Carousel>
+            </div>
+            <div className="offer__sub-gallery">
+              <Carousel
+                asNavFor={nav1}
+                ref={(slider) => (slider2 = slider)}
+                slidesToShow={2}
+                focusOnSelect={true}
+                centerMode
+              >
+                {userOffer.files.map((img: string, index: number) => (
+                  <div className="offer__sub-gallery-item-wrapper" key={index}>
+                    <img
+                      className="offer__sub-gallery-img"
+                      src={`https://profiroom.com/Backend/public/storage/offerFiles/big/${img}`}
+                      alt=""
+                    />
+                  </div>
+                ))}
               </Carousel>
             </div>
 
             <div className="offer__about about">
               <h4 className="about__title">Опис послуги</h4>
               <div className="about__text">
-                <p>Cоздаю:</p>
-                {/* descriptiion */}
-                <p>
-                  test test test test test test test test test test test test test test test test
-                  test test test test test test test test test test test test test
-                </p>
+                <p>{userOffer.description}</p>
               </div>
             </div>
+
             <div className="offer__tabs tabs">
               <div className="tabs__buttons-wrapper">
                 <button className="tabs__button">Базовий</button>
@@ -128,49 +190,85 @@ const Offer: NextPage = (props): JSX.Element => {
                 <div className="tabs__content">
                   <div className="tabs__main-info">
                     <div className="tabs__title-wrapper">
-                      <h4 className="tabs__title">Логотип</h4>
-                      <span className="tabs__price">1000&#8372;</span>
+                      <h4 className="tabs__title">{userOffer.basic.title}</h4>
+                      <span className="tabs__price">{userOffer.basic.price}</span>
                     </div>
-                    <p className="tabs__short-description">Создают логотипы</p>
+                    <p className="tabs__short-description">{userOffer.basic.description}</p>
                   </div>
                   <div className="tabs__changes-term changes-term">
-                    <span className="changes-term__correction">1 правок</span>
-                    <span className="changes-term__term">222 днів виконання</span>
+                    <span className="changes-term__correction">
+                      {userOffer.basic.changes} правок
+                    </span>
+                    <span className="changes-term__term">
+                      {userOffer.basic.term} днів виконання
+                    </span>
                   </div>
                   <div className="tabs__extra-options-wrapper">
                     <div className="tabs__extra-options-btn-wrapper">
-                      <button className="tabs__extra-options-btn">
+                      <button
+                        className="tabs__extra-options-btn"
+                        onClick={() => setExtraOpen((prev) => !prev)}
+                      >
                         Вибрати додаткові опціїї
                         <img
-                          className="tabs__extra-options-arrow tabs__extra-options-arrow--open"
+                          className={`tabs__extra-options-arrow ${
+                            isExtraOpen && 'tabs__extra-options-arrow--open'
+                          }`}
                           src="/assets/img/arrow-down.svg"
                           alt=""
                         />
                       </button>
                     </div>
-                    <div className="tabs__extra-options-list">
-                      <Checkbox>
-                        <p className="tabs__extra-options-item">Стислі терміни</p>
-                        <p className="tabs__extra-options-price">
-                          <strong>1000&#8372;</strong>
-                        </p>
-                      </Checkbox>
-                      <Checkbox>
-                        <p className="tabs__extra-options-item">Комерційне використання</p>
-                        <p className="tabs__extra-options-price">
-                          <strong>1000&#8372;</strong>
-                        </p>
-                      </Checkbox>
-                      <Checkbox>
-                        <p className="tabs__extra-options-item">Додаткові правки</p>
-                        <p className="tabs__extra-options-price">
-                          <strong>1000&#8372;</strong>
-                        </p>
-                      </Checkbox>
+                    <div
+                      className={`tabs__extra-options-list ${
+                        isExtraOpen && 'tabs__extra-options-list--open'
+                      }`}
+                    >
+                      {userOffer.extra_changes && (
+                        <Checkbox onChange={(e) => handleExtraOptions(e, extraChangesRef)}>
+                          <p className="tabs__extra-options-item">Додаткові правки</p>
+                          <p
+                            className="tabs__extra-options-price"
+                            id="changes"
+                            ref={extraChangesRef}
+                          >
+                            <strong>{userOffer.extra_changes.price}</strong>
+                          </p>
+                        </Checkbox>
+                      )}
+
+                      {userOffer.extra_commercial && (
+                        <Checkbox onChange={(e) => handleExtraOptions(e, extraCommercialRef)}>
+                          <p className="tabs__extra-options-item">Комерційне використання</p>
+                          <p
+                            className="tabs__extra-options-price"
+                            id="commercial"
+                            ref={extraCommercialRef}
+                          >
+                            <strong>{userOffer.extra_commercial.price}</strong>
+                          </p>
+                        </Checkbox>
+                      )}
+                      {/* {userOffer.extra_features.length >= 1 && (
+                        <Checkbox>
+                          <p className="tabs__extra-options-item">Додаткові правки</p>
+                          <p className="tabs__extra-options-price">
+                            <strong>{userOffer.extra_features[0].price}&#8372;</strong>
+                          </p>
+                        </Checkbox>
+                      )} */}
+                      {userOffer.extra_terms.length >= 1 && (
+                        <Checkbox onChange={(e) => handleExtraOptions(e, extraTermRef)}>
+                          <p className="tabs__extra-options-item">Стислі сроки</p>
+                          <p className="tabs__extra-options-price" id="terms" ref={extraTermRef}>
+                            <strong>{userOffer.extra_terms[0].price}</strong>
+                          </p>
+                        </Checkbox>
+                      )}
                     </div>
                     <div className="tabs__extra-option-order-wrapper">
                       <button className="tabs__extra-option-order-btn">
-                        Замовити послугу за (2222&#8372;)
+                        Замовити послугу за ({totalPrice}&#8372;)
                       </button>
                     </div>
                   </div>
@@ -180,40 +278,60 @@ const Offer: NextPage = (props): JSX.Element => {
 
             <div className="offer__rating rating">
               <div className="offer__rating-wrapper">
-                <h4 className="rating__title">Рейтинг послуги test</h4>
+                <h4 className="rating__title">Рейтинг послуги {userOffer.title}</h4>
                 <div className="rating__type">
                   <p className="rating__type-name">Якість послуги</p>
                   <div className="rating__type-numeral">
-                    <span className="rating__type-star">0</span>
+                    <span className="rating__type-star">{userOffer.averageRating.qualityMark}</span>
                   </div>
                 </div>
                 <div className="rating__type">
-                  <p className="rating__type-name">Якість послуги</p>
+                  <p className="rating__type-name">Термін виконання</p>
                   <div className="rating__type-numeral">
-                    <span className="rating__type-star">0</span>
+                    <span className="rating__type-star">{userOffer.averageRating.termMark}</span>
                   </div>
                 </div>
                 <div className="rating__type">
-                  <p className="rating__type-name">Якість послуги</p>
+                  <p className="rating__type-name">Ввічливість фрілансера</p>
                   <div className="rating__type-numeral">
-                    <span className="rating__type-star">0</span>
+                    <span className="rating__type-star">
+                      {userOffer.averageRating.politenessMark}
+                    </span>
                   </div>
                 </div>
                 <div className="rating__type-average">
                   <span className="rating__type-average-text">Cередня оцінка</span>
-                  <span className="rating__type-average-number">0</span>
-                  <span className="rating__type-average-comments">(0 відгуків)</span>
+                  <span className="rating__type-average-number">
+                    {userOffer.averageRating.averageMark}
+                  </span>
+                  <span className="rating__type-average-comments">
+                    ({userOffer.comments_count} відгуків)
+                  </span>
                 </div>
               </div>
             </div>
 
             <div className="offer__question question">
               <h4 className="question__title">Часто задавані питання</h4>
-              <div className="qustion__list">
-                <div className="question__item">
-                  <p className="question__text">За скільки зробите</p>
-                  <span className="question__toggler"></span>
-                </div>
+              <div className="qustion__list" ref={questionListref}>
+                {userOffer.offer_faq.map((question, index: number) => (
+                  <div
+                    role="presentation"
+                    className="question__item"
+                    key={question.id}
+                    onClick={() => handleActiveIndex(index)}
+                  >
+                    <p className="question__text">{question.question}</p>
+                    <p
+                      className={`question__answer ${
+                        index === activeIndex && 'question__answer--open '
+                      }`}
+                    >
+                      {question.answer}
+                    </p>
+                    <span className="question__toggler"></span>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -222,31 +340,37 @@ const Offer: NextPage = (props): JSX.Element => {
               <div className="about-user__main-info">
                 <Link href="">
                   <a className="about-user__avatar-link">
-                    <img className="about-user__avatar" src="/assets/img/avatar.svg" alt="" />
+                    <img className="about-user__avatar" src={userOffer.user.avatar} alt="" />
                   </a>
                 </Link>
-                <p className="about-user__name">Алеша</p>
+                <p className="about-user__name">
+                  {userOffer.user.name} {userOffer.user.surname}
+                </p>
                 <p className="about-user__status">Рівень:Стартовий</p>
                 <div className="about-user__rating-wrapper">
                   <p className="about-user__rating"></p>
-                  <span className="about-user__comments">(0 відгуків)</span>
+                  <span className="about-user__comments">
+                    ({userOffer.comments_count} відгуків)
+                  </span>
                 </div>
                 <div className="about-user__online-status-wrapper">
-                  <span className="about-user__online-status">Оффлайн</span>
+                  <span className="about-user__online-status">
+                    {userOffer.user.status === 'online' ? 'Онлайн' : 'Офлайн'}
+                  </span>
                 </div>
               </div>
               <div className="about-user__actions">
                 <div className="about-user__action">
                   <Link href="/">
                     <a className="offer__message">
-                      <img src="/assets/img/envelope.svg" alt="" />
+                      <img src="/assets/img/envelope.svg" alt="message icon" />
                     </a>
                   </Link>
                 </div>
                 <div className="about-user__action">
                   <Link href="/">
                     <a className="offer__message">
-                      <img src="/assets/img/calendar.svg" alt="" />
+                      <img src="/assets/img/calendar.svg" alt="calendar icon" />
                     </a>
                   </Link>
                 </div>
@@ -254,11 +378,11 @@ const Offer: NextPage = (props): JSX.Element => {
               <div className="about-user__sub-info">
                 <div className="about-user__country">
                   <p className="about-user__country-title">Країна</p>
-                  <p className="about-user__country-name">Мексика</p>
+                  <p className="about-user__country-name">{userOffer.user.country}</p>
                 </div>
                 <div className="about-user__term">
                   <p className="about-user__term-title">На сайті з</p>
-                  <p className="about-user__term-info">2020-07-08 08:21:15</p>
+                  <p className="about-user__term-info">{userOffer.created_at}</p>
                 </div>
               </div>
             </div>
@@ -266,7 +390,7 @@ const Offer: NextPage = (props): JSX.Element => {
             <div className="offer__another-offers another-offers">
               <h2 className="another-offers__title">Інші послуги фрілансера</h2>
               <div className="another-offers__list">
-                {props.offer.userOffer.user.userOffers.map((card) => (
+                {userOffer.user.userOffers.map((card) => (
                   <div className="another-offers__card card" key={card.id}>
                     <div className="card__img-wrapper">
                       <img className="card__img" src={card.mainImage} alt="" />
@@ -275,7 +399,10 @@ const Offer: NextPage = (props): JSX.Element => {
                       <h1
                         role="presentation"
                         className="card__about"
-                        // onClick={() => router.push(`/showOffer/${id}`)}
+                        onClick={() => {
+                          document.body.scrollIntoView()
+                          router.push(`/showOffer/${card.id}`)
+                        }}
                       >
                         {card.title}
                       </h1>
@@ -293,19 +420,6 @@ const Offer: NextPage = (props): JSX.Element => {
                     </div>
                   </div>
                 ))}
-
-                {/* {props.offer.userOffer.user.userOffers.map((card) => (
-                <OfferCard
-                  key={card.id}
-                  averageRating={card.averageRating}
-                  comments_count={card.comments_count}
-                  mainImage={card.mainImage}
-                  minPrice={card.minPrice}
-                  title={card.title}
-                  // user={card.user}
-                  id={card.id}
-                />
-              ))} */}
               </div>
             </div>
           </div>

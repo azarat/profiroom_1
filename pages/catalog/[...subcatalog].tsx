@@ -35,6 +35,7 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
   const serviceRef = React.useRef<HTMLDivElement>(null)
 
   const { catalog } = props
+  console.log(catalog)
 
   const router = useRouter()
   ////Set query for service filter
@@ -189,7 +190,11 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
               </div>
               <div className="services__desktop-filters">
                 {/*фильтр бюджета */}
-                <div className="services__filter services__filter--budget" ref={budgetRef}>
+                <div
+                  className="services__filter services__filter--budget"
+                  id="budget"
+                  ref={budgetRef}
+                >
                   <button
                     className="services__budget-filter-btn"
                     onClick={() => setBudgetVisible((prev) => !prev)}
@@ -265,7 +270,7 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                   </div>
                 </div>
                 {/*фильтры срока */}
-                <div className="services__filter services__filter--term" ref={termRef}>
+                <div className="services__filter services__filter--term" id="term" ref={termRef}>
                   <button
                     className="services__budget-filter-btn"
                     onClick={() => setTermVisible((prev) => !prev)}
@@ -386,7 +391,11 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                   </div>
                 </div>
                 {/*фильтры сервиса */}
-                <div className="services__filter services__filter--service" ref={serviceRef}>
+                <div
+                  className="services__filter services__filter--service"
+                  id="service"
+                  ref={serviceRef}
+                >
                   <button
                     className="services__budget-filter-btn"
                     onClick={() => setServiceVisible((prev) => !prev)}
