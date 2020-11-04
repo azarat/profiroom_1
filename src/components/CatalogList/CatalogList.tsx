@@ -9,20 +9,19 @@ type CatalogListProps = {
   categories: any
 }
 
-const CatalogList: React.FC<CatalogListProps> = ({ categories }): JSX.Element => {
+const CatalogList: React.FC<CatalogListProps> = ({
+  categories: {
+    json: { category },
+  },
+}): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState<number>(0)
   const [isSubOpen, setSubOpen] = useState<boolean>(false)
-  console.log(categories)
 
   const { lang } = useContext(MainContext)
 
   const selectActiveIndex = (index: number) => {
     setActiveIndex(index), setSubOpen((prev) => !prev)
   }
-
-  const {
-    json: { category },
-  } = categories
 
   return (
     <div className="categorie-list">
@@ -49,9 +48,13 @@ const CatalogList: React.FC<CatalogListProps> = ({ categories }): JSX.Element =>
                   <LeftOutlined className="categorie-list__back" />
                 </button>
                 {isSubOpen &&
-                  category[activeIndex].sub_categories.map((subCategory: any) => (
+                  category[activeIndex].sub_categories.map((subCategory: subCategriesTypes) => (
                     <div key={subCategory.id} className="categorie-list-sub-item sub-item">
-                      <Link href={`catalog/${singleCategory.link}/${subCategory.link}`}>
+                      <Link
+                        href={`catalog/${encodeURIComponent(
+                          singleCategory.link
+                        )}/${encodeURIComponent(subCategory.link)}`}
+                      >
                         <a
                           role="presentation"
                           className="sub-item__name"
@@ -67,11 +70,15 @@ const CatalogList: React.FC<CatalogListProps> = ({ categories }): JSX.Element =>
                 <ul className="categorie-list__tablet">
                   {singleCategory.sub_categories.map((subCategory: subCategriesTypes) => (
                     <li key={subCategory.id} className="categorie-list__link">
-                      <Link href={`catalog/${singleCategory.link}/${subCategory.link}`}>
+                      <Link
+                        href={`catalog/${encodeURIComponent(
+                          singleCategory.link
+                        )}/${encodeURIComponent(subCategory.link)}`}
+                      >
                         <a className="categorie-list__sub-name">{subCategory[`name_${lang}`]}</a>
                       </Link>
                     </li>
-                  ))}{' '}
+                  ))}
                 </ul>
               </div>
             </div>

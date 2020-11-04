@@ -8,7 +8,7 @@ import Service from '../../src/components/OfferCard/OfferCard'
 import MainLayout from '../../layouts/MainLayout'
 // Antd
 import { Switch, Input, Checkbox, Breadcrumb, Pagination, Radio } from 'antd'
-import { subcatalogProps } from '../../src/components/OfferCard/Types'
+import { SubcatalogProps } from '../../src/components/OfferCard/Types'
 
 //hook
 import useOutsideClick from '../../src/hooks/useOutsideClick'
@@ -20,7 +20,7 @@ const optionsService = [
   { label: 'Додаткові правки', value: 'extraChanges' },
 ]
 
-const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
+const subcatalog: NextPage<SubcatalogProps> = (props): JSX.Element => {
   const [isFilterOpen, setFilterOpen] = useState<boolean>(false)
   const [budgetVisible, setBudgetVisible] = useState<boolean>(false)
   const [termVisible, setTermVisible] = useState<boolean>(false)
@@ -37,6 +37,7 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
   const { catalog } = props
 
   const router = useRouter()
+
   ////Set query for service filter
   const groupChange = (checkedList: any) => {
     setCheckedList(checkedList)

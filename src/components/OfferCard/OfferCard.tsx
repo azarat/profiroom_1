@@ -1,15 +1,15 @@
 import React from 'react'
 import Link from 'next/link'
-import { dataTypes } from './Types'
+import { DataTypes } from './Types'
 import { useRouter } from 'next/router'
 
-const Service: React.FC<dataTypes> = ({
-  averageRating,
+const Service: React.FC<DataTypes> = ({
+  averageRating: { averageMark },
   comments_count,
   mainImage,
   minPrice,
   title,
-  user,
+  user: { avatar },
   id,
 }): JSX.Element => {
   const router = useRouter()
@@ -31,14 +31,14 @@ const Service: React.FC<dataTypes> = ({
           <div className="item__rating">
             <div className="item__star-wrapper">
               <img className="item__star" src="/assets/img/star.svg" alt="star" />
-              <span className="item__star-count">{averageRating.averageMark}</span>
+              <span className="item__star-count">{averageMark}</span>
             </div>
             <span className="item__reviews">({comments_count} відгуків)</span>
           </div>
           <div className="item__avatar-wrapper">
             <Link href="/">
               <a>
-                <img className="item__avatar" src={user.avatar} alt="avatar" />
+                <img className="item__avatar" src={avatar} alt="avatar" />
               </a>
             </Link>
           </div>

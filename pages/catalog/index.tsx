@@ -6,8 +6,6 @@ import MainLayout from '../../layouts/MainLayout'
 import CatalogList from '../../src/components/CatalogList/CatalogList'
 
 const index: NextPage = (props): JSX.Element => {
-  console.log(props)
-
   return (
     <MainLayout categories={props}>
       <CatalogList categories={props} />

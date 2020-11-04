@@ -1,4 +1,4 @@
-export type subcatalogProps = {
+export type SubcatalogProps = {
   catalog: {
     current_page: number
     first_page_url: string
@@ -11,28 +11,28 @@ export type subcatalogProps = {
     prev_page_url: string
     to: number
     total: number
-    data: dataTypes[]
+    data: DataTypes[]
   }
 }
 
-export type dataTypes = {
+export type DataTypes = {
   comments_count: number
   id: number
   mainImage: string
   minPrice: number
   title: string
-  averageRating: averageTypes
-  user: userTypes
+  averageRating: AverageTypes
+  user: UserTypes
 }
 
-type averageTypes = {
+type AverageTypes = {
   averageMark: number
   politenessMark: number
   qualityMark: number
   termMark: number
 }
 
-type userTypes = {
+type UserTypes = {
   avatar: string
   country: string
   description: string
@@ -42,30 +42,30 @@ type userTypes = {
   rank_id: number
   surname: string
   views: number
-  arbitration: arbitrationTypes
-  averageRating: averageRatingTypes
-  dealsCounts: dealsCountsTypes
+  arbitration: ArbitrationTypes
+  averageRating: AverageRatingTypes
+  dealsCounts: DealsCountsTypes
 }
 
-type arbitrationTypes = {
+type ArbitrationTypes = {
   all: number
   customer: number
   freelancer: number
 }
 
-type averageRatingTypes = {
-  freelancer: averageTypes
-  customer: customerTypes
+type AverageRatingTypes = {
+  freelancer: AverageTypes
+  customer: CustomerTypes
 }
 
-type customerTypes = {
+type CustomerTypes = {
   averageMark: number
   contactLevel: number
   requirementsClarity: number
   taskClarity: number
 }
 
-type dealsCountsTypes = {
+type DealsCountsTypes = {
   EndedWorks: number
   QueuedOffers: number
   dealsAsCustomer: number
