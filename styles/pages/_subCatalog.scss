@@ -3,14 +3,14 @@
     display: flex;
   }
 
-  &__breadcrumb {
+  &__breadcrumb.ant-breadcrumb {
     margin-top: 25px;
     padding: 15px;
   }
 
   &__breadcrumb-link {
-    color: $black-color;
     font-weight: $font-weight-400;
+    color: $black-color;
     font-size: $font-14;
     line-height: 18px;
     text-decoration: none;
@@ -30,7 +30,7 @@
     gap: 15px;
     justify-content: center;
     width: 100%;
-    padding: 10px 0px 30px 0px;
+    padding: 0px 0px 30px 0px;
   }
 
   &__img-wrapper {
@@ -112,7 +112,7 @@
 @media screen and (min-width: 1200px) {
   .sub-catalog-page {
     &__img-wrapper {
-      width: 200px;
+      width: 170px;
     }
   }
 }

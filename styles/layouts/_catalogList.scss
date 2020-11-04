@@ -36,10 +36,16 @@
       -webkit-transform: rotate(45deg);
       transform: rotate(45deg);
     }
-    &__title {
+    &__title-mobile {
       margin: 0;
       font-size: $font-16;
       cursor: pointer;
+    }
+    &__title-desktop {
+      margin: 0;
+      font-size: $font-16;
+      cursor: pointer;
+      display: none;
     }
   }
 
@@ -134,10 +140,17 @@
         display: none;
       }
 
-      &__title {
+      &__title-mobile {
         padding: 0 15px;
         font-size: $font-16;
         cursor: default;
+        display: none;
+      }
+      &__title-desktop {
+        padding: 0 15px;
+        font-size: $font-16;
+        cursor: default;
+        display: block;
       }
     }
 

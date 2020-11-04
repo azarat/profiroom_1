@@ -1,0 +1,1007 @@
+.wrapper {
+  height: 280px;
+  padding: 60px 20px;
+  text-align: center;
+  background-image: url('/pseudo-elements3.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: auto 100%;
+
+  &__title {
+    color: $white-trans-color;
+    font-size: $font-9;
+  }
+
+  &__description {
+    color: $white-color;
+    font-size: $font-16;
+  }
+
+  &__button {
+    display: block;
+    width: 190px;
+    margin: 15px auto;
+    color: $white-trans-color;
+    font-size: $font-13;
+    border: 1px solid $white-color;
+    border-radius: 3px;
+    &:hover {
+      color: $white-trans-color;
+    }
+  }
+}
+
+//todo: add background color
+.main-description {
+  position: relative;
+  top: -10px;
+  padding: 10px 15px;
+
+  &__wrapper {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  &__subtitle {
+    color: $error-color;
+    font-size: $font-9;
+
+    &::before {
+      position: absolute;
+      top: -10px;
+      z-index: -1;
+      width: 70px;
+      height: 100px;
+      background-image: url('/dots-advantages.svg');
+      content: '';
+    }
+  }
+
+  &__title {
+    font-size: $font-24;
+    &::after {
+      position: absolute;
+      z-index: -1;
+      display: block;
+      width: 250px;
+      height: 250px;
+      margin-top: 40px;
+      margin-left: -70px;
+      background-color: $white-color;
+      border-radius: 70px;
+      box-shadow: 0 0 40px rgba(128, 152, 213, 0.2);
+      transform: rotate(30deg);
+      content: '';
+    }
+  }
+
+  &__card-container {
+    height: auto;
+    padding-bottom: 50px;
+  }
+
+  &__card {
+    width: 275px;
+    max-height: 75px;
+    margin: 20px auto;
+    padding-top: 20px;
+    padding-right: 10px;
+    padding-left: 20px;
+    overflow: hidden;
+    background-color: $white-color;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(128, 152, 213, 0.3);
+    transition: $transition-height;
+  }
+
+  &__card-close {
+    max-height: 76px;
+    transition: $transition-height;
+  }
+
+  &__card-open {
+    max-height: 300px;
+    transition: $transition-height;
+  }
+
+  &__card-title {
+    margin-top: 5px;
+    margin-left: 20px;
+    font-size: $font-16;
+    user-select: none;
+  }
+
+  &__card-button {
+    margin-top: 15px;
+    transition: 0.7s;
+  }
+
+  &__card-button-open {
+    transform: rotate(180deg);
+    transition: 0.7s;
+  }
+
+  //todo: add gray color
+  &__card-description {
+    height: 100%;
+    margin-top: 20px;
+  }
+
+  &__button {
+    display: none;
+  }
+}
+
+.how-its-work {
+  margin-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 30px;
+  padding-left: 10px;
+
+  &__wrapper {
+    margin: 0 auto;
+  }
+  &__subtitle {
+    color: $error-color;
+    font-size: $font-9;
+  }
+
+  &__title {
+    font-size: $font-24;
+  }
+
+  &__description {
+    text-align: justify;
+  }
+
+  &__card-container {
+    width: 100%;
+    height: 170px;
+    margin-top: 10px;
+    perspective: 1000px;
+  }
+
+  &__number-card {
+    width: 30px;
+    height: 30px;
+    color: $white-color;
+    border: 0.5px solid $secondary-color;
+    border-radius: 50%;
+  }
+
+  &__number-card-child {
+    width: 22px;
+    height: 22px;
+    margin: 3px auto;
+    padding-left: 25%;
+    background-color: $secondary-color;
+    border-radius: 50%;
+  }
+
+  &__card-flipper {
+    position: relative;
+    width: 270px;
+    height: 170px;
+    margin: 0 auto;
+    padding: 10px 10px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 0 40px rgba(128, 152, 213, 0.3);
+    transform-style: preserve-3d;
+    transition: transform 0.8s;
+  }
+
+  &__card-front {
+    position: absolute;
+    width: 250px;
+    height: 150px;
+    background-color: $white-color;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+    transition: 0.3s;
+  }
+
+  &__card-back {
+    position: absolute;
+    width: 250px;
+    height: 150px;
+    background-color: $white-color;
+    transform: rotateY(180deg);
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+  }
+
+  &__slider-card {
+    width: 190px;
+    height: 120px;
+    margin-left: 40px;
+    padding: 10px 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 40px rgba(128, 152, 213, 0.1);
+  }
+
+  &__slider-card-content {
+    width: 80%;
+    margin: 20px auto;
+  }
+
+  &__slider-button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 90px;
+    margin: 0px auto;
+  }
+
+  &__slider-button {
+    width: 33px;
+    height: 33px;
+    padding-top: 5px;
+    padding-left: 10px;
+    background-color: $white-color;
+    border: 0.5px solid $gray-trans-color;
+    border-radius: 50%;
+    box-shadow: 0 0 40px rgba(128, 152, 213, 0.6);
+  }
+
+  &__slider-button-left {
+    transform: rotate(90deg);
+  }
+
+  &__slider-button-right {
+    transform: rotate(270deg);
+  }
+
+  &__slider-button-disable {
+    opacity: 0.3;
+  }
+
+  &__desktop {
+    display: none;
+  }
+}
+
+.main-categories {
+  padding: 10px 15px;
+  background-image: url('/find-specialist-bg.svg');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  &__subtitle {
+    color: $error-color; //add green color
+    font-size: $font-9;
+  }
+
+  &__title {
+    font-size: $font-24;
+  }
+  &__card {
+    width: 80%;
+    max-height: 150px;
+    margin: 20px auto;
+    padding: 15px 15px;
+    background-color: $white-color;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(128, 152, 213, 0.2);
+  }
+
+  &__card-top {
+    display: flex;
+  }
+
+  &__card-image {
+    width: 20px;
+    height: 20px;
+  }
+
+  &__card-title {
+    margin-left: 20px;
+    font-size: $font-13;
+  }
+
+  &__card-description {
+    font-size: $font-11;
+  }
+}
+
+.questions {
+  position: relative;
+  min-height: 450px;
+  padding: 0 15px;
+  overflow: hidden;
+
+  &__title {
+    font-size: $font-24;
+  }
+  &__subtitle {
+    color: $error-color; //todo: add green color
+    font-size: $font-9;
+  }
+
+  &__description {
+    margin-top: 20px;
+    font-size: $font-13; //todo: add gray color
+  }
+
+  &__button-container {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: -5px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 40px rgba(128, 152, 213, 0.3);
+  }
+
+  &__button {
+    width: 100%;
+    max-height: 50px;
+    padding-top: 15px;
+    padding-left: 15px;
+    overflow: hidden;
+    font-size: $font-13;
+    background-color: $white-color;
+    border-bottom: 1px solid $gray-trans-color;
+    transition: 0.3s;
+  }
+
+  &__button-top {
+    height: 30px;
+    padding-right: 10px;
+    font-size: $font-12;
+  }
+
+  &__button-content {
+    margin-top: 5px;
+    padding-bottom: 10px;
+  }
+
+  &__open-button {
+    max-height: 300px;
+    transition: 0.3s;
+  }
+
+  &::before {
+    position: absolute;
+    left: 70px;
+    z-index: -1;
+    display: block;
+    width: 300px;
+    height: 300px;
+    margin-top: 20px;
+    background-color: $primary-color;
+    border-radius: 100px;
+    box-shadow: 0 0 40px rgba(128, 152, 213, 0.3);
+    transform: rotate(25deg);
+    opacity: 0.1;
+    content: '';
+  }
+}
+
+.mobile-app {
+  width: 100%;
+  margin-top: 20px;
+  padding-top: 10px;
+  padding-left: 15px;
+  background-color: $secondary-color;
+
+  &__wrapper {
+    display: flex;
+    padding-right: 10px;
+    padding-bottom: 10px;
+  }
+
+  &__subtitle {
+    margin-top: 20px;
+    color: $white-trans-color;
+    font-size: $font-8;
+  }
+
+  &__title {
+    display: block;
+    color: $white-color;
+    font-size: $font-16;
+  }
+
+  &__description {
+    margin-top: 20px;
+    color: $white-trans-color;
+    font-size: $font-13;
+  }
+
+  &__phone {
+    width: 100px;
+    height: 200px;
+    margin-top: 30px;
+    padding: 0 5px;
+    background-color: $white-color;
+    border-radius: 10px;
+  }
+
+  &__phone-screen {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  &__phone-button {
+    width: 15px;
+    height: 15px;
+    margin: 2px auto;
+    border: 3px solid $gray-trans-color;
+    border-radius: 50%;
+  }
+
+  &__phone-message-small {
+    position: relative;
+    width: 30px;
+    height: 35px;
+    margin-top: -120px;
+    margin-left: -20px;
+    padding: 3px 3px;
+    background-color: $white-color;
+    border-radius: 5px;
+  }
+
+  &__phone-message-big {
+    position: relative;
+    width: 90px;
+    height: 40px;
+    margin-left: 50px;
+    padding: 5px 5px;
+    background-color: $white-color;
+    border-radius: 5px;
+  }
+}
+
+.get-start {
+  width: 90%;
+  height: 220px;
+  margin: 30px auto;
+  padding: 20px 10px;
+  text-align: center;
+  background-color: $white-color;
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(128, 152, 213, 0.3);
+
+  &__title {
+    font-size: $font-16;
+  }
+
+  &__subtitle {
+    margin-top: 10px;
+    font-size: $font-12;
+  }
+
+  &__button {
+    width: 80%;
+    margin: 0 auto;
+    color: $white-color;
+    font-size: $font-12;
+    background-color: $secondary-color;
+    box-shadow: 0 0 40px rgba(128, 152, 213, 0.3);
+  }
+}
+
+.select-role {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.slider-title {
+  font-size: $font-16;
+  transition: 0.5s;
+  user-select: none;
+}
+
+.slider-title-active {
+  color: $secondary-color;
+  transition: 0.5s;
+}
+
+.slider-description {
+  font-size: $font-16;
+}
+
+.indicator {
+  width: 50%;
+  height: 3px;
+  background-color: $secondary-color;
+  border-radius: 10px 10px 1px 1px;
+  transition: 0.3s;
+}
+
+.indicator-active {
+  margin-left: 50%;
+  transition: 0.3s;
+}
+
+.indicator-bottom {
+  height: 1px;
+  margin-top: 0;
+  background-color: $secondary-color;
+  border: none;
+}
+
+.button {
+  padding: 10px 10px;
+  border-radius: 4px;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    min-width: 100%;
+    height: 330px;
+    text-align: center;
+    background-image: url('/pseudo-elements3.svg');
+    background-size: cover;
+
+    &__title {
+      width: 50%;
+      margin: 0 auto;
+      margin-top: 30px;
+      font-size: $font-10;
+    }
+    &__description {
+      display: block;
+      width: 60%;
+      margin: 0 auto;
+      margin-top: 20px;
+      font-size: $font-22;
+    }
+
+    &::before {
+      position: absolute;
+      top: 20px;
+      left: 60%;
+      display: block;
+      width: 290px;
+      height: 300px;
+      background-image: url('/pseudo-elements2.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+      content: '';
+    }
+
+    &::after {
+      position: absolute;
+      top: 150px;
+      display: block;
+      width: 300px;
+      height: 300px;
+      background-image: url('/pseudo-elements.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+      content: '';
+    }
+  }
+
+  .main-description {
+    // min-height: 800px;
+    margin-left: 20px;
+    background-size: 15%;
+
+    &__wrapper {
+      display: flex;
+    }
+
+    &__text {
+      width: 30%;
+    }
+
+    &__subtitle {
+      margin-top: 35px;
+    }
+
+    &__title {
+      &::after {
+        top: -15px;
+        width: 430px;
+        height: 400px;
+        border-radius: 100px;
+      }
+    }
+
+    &__description {
+      width: 370px;
+      margin-top: 20px;
+    }
+
+    &__card-container {
+      display: flex;
+      flex-flow: row-reverse wrap-reverse;
+      margin-top: 80px;
+    }
+
+    &__card {
+      position: relative;
+      width: 220px;
+      min-height: 220px;
+      margin: 0px 10px 20px;
+      padding-top: 20px;
+      padding-right: 5px;
+      padding-left: 20px;
+      transition: all 0.3s;
+
+      &::after {
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+        display: block;
+        width: 30%;
+        height: 30%;
+        background-color: $secondary-color;
+        border-radius: 20px;
+        box-shadow: 0 0 40px rgba(128, 152, 213, 0.2);
+        transform: rotate(70deg);
+        transition: 0.7s;
+        content: '';
+      }
+
+      &:hover {
+        overflow: visible;
+        &::after {
+          // background-color: $secondary-color;
+          // transform: rotate(75deg);
+          top: 0;
+          right: 0;
+          width: 100%;
+          height: 100%;
+          transition: 0.3s;
+        }
+      }
+    }
+
+    &__card-description {
+      margin-top: 0px;
+      font-size: $font-13;
+    }
+
+    &__card-button {
+      display: none;
+    }
+
+    &__button {
+      display: block;
+      width: 170px;
+      margin-top: 30px;
+      color: $white-color;
+      text-align: center;
+      background-color: $secondary-color;
+      box-shadow: 0 0 40px rgba(128, 152, 213, 0.3);
+      &:hover {
+        color: $white-color;
+      }
+    }
+  }
+
+  .how-its-work {
+    padding: 0 20px;
+
+    &__wrapper {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 auto;
+    }
+
+    &__row {
+      display: flex;
+      justify-content: space-around;
+      width: 450px;
+      max-height: 80px;
+      margin-top: 30px;
+    }
+
+    &__card-container {
+      width: 140px;
+      height: 90px;
+      margin-left: 35px;
+    }
+
+    &__card-flipper {
+      width: 140px;
+      height: 90px;
+    }
+
+    &__slider-card-content {
+      width: 180px;
+      margin-top: 20px;
+      font-size: $font-12;
+    }
+
+    &__main-mobile {
+      display: none;
+    }
+
+    &__desktop {
+      display: block;
+    }
+
+    &__card-front {
+      width: 120px;
+      height: 70px;
+    }
+
+    &__card-back {
+      width: 120px;
+      height: 70px;
+    }
+
+    &__number-card {
+      margin-top: 40px;
+      margin-left: 20px;
+    }
+
+    &::after {
+      position: absolute;
+      left: 90%;
+      width: 70px;
+      height: 120px;
+      margin-top: -170px;
+      background-image: url('/dots-advantages.svg');
+      content: '';
+    }
+  }
+
+  .main-categories {
+    margin-top: 90px;
+    padding: 0 25px;
+
+    &__title {
+      display: block;
+      width: 70%;
+    }
+
+    &__card-container {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    &__card {
+      z-index: 2;
+      width: 210px;
+    }
+
+    &::before {
+      position: absolute;
+      left: 85%;
+      width: 130px;
+      height: 250px;
+      margin-top: 40px;
+      background-image: url('/dots-advantages.svg');
+      background-repeat: no-repeat;
+      content: '';
+    }
+  }
+
+  .questions {
+    min-height: 470px;
+    margin-top: 100px;
+
+    &__wrapper {
+      display: flex;
+    }
+
+    &__button-block {
+      width: 80%;
+    }
+
+    &__button {
+      max-height: 70px;
+    }
+
+    &__open-button {
+      max-height: 300px;
+    }
+
+    &__button-top {
+      padding-top: 10px;
+      font-size: $font-13;
+    }
+
+    &__button-content {
+      margin-top: 20px;
+    }
+  }
+
+  .mobile-app {
+    height: 240px;
+    margin-top: 100px;
+    padding-left: 25px;
+
+    &__wrapper {
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    &__subtitle {
+      font-size: $font-10;
+    }
+
+    &__title {
+      font-size: $font-22;
+    }
+
+    &__description {
+      font-size: $font-14;
+    }
+
+    &__phone {
+      width: 160px;
+      height: 330px;
+      margin-top: -60px;
+      margin-left: 50px;
+      padding-top: 10px;
+      border-radius: 20px;
+      box-shadow: 0 0 40px rgba(128, 152, 213, 0.3);
+    }
+
+    &__phone-button {
+      width: 25px;
+      height: 25px;
+    }
+
+    &__phone-message-small {
+      width: 50px;
+      height: 60px;
+      margin-top: -200px;
+      margin-left: -30px;
+    }
+
+    &__phone-message-big {
+      width: 150px;
+      height: 60px;
+      margin-left: 80px;
+    }
+  }
+
+  .get-start {
+    display: flex;
+    height: 150px;
+    margin-top: 100px;
+    padding-top: 40px;
+    padding-right: 20px;
+    padding-left: 20px;
+    text-align: start;
+
+    &__button {
+      width: 220px;
+      height: 40px;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    &::before {
+      position: absolute;
+      z-index: -1;
+      width: 70px;
+      height: 100px;
+      margin-top: -70px;
+      margin-left: -30px;
+      background-image: url('/dots-advantages.svg');
+      background-repeat: no-repeat;
+      background-size: 100%;
+      content: '';
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .wrapper {
+    min-height: 440px;
+
+    &::before {
+      top: 50px;
+    }
+  }
+
+  .how-its-work {
+    &__text {
+      width: 50%;
+    }
+
+    &__desktop {
+      width: 50%;
+    }
+  }
+
+  .main-categories {
+    &__card {
+      width: 250px;
+    }
+
+    &::before {
+      left: 80%;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .wrapper {
+    min-height: 850px;
+    padding-top: 300px;
+
+    &__title {
+      font-size: $font-16;
+    }
+
+    &__description {
+      font-size: $font-36;
+    }
+
+    &__button {
+      margin-top: 30px;
+    }
+
+    &::before {
+      top: -50px;
+      width: 500px;
+      height: 500px;
+    }
+
+    &::after {
+      top: 350px;
+      left: -20px;
+      width: 700px;
+      height: 700px;
+    }
+  }
+  .main-description {
+    &__wrapper {
+      display: flex;
+    }
+    &__card-container {
+      display: flex;
+    }
+  }
+
+  .main-categories {
+    &__card {
+      width: 350px;
+    }
+
+    &__card-image {
+      width: 30px;
+      height: 30px;
+    }
+
+    &__card-title {
+      font-size: $font-18;
+    }
+
+    &__card-description {
+      font-size: $font-15;
+    }
+  }
+}
+
+@media (min-width: 2500px) {
+  .wrapper {
+    min-height: 1090px;
+  }
+
+  .how-its-work {
+    &::after {
+      left: 70%;
+    }
+  }
+
+  .main-categories {
+    &::before {
+      left: 70%;
+    }
+  }
+}
+
+.fade {
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
