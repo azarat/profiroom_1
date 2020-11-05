@@ -35,33 +35,8 @@
     margin-left: auto;
   }
 }
-@media screen and (min-width: 1024px) {
-  .container__signup {
-    & .login__title {
-      margin-top: 25px;
-    }
-  }
-}
-
-@media screen and (min-height: 1024px) {
-  .container__signup {
-    & .login__title {
-      margin-top: 400px;
-    }
-  }
-  .container__signin {
-    .login__title {
-      margin-top: 450px;
-    }
-  }
-}
 
 @media screen and (min-width: 1200px) {
-  .container__signup {
-    & .login__title {
-      margin-top: 100px;
-    }
-  }
   .registration__form {
     max-width: 600px;
   }
