@@ -42,7 +42,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ registrationHandler }): JSX.Eleme
 
   const onFinish = async (values: LoginValues): Promise<void> => {
     if (values.foreignComp === undefined) {
-      values.foreignComp = !!values.foreignComp
+      values.foreignComp = false
     }
     const url = `${process.env.NEXT_PUBLIC_API}api/login`
     const response = await fetch(url, {

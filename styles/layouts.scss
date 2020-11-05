@@ -1,6 +1,7 @@
-@import './fonts/roboto';
+@import '../public/fonts/roboto.css';
 @import './variables';
 @import './layouts/header';
+@import './layouts/landing';
 @import './layouts/loginForm';
 @import './layouts/registrationForm';
 @import './layouts/mobile-menu';
@@ -12,6 +13,9 @@
 @import './layouts/catalogList';
 @import './pages/subCatalog';
 @import './layouts/servicesCard';
+@import './layouts/dashboardHeader';
+@import './layouts/dashboardMenu';
+
 
 body {
   font-family: $font-roboto;

@@ -3,7 +3,9 @@
   flex-direction: column;
   align-items: center;
   max-width: 280px;
+  &.ant-form {
   margin: 0 auto;
+  }
 }
 .registration__password-information {
   color: $gray-color;
@@ -23,5 +25,11 @@
 @media screen and (min-width: 768px) {
   .registration__form {
     max-width: 400px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .registration__form {
+    max-width: 550px;
   }
 }

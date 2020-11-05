@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { NextPage } from 'next'
-// MainLayout
-import MainLayout from '../layouts/MainLayout'
 // Components
 import LoginForm from '../src/components/LoginForm/LoginForm'
 import RegistrationForm from '../src/components/RegistrationForm/RegistrationForm'
+import Header from '../src/components/Header/MainHeader/Header'
 import { useRouter } from 'next/router'
 // Style
 
-const login: NextPage = (props): JSX.Element => {
+const login: NextPage = (): JSX.Element => {
   const [isRegistration, setIsRegistration] = useState<boolean>(false)
   const [mobile, setMobile] = useState<boolean>(false)
 
@@ -39,7 +38,7 @@ const login: NextPage = (props): JSX.Element => {
   )
 
   return (
-    <MainLayout title="Login Page" categories={props}>
+    <>
       {!mobile && <div className="login">{renderData}</div>}
       {mobile && (
         <div className={`login ${isRegistration && 'right-panel-active'}`}>
@@ -51,6 +50,7 @@ const login: NextPage = (props): JSX.Element => {
             <LoginForm registrationHandler={handleRegistration} />
           </div>
 
+          <Header />
           <div className="container__overlay">
             <div className="login__overlay">
               <div className="overlay__panel overlay__left">
@@ -75,7 +75,7 @@ const login: NextPage = (props): JSX.Element => {
           </div>
         </div>
       )}
-    </MainLayout>
+    </>
   )
 }
 
