@@ -6,17 +6,23 @@ import { Carousel, Checkbox } from 'antd'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import useOutsideClick from '../../src/hooks/useOutsideClick'
 import { useRouter } from 'next/router'
+import { OfferTypes, ExtraListTypes, CustomArrowProps } from '../../src/components/OfferCard/Types'
 
-const Offer: NextPage = (props): JSX.Element => {
+const Offer: NextPage<OfferTypes> = (props): JSX.Element => {
   const {
     offer: { userOffer },
   } = props
 
+  console.log(props)
+
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [isExtraOpen, setExtraOpen] = useState<boolean>(false)
   const [totalPrice, setTotalPrice] = useState<number>(userOffer.basic.price)
+  const [isAddExtraOpen, setAddExtraOpen] = useState<boolean>(false)
+  const [isConfirmOpen, setConfirmOpen] = useState<boolean>(false)
   const [nav1, setNav1] = useState()
   const [nav2, setNav2] = useState()
+  const [extraList, setExtraList] = useState<ExtraListTypes[]>([])
 
   let slider2 = []
   let slider1 = []
@@ -37,23 +43,29 @@ const Offer: NextPage = (props): JSX.Element => {
   }
 
   const extraCommercialRef = useRef<HTMLParagraphElement>(null)
+  const extraCommercialTextRef = useRef<HTMLParagraphElement>(null)
   const extraTermRef = useRef<HTMLParagraphElement>(null)
+  const extraTermTextRef = useRef<HTMLParagraphElement>(null)
   const extraChangesRef = useRef<HTMLParagraphElement>(null)
+  const extraChangesTextRef = useRef<HTMLParagraphElement>(null)
 
   const handleExtraOptions = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    ref: RefObject<HTMLElement>
+    event: any,
+    ref: RefObject<HTMLElement>,
+    textRef: RefObject<HTMLElement>
   ) => {
     let newPrice = totalPrice
+    const newExtra = extraList
     if (event.target.checked) {
       newPrice += Number(ref.current?.innerText)
+      newExtra.push({ name: textRef.current!.innerText, price: Number(ref.current?.innerText) })
     } else {
       newPrice -= Number(ref.current?.innerText)
+      newExtra.splice(newExtra.indexOf(textRef.current?.innerText), 1)
     }
-
-    console.log(newPrice)
+    setExtraList(newExtra)
     setTotalPrice(newPrice)
-    console.log(event.target.checked)
+    console.log(extraList)
   }
 
   const questionListref = useRef<HTMLDivElement>(null)
@@ -61,7 +73,7 @@ const Offer: NextPage = (props): JSX.Element => {
     setActiveIndex(null)
   })
 
-  const SampleNextArrow = (props) => {
+  const SampleNextArrow = (props: CustomArrowProps) => {
     const { className, style, onClick } = props
     return (
       <div
@@ -79,7 +91,7 @@ const Offer: NextPage = (props): JSX.Element => {
     )
   }
 
-  const SamplePrevArrow = (props) => {
+  const SamplePrevArrow = (props: CustomArrowProps) => {
     const { className, style, onClick } = props
     return (
       <div
@@ -106,7 +118,11 @@ const Offer: NextPage = (props): JSX.Element => {
     <MainLayout categories={props}>
       <div className="offer">
         <div className="container">
-          <div className="offer__wrapper">
+          <div
+            className={`offer__wrapper ${
+              isAddExtraOpen || isConfirmOpen ? 'offer__wrapper--extra' : ''
+            }`}
+          >
             <h2 className="offer__title">{userOffer.title}</h2>
             <div className="offer__user-info">
               <Link href="/">
@@ -160,6 +176,7 @@ const Offer: NextPage = (props): JSX.Element => {
                 slidesToShow={2}
                 focusOnSelect={true}
                 centerMode
+                dots={false}
               >
                 {userOffer.files.map((img: string, index: number) => (
                   <div className="offer__sub-gallery-item-wrapper" key={index}>
@@ -225,8 +242,18 @@ const Offer: NextPage = (props): JSX.Element => {
                       }`}
                     >
                       {userOffer.extra_changes && (
-                        <Checkbox onChange={(e) => handleExtraOptions(e, extraChangesRef)}>
-                          <p className="tabs__extra-options-item">Додаткові правки</p>
+                        <Checkbox
+                          onChange={(e) =>
+                            handleExtraOptions(e, extraChangesRef, extraChangesTextRef)
+                          }
+                        >
+                          <p
+                            className="tabs__extra-options-item"
+                            id="extrachanges"
+                            ref={extraChangesTextRef}
+                          >
+                            Додаткові правки
+                          </p>
                           <p
                             className="tabs__extra-options-price"
                             id="changes"
@@ -238,8 +265,18 @@ const Offer: NextPage = (props): JSX.Element => {
                       )}
 
                       {userOffer.extra_commercial && (
-                        <Checkbox onChange={(e) => handleExtraOptions(e, extraCommercialRef)}>
-                          <p className="tabs__extra-options-item">Комерційне використання</p>
+                        <Checkbox
+                          onChange={(e) =>
+                            handleExtraOptions(e, extraCommercialRef, extraCommercialTextRef)
+                          }
+                        >
+                          <p
+                            className="tabs__extra-options-item"
+                            id="extracommercial"
+                            ref={extraCommercialTextRef}
+                          >
+                            Комерційне використання
+                          </p>
                           <p
                             className="tabs__extra-options-price"
                             id="commercial"
@@ -249,17 +286,17 @@ const Offer: NextPage = (props): JSX.Element => {
                           </p>
                         </Checkbox>
                       )}
-                      {/* {userOffer.extra_features.length >= 1 && (
-                        <Checkbox>
-                          <p className="tabs__extra-options-item">Додаткові правки</p>
-                          <p className="tabs__extra-options-price">
-                            <strong>{userOffer.extra_features[0].price}&#8372;</strong>
-                          </p>
-                        </Checkbox>
-                      )} */}
                       {userOffer.extra_terms.length >= 1 && (
-                        <Checkbox onChange={(e) => handleExtraOptions(e, extraTermRef)}>
-                          <p className="tabs__extra-options-item">Стислі сроки</p>
+                        <Checkbox
+                          onChange={(e) => handleExtraOptions(e, extraTermRef, extraTermTextRef)}
+                        >
+                          <p
+                            className="tabs__extra-options-item"
+                            id="extraterms"
+                            ref={extraTermTextRef}
+                          >
+                            Стислі сроки
+                          </p>
                           <p className="tabs__extra-options-price" id="terms" ref={extraTermRef}>
                             <strong>{userOffer.extra_terms[0].price}</strong>
                           </p>
@@ -267,7 +304,10 @@ const Offer: NextPage = (props): JSX.Element => {
                       )}
                     </div>
                     <div className="tabs__extra-option-order-wrapper">
-                      <button className="tabs__extra-option-order-btn">
+                      <button
+                        className="tabs__extra-option-order-btn"
+                        onClick={() => setAddExtraOpen(true)}
+                      >
                         Замовити послугу за ({totalPrice}&#8372;)
                       </button>
                     </div>
@@ -300,7 +340,7 @@ const Offer: NextPage = (props): JSX.Element => {
                   </div>
                 </div>
                 <div className="rating__type-average">
-                  <span className="rating__type-average-text">Cередня оцінка</span>
+                  <p className="rating__type-average-text">Cередня оцінка</p>
                   <span className="rating__type-average-number">
                     {userOffer.averageRating.averageMark}
                   </span>
@@ -338,43 +378,48 @@ const Offer: NextPage = (props): JSX.Element => {
             <div className="offer__about-user about-user">
               <h4 className="about-user__title">Про фрілансера</h4>
               <div className="about-user__main-info">
-                <Link href="">
-                  <a className="about-user__avatar-link">
-                    <img className="about-user__avatar" src={userOffer.user.avatar} alt="" />
-                  </a>
-                </Link>
-                <p className="about-user__name">
-                  {userOffer.user.name} {userOffer.user.surname}
-                </p>
-                <p className="about-user__status">Рівень:Стартовий</p>
-                <div className="about-user__rating-wrapper">
-                  <p className="about-user__rating"></p>
-                  <span className="about-user__comments">
-                    ({userOffer.comments_count} відгуків)
-                  </span>
-                </div>
-                <div className="about-user__online-status-wrapper">
-                  <span className="about-user__online-status">
-                    {userOffer.user.status === 'online' ? 'Онлайн' : 'Офлайн'}
-                  </span>
-                </div>
-              </div>
-              <div className="about-user__actions">
-                <div className="about-user__action">
-                  <Link href="/">
-                    <a className="offer__message">
-                      <img src="/assets/img/envelope.svg" alt="message icon" />
+                <div className="about-user__avatar-link-wrapper">
+                  <Link href="">
+                    <a className="about-user__avatar-link">
+                      <img className="about-user__avatar" src={userOffer.user.avatar} alt="" />
                     </a>
                   </Link>
                 </div>
-                <div className="about-user__action">
-                  <Link href="/">
-                    <a className="offer__message">
-                      <img src="/assets/img/calendar.svg" alt="calendar icon" />
-                    </a>
-                  </Link>
+                <div className="about-user__main-info-inner">
+                  <p className="about-user__name">
+                    {userOffer.user.name} {userOffer.user.surname}
+                  </p>
+                  <p className="about-user__status">Рівень:Стартовий</p>
+                  <div className="about-user__rating-wrapper">
+                    <p className="about-user__rating"></p>
+                    <span className="about-user__comments">
+                      ({userOffer.comments_count} відгуків)
+                    </span>
+                  </div>
+                  <div className="about-user__online-status-wrapper">
+                    <span className="about-user__online-status">
+                      {userOffer.user.online ? 'Онлайн' : 'Офлайн'}
+                    </span>
+                  </div>
+                </div>
+                <div className="about-user__actions">
+                  <div className="about-user__action">
+                    <Link href="/">
+                      <a className="offer__message">
+                        <img src="/assets/img/shape.svg" alt="shape icon" />
+                      </a>
+                    </Link>
+                  </div>
+                  <div className="about-user__action">
+                    <Link href="/">
+                      <a className="offer__message">
+                        <img src="/assets/img/envelope.svg" alt="calendar icon" />
+                      </a>
+                    </Link>
+                  </div>
                 </div>
               </div>
+
               <div className="about-user__sub-info">
                 <div className="about-user__country">
                   <p className="about-user__country-title">Країна</p>
@@ -388,7 +433,9 @@ const Offer: NextPage = (props): JSX.Element => {
             </div>
 
             <div className="offer__another-offers another-offers">
-              <h2 className="another-offers__title">Інші послуги фрілансера</h2>
+              <h2 className="another-offers__title">
+                Інші послуги фрілансера <span>(3 з {userOffer.user.userOffers.length})</span>
+              </h2>
               <div className="another-offers__list">
                 {userOffer.user.userOffers.map((card) => (
                   <div className="another-offers__card card" key={card.id}>
@@ -421,7 +468,105 @@ const Offer: NextPage = (props): JSX.Element => {
                   </div>
                 ))}
               </div>
+              <Link href="/">
+                <a className="another-offers__profile-link">більше послуг в профілі</a>
+              </Link>
             </div>
+          </div>
+          <div
+            className={`offer__add-block add-block ${isAddExtraOpen ? 'add-block--active' : ''}`}
+          >
+            <div className="add-block__wrapper">
+              <h3 className="add-block__title">
+                {extraList.length > 0
+                  ? 'Ви обрали додаткові опції:'
+                  : 'Ви не обрали додаткових опцій'}
+              </h3>
+              {/* <h4 className="add-block__subtitle">{userOffer.title}</h4> */}
+              <div className="add-block__extra">
+                <ul>
+                  {extraList.map((extra, index) => (
+                    <li key={index}>{extra.name}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="add-block__add-btn-wrapper">
+                <button
+                  className="add-block__add-btn"
+                  onClick={() => {
+                    setAddExtraOpen(false), setConfirmOpen(true)
+                  }}
+                >
+                  до замовлення
+                </button>
+              </div>
+              <div className="add-block__back-btn-wrapper">
+                <button className="add-block__back-btn" onClick={() => setAddExtraOpen(false)}>
+                  назад до послуги
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            className={`offer__confirm-block confirm-block ${
+              isConfirmOpen ? 'confirm-block--open' : ''
+            }`}
+          >
+            <div className="confirm-block__top-info">
+              <p className="confirm-block__type">Базовий</p>
+              <p className="confirm-block__base-price">{userOffer.basic.price}</p>
+            </div>
+            <span className="confirm-block__price-no-features">
+              Загальна вартість (без доп. Опцій)
+            </span>
+            <div className="confirm-block__features">
+              <span className="confirm-block__correction">{userOffer.basic.changes} правок</span>
+              <span className="confirm-block__term">{userOffer.basic.term} днів виконання</span>
+            </div>
+            <div className="confirm-block__extra">
+              {extraList.length > 0 ? (
+                <>
+                  <h4 className="confirm-block__extra-title">Додаткові опції</h4>
+                  {extraList.map((extra, index) => (
+                    <div key={index} className="confirm-block__extra-item">
+                      <p>{extra.name}</p>
+                      <p>
+                        {extra.price} <strong>UAH</strong>
+                      </p>
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <h4 className="confirm-block__extra-title">Послуга без додаткових опцій</h4>
+              )}
+            </div>
+            <div className="confirm-block__сommission">
+              <p>Комісія за сервіс</p>
+              <p>
+                <strong>0 UAH</strong>
+              </p>
+            </div>
+            <div className="confirm-block__final-price">
+              <p className="confirm-block__price-text">кінцева вартість</p>
+              <p>
+                <strong>{totalPrice}</strong>
+              </p>
+            </div>
+            <div className="confirm-block__btn-wrapper">
+              <button className="confirm-block__confirm-btn">підтвердити замовлення</button>
+              <button
+                className="confirm-block__btn-back"
+                onClick={() => {
+                  setAddExtraOpen(true), setConfirmOpen(false)
+                }}
+              >
+                назад
+              </button>
+            </div>
+
+            <span className="confirm-block__bottom-text">
+              * Підтвердження замовлення не є його оплатою.
+            </span>
           </div>
         </div>
       </div>

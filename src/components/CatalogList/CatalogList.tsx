@@ -28,15 +28,15 @@ const CatalogList: React.FC<CategoriesProps> = ({ categories }): JSX.Element => 
     <div className="categorie-list">
       <div className="container">
         <div className="categorie-list__wrapper">
-          {category.map((singleCategory, index: number) => (
-            <div className="categorie-list__sub-categories-wrapper" key={singleCategory.id}>
+          {category.map(({ id, link, sub_categories, ...rest }, index: number) => (
+            <div className="categorie-list__sub-categories-wrapper" key={id}>
               <div className="categorie-list__item item ">
                 <h3
                   role="presentation"
                   onClick={() => selectActiveIndex(index)}
                   className="item__title"
                 >
-                  {singleCategory[`name_${lang}`]}
+                  {rest[`name_${lang}`]}
                 </h3>
               </div>
 
@@ -49,29 +49,33 @@ const CatalogList: React.FC<CategoriesProps> = ({ categories }): JSX.Element => 
                   <LeftOutlined className="categorie-list__back" />
                 </button>
                 {isSubOpen &&
-                  category[activeIndex].sub_categories.map((subCategory) => (
-                    <div key={subCategory.id} className="categorie-list-sub-item sub-item">
-                      <Link href={`catalog/${singleCategory.link}/${subCategory.link}`}>
-                        <a
-                          role="presentation"
-                          className="sub-item__name"
-                          onClick={() => {
-                            setSubOpen(false)
-                          }}
-                        >
-                          {subCategory[`name_${lang}`]}
-                        </a>
-                      </Link>
-                    </div>
-                  ))}
+                  category[activeIndex].sub_categories.map(
+                    ({ id, link: subCategoryLink, ...rest }) => (
+                      <div key={id} className="categorie-list-sub-item sub-item">
+                        <Link href={`catalog/${link}/${subCategoryLink}`}>
+                          <a
+                            role="presentation"
+                            className="sub-item__name"
+                            onClick={() => {
+                              setSubOpen(false)
+                            }}
+                          >
+                            {rest[`name_${lang}`]}
+                          </a>
+                        </Link>
+                      </div>
+                    )
+                  )}
                 <ul className="categorie-list__tablet">
-                  {singleCategory.sub_categories.map((subCategory: subCategriesTypes) => (
-                    <li key={subCategory.id} className="categorie-list__link">
-                      <Link href={`catalog/${singleCategory.link}/${subCategory.link}`}>
-                        <a className="categorie-list__sub-name">{subCategory[`name_${lang}`]}</a>
-                      </Link>
-                    </li>
-                  ))}{' '}
+                  {sub_categories.map(
+                    ({ id, link: subCategoryLink, ...rest }: subCategriesTypes) => (
+                      <li key={id} className="categorie-list__link">
+                        <Link href={`catalog/${link}/${subCategoryLink}`}>
+                          <a className="categorie-list__sub-name">{rest[`name_${lang}`]}</a>
+                        </Link>
+                      </li>
+                    )
+                  )}
                 </ul>
               </div>
             </div>

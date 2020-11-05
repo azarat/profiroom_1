@@ -38,6 +38,7 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
   console.log(catalog)
 
   const router = useRouter()
+
   ////Set query for service filter
   const groupChange = (checkedList: any) => {
     setCheckedList(checkedList)
@@ -172,7 +173,7 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                 </Link>
               </Breadcrumb.Item>
             </Breadcrumb>
-
+            {/*todo title */}
             <h2 className="services__title">1C</h2>
             <div className="services__mobile-filters" role="presentation" onClick={handleFilters}>
               <div className="services__mobile-filters-img-wrapper">
