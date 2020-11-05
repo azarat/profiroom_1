@@ -1,14 +1,18 @@
 import React from 'react'
 import Head from 'next/head'
+
+//components
 import DashboardHeader from '../src/components/Header/DashboardHeader/DashboardHeader'
 
 // Types
 type DashboardLayoutProps = {
   children: React.ReactNode
   title?: string
+  userData: any
 }
 
-const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, title }) => {
+const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, title, userData }) => {
+  const { user } = userData
   return (
     <>
       <Head>
@@ -20,7 +24,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, title }) =>
         />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <DashboardHeader />
+      <DashboardHeader userData={user} />
       <main>{children}</main>
     </>
   )

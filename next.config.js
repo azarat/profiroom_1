@@ -1,50 +1,48 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable @typescript-eslint/no-empty-function */
-const path = require('path')
-const withSass = require('@zeit/next-sass')
 const withLess = require('@zeit/next-less')
-const withCSS = require('@zeit/next-css')
-const compose = require('next-compose-plugins')
-const withReactSvg = require('next-react-svg')
+const withSass = require('@zeit/next-sass')
+const lessToJS = require('less-vars-to-js')
+const fs = require('fs')
+const path = require('path')
 
-const isProd = process.env.NODE_ENV === 'production'
+module.exports = withSass({
+  ...withLess({
+    lessLoaderOptions: {
+      javascriptEnabled: true,
+      importLoaders: 0,
+    },
+    cssLoaderOptions: {
+      importLoaders: 3,
+      localIdentName: '[local]___[hash:base64:5]',
+    },
+    webpack: (config, { isServer }) => {
+      if (isServer) {
+        const antStyles = /antd\/.*?\/style.*?/
+        const origExternals = [...config.externals]
+        config.externals = [
+          (context, request, callback) => {
+            if (request.match(antStyles)) return callback()
+            if (typeof origExternals[0] === 'function') {
+              origExternals[0](context, request, callback)
+            } else {
+              callback()
+            }
+          },
+          ...(typeof origExternals[0] === 'function' ? [] : origExternals),
+        ]
 
-// fix: prevents error when .less files are required by node
-if (typeof require !== 'undefined') {
-  require.extensions['.less'] = (file) => {}
-}
-
-const cssConfig = withCSS({
-  cssModules: true,
-  cssLoaderOptions: {
-    importLoaders: 1,
-    localIdentName: '[local]___[hash:base64:5]',
-  },
-  ...withLess(
-    withSass({
-      lessLoaderOptions: {
-        javascriptEnabled: true,
-      },
-    })
-  ),
-})
-
-const sassConfig = withSass({
-  lessLoaderOptions: {
-    javascriptEnabled: true,
-  },
-})
-
-module.exports = compose([sassConfig, withLess], {
-  webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      issuer: {
-        test: /\.(js|ts)x?$/,
-      },
-      use: ['@svgr/webpack'],
-    })
-
-    return config
-  },
+        config.module.rules.unshift({
+          test: antStyles,
+          use: 'null-loader',
+        })
+      }
+      config.module.rules.push({
+        test: /\.svg$/,
+        issuer: {
+          test: /\.(js|ts)x?$/,
+        },
+        use: ['@svgr/webpack'],
+      })
+      return config
+    },
+  }),
 })
