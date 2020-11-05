@@ -27,36 +27,38 @@ const Categories: React.FC<CategoriesProps> = ({ categories }): JSX.Element => {
       <div className="container">
         <div className="categories__wrapper">
           {/* TODO : Добавить ссылки в href */}
-          {category.map((category) => (
-            <Link key={category.id} href={`/catalog/${category.link}`}>
+          {category.map(({ id, link, groups, sub_categories, ...rest }) => (
+            <Link key={id} href={`/catalog/${link}`}>
               {router.pathname === '/catalog' || widthDevice ? (
-                <a className="categories__link">{category[`name_${lang}`]}</a>
+                <a className="categories__link">{rest[`name_${lang}`]}</a>
               ) : (
                 <Popover
                   arrowPointAtCenter
                   className="categories__popover"
-                  key={category.id}
+                  key={id}
                   placement="bottom"
                   trigger="hover"
-                  content={category.groups.map((group: string, index: number) => (
+                  content={groups.map((group: string, index: number) => (
                     <div className="categories__item" key={index}>
                       <h4 className="categories__name">{group}</h4>
-                      {category.sub_categories
+                      {sub_categories
                         .filter((sub) => sub.group === group)
-                        .map((subFiltered) => {
+                        .map(({ id, link: subFilteredLink, ...rest }) => {
                           return (
                             <Link
-                              href={`/catalog/${category.link}/${subFiltered.link}`}
-                              key={subFiltered.id}
+                              href={`/catalog/${encodeURIComponent(link)}/${encodeURIComponent(
+                                subFilteredLink
+                              )}`}
+                              key={id}
                             >
-                              <a className="categories__sub-link">{subFiltered[`name_${lang}`]}</a>
+                              <a className="categories__sub-link">{rest[`name_${lang}`]}</a>
                             </Link>
                           )
                         })}
                     </div>
                   ))}
                 >
-                  <a className="categories__link">{category[`name_${lang}`]}</a>
+                  <a className="categories__link">{rest[`name_${lang}`]}</a>
                 </Popover>
               )}
             </Link>
