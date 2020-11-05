@@ -4,7 +4,7 @@
   align-items: center;
   max-width: 280px;
   &.ant-form {
-  margin: 0 auto;
+    margin: 0 auto;
   }
 }
 .registration__password-information {
@@ -24,12 +24,48 @@
 
 @media screen and (min-width: 768px) {
   .registration__form {
-    max-width: 400px;
+    max-width: 450px;
+    width: 100%;
+  }
+  .ant-space.ant-space-vertical {
+    width: 100%;
+  }
+  .registration__password-information {
+    max-width: 300px;
+    margin-left: auto;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .container__signup {
+    & .login__title {
+      margin-top: 25px;
+    }
+  }
+}
+
+@media screen and (min-height: 1024px) {
+  .container__signup {
+    & .login__title {
+      margin-top: 400px;
+    }
+  }
+  .container__signin {
+    .login__title {
+      margin-top: 450px;
+    }
   }
 }
 
 @media screen and (min-width: 1200px) {
+  .container__signup {
+    & .login__title {
+      margin-top: 100px;
+    }
+  }
   .registration__form {
-    max-width: 550px;
+    max-width: 600px;
+  }
+  .registration__password-information {
+    max-width: 400px;
   }
 }

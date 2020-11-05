@@ -3,7 +3,7 @@
   font-weight: $font-weight-700;
   font-size: $font-24;
   text-align: center;
-  text-transform: uppercase;
+  // text-transform: uppercase;
 }
 .login__subtitle {
   color: $gray-color;
@@ -17,7 +17,7 @@
   align-items: center;
   max-width: 280px;
   &.ant-form {
-  margin: 0 auto;
+    margin: 0 auto;
   }
 }
 
@@ -32,12 +32,12 @@
 
 @media screen and (min-width: 1024px) {
   .login__title {
-    margin-top: 25px;
+    margin-top: 150px;
   }
-  }
+}
 @media screen and (min-width: 1200px) {
   .login__title {
-    margin-top: 100px;
+    margin-top: 150px;
   }
   .login__form {
     max-width: 550px;

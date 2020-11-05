@@ -18,6 +18,9 @@
   left: 0;
   z-index: 2;
   width: 60%;
+  display: flex;
+  place-items: center;
+  flex-direction: column;
 }
 
 .login.right-panel-active .container__signin {
@@ -25,11 +28,14 @@
 }
 
 .container__signup {
-  left: -150px;
+  // left: -150px;
   z-index: 1;
   width: 60%;
   padding-right: 10px;
   opacity: 0;
+  display: flex;
+  place-items: center;
+  flex-direction: column;
 }
 
 .login.right-panel-active .container__signup {
@@ -149,7 +155,11 @@
     opacity: 1;
   }
 }
-
+@media screen and (min-width: 768px) {
+  .container__signup {
+    left: -150px;
+  }
+}
 @media screen and (min-width: 1024px) {
   .container__signup {
     left: -200px;

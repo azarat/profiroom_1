@@ -95,14 +95,16 @@ const LoginForm: React.FC<LoginFormProps> = ({ registrationHandler }): JSX.Eleme
           >
             <Input.Password size="large" placeholder="Пароль" prefix={<LockOutlined />} />
           </Form.Item>
-          <Form.Item {...tailFormItemLayout}>
-            <Form.Item name="foreignComp" valuePropName="checked" noStyle>
-              <Checkbox>Чужий комп&apos;ютер</Checkbox>
+          <Space direction="horizontal">
+            <Form.Item {...tailFormItemLayout}>
+              <Form.Item name="foreignComp" valuePropName="checked" noStyle>
+                <Checkbox>Чужий комп&apos;ютер</Checkbox>
+              </Form.Item>
+              <Link href="/">
+                <a className="login-form-forgot">Забули пароль?</a>
+              </Link>
             </Form.Item>
-            <Link href="/">
-              <a className="login-form-forgot">Забули пароль?</a>
-            </Link>
-          </Form.Item>
+          </Space>
           <Form.Item {...tailFormItemLayout}>
             <Space direction="horizontal">
               <Button type="primary" htmlType="submit" className="login-form-button">
