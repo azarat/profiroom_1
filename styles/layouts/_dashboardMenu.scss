@@ -1,0 +1,348 @@
+.dashboard-menu {
+  position: absolute;
+  left: -200px;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 100vh;
+  background-color: $primary-color;
+  transition: 0.5s;
+
+  &__open {
+    left: 0;
+  }
+
+  &__button {
+    display: flex;
+    margin-top: 10px;
+    margin-left: 15px;
+    text-transform: uppercase;
+  }
+
+  &__button-image-container {
+    width: 35px;
+    height: 35px;
+    padding: 7px 5px;
+    text-align: center;
+    background-color: $white-color;
+    border-radius: 10px;
+    color: #bfc5d1;
+    font-size: $font-20;
+  }
+
+  &__button-image-container-active {
+    color: $white-color;
+    background-color: $secondary-color;
+  }
+
+  &__button-text {
+    margin-top: 5px;
+    margin-left: 15px;
+    color: $white-color;
+    font-size: $font-13;
+    user-select: none;
+  }
+
+  &__avatar {
+    display: none;
+  }
+
+  &__stars {
+    display: none;
+    color: orange;
+  }
+
+  &__button-text-open {
+    display: none;
+  }
+
+  &__open-button-icon {
+    display: none;
+  }
+
+  &__button-text-large {
+    display: none;
+  }
+}
+
+.message {
+  width: 25px;
+  color: $white-color;
+  background-color: #bfc5d1;
+  border-radius: 5px;
+}
+
+.message-active {
+  color: $secondary-color;
+  background-color: $white-color;
+}
+
+@media (min-width: 768px) {
+  .dashboard-menu {
+    top: 0;
+    left: 0;
+    width: 75px;
+    background-color: $white-color;
+
+    &__open {
+      width: 250px;
+    }
+
+    &__user-info {
+      margin-left: 5px;
+    }
+
+    &__user-info-open {
+      width: 50%;
+      margin: 0 auto;
+      margin-top: -40px;
+    }
+
+    &__button {
+      width: 100px;
+      margin-left: -5px;
+    }
+
+    &__button-open {
+      margin-left: 0px;
+    }
+
+    &__button-text {
+      display: none;
+    }
+
+    &__button-image-container {
+      width: 60px;
+      height: 55px;
+      margin-left: 10px;
+      padding: 0 0;
+      font-size: $font-22;
+      cursor: pointer;
+    }
+
+    &__button-image {
+      display: block;
+      margin: 15px auto;
+    }
+
+    &__avatar {
+      display: block;
+      width: 100%;
+      height: 230px;
+      padding: 50px 15px;
+      background-color: $primary-color;
+      transition: 0.3s;
+    }
+
+    &__avatar-image-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      overflow: hidden;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+
+    &__avatar-image-container-open {
+      width: 110px;
+      height: 110px;
+    }
+
+    &__avatar-image {
+      width: auto;
+      height: 100%;
+      margin: 0 auto;
+      transition: 0.3s;
+    }
+
+    &__avatar-border {
+      position: relative;
+      width: 70px;
+      height: 70px;
+      margin-top: 0;
+      transition: 0.3s;
+    }
+
+    &__avatar-aura {
+      position: absolute;
+      top: 55px;
+      left: -15px;
+      width: 100%;
+      transition: 0.3s;
+    }
+
+    &__avatar-open {
+      padding-top: 0px;
+      transition: 0.3s;
+    }
+
+    &__avatar-border-open {
+      top: 35px;
+      left: -35px;
+      width: 180px;
+      transition: 0.3s;
+    }
+
+    &__username {
+      display: none;
+    }
+
+    &__username-open {
+      display: block;
+      margin: 15px auto;
+      color: $white-color;
+      font-size: $font-13;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    &__open-button {
+      position: absolute;
+      top: 10px;
+      left: 95%;
+      width: 20px;
+      height: 20px;
+      padding-left: 4px;
+      color: $white-color;
+      background-color: $secondary-color;
+      border-radius: 50%;
+    }
+
+    &__button-container {
+      position: relative;
+      height: 20px;
+    }
+
+    &__stars-open {
+      display: flex;
+      justify-content: space-around;
+      margin-top: -10px;
+    }
+
+    &__button-image-container-open {
+      width: 90px;
+      height: 70px;
+      margin-left: 20px;
+      font-size: $font-30;
+      border-radius: 10px;
+    }
+
+    &__button-text-open {
+      display: block;
+      width: 90px;
+      margin-top: -10px;
+      font-size: $font-10;
+      text-align: center;
+      user-select: none;
+    }
+
+    &__nav {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 auto;
+    }
+
+    &__nav-open {
+      max-width: 90%;
+    }
+
+    &__open-button-icon {
+      display: inline;
+    }
+  }
+
+  .message {
+    width: 45%;
+  }
+}
+
+.transform-90 {
+  transform: rotate(180deg);
+  transition: 0.7s;
+}
+
+@media (min-width: 1200px) {
+  .dashboard-menu {
+    top: 55px;
+    width: 250px;
+
+    &__open-button {
+      display: none;
+    }
+
+    &__avatar {
+      padding-top: 0px;
+      transition: 0.3s;
+    }
+
+    &__user-info {
+      width: 50%;
+      margin: 0 auto;
+      margin-top: -40px;
+    }
+
+    &__avatar-image-container {
+      width: 110px;
+      height: 110px;
+    }
+
+    &__avatar-border {
+      top: 35px;
+      left: -35px;
+      width: 180px;
+      transition: 0.3s;
+    }
+
+    &__avatar-aura {
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    &__username {
+      display: block;
+      margin: 15px auto;
+      color: $white-color;
+      font-size: $font-13;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    &__stars {
+      display: flex;
+      justify-content: space-around;
+      margin-top: -10px;
+    }
+
+    &__nav {
+      max-width: 90%;
+    }
+
+    &__button {
+      margin-left: 0px;
+    }
+
+    &__button-image-container {
+      width: 90px;
+      height: 70px;
+      margin-left: 20px;
+      font-size: $font-30;
+      border-radius: 10px;
+    }
+
+    &__button-text-large {
+      display: block;
+      width: 90px;
+      margin-top: -10px;
+      font-size: $font-10;
+      text-align: center;
+      user-select: none;
+    }
+
+    &__button-text-open {
+      display: none;
+    }
+  }
+}
