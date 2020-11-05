@@ -1,0 +1,218 @@
+.dashboard-header {
+  padding: 10px 15px;
+  background-color: $primary-color;
+
+  &__nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    color: $white-color;
+    font-size: $font-18;
+    font-weight: bold;
+  }
+
+  &__bell-icon {
+    color: $white-color;
+    font-size: $font-22;
+  }
+
+  &__nav-button-group {
+    display: flex;
+  }
+
+  &__link {
+    margin-left: 20px;
+    color: $white-color;
+    text-decoration: none;
+
+    &:hover {
+      color: $white-color;
+    }
+  }
+
+  &__subnav-button-group {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__menu-button {
+    margin-right: 30px;
+    color: $white-color;
+    font-size: $font-20;
+  }
+
+  &__switch {
+    display: flex;
+  }
+
+  &__switch-desktop {
+    display: none;
+  }
+
+  &__switch-text {
+    margin: 0 5px;
+    color: $white-color;
+    transition: 0.3s;
+  }
+
+  &__switch-text-disabled {
+    color: $white-trans-color;
+    transition: 0.3s;
+  }
+}
+
+.ant-switch {
+  background-color: $secondary-color !important;
+}
+
+.ant-switch-checked {
+  background-color: $secondary-color !important;
+}
+
+.ant-switch-handle {
+  &::before {
+    background-color: $secondary-color;
+  }
+}
+
+
+@media (min-width: 768px) {
+  .dashboard-header {
+    padding: 15px 20px;
+    &__nav {
+      justify-content: space-between;
+      width: 85%;
+      margin: 0 auto;
+    }
+
+    &__logo {
+      font-size: $font-24;
+    }
+
+    &__go-to-main {
+      display: none;
+    }
+
+    &__nav-button-group {
+      margin-top: 10px;
+      color: $white-color;
+    }
+
+    &__subnav-button-group {
+      display: none;
+    }
+
+    &__switch-desktop {
+      display: flex;
+      margin: 0 30px;
+    }
+  }
+}
+
+.c-hamburger {
+  position: relative;
+  display: block;
+  width: 55px;
+  height: 25px;
+  margin: 0 -15px;
+  padding: 0;
+  overflow: hidden;
+  text-indent: -9999px;
+  border: none;
+  border-radius: none;
+  box-shadow: none;
+  appearance: none;
+  font-size: 0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.c-hamburger:focus {
+  outline: none;
+}
+
+.c-hamburger span {
+  position: absolute;
+  top: 10px;
+  right: 18px;
+  left: 18px;
+  display: block;
+  height: 2px;
+  background: white;
+}
+
+.c-hamburger span::before,
+.c-hamburger span::after {
+  position: absolute;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  content: '';
+}
+
+.c-hamburger span::before {
+  top: -7px;
+}
+
+.c-hamburger span::after {
+  bottom: -7px;
+}
+
+.c-hamburger--htx {
+  background-color: $primary-color;
+}
+
+.c-hamburger--htx span {
+  transition: 0s 0.3s;
+}
+
+.c-hamburger--htx span::before,
+.c-hamburger--htx span::after {
+  transition-delay: 0.3s, 0s;
+  transition-duration: 0.3s, 0.3s;
+}
+
+.c-hamburger--htx span::before {
+  transition-property: top, transform;
+}
+
+.c-hamburger--htx span::after {
+  transition-property: bottom, transform;
+}
+
+.c-hamburger--htx.is-active {
+  background-color: $primary-color;
+}
+
+.c-hamburger--htx.is-active span {
+  background: none;
+}
+
+.c-hamburger--htx.is-active span::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.c-hamburger--htx.is-active span::after {
+  bottom: 0;
+  transform: rotate(-45deg);
+}
+
+.c-hamburger--htx.is-active span::before,
+.c-hamburger--htx.is-active span::after {
+  transition-delay: 0s, 0.3s;
+}
+
+@media (min-width: 1200px) {
+  .dashboard-header {
+    &__nav {
+      width: 95%;
+    }
+  }
+}
