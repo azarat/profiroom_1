@@ -2,8 +2,6 @@ import React from 'react'
 import MainLayout from '../../layouts/MainLayout'
 
 const Offer = (props: any) => {
-  console.log(props)
-
   return <MainLayout categories={props}>hello</MainLayout>
 }
 
