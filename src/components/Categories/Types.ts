@@ -1,4 +1,4 @@
-export type CategoriesProps = {
+export interface CategoriesProps {
   categories: {
     json: jsonTypes
   }

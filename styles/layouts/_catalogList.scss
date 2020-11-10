@@ -36,7 +36,21 @@
       -webkit-transform: rotate(45deg);
       transform: rotate(45deg);
     }
+
     &__title {
+      display: none;
+      padding: 0 15px;
+      font-size: $font-16;
+      cursor: default;
+    }
+
+    &__title-mobile {
+      margin: 0;
+      font-size: $font-16;
+      cursor: pointer;
+    }
+    &__title-desktop {
+      display: none;
       margin: 0;
       font-size: $font-16;
       cursor: pointer;
@@ -137,7 +151,12 @@
         display: none;
       }
 
+      &__title-mobile {
+        display: none;
+      }
+
       &__title {
+        display: block;
         padding: 0 15px;
         font-size: $font-16;
         cursor: default;

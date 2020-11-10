@@ -2,7 +2,9 @@
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 5px 15px;
+  z-index: 10;
 
   &__menu-wrapper {
     display: flex;
@@ -26,7 +28,6 @@
   &__nav-wrapper {
     display: none;
     margin: auto;
-
     .nav {
       display: flex;
       align-items: center;
@@ -43,12 +44,22 @@
       }
     }
   }
+  &__nav-wrapper--auth {
+    display: none;
+  }
 
   &__search-wrapper {
     display: none;
     width: 40%;
     margin-right: auto;
     margin-right: 30px;
+  }
+
+  &__search-wrapper--auth {
+    display: none;
+  }
+  &__select-auth-wrapper {
+    display: flex;
   }
 
   &__user-panel {

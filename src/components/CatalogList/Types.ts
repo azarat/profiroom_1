@@ -1,5 +1,6 @@
-export type subcatalogProps = {
+export type SubCatalogProps = {
   catalog: {
+    [key: string]: any
     current_page: number
     first_page_url: string
     from: number
@@ -12,6 +13,12 @@ export type subcatalogProps = {
     to: number
     total: number
     data: dataTypes[]
+    category_en: string
+    category_ru: string
+    category_uk: string
+    name_en: string
+    name_ru: string
+    name_uk: string
   }
 }
 
@@ -22,7 +29,7 @@ export type dataTypes = {
   minPrice: number
   title: string
   averageRating: averageTypes
-  user?: userTypes
+  user: userTypes
 }
 
 type averageTypes = {

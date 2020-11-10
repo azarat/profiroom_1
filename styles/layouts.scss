@@ -1,6 +1,7 @@
-@import './fonts/roboto';
+@import '../public/fonts/roboto.css';
 @import './variables';
 @import './layouts/header';
+@import './layouts/landing';
 @import './layouts/loginForm';
 @import './layouts/registrationForm';
 @import './layouts/mobile-menu';
@@ -13,9 +14,15 @@
 @import './pages/subCatalog';
 @import './layouts/servicesCard';
 @import './pages/offerPage';
+@import './layouts/dashboardHeader';
+@import './layouts/dashboardMenu';
+@import './pages/carousel';
 
 body {
   font-family: $font-roboto;
+}
+html {
+  scroll-behavior: smooth;
 }
 
 @media screen and (min-width: 1200px) {

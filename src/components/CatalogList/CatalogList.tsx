@@ -5,12 +5,12 @@ import { MainContext } from '../../context/MainContext'
 //antd
 import { LeftOutlined } from '@ant-design/icons'
 import { CategoriesProps, subCategriesTypes } from '../Categories/Types'
-// Types
-// type CatalogListProps = {
-//   categories: any
-// }
 
-const CatalogList: React.FC<CategoriesProps> = ({ categories }): JSX.Element => {
+const CatalogList: React.FC<CategoriesProps> = ({
+  categories: {
+    json: { category },
+  },
+}): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState<number>(0)
   const [isSubOpen, setSubOpen] = useState<boolean>(false)
 
@@ -19,10 +19,6 @@ const CatalogList: React.FC<CategoriesProps> = ({ categories }): JSX.Element => 
   const selectActiveIndex = (index: number) => {
     setActiveIndex(index), setSubOpen((prev) => !prev)
   }
-
-  const {
-    json: { category },
-  } = categories
 
   return (
     <div className="categorie-list">
@@ -34,8 +30,11 @@ const CatalogList: React.FC<CategoriesProps> = ({ categories }): JSX.Element => 
                 <h3
                   role="presentation"
                   onClick={() => selectActiveIndex(index)}
-                  className="item__title"
+                  className="item__title-mobile"
                 >
+                  {rest[`name_${lang}`]}
+                </h3>
+                <h3 role="presentation" className="item__title">
                   {rest[`name_${lang}`]}
                 </h3>
               </div>
@@ -52,7 +51,11 @@ const CatalogList: React.FC<CategoriesProps> = ({ categories }): JSX.Element => 
                   category[activeIndex].sub_categories.map(
                     ({ id, link: subCategoryLink, ...rest }) => (
                       <div key={id} className="categorie-list-sub-item sub-item">
-                        <Link href={`catalog/${link}/${subCategoryLink}`}>
+                        <Link
+                          href={`catalog/${encodeURIComponent(link)}/${encodeURIComponent(
+                            subCategoryLink
+                          )}`}
+                        >
                           <a
                             role="presentation"
                             className="sub-item__name"
@@ -70,7 +73,11 @@ const CatalogList: React.FC<CategoriesProps> = ({ categories }): JSX.Element => 
                   {sub_categories.map(
                     ({ id, link: subCategoryLink, ...rest }: subCategriesTypes) => (
                       <li key={id} className="categorie-list__link">
-                        <Link href={`catalog/${link}/${subCategoryLink}`}>
+                        <Link
+                          href={`catalog/${encodeURIComponent(link)}/${encodeURIComponent(
+                            subCategoryLink
+                          )}`}
+                        >
                           <a className="categorie-list__sub-name">{rest[`name_${lang}`]}</a>
                         </Link>
                       </li>

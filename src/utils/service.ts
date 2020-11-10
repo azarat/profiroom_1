@@ -9,7 +9,6 @@ import {
 export async function getStaticProps(): Promise<any> {
   const res = await fetch('http://test.profiroom.com/Backend/api/categories')
   const json = await res.json()
-
   return {
     props: {
       json,
@@ -37,6 +36,7 @@ export const getSubCatalogProps: GetStaticProps = async (
   const url = `http://test.profiroom.com/Backend/api/subcategories?catedory=${
     context.params && context.params.subcatalog
   }`
+
   const res = await fetch(url)
   const subcatalog = await res.json()
   const { props: categories } = await getStaticProps()
@@ -51,8 +51,6 @@ export const getSubCatalogProps: GetStaticProps = async (
 export const getCategorySideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ): Promise<any> => {
-  console.log(context)
-
   const url = 'http://test.profiroom.com/Backend/api/catalog'
 
   const params = context && context.params && context.params.subcatalog
@@ -80,7 +78,7 @@ export const getCategorySideProps: GetServerSideProps = async (
       minPrice,
       maxPrice,
       page,
-      online,
+      online: online === 'true',
     }),
   })
   const catalog = await res.json()

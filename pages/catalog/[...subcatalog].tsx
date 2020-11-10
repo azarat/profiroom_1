@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -8,10 +8,8 @@ import OfferCard from '../../src/components/OfferCard/OfferCard'
 import MainLayout from '../../layouts/MainLayout'
 // Antd
 import { Switch, Input, Checkbox, Breadcrumb, Pagination, Radio } from 'antd'
-import { subcatalogProps } from './Types'
-
-//hook
-import useOutsideClick from '../../src/hooks/useOutsideClick'
+import { dataTypes, SubCatalogProps } from '../../src/components/CatalogList/Types'
+import { MainContext } from '../../src/context/MainContext'
 
 ///options for term filter
 const optionsService = [
@@ -20,11 +18,10 @@ const optionsService = [
   { label: 'Додаткові правки', value: 'extraChanges' },
 ]
 
-const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
+const subcatalog: NextPage<SubCatalogProps> = ({ catalog, ...props }): JSX.Element => {
   const [isFilterOpen, setFilterOpen] = useState<boolean>(false)
-  const [budgetVisible, setBudgetVisible] = useState<boolean>(false)
-  const [termVisible, setTermVisible] = useState<boolean>(false)
-  const [serviceVisible, setServiceVisible] = useState<boolean>(false)
+  const [visibleFilter, setVisibleFilter] = useState<number>()
+
   const [minPrice, setMinPrice] = useState<string>('')
   const [maxPrice, setMaxPrice] = useState<string>('')
   const [radioValue, setRadioValue] = useState<string | null>(null)
@@ -34,10 +31,31 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
   const termRef = React.useRef<HTMLDivElement>(null)
   const serviceRef = React.useRef<HTMLDivElement>(null)
 
-  const { catalog } = props
-  console.log(catalog)
-
+  const [catalogList, setCatalogList] = useState<dataTypes[]>(catalog.data)
+  const [page, setPage] = useState<number>(1)
+  const [loading, setLoading] = useState<boolean>(false)
+  const { lang } = useContext(MainContext)
   const router = useRouter()
+
+  useEffect(() => {
+    setCatalogList((_) => catalog.data)
+    setLoading(false)
+  }, [catalog.data])
+
+  useEffect(() => {
+    const handleFilterClick = (e: any) => {
+      const t = e.target as HTMLElement
+      let isFilter = false
+      for (let i: HTMLElement = t; i?.parentElement; i = i.parentElement) {
+        if (i.classList.contains('filter-options')) isFilter = true
+      }
+      if (!(+!t.classList.contains('filter-btn') ^ +!isFilter)) setVisibleFilter(undefined)
+    }
+    document.addEventListener('click', handleFilterClick, { capture: false })
+    return () => {
+      document.removeEventListener('click', handleFilterClick)
+    }
+  }, [])
 
   ////Set query for service filter
   const groupChange = (checkedList: any) => {
@@ -100,30 +118,60 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
     setFilterOpen(true)
   }
 
-  useOutsideClick(budgetRef, () => {
-    setBudgetVisible(false)
-  })
-  useOutsideClick(termRef, () => {
-    setTermVisible(false)
-  })
-  useOutsideClick(serviceRef, () => {
-    setServiceVisible(false)
-  })
   ///todo fix
   const onlineHandler = (checked: boolean) => {
-    console.log(checked)
-    // router.push({
-    //   pathname: router.pathname,
-    //   query: { ...router.query, online: checked },
-    // })
+    router.push({
+      pathname: router.pathname,
+      query: { ...router.query, online: checked },
+    })
   }
 
-  const handlerPage = (page: number) => {
+  const handlerPage = async (page: number) => {
+    setPage(page)
+    setLoading(true)
     document.body.scrollIntoView()
+
     router.push({
       pathname: router.pathname,
       query: { ...router.query, page },
     })
+  }
+
+  const handleLoadMore = async () => {
+    setLoading(true)
+    const url = 'http://test.profiroom.com/Backend/api/catalog'
+
+    const extraCommercial = router.query.extraCommercial && router.query.extraCommercial
+    const extraTerm = router.query.extraTerm && router.query.extraTerm
+    const extraChanges = router.query.extraChanges && router.query.extraChanges
+    const maxTerm = router.query.maxTerm && router.query.maxTerm
+    const minPrice = router.query.minPrice && router.query.minPrice
+    const maxPrice = router.query.maxPrice && router.query.maxPrice
+    const online = router.query.online && router.query.online
+
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        category: catalog.category_en,
+        subCategory: catalog.name_en,
+        page: page + 1,
+        extraCommercial,
+        extraTerm,
+        extraChanges,
+        maxTerm,
+        minPrice,
+        maxPrice,
+        online: online === 'true',
+      }),
+    })
+    setPage((prev) => prev + 1)
+    const data = await res.json()
+    const newArr = catalogList.concat(data.data)
+    setLoading(false)
+    setCatalogList(newArr)
   }
 
   const radioStyle = {
@@ -140,10 +188,6 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
     //todo fix
     color: '#272525',
     fontSize: '16px',
-  }
-
-  const checkBoxStyle = {
-    color: '#ffff',
   }
 
   return (
@@ -163,18 +207,22 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                 </Link>
               </Breadcrumb.Item>
               <Breadcrumb.Item>
-                <Link href={`/catalog/${router.query.subcatalog![0]}`}>
-                  <a className="services__breadcrumb-link">{router.query.subcatalog![0]}</a>
+                <Link href={`/catalog/${catalog.category_en}`}>
+                  <a className="services__breadcrumb-link">{catalog[`category_${lang}`]}</a>
                 </Link>
               </Breadcrumb.Item>
               <Breadcrumb.Item>
-                <Link href="/catalog">
-                  <a className="services__breadcrumb-link">{router.query.subcatalog![1]}</a>
+                <Link href={`/catalog/${catalog.category_en}/${catalog.name_en}`}>
+                  <a className="services__breadcrumb-link">{catalog[`name_${lang}`]}</a>
                 </Link>
               </Breadcrumb.Item>
             </Breadcrumb>
             {/*todo title */}
-            <h2 className="services__title">1C</h2>
+            {!loading ? (
+              <h2 className="services__title">{catalog.name_ru}</h2>
+            ) : (
+              <h2 className="services__title">Завантаження</h2>
+            )}
             <div className="services__mobile-filters" role="presentation" onClick={handleFilters}>
               <div className="services__mobile-filters-img-wrapper">
                 <img src="/assets/img/show-filters.svg" alt="filters" />
@@ -197,13 +245,13 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                   ref={budgetRef}
                 >
                   <button
-                    className="services__budget-filter-btn"
-                    onClick={() => setBudgetVisible((prev) => !prev)}
+                    className="services__budget-filter-btn filter-btn"
+                    onClick={() => setVisibleFilter(0)}
                   >
                     Бюджет
                     <img
                       className={`${
-                        budgetVisible
+                        visibleFilter == 0
                           ? 'services__budget-filter-arrow--open'
                           : 'services__budget-filter-arrow'
                       }`}
@@ -213,8 +261,8 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                   </button>
 
                   <div
-                    className={`services__budget-filter-options ${
-                      budgetVisible && 'services__budget-filter-options--open'
+                    className={`services__budget-filter-options filter-options service__filter ${
+                      visibleFilter === 0 ? 'services__budget-filter-options--open' : ''
                     }`}
                   >
                     <div className="services__budget-filter-option">
@@ -225,15 +273,6 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                         id="min-price"
                         placeholder="UAH"
                         value={minPrice}
-                        // onChange={(e) => {
-                        //   setMinPrice(e.target.value)
-                        //   router.push({
-                        //     pathname: `/catalog/${router.query.subcatalog![0]}/${
-                        //       router.query.subcatalog![1]
-                        //     }`,
-                        //     query: { ...router.query, minPrice: minPrice },
-                        //   })
-                        // }}
                         onChange={setMinimalPrice}
                       />
                     </div>
@@ -245,22 +284,13 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                         type="text"
                         placeholder="UAH"
                         value={maxPrice}
-                        // onChange={(e) => {
-                        //   setMaxPrice(e.target.value)
-                        //   router.push({
-                        //     pathname: `/catalog/${router.query.subcatalog![0]}/${
-                        //       router.query.subcatalog![1]
-                        //     }`,
-                        //     query: { ...router.query, maxPrice: maxPrice },
-                        //   })
-                        // }}
                         onChange={setMaximalPrice}
                       />
                     </div>
                     <div className="services__budget-filter-buttons budget-buttons">
                       <button
                         className="budget-buttons__close"
-                        onClick={() => setBudgetVisible(false)}
+                        onClick={() => setVisibleFilter(undefined)}
                       >
                         Закрити
                       </button>
@@ -273,13 +303,13 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                 {/*фильтры срока */}
                 <div className="services__filter services__filter--term" id="term" ref={termRef}>
                   <button
-                    className="services__budget-filter-btn"
-                    onClick={() => setTermVisible((prev) => !prev)}
+                    className="services__budget-filter-btn filter-btn"
+                    onClick={() => setVisibleFilter(1)}
                   >
                     Термін виконання
                     <img
                       className={`${
-                        termVisible
+                        visibleFilter === 1
                           ? 'services__budget-filter-arrow--open'
                           : 'services__budget-filter-arrow'
                       }`}
@@ -289,8 +319,8 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                   </button>
 
                   <div
-                    className={`services__term-filter-options ${
-                      termVisible && 'services__term-filter-options--open'
+                    className={`services__term-filter-options filter-options service__filter ${
+                      visibleFilter === 1 ? 'services__term-filter-options--open' : ''
                     }`}
                   >
                     <div className="services__term-filter-option">
@@ -383,7 +413,7 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                         </button>
                         <button
                           className="term-buttons__btn-close"
-                          onClick={() => setTermVisible(false)}
+                          onClick={() => setVisibleFilter(undefined)}
                         >
                           Закрити
                         </button>
@@ -398,13 +428,13 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                   ref={serviceRef}
                 >
                   <button
-                    className="services__budget-filter-btn"
-                    onClick={() => setServiceVisible((prev) => !prev)}
+                    className="services__budget-filter-btn filter-btn"
+                    onClick={() => setVisibleFilter(2)}
                   >
                     Сервіс включає
                     <img
                       className={`${
-                        serviceVisible
+                        visibleFilter === 2
                           ? 'services__budget-filter-arrow--open'
                           : 'services__budget-filter-arrow'
                       }`}
@@ -414,8 +444,8 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                   </button>
 
                   <div
-                    className={`services__service-filter-options ${
-                      serviceVisible && 'services__service-filter-options--open'
+                    className={`services__service-filter-options filter-options service__filter ${
+                      visibleFilter === 2 ? 'services__service-filter-options--open' : ''
                     }`}
                   >
                     <div className="services__term-filter-option">
@@ -433,7 +463,7 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                         </button>
                         <button
                           className="service-buttons__btn-close"
-                          onClick={() => setServiceVisible(false)}
+                          onClick={() => setVisibleFilter(undefined)}
                         >
                           Закрити
                         </button>
@@ -539,7 +569,7 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
                 </div>
                 <div className="mobile-filter__deadline-options mobile-filter__options ">
                   <Checkbox.Group
-                    style={checkBoxStyle}
+                    // style={checkBoxStyle}
                     options={optionsService}
                     onChange={groupChange}
                     value={checkedList}
@@ -552,18 +582,21 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
             </div>
 
             <div className="services__list">
-              {catalog.data.map((service) => (
-                <OfferCard
-                  key={service.id}
-                  averageRating={service.averageRating}
-                  comments_count={service.comments_count}
-                  mainImage={service.mainImage}
-                  minPrice={service.minPrice}
-                  title={service.title}
-                  user={service.user}
-                  id={service.id}
-                />
-              ))}
+              {!loading &&
+                catalogList.map(
+                  ({ comments_count, mainImage, minPrice, title, user, id, averageRating }) => (
+                    <OfferCard
+                      key={id}
+                      averageRating={averageRating}
+                      comments_count={comments_count}
+                      mainImage={mainImage}
+                      minPrice={minPrice}
+                      title={title}
+                      user={user}
+                      id={id}
+                    />
+                  )
+                )}
             </div>
           </div>
           <div className="services__pagination">
@@ -576,6 +609,15 @@ const subcatalog: NextPage<subcatalogProps> = (props): JSX.Element => {
               defaultCurrent={1}
               current={router.query.page ? Number(router.query.page) : 1}
             />
+          </div>
+          <div className="services__load-more-wrapper">
+            <button
+              disabled={page === catalog.last_page}
+              className="services__load-more"
+              onClick={() => handleLoadMore()}
+            >
+              {!loading ? 'Завантажити ще' : 'Завантаження...'}
+            </button>
           </div>
         </div>
       </div>

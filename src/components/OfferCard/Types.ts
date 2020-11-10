@@ -11,11 +11,21 @@ export type CustomArrowProps = {
   slideCount?: number
 }
 
+export type OfferCardPropsTypes = {
+  comments_count: number
+  mainImage: string
+  minPrice: number
+  title: string
+  id: number
+  user: UserTypes
+  averageRating: AverageTypes
+}
+
 export type OfferTypes = {
   offer: UserOfferTypes
 }
 
-type UserOfferTypes = {
+export type UserOfferTypes = {
   userOffer: {
     comments_count: number
     created_at: string | null
@@ -30,7 +40,7 @@ type UserOfferTypes = {
     extra_changes: ExtraChangesTypes
     extra_commercial: ExtraCommercialTypes
     extra_terms: ExtraTermsTypes[]
-    averageRating: AverageRatingTypes
+    averageRating: AverageTypes
     offer_faq: OfferFaqTypes[]
   }
 }
@@ -70,7 +80,7 @@ type ExtraTermsTypes = {
   published: number
 }
 
-type AverageRatingTypes = {
+type AverageTypes = {
   averageMark: number
   politenessMark: number
   qualityMark: number
@@ -90,7 +100,7 @@ type UserTypes = {
   name: string
   online: boolean
   surname: string
-  userOffers: UserOffersTypes[]
+  userOffers?: UserOffersTypes[]
 }
 
 type UserOffersTypes = {
@@ -99,5 +109,5 @@ type UserOffersTypes = {
   mainImage: 'https://profiroom.com/Backend/public/storage/offerFiles/big/qiASz4t4enw3fCpaf25a1f4nDCSIXEDmq1DlpxTC.jpeg'
   minPrice: number
   title: 'Test'
-  averageRating: AverageRatingTypes
+  averageRating: AverageTypes
 }
