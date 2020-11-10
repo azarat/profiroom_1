@@ -20,7 +20,7 @@ type categoryTypes = {
   sub_categories: subCategriesTypes[]
 }
 
-type subCategriesTypes = {
+export type subCategriesTypes = {
   [key: string]: any
   category_id: number
   description: string

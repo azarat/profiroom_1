@@ -4,12 +4,16 @@ import { MainContext } from '../../context/MainContext'
 
 //antd
 import { LeftOutlined } from '@ant-design/icons'
-// Types
+import { subCategriesTypes } from '../Categories/Types'
 type CatalogListProps = {
   categories: any
 }
 
-const CatalogList: React.FC<CatalogListProps> = ({ categories }): JSX.Element => {
+const CatalogList: React.FC<CatalogListProps> = ({
+  categories: {
+    json: { category },
+  },
+}): JSX.Element => {
   const [activeIndex, setActiveIndex] = useState<number>(0)
   const [isSubOpen, setSubOpen] = useState<boolean>(false)
 
@@ -19,26 +23,22 @@ const CatalogList: React.FC<CatalogListProps> = ({ categories }): JSX.Element =>
     setActiveIndex(index), setSubOpen((prev) => !prev)
   }
 
-  const {
-    json: { category },
-  } = categories
-
   return (
     <div className="categorie-list">
       <div className="container">
         <div className="categorie-list__wrapper">
-          {category.map((singleCategory: any, index: number) => (
-            <div className="categorie-list__sub-categories-wrapper" key={singleCategory.id}>
+          {category.map(({ id, link, sub_categories, ...rest }: any, index: number) => (
+            <div className="categorie-list__sub-categories-wrapper" key={id}>
               <div className="categorie-list__item item ">
                 <h3
                   role="presentation"
                   onClick={() => selectActiveIndex(index)}
                   className="item__title-mobile"
                 >
-                  {singleCategory[`name_${lang}`]}
+                  {rest[`name_${lang}`]}
                 </h3>
-                <h3 role="presentation" className="item__title-desktop">
-                  {singleCategory[`name_${lang}`]}
+                <h3 role="presentation" className="item__title">
+                  {rest[`name_${lang}`]}
                 </h3>
               </div>
 
@@ -51,29 +51,41 @@ const CatalogList: React.FC<CatalogListProps> = ({ categories }): JSX.Element =>
                   <LeftOutlined className="categorie-list__back" />
                 </button>
                 {isSubOpen &&
-                  category[activeIndex].sub_categories.map((subCategory: any) => (
-                    <div key={subCategory.id} className="categorie-list-sub-item sub-item">
-                      <Link href={'/'}>
-                        <a
-                          role="presentation"
-                          className="sub-item__name"
-                          onClick={() => {
-                            setSubOpen(false)
-                          }}
+                  category[activeIndex].sub_categories.map(
+                    ({ id, link: subCategoryLink, ...rest }: subCategriesTypes) => (
+                      <div key={id} className="categorie-list-sub-item sub-item">
+                        <Link
+                          href={`catalog/${encodeURIComponent(link)}/${encodeURIComponent(
+                            subCategoryLink
+                          )}`}
                         >
-                          {subCategory[`name_${lang}`]}
-                        </a>
-                      </Link>
-                    </div>
-                  ))}
+                          <a
+                            role="presentation"
+                            className="sub-item__name"
+                            onClick={() => {
+                              setSubOpen(false)
+                            }}
+                          >
+                            {rest[`name_${lang}`]}
+                          </a>
+                        </Link>
+                      </div>
+                    )
+                  )}
                 <ul className="categorie-list__tablet">
-                  {singleCategory.sub_categories.map((subCategory: any) => (
-                    <li key={subCategory.id} className="categorie-list__link">
-                      <Link href={`catalog/${singleCategory.link}/${subCategory.link}`}>
-                        <a className="categorie-list__sub-name">{subCategory[`name_${lang}`]}</a>
-                      </Link>
-                    </li>
-                  ))}{' '}
+                  {sub_categories.map(
+                    ({ id, link: subCategoryLink, ...rest }: subCategriesTypes) => (
+                      <li key={id} className="categorie-list__link">
+                        <Link
+                          href={`catalog/${encodeURIComponent(link)}/${encodeURIComponent(
+                            subCategoryLink
+                          )}`}
+                        >
+                          <a className="categorie-list__sub-name">{rest[`name_${lang}`]}</a>
+                        </Link>
+                      </li>
+                    )
+                  )}
                 </ul>
               </div>
             </div>

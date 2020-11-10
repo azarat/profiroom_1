@@ -31,7 +31,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
           </Link>
         </div>
         <div className="mobile__menu-catalog">
-          <Link href="/">
+          <Link href="/catalog">
             <a
               role="presentation"
               onClick={() => closeMenu()}

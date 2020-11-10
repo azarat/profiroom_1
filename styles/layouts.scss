@@ -9,11 +9,13 @@
 @import './layouts//mobile-menu';
 @import './layouts/footer';
 @import './layouts/categories';
-@import './pages/card';
+@import './pages/services';
 @import './layouts/catalogList';
 @import './pages/subCatalog';
+@import './layouts/servicesCard';
 @import './layouts/dashboardHeader';
 @import './layouts/dashboardMenu';
+
 
 body {
   font-family: $font-roboto;
