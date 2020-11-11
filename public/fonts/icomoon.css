@@ -1,0 +1,108 @@
+@font-face {
+    font-family: 'icomoon';
+    src: url('/fonts/icomoon.eot?cls64y');
+    src: url('/fonts/icomoon.eot?cls64y#iefix') format('embedded-opentype'),
+      url('/fonts/icomoon.ttf?cls64y') format('truetype'),
+      url('/fonts/icomoon.woff?cls64y') format('woff'),
+      url('/fonts/icomoon.svg?cls64y#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+  }
+  
+  [class^='icon-'],
+  [class*=' icon-'] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .icon-Iinfo:before {
+    content: '\e90f';
+    color: #dadada;
+  }
+  .icon-full-size:before {
+    content: '\e90d';
+    color: #bfc5d1;
+  }
+  .icon-Star-1:before {
+    content: '\e907';
+    color: #ffcb55;
+  }
+  .icon-projects1:before {
+    content: '\e905';
+    /* color: #bfc5d1; */
+  }
+  .icon-my-services:before {
+    content: '\e90a';
+    /* color: #bfc5d1; */
+  }
+  .icon-finance:before {
+    content: '\e90c';
+    /* color: #bfc5d1; */
+  }
+  .icon-arbitr:before {
+    content: '\e909';
+    color: black;
+  }
+  .icon-users:before {
+    content: '\e90b';
+    color: black;
+  }
+  .icon-Mask:before {
+    content: '\e915';
+  }
+  .icon-download-file:before {
+    content: '\e913';
+    color: #a6a7a8;
+  }
+  .icon-files_folder:before {
+    content: '\e912';
+    color: #707683;
+  }
+  .icon-file:before {
+    content: '\e911';
+    color: #bfc5d1;
+  }
+  .icon-send-message:before {
+    content: '\e910';
+    color: #bfc5d1;
+  }
+  .icon-Settings1:before {
+    content: '\e904';
+    /* color: #bfc5d1; */
+  }
+  .icon-message:before {
+    content: '\e90e';
+    /* color: #fff; */
+    /* background-color: #bfc5d1; */
+  }
+  .icon-dashboard:before {
+    content: '\e903';
+    /* color: #fff; */
+  }
+  .icon-Settings:before {
+    content: '\e914';
+    color: #bfc5d1;
+  }
+  .icon-upload:before {
+    content: '\e902';
+    color: #bfc5d1;
+  }
+  .icon-done:before {
+    content: '\e901';
+    color: black;
+  }
+  .icon-close-24px:before {
+    content: '\e900';
+  }
+  
