@@ -63,6 +63,10 @@
   &__button-text-large {
     display: none;
   }
+
+  &__open-button {
+    display: none;
+  }
 }
 
 .message {
@@ -75,6 +79,10 @@
 .message-active {
   color: $secondary-color;
   background-color: $white-color;
+}
+
+.anticon-bell {
+  color: $white-color !important;
 }
 
 @media (min-width: 768px) {
@@ -101,6 +109,10 @@
     &__button {
       width: 100px;
       margin-left: -5px;
+    }
+
+    &__open-button {
+      display: block;
     }
 
     &__button-open {
@@ -242,6 +254,7 @@
       display: flex;
       flex-wrap: wrap;
       margin: 0 auto;
+      transition: 0.3s;
     }
 
     &__nav-open {
@@ -251,6 +264,10 @@
     &__open-button-icon {
       display: inline;
     }
+  }
+
+  .anticon-right {
+    display: block;
   }
 
   .message {
