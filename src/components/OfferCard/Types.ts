@@ -1,28 +1,83 @@
-export type SubcatalogProps = {
-  catalog: {
-    current_page: number
-    first_page_url: string
-    from: number
-    last_page: number
-    last_page_url: string
-    next_page_url: string
-    path: string
-    per_page: number
-    prev_page_url: string
-    to: number
-    total: number
-    data: DataTypes[]
-  }
+export type ExtraListTypes = {
+  name: string | null
+  price: number | null
 }
 
-export type DataTypes = {
+export type CustomArrowProps = {
+  className?: string
+  style?: React.CSSProperties
+  onClick?: React.MouseEventHandler<any>
+  currentSlide?: number
+  slideCount?: number
+}
+
+export type OfferCardPropsTypes = {
   comments_count: number
-  id: number
   mainImage: string
   minPrice: number
   title: string
-  averageRating: AverageTypes
+  id: number
   user: UserTypes
+  averageRating: AverageTypes
+}
+
+export type OfferTypes = {
+  offer: UserOfferTypes
+}
+
+export type UserOfferTypes = {
+  userOffer: {
+    comments_count: number
+    created_at: string | null
+    id: number
+    mainImage: string
+    minPrice: number
+    title: string
+    basic: BasicTypes
+    description: string
+    user: UserTypes
+    files: string[]
+    extra_changes: ExtraChangesTypes
+    extra_commercial: ExtraCommercialTypes
+    extra_terms: ExtraTermsTypes[]
+    averageRating: AverageTypes
+    offer_faq: OfferFaqTypes[]
+  }
+}
+
+type BasicTypes = {
+  changes: number
+  description: string
+  id: number
+  offers_id: number
+  price: number
+  term: number
+  title: string
+}
+
+type ExtraChangesTypes = {
+  count: number
+  id: number
+  offers_id: number
+  price: number
+  published: number
+}
+
+type ExtraCommercialTypes = {
+  id: number
+  offers_id: number
+  price: number
+  published: number
+}
+
+type ExtraTermsTypes = {
+  conditions: number
+  count_days: number
+  id: number
+  offers_id: number
+  package: string
+  price: number
+  published: number
 }
 
 type AverageTypes = {
@@ -31,43 +86,28 @@ type AverageTypes = {
   qualityMark: number
   termMark: number
 }
+type OfferFaqTypes = {
+  answer: string
+  id: number
+  offers_id: number
+  question: 'string'
+}
 
 type UserTypes = {
   avatar: string
   country: string
   description: string
-  id: number
   name: string
   online: boolean
-  rank_id: number
   surname: string
-  views: number
-  arbitration: ArbitrationTypes
-  averageRating: AverageRatingTypes
-  dealsCounts: DealsCountsTypes
+  userOffers?: UserOffersTypes[]
 }
 
-type ArbitrationTypes = {
-  all: number
-  customer: number
-  freelancer: number
-}
-
-type AverageRatingTypes = {
-  freelancer: AverageTypes
-  customer: CustomerTypes
-}
-
-type CustomerTypes = {
-  averageMark: number
-  contactLevel: number
-  requirementsClarity: number
-  taskClarity: number
-}
-
-type DealsCountsTypes = {
-  EndedWorks: number
-  QueuedOffers: number
-  dealsAsCustomer: number
-  inProgressOffers: number
+type UserOffersTypes = {
+  comments_count: number
+  id: number
+  mainImage: 'https://profiroom.com/Backend/public/storage/offerFiles/big/qiASz4t4enw3fCpaf25a1f4nDCSIXEDmq1DlpxTC.jpeg'
+  minPrice: number
+  title: 'Test'
+  averageRating: AverageTypes
 }

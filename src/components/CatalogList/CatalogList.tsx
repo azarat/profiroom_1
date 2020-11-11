@@ -4,12 +4,9 @@ import { MainContext } from '../../context/MainContext'
 
 //antd
 import { LeftOutlined } from '@ant-design/icons'
-import { subCategriesTypes } from '../Categories/Types'
-type CatalogListProps = {
-  categories: any
-}
+import { CategoriesProps, subCategriesTypes } from '../Categories/Types'
 
-const CatalogList: React.FC<CatalogListProps> = ({
+const CatalogList: React.FC<CategoriesProps> = ({
   categories: {
     json: { category },
   },
@@ -27,7 +24,7 @@ const CatalogList: React.FC<CatalogListProps> = ({
     <div className="categorie-list">
       <div className="container">
         <div className="categorie-list__wrapper">
-          {category.map(({ id, link, sub_categories, ...rest }: any, index: number) => (
+          {category.map(({ id, link, sub_categories, ...rest }, index: number) => (
             <div className="categorie-list__sub-categories-wrapper" key={id}>
               <div className="categorie-list__item item ">
                 <h3
@@ -52,7 +49,7 @@ const CatalogList: React.FC<CatalogListProps> = ({
                 </button>
                 {isSubOpen &&
                   category[activeIndex].sub_categories.map(
-                    ({ id, link: subCategoryLink, ...rest }: subCategriesTypes) => (
+                    ({ id, link: subCategoryLink, ...rest }) => (
                       <div key={id} className="categorie-list-sub-item sub-item">
                         <Link
                           href={`catalog/${encodeURIComponent(link)}/${encodeURIComponent(

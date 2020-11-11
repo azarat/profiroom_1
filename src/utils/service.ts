@@ -78,7 +78,7 @@ export const getCategorySideProps: GetServerSideProps = async (
       minPrice,
       maxPrice,
       page,
-      online,
+      online: online === 'true',
     }),
   })
   const catalog = await res.json()

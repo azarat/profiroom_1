@@ -1,9 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
-import { DataTypes } from './Types'
+import { OfferCardPropsTypes } from './Types'
 import { useRouter } from 'next/router'
 
-const Service: React.FC<DataTypes> = ({
+const OfferCard: React.FC<OfferCardPropsTypes> = ({
   averageRating: { averageMark },
   comments_count,
   mainImage,
@@ -13,16 +13,25 @@ const Service: React.FC<DataTypes> = ({
   id,
 }): JSX.Element => {
   const router = useRouter()
+
   return (
     <div className="services__item item">
-      <div className="item__img-wrapper">
+      <div
+        role="presentation"
+        className="item__img-wrapper"
+        onClick={() => {
+          router.push(`/showOffer/${id}`)
+        }}
+      >
         <img className="item__img" src={mainImage} alt="img preview" />
       </div>
       <div className="item__description">
         <h1
           role="presentation"
           className="item__about"
-          onClick={() => router.push(`/showOffer/${id}`)}
+          onClick={() => {
+            router.push(`/showOffer/${id}`)
+          }}
         >
           {title}
         </h1>
@@ -31,15 +40,15 @@ const Service: React.FC<DataTypes> = ({
           <div className="item__rating">
             <div className="item__star-wrapper">
               <img className="item__star" src="/assets/img/star.svg" alt="star" />
-              <span className="item__star-count">{averageMark}</span>
+              {typeof averageMark !== undefined && (
+                <span className="item__star-count">{averageMark}</span>
+              )}
             </div>
             <span className="item__reviews">({comments_count} відгуків)</span>
           </div>
           <div className="item__avatar-wrapper">
             <Link href="/">
-              <a>
-                <img className="item__avatar" src={avatar} alt="avatar" />
-              </a>
+              <a>{avatar && <img className="item__avatar" src={avatar} alt="avatar" />}</a>
             </Link>
           </div>
         </div>
@@ -55,4 +64,4 @@ const Service: React.FC<DataTypes> = ({
   )
 }
 
-export default Service
+export default OfferCard
