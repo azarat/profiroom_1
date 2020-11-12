@@ -1,6 +1,11 @@
 .dashboard-header {
   padding: 10px 15px;
   background-color: $primary-color;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
 
   &__nav {
     display: flex;
@@ -78,7 +83,6 @@
     background-color: $secondary-color;
   }
 }
-
 
 @media (min-width: 768px) {
   .dashboard-header {

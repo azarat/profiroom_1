@@ -14,9 +14,11 @@
 @import './pages/subCatalog';
 @import './layouts/dashboardHeader';
 @import './layouts/dashboardMenu';
+@import './layouts/dashboardHome';
+@import './layouts/carouselHome';
 
 body {
-  font-family: $font-roboto;
+  font-family: $font-roboto !important;
 }
 
 @media screen and (min-width: 1200px) {
