@@ -316,7 +316,7 @@
     }
 
     &__language-level option {
-        background-color: $primary-color;
+        
         color: $black-color;
     }
 
@@ -332,6 +332,7 @@
 
     &__education-form {
         display: flex;
+        flex-direction: column;
         margin: 10px;
         padding: 10px;
         border-bottom: 1px solid $gray-background;
@@ -411,6 +412,7 @@
 
     &__complement-form {
         display: flex;
+        flex-direction: column;
         margin: 10px;
         padding: 10px;
         border-bottom: 1px solid $gray-background;

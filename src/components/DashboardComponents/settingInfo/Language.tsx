@@ -8,6 +8,8 @@ const Language: React.FC = (): JSX.Element => {
   //     console.log(`selected ${value}`);
   //     }
 
+  const langLevel = ['Початковий', 'Середній', 'Продвинутий', 'Вільно володію', 'Рідна']
+
   return (
     <>
       <div className="setting__language-item">
@@ -21,11 +23,9 @@ const Language: React.FC = (): JSX.Element => {
             <p>Рівень володіння</p>
           </label>
           <select id="langLevel">
-            <option value="Початковий">Початковий</option>
-            <option value="Середній">Середній</option>
-            <option value="Продвинутий">Продвинутий</option>
-            <option value="Вільно володію">Вільно володію</option>
-            <option value="Рідна">Рідна</option>
+            {langLevel.map((item, i) => {
+              return <option value={i}>{item}</option>
+            })}
           </select>
         </div>
         <div className="setting__button-delete">

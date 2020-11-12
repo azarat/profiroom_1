@@ -13,10 +13,11 @@ const dateFormatList: Array<string> = ['DD/MM/YYYY']
 
 const Settings: React.FC = (): JSX.Element => {
   const [form] = Form.useForm()
-  const [formLayout, setFormLayout] = useState('horizontal')
-  const [gender, setGender] = useState('male')
-  const [langArr, setLangArr] = useState<React.ReactNode[]>([])
+  const [formLayout, setFormLayout] = useState<string>('horizontal')
+  const [gender, setGender] = useState<string>('male')
+  const [langArr, setLangArr] = useState<React.ReactNode[]>([<Language key={0} />])
   const [educationArr, setEducationArr] = useState<React.ReactNode[]>([])
+  const [complEducArr, setComplEducArr] = useState<React.ReactNode[]>([])
   const tabMenu = useRef<HTMLDivElement>(null)
 
   const scrollBtn = (e: any): void => {
@@ -171,8 +172,9 @@ const Settings: React.FC = (): JSX.Element => {
               </div>
 
               <div className="setting__language">
-                <Language />
-                {langArr.map((i) => i)}
+                {langArr.map((i, idx) => (
+                  <Language key={idx + 1} />
+                ))}
               </div>
 
               <div className="setting__language-button">
@@ -181,11 +183,7 @@ const Settings: React.FC = (): JSX.Element => {
                   <span
                     role="presentation"
                     onClick={() => {
-                      setLangArr((arr) => {
-                        arr.push(<Language />)
-                        console.log(arr)
-                        return arr
-                      })
+                      setLangArr((arr) => [...arr, <Language />])
                     }}
                     className="setting__button-add-label"
                   >
@@ -203,11 +201,7 @@ const Settings: React.FC = (): JSX.Element => {
             <div
               role="presentation"
               onClick={() => {
-                setEducationArr((arr) => {
-                  arr.push(<Education />)
-                  console.log(arr)
-                  return arr
-                })
+                setEducationArr((arr) => [...arr, <Education />])
               }}
               className="setting__education-button"
             >
@@ -221,10 +215,14 @@ const Settings: React.FC = (): JSX.Element => {
         <div className="setting__complement-section">
           <div className="setting__main-title">ДОДАТКОВА ОСВІТА</div>
           <div className="setting__complement">
-            <div className="setting__complement-form">
-              <ComplEduc />
-            </div>
-            <div className="setting__education-button">
+            <div className="setting__complement-form">{complEducArr.map((i) => i)}</div>
+            <div
+              role="presentation"
+              onClick={() => {
+                setComplEducArr((arr) => [...arr, <ComplEduc />])
+              }}
+              className="setting__education-button"
+            >
               <button className="setting__button-add">
                 <PlusCircleOutlined />
                 <span className="setting__button-add-label ">ДОДАТИ ОСВІТУ</span>
