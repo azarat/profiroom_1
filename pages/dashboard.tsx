@@ -6,7 +6,7 @@ import DashboardLayout from '../layouts/DashboardLayout'
 
 import Home from '../src/components/DashboardComponents/Home'
 import Projects from '../src/components/DashboardComponents/Projects'
-import Chat from '../src/components/DashboardComponents/Chat'
+import Chat from '../pages/chat'
 import Services from '../src/components/DashboardComponents/Services'
 import Finance from '../src/components/DashboardComponents/Finance'
 import Settings from '../src/components/DashboardComponents/Settings'
@@ -19,6 +19,7 @@ type dashboardProps = {
 
 const dashboard: NextPage<dashboardProps> = ({ jsonResponse }): JSX.Element => {
   const router = useRouter()
+  console.log(router)
   return (
     <DashboardLayout userData={jsonResponse}>
       {router.asPath === '/dashboard/home' ? <Home /> : undefined}

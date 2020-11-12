@@ -4,6 +4,7 @@
 	"private": true,
 	"dependencies": {
 		"@ant-design/icons": "latest",
+		"@types/emoji-mart": "^3.0.4",
 		"@zeit/next-css": "^1.0.1",
 		"@zeit/next-less": "^1.0.1",
 		"@zeit/next-sass": "^1.0.1",

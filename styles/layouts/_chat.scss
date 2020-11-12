@@ -1,0 +1,385 @@
+.dialogs-preview {
+  position: absolute;
+  width: 258px;
+  height: 100%;
+  background-color: $white-color;
+  border: 1px solid $gray-trans-color;
+  transition: 0.3s;
+
+  &__open {
+    left: 0;
+    z-index: 3;
+  }
+
+  &__close {
+    left: -240px;
+    z-index: 3;
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-around;
+    height: 43px;
+    padding-top: 10px;
+    background-color: #f4f7fc;
+  }
+
+  &__top-title {
+    font-size: $font-13;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  &__dialog {
+    display: flex;
+    padding: 20px 20px;
+  }
+
+  &__dialog-active {
+    background-color: #f6f7ff;
+  }
+
+  &__image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+  &__image {
+    width: auto;
+    height: 100%;
+  }
+
+  &__username-container {
+    display: flex;
+    margin-left: 10px;
+  }
+
+  &__username {
+    margin-left: 5px;
+    color: $gray-color;
+    font-size: $font-13;
+    font-weight: bold;
+  }
+
+  &__last-message {
+    width: 140px;
+    margin-top: -10px;
+    margin-left: 15px;
+    color: $gray-color;
+    font-size: $font-11;
+  }
+
+  &__date {
+    position: absolute;
+    left: 60%;
+    display: flex;
+    justify-content: flex-end;
+    width: 90px;
+    margin-top: -15px;
+    font-size: $font-9;
+  }
+
+  &__info {
+    position: relative;
+  }
+
+  &__open-button {
+    position: absolute;
+    top: 200px;
+    left: 96%;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: $secondary-color;
+  }
+}
+
+.messages-window {
+  width: 90%;
+  margin: 0px auto;
+
+  &__top {
+    height: 43px;
+    padding-top: 10px;
+    background-color: #f4f7fc;
+  }
+
+  &__collocutor-info {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  &__message-container-author {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  &__message-container-collocutor {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  &__message {
+    position: relative;
+    max-width: 80%;
+    margin: 10px 20px;
+    padding: 15px 15px;
+    color: $white-color;
+    background-color: $primary-color;
+    border-radius: 15px;
+    z-index: -1;
+    word-wrap: break-word;
+
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      bottom: 0;
+      right: -10px;
+      width: 10px;
+      height: 20px;
+      background-color: white;
+      border-bottom-left-radius: 10px;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: 0;
+      bottom: 0;
+      right: -8px;
+      height: 20px;
+      width: 20px;
+      background-color: $primary-color;
+      background-attachment: fixed;
+      border-bottom-left-radius: 15px;
+    }
+  }
+
+  &__message-collocutor {
+    position: relative;
+    max-width: 80%;
+    margin: 10px 20px;
+    padding: 15px 15px;
+    border-radius: 15px;
+    background-color: #eae8ed;
+    z-index: -1;
+    word-wrap: break-word;
+
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: 0;
+      bottom: 0;
+      left: -7px;
+      height: 20px;
+      width: 20px;
+      background-color: #eae8ed;
+      border-bottom-right-radius: 15px;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      bottom: 0;
+      left: -10px;
+      width: 10px;
+      height: 20px;
+      background: $white-color;
+      border-bottom-right-radius: 10px;
+    }
+  }
+
+  &__messages-list-container {
+    max-height: 100%;
+    padding-bottom: 10px;
+  }
+
+  &__messages-list {
+    height: 65vh;
+    overflow-y: auto;
+  }
+
+  &__message-time-user {
+    display: flex;
+    justify-content: flex-end;
+    height: 10px;
+    color: $white-trans-color;
+    font-size: $font-10;
+  }
+
+  &__message-time-collocutor {
+    display: flex;
+    justify-content: flex-start;
+    height: 10px;
+    color: $gray-color;
+    font-size: $font-10;
+  }
+
+  &__collocutor-name {
+    font-size: $font-13;
+    font-weight: bold;
+  }
+
+  &__online-status {
+    font-size: $font-12;
+  }
+
+  &__file {
+    display: flex;
+    justify-content: space-between;
+    width: 280px;
+    height: 53px;
+    margin: 0 auto;
+    padding-top: 15px;
+    font-size: $font-16;
+    background-color: $white-color;
+    border-radius: 10px;
+    box-shadow: 0 9px 21px rgba(128, 152, 213, 0.1);
+  }
+
+  &__file-image {
+    width: 24px;
+    height: 24px;
+  }
+
+  &__file-title {
+    font-size: $font-14;
+  }
+
+  &__upload-file-preview {
+    margin-top: -5px;
+    margin-left: 50px;
+    height: 30px;
+    width: auto;
+  }
+
+  &__input {
+    display: block;
+    width: 90%;
+    height: 80px;
+    margin: 0 auto;
+    border: none;
+    outline: none;
+    resize: none;
+  }
+
+  &__form-container {
+    width: 100%;
+    height: 100px;
+    margin: 0 10px;
+    padding-top: 10px;
+    box-shadow: 0 9px 21px rgba(128, 152, 213, 0.1);
+  }
+
+  &__form {
+    width: 100%;
+    position: relative;
+  }
+
+  &__tools {
+    position: relative;
+    display: flex;
+    // justify-content: space-between;
+    width: 100%;
+    height: 40px;
+    margin: 0 auto;
+    padding: 10px 10px;
+    font-size: $font-20;
+    background-color: #f6f7ff;
+  }
+
+  &__submit-button {
+    position: absolute;
+    left: 85%;
+    z-index: 1;
+    margin-top: 10px;
+    font-size: $font-20;
+    background: none;
+    border: none;
+    outline: none;
+  }
+
+  &__file-upload {
+    // margin-top: -40px;
+  }
+
+  &__emoji-container-open {
+    position: absolute;
+    top: -350px;
+    left: -10px;
+    transition: 0.3s;
+    animation: emoji 0.2s ease-in-out;
+  }
+
+  &__emoji-container-close {
+    display: none;
+  }
+
+  &__emoji-smiles-button {
+    margin-left: 10px;
+    margin-top: -5px;
+    color: #bfc5d1;
+  }
+}
+
+.collocutor {
+  position: absolute;
+  width: 258px;
+  height: 100%;
+  background-color: $white-color;
+  border: 1px solid $gray-trans-color;
+  transition: 0.3s;
+
+  &__open {
+    top: 50px;
+    right: 0;
+    z-index: 1;
+  }
+
+  &__close {
+    top: 50px;
+    right: -240px;
+    z-index: 1;
+  }
+
+  &__top {
+    width: 100%;
+    height: 66px;
+    background-color: #f4f7fc;
+  }
+}
+
+.emoji-mart-preview {
+  display: none;
+}
+
+.ant-popover-content {
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 0 0;
+}
+
+.ant-popover-inner-content {
+  max-width: 300px;
+  padding: 0 0;
+  grid-gap: 0px;
+}
+
+@keyframes emoji {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -15,6 +15,8 @@
 @import './pages/subCatalog';
 @import './layouts/dashboardHeader';
 @import './layouts/dashboardMenu';
+@import './layouts/chat';
+@import '../node_modules/emoji-mart/css/emoji-mart.css';
 
 body {
   font-family: $font-roboto;
