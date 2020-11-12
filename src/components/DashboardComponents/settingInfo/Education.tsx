@@ -1,8 +1,10 @@
-import React, { MouseEvent } from 'react'
+import React, { MouseEvent, useRef, useState } from 'react'
 import { Form, Input } from 'antd'
 import { DeleteFilled, EditFilled, PaperClipOutlined } from '@ant-design/icons'
 
 const Education: React.FC = (): JSX.Element => {
+  const [showEduc, setShowEduc] = useState(false)
+
   const boxStart = document.querySelector('#startYear'),
     boxEnd = document.querySelector('#endYear'),
     today = new Date()
@@ -57,14 +59,22 @@ const Education: React.FC = (): JSX.Element => {
           </Form.Item>
         </div>
         <div className="setting__button-editor setting__education-btns">
-          <div className="setting__button-edit setting__education-button-edit">
+          <div
+            role="presentation"
+            onClick={() => setShowEduc((prev) => !prev)}
+            className="setting__button-edit setting__education-button-edit"
+          >
             <EditFilled />
           </div>
           <div className="setting__button-delete setting__education-button-delete">
             <DeleteFilled />
           </div>
         </div>
-        <div className="setting__education-form-univer-info">
+        <div
+          className={`setting__education-form-univer-info ${
+            showEduc ? 'setting__education-form-univer-info-hidden' : ''
+          }`}
+        >
           <div className="setting__education-level setting__select">
             <label htmlFor="scienceDegree">
               <p>Наукова ступінь</p>

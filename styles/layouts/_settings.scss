@@ -22,8 +22,6 @@
     }
 
     &__main-item .ant-row label {
-        margin-bottom: 0;
-        padding-bottom: 0;
         font-size: $font-14;
     }
 
@@ -84,7 +82,13 @@
     &__button-edit  .anticon {
         color: #c2cfe0;
         font-size: $font-20;
+
+        &:active,
+        &:focus {
+            color:$primary-color;
+        }
     }
+
 
     &__button-editor {
         display: flex;
@@ -139,6 +143,7 @@
         flex-direction: row;
         max-width: 100%;
         overflow: scroll;
+        
         justify-content: start;
         margin: 0 20px 0 20px;
     }
@@ -201,6 +206,48 @@
 
     &__datapicker.ant-picker {
         border-radius: 5px;
+    }
+
+    //avatar
+    &__avatar {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__main-item-avatar {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__main-field-img-block {
+        width: 125px;
+        height: 125px; 
+        align-content: center;
+    }
+
+    &__main-form-item-avatar-input {
+        display: none !important;
+    }
+
+    &__main-item-avatar-img {
+        border-radius: 50%;
+        height: 96%;
+        width: 100%;
+
+    }
+
+    &__main-item-avatar-edit .anticon {
+        position: absolute;
+        top: 90px; left: 93px;
+        font-size: $font-20;
+        border-color: #fff;
+        border-radius: 50%;
+        box-shadow: 0 4px 4px rgba(0,0,0,.08);
+        width: 28px;
+        height: 28px;
+        bottom: 0;
+        right: 0;
     }
 
     //country
@@ -288,7 +335,15 @@
         margin: 10px;
         padding: 10px;
         border-bottom: 1px solid $gray-background;
+        &-univer-info{
+            display: block;
+            &-hidden {
+                display: none;
+            }
+        }
     }
+
+    
 
     &__education-button {
         margin: 10px 0 20px 20px;
@@ -350,7 +405,7 @@
 
     //complementary education
 
-    &__complement {
+    &__complement-section{
         border-bottom: 1px solid $gray-background;
     }
 
@@ -380,4 +435,25 @@
     &__complement-form-info-yaers &__select {
         margin-right: 25px;
     }
+
+
+    &__save-btn {
+        font-weight: $font-weight-600;
+        font-size: $font-14;
+        line-height: 20px;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        text-align: center;
+        letter-spacing: 1px;
+        color: $white-color;
+        background: $secondary-color;
+        box-shadow: 0 2px 4px rgba(60,9,179,.3);
+        border-radius: 4px;
+        border: none;
+        margin: 30px auto 20px;
+        padding: 17px 35px 15px;
+        text-transform: uppercase;
+    }
+
 }  

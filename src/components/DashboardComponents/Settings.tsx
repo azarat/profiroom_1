@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 //styles
 import { Form, Input, Radio, DatePicker } from 'antd'
-import { LeftOutlined, RightOutlined, PlusCircleOutlined } from '@ant-design/icons'
+import { LeftOutlined, RightOutlined, PlusCircleOutlined, EditFilled } from '@ant-design/icons'
 import moment from 'moment'
 
 import Language from './settingInfo/Language'
@@ -15,6 +15,8 @@ const Settings: React.FC = (): JSX.Element => {
   const [form] = Form.useForm()
   const [formLayout, setFormLayout] = useState('horizontal')
   const [gender, setGender] = useState('male')
+  const [langArr, setLangArr] = useState<React.ReactNode[]>([])
+  const [educationArr, setEducationArr] = useState<React.ReactNode[]>([])
   const tabMenu = useRef<HTMLDivElement>(null)
 
   const scrollBtn = (e: any): void => {
@@ -103,9 +105,27 @@ const Settings: React.FC = (): JSX.Element => {
               <Form.Item name="surName" label="Прізвище" className="setting__main-item">
                 <Input className="setting__main-field" />
               </Form.Item>
-              <Form.Item name="avatar" label="Аватар" className="setting__main-item">
-                <Input type="file" className="setting__main-form-item-avatar" />
-              </Form.Item>
+              <div className="setting__avatar">
+                <Form.Item name="avatar" label="Аватар" className="setting__main-item-avatar">
+                  <label htmlFor="avatarImg">
+                    <div className="setting__main-field-img-block">
+                      <img
+                        className="setting__main-item-avatar-img"
+                        src="https://profiroom.com/Backend/public/storage/avatar/noAva.jpg"
+                        alt="avatar"
+                      />{' '}
+                      <div className="setting__main-item-avatar-edit">
+                        <EditFilled />
+                      </div>
+                    </div>
+                  </label>
+                  <input
+                    type="file"
+                    className="setting__main-form-item-avatar-input"
+                    id="avatarImg"
+                  />
+                </Form.Item>
+              </div>
               <Form.Item name="gender" label="Стать" className="setting__main-item">
                 <Radio.Group onChange={onChange} value={gender}>
                   <Radio value={'male'}>Чоловіча</Radio>
@@ -149,13 +169,28 @@ const Settings: React.FC = (): JSX.Element => {
                   <Input className="setting__main-field" />
                 </Form.Item>
               </div>
+
               <div className="setting__language">
                 <Language />
+                {langArr.map((i) => i)}
               </div>
+
               <div className="setting__language-button">
                 <button className="setting__button-add">
                   <PlusCircleOutlined />
-                  <span className="setting__button-add-label">ДОДАТИ МОВУ</span>
+                  <span
+                    role="presentation"
+                    onClick={() => {
+                      setLangArr((arr) => {
+                        arr.push(<Language />)
+                        console.log(arr)
+                        return arr
+                      })
+                    }}
+                    className="setting__button-add-label"
+                  >
+                    ДОДАТИ МОВУ
+                  </span>
                 </button>
               </div>
             </Form>
@@ -164,18 +199,26 @@ const Settings: React.FC = (): JSX.Element => {
         <div className="setting__education">
           <div className="setting__main-title">ВИЩА ОСВІТА</div>
           <div className="setting__education">
-            <div className="setting__education-form">
-              <Education />
-            </div>
-            <div className="setting__education-button">
+            <div className="setting__education-form">{educationArr.map((i) => i)}</div>
+            <div
+              role="presentation"
+              onClick={() => {
+                setEducationArr((arr) => {
+                  arr.push(<Education />)
+                  console.log(arr)
+                  return arr
+                })
+              }}
+              className="setting__education-button"
+            >
               <button className="setting__button-add">
                 <PlusCircleOutlined />
-                <span className="setting__button-add-label ">ДОДАТИ ОСВІТУ</span>
+                <span className="setting__button-add-label">ДОДАТИ ОСВІТУ</span>
               </button>
             </div>
           </div>
         </div>
-        <div>
+        <div className="setting__complement-section">
           <div className="setting__main-title">ДОДАТКОВА ОСВІТА</div>
           <div className="setting__complement">
             <div className="setting__complement-form">
@@ -189,9 +232,8 @@ const Settings: React.FC = (): JSX.Element => {
             </div>
           </div>
         </div>
-        <div>
-          <div className="setting__main-title">BUTTON</div>
-          <div></div>
+        <div className="setting__save">
+          <button className="setting__save-btn">ЗБЕРЕГТИ ЗМІНИ</button>
         </div>
       </section>
     </div>

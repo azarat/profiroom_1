@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NextPage } from 'next'
 import { Form, Input } from 'antd'
 import { DeleteFilled, EditFilled, PaperClipOutlined } from '@ant-design/icons'
 
 const ComplEduc: NextPage = (): JSX.Element => {
+  const [showEduc, setShowEduc] = useState(false)
+
   return (
     <>
       <Form>
@@ -14,7 +16,11 @@ const ComplEduc: NextPage = (): JSX.Element => {
             </Form.Item>
           </div>
           <div className="setting__button-editor setting__complement-btns">
-            <div className="setting__button-edit setting__complement-edit">
+            <div
+              role="presentation"
+              onClick={() => setShowEduc((prev) => !prev)}
+              className="setting__button-edit setting__complement-edit"
+            >
               <EditFilled />
             </div>
             <div className="setting__button-delete setting__complement-delete">
@@ -22,7 +28,11 @@ const ComplEduc: NextPage = (): JSX.Element => {
             </div>
           </div>
         </div>
-        <div className="setting__complement-form-univer-info">
+        <div
+          className={`setting__complement-form-univer-info ${
+            showEduc ? 'setting__education-form-univer-info-hidden' : ''
+          }`}
+        >
           <div>
             <Form.Item name="courses" label="Назва курсів" className="setting__main-item">
               <Input name="courses" className="setting__main-field" />
