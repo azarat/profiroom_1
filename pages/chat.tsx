@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { NextPage } from 'next'
 import nextCookie from 'next-cookies'
-import { io } from 'socket.io-client'
+// import io from 'socket.io-client'
 
 //components
 import Dialog from '../src/components/Chat/DialogPreview'
@@ -21,7 +21,14 @@ import {
   FileType,
 } from '../src/components/Chat/Types'
 
-let socket: any
+// let socket: any
+const socket: any = 23
+// const socket: any = io('http://142.93.233.236:6001', {})
+
+socket.on('anything')
+
+let one: any
+let newid
 
 const Сhat: NextPage = (): JSX.Element => {
   const [isAuth, setAuth] = useState<boolean>(false)
@@ -32,7 +39,7 @@ const Сhat: NextPage = (): JSX.Element => {
   const [user, setUser] = useState<UserType>()
   const [isOpenDialogsPreview, setIsOpenDialogsPreview] = useState<boolean>(false)
   const [inputValue, setInputValue] = useState<string>('')
-  // const [socketId, setsocketId] = useState<string>()
+  const [socketId, setSocketId] = useState()
   const [file, setFile] = useState<FileType>()
   const [preview, setPreview] = useState<string>()
   const [openSmiles, setOpenSmiles] = useState<boolean>(false)
@@ -45,57 +52,48 @@ const Сhat: NextPage = (): JSX.Element => {
 
   useEffect(() => {
     if (isAuth) {
-      getChatDialogs()
+      // getChatDialogs()
     }
   }, [isAuth])
 
   useEffect(() => {
-    // scrollToBottom()
-    if (!socket) {
-      socket = io('http://142.93.233.236:6001', {
-        // transports: ['flashsocket', 'polling', 'websocket'],
-      })
-
-      socket.emit('join', 'gigroom_database_private-' + 's8cc87833-997a-4d97-b055-99eb732fd002')
-      socket.emit(
-        'join',
-        'gigroom_database_private-' + 'classic' + 's8cc87833-997a-4d97-b055-99eb732fd002'
-      )
-      socket.emit(
-        'join',
-        'gigroom_database_private-' + 'classic' + 's8cc87833-997a-4d97-b055-99eb732fd002'
-      )
+    if (!one) {
       if (jwt_token) {
         checkAuth()
       }
-      rooms.forEach((el) => {
-        //   //join rooms
-        socket.emit('join', 'gigroom_database_private-' + 's8cc87833-997a-4d97-b055-99eb732fd002')
-        socket.emit('join', 'gigroom_database_private-bellRoom-' + socketId)
-        socket.emit('join', 'gigroom_database_private-' + el.roomId)
-        socket.emit('leave', 'gigroom_database_private-' + el.roomId)
-        //   socket.emit('join', 'gigroom_database_private-' + 'classic' + socketId)
-
-        //   //updateDialogs
-        //   socket.on('collocutorsList', (data: any) => console.log(data))
-
-        //   //typing
-        //   socket.emit(user?.id, 'gigroom_database_private-' + el.roomId, user?.id)
-        //   socket.on('typing', (data: any) => {
-        //     console.log(data)
-      })
-
-      //   socket.on('stopTyping', (data: any) => {
-      //     console.log(data)
-      //   })
-
-      //   //message
-      //   socket.on('message', (data: any) => {
-      //     console.log(data)
-      //   })
-      // })
+      one = 1
     }
-  })
+    // scrollToBottom()
+    // if (!socket) {
+    //   socket = io('http://142.93.233.236:6001', {})
+    //   socket.on('message', (data: any) => {
+    //     console.log(data)
+    //   })
+    //   if (jwt_token) {
+    //     checkAuth()
+    //   }
+    // rooms.forEach((el) => {
+    //   //join rooms
+    //   socket.emit('join', 'gigroom_database_private-' + socketId)
+    //   socket.emit('join', 'gigroom_database_private-' + el.roomId)
+    //   socket.emit('join', 'gigroom_database_private-' + 'classic' + socketId)
+    //   //updateDialogs
+    //   socket.on('collocutorsList', (data: any) => console.log(data))
+    //   //typing
+    //   socket.emit(user?.id, 'gigroom_database_private-' + el.roomId, user?.id)
+    //   socket.on('typing', (data: any) => {
+    //     console.log(data)
+    //   })
+    //   socket.on('stopTyping', (data: any) => {
+    //     console.log(data)
+    //   })
+    //   //message
+    //   socket.on('message', (data: any) => {
+    //     console.log(data)
+    //   })
+    // })
+    // }
+  }, [])
 
   useOutSideClick(smilesBox, () => {
     setOpenSmiles(false)
@@ -112,6 +110,17 @@ const Сhat: NextPage = (): JSX.Element => {
       .then((res) => {
         res.auth && setAuth(true)
         getDataMin()
+        const id = res.socketId
+        setSocketId(id)
+        newid = id
+        socket.emit('join', 'gigroom_database_private-' + res.socketId)
+        socket.emit('join', 'gigroom_database_private-bellRoom-' + res.socketId)
+        console.log(res.socketId)
+        console.log(socketId)
+        getChatDialogs()
+        socket.on('DealInfo', (data: any) => {
+          console.log('dealData', data)
+        })
       })
   }
 
@@ -137,9 +146,24 @@ const Сhat: NextPage = (): JSX.Element => {
     })
       .then((res) => res.json())
       .then((res) => {
+        console.log(res)
+        // res.forEach((el:) => {
+        //   socket.emit('join', 'gigroom_database_private-' + el.roomId)
+        //   socket.emit('join', 'gigroom_database_private-' + 'classic-' + newid) //расскоментить
+        // })
         res.sort((a: any, b: any) =>
           new Date(a.message[0].dateTime) > new Date(b.message[0].dateTime) ? -1 : 1
         )
+        socket.on('join', () => {
+          console.log('asds')
+        })
+        socket.on('collocutorsList', (data: any) => {
+          console.log('showNewMessage - ', data)
+        })
+        socket.on('message', (data: any) => {
+          console.log('onMessage - ', data)
+        })
+        console.log(socket)
         setRooms(res)
       })
   }
@@ -191,6 +215,7 @@ const Сhat: NextPage = (): JSX.Element => {
     })
       .then((res) => res.json())
       .then((res) => {
+        console.log(res)
         const newMessage: MessageType = res
         const arr = Array<MessageType>(newMessage)
         const updateArr = activeMessagesList.concat(arr)

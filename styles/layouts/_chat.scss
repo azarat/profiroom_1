@@ -330,6 +330,18 @@
     margin-top: -5px;
     color: #bfc5d1;
   }
+
+  .ant-popover-content {
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 0 0;
+  }
+
+  .ant-popover-inner-content {
+    max-width: 300px;
+    padding: 0 0;
+    grid-gap: 0px;
+  }
 }
 
 .collocutor {
@@ -357,22 +369,6 @@
     height: 66px;
     background-color: #f4f7fc;
   }
-}
-
-.emoji-mart-preview {
-  display: none;
-}
-
-.ant-popover-content {
-  max-width: 300px;
-  margin: 0 auto;
-  padding: 0 0;
-}
-
-.ant-popover-inner-content {
-  max-width: 300px;
-  padding: 0 0;
-  grid-gap: 0px;
 }
 
 @keyframes emoji {
