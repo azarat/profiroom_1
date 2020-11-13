@@ -2,8 +2,9 @@ import React from 'react'
 
 import { Form, Input } from 'antd'
 import { DeleteFilled } from '@ant-design/icons'
+import { ILanguageProps } from './Types'
 
-const Language: React.FC = (): JSX.Element => {
+const Language: React.FC<ILanguageProps> = ({ deleteComponent }: any): JSX.Element => {
   // function handleChange(value: any) {
   //     console.log(`selected ${value}`);
   //     }
@@ -24,12 +25,16 @@ const Language: React.FC = (): JSX.Element => {
           </label>
           <select id="langLevel">
             {langLevel.map((item, i) => {
-              return <option value={i}>{item}</option>
+              return (
+                <option key={i} value={i}>
+                  {item}
+                </option>
+              )
             })}
           </select>
         </div>
         <div className="setting__button-delete">
-          <DeleteFilled />
+          <DeleteFilled onClick={deleteComponent} />
         </div>
       </div>
     </>

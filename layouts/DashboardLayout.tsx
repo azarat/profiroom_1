@@ -25,7 +25,14 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, title, user
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <DashboardHeader userData={user} />
-      <main>{children}</main>
+      <main
+        style={{
+          overflow: ' auto',
+          height: 'calc(100vh - 67px)',
+        }}
+      >
+        {children}
+      </main>
     </>
   )
 }

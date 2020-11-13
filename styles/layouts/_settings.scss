@@ -3,8 +3,7 @@
     display: flex;
     font-family: $font-roboto;
     flex-direction: column;
-    overflow: scroll;
-
+    position: relative;
      &__main-field.ant-input {
          border-radius: 5px;
          font-size: $font-14;
@@ -143,9 +142,14 @@
         flex-direction: row;
         max-width: 100%;
         overflow: scroll;
+        overflow: hidden;
         
         justify-content: start;
         margin: 0 20px 0 20px;
+
+        &::-webkit-scrollbar {
+            display: none;
+          }
     }
 
     &__tab-btns span {
@@ -457,5 +461,55 @@
         padding: 17px 35px 15px;
         text-transform: uppercase;
     }
-
 }  
+
+@media screen and (min-width: 1200px) {
+    .setting {
+        width: 77%;
+        background: #fbfcfd;
+        box-shadow: 0 9px 21px rgba(128,152,213,.1);
+        border-radius: 4px;
+        position: relative;
+        z-index: 8;
+        margin-left: 356px;
+
+        &__header-title {
+            margin: 30px auto 0 15px;
+        }
+
+        &__tab-btns{
+            display: none;
+        }
+
+        &__tab{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        &__main {
+            display: flex;
+            flex-direction: column;
+        }
+
+        &__block{
+            display: flex;
+            flex-direction: row;
+        }
+
+        &__block-title {
+            padding: 40px 25px;
+            width: 27%
+        }
+
+        &__block-info {
+            width: 77%;
+        }
+
+       
+
+    }
+    
+}
+

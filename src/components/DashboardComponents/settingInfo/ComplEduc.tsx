@@ -1,10 +1,34 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { NextPage } from 'next'
 import { Form, Input } from 'antd'
+import { IComplEducProps } from './Types'
 import { DeleteFilled, EditFilled, PaperClipOutlined } from '@ant-design/icons'
 
-const ComplEduc: NextPage = (): JSX.Element => {
+const ComplEduc: NextPage<IComplEducProps> = ({ deleteComponent }: any): JSX.Element => {
   const [showEduc, setShowEduc] = useState(false)
+
+  const months = [
+    'Січень',
+    'Лютий',
+    'Березень',
+    'Квітень',
+    'Травень',
+    'Червень',
+    'Липень',
+    'Серпень',
+    'Вересень',
+    'Жовтень',
+    'Листопад',
+    'Грудень',
+  ]
+
+  const today = new Date()
+  const years: Array<number> = []
+  useMemo(() => {
+    for (let i = 1960; i <= today.getFullYear(); i++) {
+      years.push(i)
+    }
+  }, [])
 
   return (
     <>
@@ -24,7 +48,7 @@ const ComplEduc: NextPage = (): JSX.Element => {
               <EditFilled />
             </div>
             <div className="setting__button-delete setting__complement-delete">
-              <DeleteFilled />
+              <DeleteFilled onClick={deleteComponent} />
             </div>
           </div>
         </div>
@@ -46,47 +70,53 @@ const ComplEduc: NextPage = (): JSX.Element => {
                   <p>Рік старту</p>
                 </label>
                 <select id="startMonth">
-                  <option value="1">Січень</option>
-                  <option value="2">Лютий</option>
-                  <option value="3">Березень</option>
-                  <option value="4">Квітень</option>
-                  <option value="5">Травень</option>
-                  <option value="6">Червень</option>
-                  <option value="7">Липень</option>
-                  <option value="8">Серпень</option>
-                  <option value="9">Вересень</option>
-                  <option value="10">Жовтень</option>
-                  <option value="11">Листопад</option>
-                  <option value="12">Грудень</option>
+                  {months.map((month, ind) => {
+                    return (
+                      <option key={ind + 1} value={ind}>
+                        {month}
+                      </option>
+                    )
+                  })}
                 </select>
               </div>
               <div className="setting__select">
-                <select id="startYear"></select>
+                <select id="startYear">
+                  {years.map((year, ind) => {
+                    return (
+                      <option key={ind} value={year}>
+                        {year}
+                      </option>
+                    )
+                  })}
+                </select>
               </div>
             </div>
 
             <div className="setting__complement-form-info-yaers">
               <div className="setting__select">
                 <label htmlFor="endMonth">
-                  <p>Рік старту</p>
+                  <p>Рік закінчення</p>
                 </label>
                 <select id="endMonth">
-                  <option value="1">Січень</option>
-                  <option value="2">Лютий</option>
-                  <option value="3">Березень</option>
-                  <option value="4">Квітень</option>
-                  <option value="5">Травень</option>
-                  <option value="6">Червень</option>
-                  <option value="7">Липень</option>
-                  <option value="8">Серпень</option>
-                  <option value="9">Вересень</option>
-                  <option value="10">Жовтень</option>
-                  <option value="11">Листопад</option>
-                  <option value="12">Грудень</option>
+                  {months.map((month, ind) => {
+                    return (
+                      <option key={ind + 1} value={ind}>
+                        {month}
+                      </option>
+                    )
+                  })}
                 </select>
               </div>
               <div className="setting__select">
-                <select id="endYear"></select>
+                <select id="endYear">
+                  {years.map((year, ind) => {
+                    return (
+                      <option key={ind} value={year}>
+                        {year}
+                      </option>
+                    )
+                  })}
+                </select>
               </div>
             </div>
             <div></div>
@@ -96,7 +126,7 @@ const ComplEduc: NextPage = (): JSX.Element => {
             <div className="setting__education-downloads-input">
               <PaperClipOutlined />
               <label htmlFor="doc">Завантажити файл/фото диплома</label>
-              <input id="doc" type="file"></input>
+              <input id="doc" type="file" accept=".png, .jpg, .jpeg"></input>
             </div>
             <p>Можливі формати файлів jpg, jpeg, png</p>
           </div>
