@@ -51,6 +51,8 @@ export const authUser: GetServerSideProps = async (
   // }
 
   const url = `${process.env.NEXT_PUBLIC_API}/api/user`
+  const dashboardUrl = `${process.env.NEXT_PUBLIC_API}/api/dashboard`
+
   try {
     const response = await fetch(url, {
       mode: 'cors',
@@ -59,9 +61,16 @@ export const authUser: GetServerSideProps = async (
         Authorization: `bearer ${jwt_token}`,
       },
     })
+    const dashboard = await fetch(dashboardUrl, {
+      headers: {
+        Authorization: `bearer ${jwt_token}`,
+      },
+    })
     const jsonResponse = await response.json()
+    const dashboardResponse = await dashboard.json()
+
     return {
-      props: { jsonResponse },
+      props: { jsonResponse, dashboardResponse },
     }
   } catch (e) {
     console.error(e.message)

@@ -37,9 +37,9 @@
 
 @media screen and (min-width: 768px) {
   .carousel {
+    position: static;
     width: 33%;
     margin: 0 auto;
-    position: static;
     overflow: visible;
 
     &-list {
@@ -50,8 +50,8 @@
   }
 
   .carousel-buttons {
-    right: 0;
     top: 30px;
+    right: 0;
     &-left {
       left: 5px;
     }

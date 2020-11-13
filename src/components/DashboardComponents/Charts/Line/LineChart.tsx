@@ -1,58 +1,61 @@
 import React from 'react'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
+type LineChartTypes = {
+  data: number[]
+}
 
-const options = {
-  title: {
-    text: '',
-  },
-  subtitle: {
-    text: '',
-  },
-  exporting: {
-    enabled: false,
-  },
-  chart: {
-    type: 'line',
-    inverted: false,
-  },
-  series: [
-    {
-      name: 'Дохід',
-      data: [100, 200, 30, 100, 50, 30],
-    },
-  ],
-  plotOptions: {
-    series: {
-      animation: false,
-    },
-  },
-
-  yAxis: {
+const LineChart: React.FC<LineChartTypes> = ({ data }): JSX.Element => {
+  const options = {
     title: {
       text: '',
     },
-    labels: {},
-  },
-  legend: {
-    enabled: false,
-  },
-  tooltip: {
-    enabled: true,
-  },
-  lang: {},
-  xAxis: {
-    title: {},
-    labels: {
-      format: 'Месяц',
+    subtitle: {
+      text: '',
     },
-  },
-  credits: {
-    enabled: false,
-  },
-}
+    exporting: {
+      enabled: false,
+    },
+    chart: {
+      type: 'line',
+      inverted: false,
+    },
+    series: [
+      {
+        name: 'Дохід',
+        data: data,
+      },
+    ],
+    plotOptions: {
+      series: {
+        animation: false,
+      },
+    },
 
-const LineChart = () => {
+    yAxis: {
+      title: {
+        text: '',
+      },
+      labels: {},
+    },
+    legend: {
+      enabled: false,
+    },
+    tooltip: {
+      enabled: true,
+    },
+    lang: {},
+    xAxis: {
+      title: {},
+      labels: {
+        format: 'Месяц',
+      },
+    },
+    credits: {
+      enabled: false,
+    },
+  }
+
   return <HighchartsReact highcharts={Highcharts} options={options} />
 }
 

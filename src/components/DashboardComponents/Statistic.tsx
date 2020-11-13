@@ -1,34 +1,32 @@
-const statistic = [
-  {
-    name: 'к-ть виконаних замовлень',
-    amount: 0,
-    img: '/assets/img/finance/deals_count.png',
-    id: 1,
-  },
-  {
-    name: 'к-ть всіх замовників',
-    amount: 0,
-    img: '/assets/img/finance/dealers_count.png',
-    id: 2,
-  },
-  {
-    name: 'заморожені кошти',
-    amount: 0,
-    img: '/assets/img/finance/hold.png',
-    id: 3,
-  },
-  {
-    name: 'виведені кошти',
-    amount: 0,
-    img: '/assets/img/finance/withdrawn.png',
-    id: 4,
-  },
-  {
-    name: 'стан рахунку',
-    amount: 0,
-    img: '/assets/img/finance/current.png',
-    id: 5,
-  },
-]
+import React from 'react'
 
-export default statistic
+type StatisticTypes = {
+  purse: PurseTypes[]
+}
+type PurseTypes = {
+  name: string
+  id: number
+  img: string
+  amount: number
+}
+const Statistic: React.FC<StatisticTypes> = ({ purse }) => {
+  return (
+    <div className="home__statistic--desktop">
+      {purse.map(({ name, img, amount, id }) => (
+        <div className="home__statistic-item" key={id}>
+          <div className="home__statistic-img-wrapper">
+            <img className="home__statistic-img" src={img} alt="" />
+          </div>
+          <div className="home__statistic-info">
+            <p className="home__statistic-info-amount">
+              <strong>{amount}</strong>
+            </p>
+            <p className="home__statistic-info-text">{name}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export default Statistic
