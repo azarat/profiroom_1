@@ -1619,6 +1619,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/engine.io@*":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@types/engine.io/-/engine.io-3.1.4.tgz#3d9472711d179daa7c95c051e50ad411e18a9bdc"
+  integrity sha512-98rXVukLD6/ozrQ2O80NAlWDGA4INg+tqsEReWJldqyi2fulC9V7Use/n28SWgROXKm6003ycWV4gZHoF8GA6w==
+  dependencies:
+    "@types/node" "*"
+
 "@types/glob@^7.1.1":
   version "7.1.3"
   resolved "https://registry.yarnpkg.com/@types/glob/-/glob-7.1.3.tgz#e6ba80f36b7daad2c685acd9266382e68985c183"
@@ -1693,6 +1700,27 @@
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
+
+"@types/socket.io-client@*":
+  version "1.4.34"
+  resolved "https://registry.yarnpkg.com/@types/socket.io-client/-/socket.io-client-1.4.34.tgz#8ca5f5732a9ad92b79aba71083cda5e5821e3ed9"
+  integrity sha512-Lzia5OTQFJZJ5R4HsEEldywiiqT9+W2rDbyHJiiTGqOcju89sCsQ8aUXDljY6Ls33wKZZGC0bfMhr/VpOyjtXg==
+
+"@types/socket.io@*":
+  version "2.1.11"
+  resolved "https://registry.yarnpkg.com/@types/socket.io/-/socket.io-2.1.11.tgz#e0d6759880e5f9818d5297a3328b36641bae996b"
+  integrity sha512-bVprmqPhJMLb9ZCm8g0Xy8kwBFRbnanOWSxzWkDkkIwxTvud5tKMfAJymXX6LQbizUKCS1yima7JM4BeLqjNqA==
+  dependencies:
+    "@types/engine.io" "*"
+    "@types/node" "*"
+
+"@types/socketio-wildcard@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@types/socketio-wildcard/-/socketio-wildcard-2.0.3.tgz#978e0ffb8ea763d014a5f2744e101d3e476412a4"
+  integrity sha512-ei9X6FK8obWE6bZMuLs9jX5tXPIfchr3reeLdLff0H2qonYWEmYy952yq1/5tS9Glh+U9kkBEJMYXucx4ghRww==
+  dependencies:
+    "@types/socket.io" "*"
+    "@types/socket.io-client" "*"
 
 "@types/unist@*", "@types/unist@^2.0.0", "@types/unist@^2.0.2":
   version "2.0.3"

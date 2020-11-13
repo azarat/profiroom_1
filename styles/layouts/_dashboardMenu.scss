@@ -292,22 +292,24 @@
     &__avatar {
       padding-top: 0px;
       transition: 0.3s;
+      width: 100vw;
     }
 
     &__user-info {
-      width: 50%;
-      margin: 0 auto;
+      max-width: 230px;
+      // margin: 0 auto;
       margin-top: -40px;
     }
 
     &__avatar-image-container {
       width: 110px;
       height: 110px;
+      margin: 10px auto;
     }
 
     &__avatar-border {
-      top: 35px;
-      left: -35px;
+      top: 45px;
+      left: 25px;
       width: 180px;
       transition: 0.3s;
     }
@@ -330,6 +332,8 @@
     &__stars {
       display: flex;
       justify-content: space-around;
+      max-width: 100px;
+      margin: 0 auto;
       margin-top: -10px;
     }
 

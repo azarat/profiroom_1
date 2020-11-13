@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { NextPage } from 'next'
 import nextCookie from 'next-cookies'
-// import io from 'socket.io-client'
+import io from 'socket.io-client'
 
 //components
 import Dialog from '../src/components/Chat/DialogPreview'
@@ -22,16 +22,16 @@ import {
 } from '../src/components/Chat/Types'
 
 // let socket: any
-const socket: any = 23
-// const socket: any = io('http://142.93.233.236:6001', {})
+// const socket: any = 23
+const socket: any = io('http://142.93.233.236:6001', {})
 
 socket.on('anything')
 
 let one: any
-let newid
+let newid: any //раскоментить
 
 const Сhat: NextPage = (): JSX.Element => {
-  const [isAuth, setAuth] = useState<boolean>(false)
+  // const [isAuth, setAuth] = useState<boolean>(false)
   const [rooms, setRooms] = useState<Array<RoomType>>([])
   const [activeMessagesList, setActiveMessagesList] = useState<Array<MessageType>>([])
   const [fileList, setFileList] = useState<any>([])
@@ -50,11 +50,11 @@ const Сhat: NextPage = (): JSX.Element => {
 
   const { jwt_token } = nextCookie('ctx')
 
-  useEffect(() => {
-    if (isAuth) {
-      // getChatDialogs()
-    }
-  }, [isAuth])
+  // useEffect(() => {
+  //   if (isAuth) {
+  //     getChatDialogs()
+  //   }
+  // }, [isAuth])
 
   useEffect(() => {
     if (!one) {
@@ -108,7 +108,7 @@ const Сhat: NextPage = (): JSX.Element => {
     })
       .then((res) => res.json())
       .then((res) => {
-        res.auth && setAuth(true)
+        // res.auth && setAuth(true)
         getDataMin()
         const id = res.socketId
         setSocketId(id)
@@ -138,7 +138,7 @@ const Сhat: NextPage = (): JSX.Element => {
   }
 
   const getChatDialogs = () => {
-    fetch(`https://profiroom.com/Backend/api/getChatclassicRooms`, {
+    fetch(`http://test.profiroom.com/Backend/api/getChatclassicRooms`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${jwt_token}`,
@@ -147,12 +147,8 @@ const Сhat: NextPage = (): JSX.Element => {
       .then((res) => res.json())
       .then((res) => {
         console.log(res)
-        // res.forEach((el:) => {
-        //   socket.emit('join', 'gigroom_database_private-' + el.roomId)
-        //   socket.emit('join', 'gigroom_database_private-' + 'classic-' + newid) //расскоментить
-        // })
         res.sort((a: any, b: any) =>
-          new Date(a.message[0].dateTime) > new Date(b.message[0].dateTime) ? -1 : 1
+          new Date(a.message[0]?.dateTime) > new Date(b.message[0]?.dateTime) ? -1 : 1
         )
         socket.on('join', () => {
           console.log('asds')
@@ -160,16 +156,14 @@ const Сhat: NextPage = (): JSX.Element => {
         socket.on('collocutorsList', (data: any) => {
           console.log('showNewMessage - ', data)
         })
-        socket.on('message', (data: any) => {
-          console.log('onMessage - ', data)
-        })
+
         console.log(socket)
         setRooms(res)
       })
   }
 
   const getDialogMessages = (roomId: string, idDialog: number) => {
-    fetch(`https://profiroom.com/Backend/api/getRoomMessages`, {
+    fetch(`http://test.profiroom.com/Backend/api/getRoomMessages`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -185,7 +179,16 @@ const Сhat: NextPage = (): JSX.Element => {
       .then((res) => {
         setActiveMessagesList(res[0])
         setActiveDialog({ dialog: idDialog, room: roomId })
+        socket.emit('join', 'gigroom_database_private-' + roomId)
+        socket.emit('join', 'gigroom_database_private-' + 'classic-' + newid) //расскоментить
+        socket.emit('typing', 'gigroom_database_private-' + roomId)
 
+        socket.on('message', (data: any) => {
+          console.log('onMessage - ', data)
+          const arr = data
+          const newArr = activeMessagesList.concat(arr)
+          setActiveMessagesList(newArr)
+        })
         const newArr: Array<MessageType> = []
         res[0].forEach(({ type, message }: MessageType) => {
           if (type === 'file') {
@@ -199,7 +202,7 @@ const Сhat: NextPage = (): JSX.Element => {
   }
 
   const sendMessage = (content: string, typeMessage: string) => {
-    fetch(`https://profiroom.com/Backend/api/message`, {
+    fetch(`http://test.profiroom.com/Backend/api/message`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -216,10 +219,6 @@ const Сhat: NextPage = (): JSX.Element => {
       .then((res) => res.json())
       .then((res) => {
         console.log(res)
-        const newMessage: MessageType = res
-        const arr = Array<MessageType>(newMessage)
-        const updateArr = activeMessagesList.concat(arr)
-        setActiveMessagesList(updateArr)
         setInputValue('')
       })
   }
@@ -250,7 +249,7 @@ const Сhat: NextPage = (): JSX.Element => {
     data.append('file', file)
     data.append('roomId', activeDialog?.room)
 
-    fetch('https://profiroom.com/Backend/api/sendFile', {
+    fetch('http://test.profiroom.com/Backend/api/sendFile', {
       method: 'POST',
       body: data,
       headers: {
