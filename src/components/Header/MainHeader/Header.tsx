@@ -15,7 +15,6 @@ const Header = (): JSX.Element => {
   const [openMenu, setOpenMenu] = useState<boolean>(false)
   const [isLogined] = useState<boolean>(false)
   const router = useRouter()
- 
 
   const { lang: updateLang, setLang: setUpdateLang } = useContext(MainContext)
 

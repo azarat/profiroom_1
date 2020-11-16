@@ -44,7 +44,7 @@
   }
 
   &__subtitle {
-    color: $error-color;
+    color: #36b37e;
     font-size: $font-9;
 
     &::before {
@@ -107,8 +107,9 @@
   &__card-title {
     margin-top: 5px;
     margin-left: 20px;
-    font-size: $font-16;
+    font-size: $font-14;
     user-select: none;
+    font-weight: bold;
   }
 
   &__card-button {
@@ -121,10 +122,10 @@
     transition: 0.7s;
   }
 
-  //todo: add gray color
   &__card-description {
     height: 100%;
     margin-top: 20px;
+    color: $gray-color;
   }
 
   &__button {
@@ -142,7 +143,7 @@
     margin: 0 auto;
   }
   &__subtitle {
-    color: $error-color;
+    color: #36b37e;
     font-size: $font-9;
   }
 
@@ -223,6 +224,7 @@
   &__slider-card-content {
     width: 80%;
     margin: 20px auto;
+    color: $gray-color;
   }
 
   &__slider-button-container {
@@ -266,7 +268,7 @@
   background-repeat: no-repeat;
   background-size: 100%;
   &__subtitle {
-    color: $error-color; //add green color
+    color: #36b37e;
     font-size: $font-9;
   }
 
@@ -293,12 +295,13 @@
   }
 
   &__card-title {
-    font-weight: bold;
     margin-left: 20px;
     font-size: $font-13;
+    font-weight: bold;
   }
 
   &__card-description {
+    color: $gray-color;
     font-size: $font-11;
   }
 }
@@ -313,13 +316,14 @@
     font-size: $font-24;
   }
   &__subtitle {
-    color: $error-color; //todo: add green color
+    color: #36b37e;
     font-size: $font-9;
   }
 
   &__description {
     margin-top: 20px;
-    font-size: $font-13; //todo: add gray color
+    color: $gray-color;
+    font-size: $font-13;
   }
 
   &__button-container {
@@ -365,22 +369,23 @@
 
   &__button-indicator-two {
     display: block;
-    margin-top: -3px;
     width: 15px;
     height: 3px;
+    margin-top: -3px;
     background-color: black;
     transform: rotate(90deg);
     transition: 0.3s;
   }
 
   &__button-indicator-open {
+    background-color: $secondary-color;
     transform: rotate(0deg);
     transition: 0.3s;
-    background-color: $secondary-color;
   }
 
   &__button-content {
     margin-top: 5px;
+    padding-right: 10px;
     padding-bottom: 10px;
   }
 
@@ -485,7 +490,7 @@
   width: 90%;
   height: 220px;
   margin: 30px auto;
-  padding: 20px 10px;
+  padding: 20px 20px;
   text-align: center;
   background-color: $white-color;
   border-radius: 20px;
@@ -647,9 +652,8 @@
 
     &__card-container {
       display: flex;
-      align-items: center;
       flex-direction: column;
-      // flex-flow: row-reverse wrap-reverse;
+      align-items: center;
     }
 
     &__card-title {
@@ -831,7 +835,7 @@
     }
 
     &__button-block {
-      width: 80%;
+      width: 50%;
     }
 
     &__button {
@@ -936,6 +940,15 @@
       text-align: center;
     }
 
+    &__info {
+      display: flex;
+    }
+
+    &__title {
+      display: block;
+      width: 90%;
+    }
+
     &::before {
       position: absolute;
       z-index: -1;
@@ -1020,6 +1033,12 @@
       left: 450px;
     }
   }
+
+  .mobile-app {
+    &__wrapper {
+      justify-content: center;
+    }
+  }
 }
 
 @media (min-width: 1200px) {
@@ -1055,20 +1074,26 @@
   .main-description {
     &__wrapper {
       display: flex;
-      padding: 0 150px;
+      padding: 0 100px;
     }
 
     &__card-wrapper {
       display: flex;
-      margin-left: 150px;
       align-items: center;
-      margin-top: -120px;
+      margin-top: -100px;
+      margin-left: 150px;
     }
 
     &__subtitle {
       &::before {
         top: -30px;
       }
+    }
+  }
+
+  .how-its-work {
+    &__desktop {
+      margin-left: 150px;
     }
   }
 
@@ -1093,11 +1118,61 @@
   }
 
   .questions {
+    &__description-container {
+      width: 50%;
+    }
     &::before {
       top: 20px;
+      left: 550px;
       width: 400px;
       height: 400px;
-      left: 550px;
+    }
+  }
+
+  .mobile-app {
+    height: 420px;
+    padding-left: 0;
+
+    &__wrapper {
+      justify-content: space-around;
+      padding-top: 30px;
+      padding-right: 60px;
+      padding-left: 60px;
+    }
+
+    &__subtitle {
+      margin-top: 60px;
+      font-size: $font-12;
+    }
+
+    &__description {
+      font-size: $font-18;
+    }
+
+    &__title {
+      font-size: $font-24;
+    }
+
+    &__phone {
+      margin-top: 20px;
+    }
+
+    &__phone-button {
+      margin: 4px auto;
+    }
+
+    &::before {
+      top: -50px;
+      left: -200px;
+      width: 730px;
+      height: 560px;
+    }
+  }
+
+  .get-start {
+    &__info {
+      width: 85%;
+      margin: 0 auto;
     }
   }
 }
@@ -1129,9 +1204,9 @@
   .questions {
     &::before {
       top: 20px;
+      left: 1150px;
       width: 400px;
       height: 400px;
-      left: 1150px;
     }
   }
 }

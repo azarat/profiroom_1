@@ -1,4 +1,5 @@
 @import '../public/fonts/roboto.css';
+@import '../public/fonts/icomoon.css';
 @import './variables';
 @import './layouts/header';
 @import './layouts/landing';
@@ -9,17 +10,23 @@
 @import './layouts//mobile-menu';
 @import './layouts/footer';
 @import './layouts/categories';
-@import './pages/card';
+@import './pages/services';
 @import './layouts/catalogList';
 @import './pages/subCatalog';
+@import './layouts/servicesCard';
+@import './pages/offerPage';
 @import './layouts/dashboardHeader';
 @import './layouts/dashboardMenu';
 @import './layouts/dashboardHome';
 @import './layouts/carouselHome';
 @import './layouts/dashboardContent';
+@import './pages/carousel';
 
 body {
   font-family: $font-roboto !important;
+}
+html {
+  scroll-behavior: smooth;
 }
 
 @media screen and (min-width: 1200px) {
