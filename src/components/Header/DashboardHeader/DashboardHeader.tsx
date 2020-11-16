@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useContext } from 'react'
 import Link from 'next/link'
 
 //components
@@ -10,6 +10,8 @@ import { Popover } from 'antd'
 import { BellFilled } from '@ant-design/icons'
 
 import { Response } from './Types'
+import { MainContext } from '../../../context/MainContext'
+import LangSelect from '../MainHeader/LangSelect'
 
 type DashboardProps = {
   userData: Response
@@ -17,8 +19,12 @@ type DashboardProps = {
 
 const DashboardHeader: React.FC<DashboardProps> = (props): JSX.Element => {
   const [isClient, setIsClient] = useState<boolean>(false)
-  const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
+  // const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
   const { userData } = props
+
+  const { lang, setLang, isMenuOpen: isOpenMenu, setMenuOpen: setIsOpenMenu } = useContext(
+    MainContext
+  )
 
   const selectRole = useCallback(() => {
     setIsClient(!isClient)
@@ -41,6 +47,7 @@ const DashboardHeader: React.FC<DashboardProps> = (props): JSX.Element => {
               <div className="dashboard-header__switch-desktop">
                 <SwitchComponent isClient={isClient} selectRole={selectRole} />
               </div>
+              <LangSelect language={lang} updateLanguage={setLang} />
               <div className="dashboard-header__nav">
                 <Link href="/">
                   <a className="dashboard-header__link dashboard-header__go-to-main">Головна</a>

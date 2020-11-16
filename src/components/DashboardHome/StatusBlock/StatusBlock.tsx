@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Switch } from 'antd'
 import Link from 'next/link'
-import { DealsCountsTypes } from '../HomeTypes'
+import { DealsCountsTypes } from '../../DashboardComponents/HomeTypes'
 
 const StatusBlock: React.FC<DealsCountsTypes> = ({
   dealsCounts: { inProgressOffers, QueuedOffers },

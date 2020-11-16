@@ -43,7 +43,6 @@ const index: NextPage = (props): JSX.Element => {
   }
 
   const nextSlide = (str: string): void => {
-    console.log(str)
     if (str === 'right') {
       if (activeSlide < sliderCardContent.length - 1) {
         setActiveSlide(activeSlide + 1)

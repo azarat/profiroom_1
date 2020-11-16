@@ -1,18 +1,16 @@
 import Link from 'next/link'
 import React from 'react'
-import { commentsType } from '../HomeTypes'
+import { commentsType } from '../../DashboardComponents/HomeTypes'
 
 type CommentsType = {
   comments: commentsType[]
 }
 
 const Comments: React.FC<CommentsType> = ({ comments }) => {
-  console.log(comments)
-
   return (
     <>
       {comments.length === 0 ? (
-        <p>Відгуків немає</p>
+        <h5 className="comments__empty-reviews">Відгуків немає</h5>
       ) : (
         <>
           {comments.map((item, index) => (
@@ -32,27 +30,29 @@ const Comments: React.FC<CommentsType> = ({ comments }) => {
                     <img src="/assets/img/envelope.svg" alt="" className="comments__img-message" />
                   </div>
                 </div>
-                <div className="comments__user-comment">
-                  <span className="comments__user-name">
-                    {item.author.name} {item.author.surname}
-                  </span>
-                  <span className="comments__date">
-                    {new Date(item.created_at).toLocaleDateString()}
-                  </span>
-                  <p className="comments__text"> {item.commentText}</p>
-                </div>
-                <div className="comments__rating">
-                  <div className="comments__rating-item">
-                    <span>Якість</span>
-                    <div className="comments__rating-icon">{item.qualityMark}</div>
+                <div>
+                  <div className="comments__user-comment">
+                    <span className="comments__user-name">
+                      {item.author.name} {item.author.surname}
+                    </span>
+                    <span className="comments__date">
+                      {new Date(item.created_at).toLocaleDateString()}
+                    </span>
+                    <p className="comments__text"> {item.commentText}</p>
                   </div>
-                  <div className="comments__rating-item">
-                    <span>Термін</span>
-                    <div className="comments__rating-icon">{item.termMark}</div>
-                  </div>
-                  <div className="comments__rating-item">
-                    <span>Вічливість</span>
-                    <div className="comments__rating-icon">{item.politenessMark}</div>
+                  <div className="comments__rating">
+                    <div className="comments__rating-item">
+                      <span>Якість</span>
+                      <div className="comments__rating-icon">{item.qualityMark}</div>
+                    </div>
+                    <div className="comments__rating-item">
+                      <span>Термін</span>
+                      <div className="comments__rating-icon">{item.termMark}</div>
+                    </div>
+                    <div className="comments__rating-item">
+                      <span>Вічливість</span>
+                      <div className="comments__rating-icon">{item.politenessMark}</div>
+                    </div>
                   </div>
                 </div>
               </div>

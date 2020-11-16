@@ -1,15 +1,30 @@
 .dashboard-header {
-  padding: 10px 15px;
-  background-color: $primary-color;
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
   z-index: 10;
+  padding: 10px 15px;
+  background-color: $primary-color;
+
+  & .header__current-lang {
+    color: $white-color;
+  }
+
+  & .header__arrow-down {
+    & * {
+      fill: $white-color;
+    }
+  }
+
+  & .header__language-box {
+    margin: 0 0 0 5px;
+  }
 
   &__nav {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
   }
 
@@ -87,6 +102,7 @@
 @media (min-width: 768px) {
   .dashboard-header {
     padding: 15px 20px;
+
     &__nav {
       justify-content: space-between;
       width: 85%;

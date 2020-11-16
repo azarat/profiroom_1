@@ -1,5 +1,5 @@
 import React from 'react'
-import { offerView } from '../HomeTypes'
+import { offerView } from '../../DashboardComponents/HomeTypes'
 
 type ProfileStatTypes = {
   avatar: string

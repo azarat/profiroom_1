@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Head from 'next/head'
 
 //components
 import DashboardHeader from '../src/components/Header/DashboardHeader/DashboardHeader'
+import { MainContext } from '../src/context/MainContext'
 
 // Types
 type DashboardLayoutProps = {
@@ -13,6 +14,7 @@ type DashboardLayoutProps = {
 
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, title, userData }) => {
   const { user } = userData
+  const { isMenuOpen } = useContext(MainContext)
   return (
     <>
       <Head>
@@ -25,7 +27,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, title, user
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <DashboardHeader userData={user} />
-      <main>{children}</main>
+      <main className={`dashboard-content ${isMenuOpen ? 'dashboard-content--blur' : ''}`}>
+        {children}
+      </main>
     </>
   )
 }

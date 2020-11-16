@@ -1,0 +1,25 @@
+.dashboard-content {
+  &--blur {
+    filter: blur(10px);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .dashboard-content {
+    margin-top: 90px;
+    margin-left: 75px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .dashboard-content {
+    width: 75%;
+    margin-left: 265px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .dashboard-content {
+    min-width: 80%;
+  }
+}
