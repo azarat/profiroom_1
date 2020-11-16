@@ -35,7 +35,11 @@ const ComplEduc: NextPage<IComplEducProps> = ({ deleteComponent }: any): JSX.Ele
       <Form>
         <div className="setting__complement-form-university">
           <div className="setting__complement-form-university-name">
-            <Form.Item name="univer" label="Навчальний заклад" className="setting__main-item">
+            <Form.Item
+              name="univer"
+              label="Навчальний заклад"
+              className="setting__main-item setting__complement-univer"
+            >
               <Input name="univer" className="setting__main-field" />
             </Form.Item>
           </div>

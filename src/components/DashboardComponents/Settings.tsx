@@ -115,7 +115,7 @@ const Settings: React.FC = (): JSX.Element => {
       <section className="setting__main">
         <div className="setting__form setting__block">
           <div className="setting__main-title setting__block-title">ПРО СЕБЕ</div>
-          <div className="setting__main-form">
+          <div className="setting__main-form  setting__block-info">
             <Form
               {...formItemLayout}
               //layout ={formLayout}
@@ -140,7 +140,8 @@ const Settings: React.FC = (): JSX.Element => {
                 <Input className="setting__main-field" />
               </Form.Item>
               <div className="setting__avatar">
-                <Form.Item name="avatar" label="Аватар" className="setting__main-item-avatar">
+                <Form.Item name="avatar" label="" className="setting__main-item-avatar">
+                  <p>Аватар</p>
                   <label htmlFor="avatarImg">
                     <div className="setting__main-field-img-block">
                       <img
@@ -168,7 +169,7 @@ const Settings: React.FC = (): JSX.Element => {
                 </Radio.Group>
               </Form.Item>
 
-              <Form.Item name="birthday" label="Дата народження" className="setting__main-item">
+              <Form.Item name="birthday" label="Дата народження" className="setting__data">
                 <DatePicker
                   className="setting__datapicker"
                   defaultValue={moment('01/01/2015', dateFormatList[0])}
@@ -234,7 +235,7 @@ const Settings: React.FC = (): JSX.Element => {
         </div>
         <div className="setting__education setting__block">
           <div className="setting__main-title setting__block-title">ВИЩА ОСВІТА</div>
-          <div className="setting__education">
+          <div className="setting__form-education  setting__block-info">
             <div className="setting__education-form">{educationArr.map((i) => i)}</div>
             <div
               role="presentation"
@@ -258,9 +259,9 @@ const Settings: React.FC = (): JSX.Element => {
             </div>
           </div>
         </div>
-        <div className="setting__complement-section setting__block">
+        <div className="setting__complement setting__block">
           <div className="setting__main-title setting__block-title">ДОДАТКОВА ОСВІТА</div>
-          <div className="setting__complement">
+          <div className="setting__complement-section   setting__block-info">
             <div className="setting__complement-form">{complEducArr.map((i) => i)}</div>
             <div
               role="presentation"

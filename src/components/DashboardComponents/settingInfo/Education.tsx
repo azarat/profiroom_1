@@ -96,7 +96,11 @@ const Education: React.FC<IEducationProps> = ({ deleteComponent }: any): JSX.Ele
               <label htmlFor="doc">Завантажити файл/фото диплома</label>
               <input id="doc" type="file" accept=".png, .jpg, .jpeg"></input>
             </div>
-            <p>Можливі формати файлів jpg, jpeg, png</p>
+            <div>
+              <p className="setting__education-downloads-formats">
+                Можливі формати файлів jpg, jpeg, png
+              </p>
+            </div>
           </div>
         </div>
       </Form>

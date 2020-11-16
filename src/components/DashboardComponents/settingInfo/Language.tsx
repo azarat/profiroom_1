@@ -23,7 +23,7 @@ const Language: React.FC<ILanguageProps> = ({ deleteComponent }: any): JSX.Eleme
           <label htmlFor="langLevel">
             <p>Рівень володіння</p>
           </label>
-          <select id="langLevel">
+          <select id="langLevel" className="setting__language-level-select">
             {langLevel.map((item, i) => {
               return (
                 <option key={i} value={i}>

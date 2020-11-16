@@ -243,7 +243,7 @@
 
     &__main-item-avatar-edit .anticon {
         position: absolute;
-        top: 90px; left: 93px;
+        top: 120px; left: 93px;
         font-size: $font-20;
         border-color: #fff;
         border-radius: 50%;
@@ -511,5 +511,230 @@
 
     }
     
+}
+
+
+@media screen and (min-width: 420px){
+    .setting {
+        display: flex;
+        flex-direction: column;
+
+        &__tab {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        &__tab-btns {
+            display: none;
+        }
+
+        &__block-title {
+            width: 100%;
+            align-items: left;
+        }
+        
+        &__block-info {
+          width: 100%;
+           display: flex;
+           justify-content: center;
+        }
+
+        &__main-form,
+        &__country-container,
+        &__education,
+        &__complement {
+            max-width: 500px;
+        
+        }
+
+        &__main-item {
+            width: 420px;
+        }
+
+        &__main-item.ant-row input {
+            width: 425px;
+        }
+        
+    
+
+        //AVATAR
+
+        &__avatar {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-left: -100px;
+        }
+        
+        &__main-item-avatar {
+            display: flex;
+            justify-content: center;
+        }
+
+    
+        &__main-field-img-block {
+            width: 125px;
+            height: 125px; 
+            align-content: center;
+        }
+    
+        &__main-item-avatar-edit .anticon {
+            z-index: 1;
+            top: 115px; left: 93px;
+            font-size: $font-20;
+            border-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 4px 4px rgba(0,0,0,.08);
+            width: 28px;
+            height: 28px;
+            bottom: 0;
+            right: 0;
+        }
+
+        &__gender.ant-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            margin: 10px 0 20px 0;
+        } 
+
+        &__gender .ant-form-item-label > label{
+           width: 80px;
+        }
+
+        &__gender.setting__gender {
+            width: 270px;
+        }
+
+        &__data.ant-row {
+            display: flex;
+            flex-direction: column;
+            margin: 10px 0 20px 0;
+        }
+
+        .ant-col.ant-form-item-label {
+            text-align: left;
+        }
+
+        .ant-col.ant-form-item-control {
+            text-align: left;
+        }
+
+        &__language-value {
+            width: 100%;
+            display: flex;
+            justify-content: start;
+        }
+
+        &__language-level {
+            width: 100%;
+            display: flex;
+            justify-content: start;
+        }
+
+        .setting__language-level select {
+            width: 90%;
+        }
+
+        &__language-value .setting__button-delete {
+            display: flex;
+            height: 100%;
+        }
+
+
+
+        //education 
+
+        &__education {
+            width: 100%;
+        }
+
+        &__form-education  {
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+        }
+
+        &__education .setting__main-title {
+            text-align: left;
+        }
+
+        &__form-education  {
+            max-width: 445px;
+        }
+        
+        &__education-form-univer .ant-input{
+            max-width: 300px;
+        }
+
+        &__education-button-edit {
+            margin-left: 40px;
+        }
+        
+        &__education-button-delete {
+            margin-left: 30px;
+        }
+
+        &__education-downloads-formats {
+        margin-left: 100px;
+        }
+
+        &__education-downloads {
+
+            padding: 10px;
+
+            &-formats {
+                display: inline;
+                margin-left: 50px;
+            }
+        }
+
+        &__form-education  .setting__education-button {
+            display: flex;
+            justify-content: center;
+        }
+
+        //complement 
+        &__complement {
+            width: 100%;
+        }
+
+        &__complement .setting__main-title {
+            text-align: left;
+        }
+
+        .setting__complement-section.setting__block-info {
+            align-items: center;
+        }
+
+
+        &__complement-section   {
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+        }
+
+        &__complement-form {
+            max-width: 445px;
+        }
+
+        &__complement-univer .ant-input{
+            max-width: 300px;
+        }
+
+        &__complement-edit {
+            margin-left: 40px;
+        }
+        
+        &__complement-delete {
+            margin-left: 30px;
+        }
+        
+    }
+
 }
 
