@@ -36,6 +36,7 @@ export const getSubCatalogProps: GetStaticProps = async (
   const url = `http://test.profiroom.com/Backend/api/subcategories?catedory=${
     context.params && context.params.subcatalog
   }`
+
   const res = await fetch(url)
   const subcatalog = await res.json()
   const { props: categories } = await getStaticProps()
@@ -88,6 +89,33 @@ export const getCategorySideProps: GetServerSideProps = async (
   return {
     props: {
       catalog,
+      json,
+    },
+  }
+}
+
+export const getOfferSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+): Promise<any> => {
+  const url = 'http://test.profiroom.com/Backend/api/showOffer'
+
+  const params = context && context.params && context.params.offerId
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      offerId: params![0],
+    }),
+  })
+  const offer = await res.json()
+  const categoriesRes = await fetch('http://test.profiroom.com/Backend/api/categories')
+  const json = await categoriesRes.json()
+
+  return {
+    props: {
+      offer,
       json,
     },
   }
