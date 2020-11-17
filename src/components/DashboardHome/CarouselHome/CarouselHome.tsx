@@ -91,40 +91,46 @@ const Carousel: React.FC<ICarousel> = ({
   }, [slide])
 
   return (
-    <div className="carousel">
+    <div className="carousel--home">
       <div
-        className="carousel-list"
+        className="carousel--home-list"
         ref={carousel}
         style={{
           transition: `transform ${TRANSITION}ms`,
         }}
       >
-        {infinity && <div className="carousel-list-item">{children[children.length - 1]}</div>}
+        {infinity && (
+          <div className="carousel--home-list-item">{children[children.length - 1]}</div>
+        )}
         {children.map((child, idx) => (
           <div
             key={idx}
-            className={`carousel-list-item ${idx === slide ? 'carousel-list-item-current' : ''}`}
+            className={`carousel--home-list-item ${
+              idx === slide ? 'carousel--home-list-item-current' : ''
+            }`}
           >
             {child}
           </div>
         ))}
-        {infinity && <div className="carousel-list-item">{children[0]}</div>}
+        {infinity && <div className="carousel--home-list-item">{children[0]}</div>}
       </div>
-      <div className="carousel-buttons">
-        <div role="presentation" className="carousel-buttons-left" onClick={handlePrevSlide}>
+      <div className="carousel--home-buttons">
+        <div role="presentation" className="carousel--home-buttons-left" onClick={handlePrevSlide}>
           {buttonPrev}
         </div>
-        <div role="presentation" className="carousel-buttons-right" onClick={handleNextSlide}>
+        <div role="presentation" className="carousel--home-buttons-right" onClick={handleNextSlide}>
           {buttonNext}
         </div>
       </div>
       {withDots && (
-        <div className="carousel-dots">
+        <div className="carousel--home-dots">
           {children.map((_, idx) => (
             <div
               role="presentation"
               key={idx}
-              className={`carousel-dots-item ${idx === slide ? 'carousel-dots-item-current' : ''}`}
+              className={`carousel--home-dots-item- ${
+                idx === slide ? 'carousel--home-dots-item-current' : ''
+              }`}
               onClick={() => setSlide(idx)}
             />
           ))}

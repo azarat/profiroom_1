@@ -1,6 +1,6 @@
 .dashboard-menu {
-  position: fixed;
-  top: 70px;
+  position: absolute;
+  top: 73px;
   left: -200px;
   z-index: 15;
   display: flex;
@@ -11,7 +11,7 @@
   transition: 0.5s;
 
   &__open {
-    position: fixed;
+    position: absolute;
     left: 0;
     z-index: 15;
   }

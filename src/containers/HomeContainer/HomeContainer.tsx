@@ -1,22 +1,27 @@
-import React, { useState } from 'react'
-import Carousel from '../../DashboardHome/CarouselHome/CarouselHome'
+import React, { useContext, useState } from 'react'
+//antd
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
-import PieChartCircle from '../../DashboardHome/Charts/PieChart/PieChart'
-import LineChart from '../../DashboardHome/Charts/Line/LineChart'
-import { achievesArray } from '../../DashboardHome/Achieves/Achieves'
-import { Progress } from 'antd'
-import { dashboardProps } from '../../../../pages/dashboard/index'
-import StatusBlock from '../../DashboardHome/StatusBlock/StatusBlock'
-import Statistic from '../../DashboardHome/Statistic/Statistic'
-import ProfileStat from '../../DashboardHome/ProfileStat/ProfileStat'
-import Comments from '../../DashboardHome/Comments/Comments'
-import ArrowSVG from '../../../../public/assets/img/arrow-down.svg'
+//components
+import Carousel from '../../components/DashboardHome/CarouselHome/CarouselHome'
+import PieChartCircle from '../../components/DashboardHome/Charts/PieChart/PieChart'
+import LineChart from '../../components/DashboardHome/Charts/Line/LineChart'
+import { dashboardProps } from '../../../pages/dashboard/index'
+import StatusBlock from '../../components/DashboardHome/StatusBlock/StatusBlock'
+import Statistic from '../../components/DashboardHome/Statistic/Statistic'
+import ProfileStat from '../../components/DashboardHome/ProfileStat/ProfileStat'
+import Comments from '../../components/DashboardHome/Comments/Comments'
+import ArrowSVG from '../../../public/assets/img/arrow-down.svg'
+//context
+import { MainContext } from '../../context/MainContext'
+import Achieves from '../../components/DashboardHome/Achieves/Achieves'
 
 const HomeContainer: React.FC<dashboardProps> = ({ dashboardResponse }): JSX.Element => {
   const [activeTab, setActiveTab] = useState<number>(1)
   const [dealsType, setDealsType] = useState(dashboardResponse.allDealsperMonths)
   const [activeBtnGraphic, setActiveBtnGraphic] = useState<string>('month')
   const [commentsType, setCommentsType] = useState('positive')
+
+  const { isMenuOpen } = useContext(MainContext)
 
   const statistic = [
     {
@@ -52,7 +57,7 @@ const HomeContainer: React.FC<dashboardProps> = ({ dashboardResponse }): JSX.Ele
   ]
 
   return (
-    <div className="dashboard__home home">
+    <div className={`dashboard__home home ${isMenuOpen ? 'home--blur' : ''}`}>
       <div className="home__wrapper">
         <div className="home__statistic">
           <Statistic purse={statistic} />
@@ -76,7 +81,6 @@ const HomeContainer: React.FC<dashboardProps> = ({ dashboardResponse }): JSX.Ele
             ))}
           </Carousel>
         </div>
-
         <div className="home__status-graphic-wrapper">
           <StatusBlock dealsCounts={dashboardResponse.dealsCounts} />
 
@@ -142,7 +146,6 @@ const HomeContainer: React.FC<dashboardProps> = ({ dashboardResponse }): JSX.Ele
             </div>
           </div>
         </div>
-
         <div className="home__comments comments">
           <div className="comments__title-wrapper">
             <h5 className="comments__title">
@@ -246,7 +249,6 @@ const HomeContainer: React.FC<dashboardProps> = ({ dashboardResponse }): JSX.Ele
             }
           />
         </div>
-
         <div className="home__piechart-profile-wrapper">
           <div className="home__piechart-block piechart-block">
             <div className="piechart-block__wrapper">
@@ -260,127 +262,12 @@ const HomeContainer: React.FC<dashboardProps> = ({ dashboardResponse }): JSX.Ele
             offerViews={dashboardResponse.offerViews}
           />
         </div>
-
-        <div className="home__my-achieves my-achieves">
-          <h4 className="my-achieves__title">Мої досягнення</h4>
-          <p className="my-achieves__sub-title">Мій рівень професійності і тарифні плани</p>
-          <div className="my-achieves__rank-list">
-            {achievesArray.map((rank, index) => (
-              <div className="my-achieves__rank-item" key={index}>
-                <div className="my-achieves__img-wrapper">
-                  <img src={rank.img} alt="" className="my-achieves__img" />
-                </div>
-                <p className="my-achieves__rank">{rank.name}</p>
-              </div>
-            ))}
-            <div className="my-achieves__progress">
-              <Progress percent={20} showInfo={false} />
-            </div>
-          </div>
-          <h6 className="my-achieves__next-lvl-title">Умови переходу на наступний рівень</h6>
-          <div className="my-achieves__skill-level">
-            <div className="my-achieves__skill-block">
-              <div className="my-achieves__skill-block-title">
-                <div className="my-achieves__img-wrapper">
-                  <img src="/assets/img/achieves/zero.png" alt="" className="my-achieves__img" />
-                </div>
-                <p className="my-achieves__current-rank">Ви досягли рівня &quot;Стартовий&quot;</p>
-              </div>
-              <div className="my-achieves__checkpoints-list">
-                <div className="my-achieves__checkpoint">
-                  <div className="my-achieves__checkpoint-name">
-                    Реєстрація <span className="my-achieves__checkpoint-goal">Ціль</span>
-                  </div>
-                  <div className="my-achieves__checkpoint-proggress">
-                    <div className="my-achieves__status-done"></div>
-                    <span>100%</span>
-
-                    <div className="my-achieves__progress-line-wrapper">
-                      <Progress percent={100} showInfo={false} strokeColor="#5ddfa9" />
-                    </div>
-                    <span>100%</span>
-                  </div>
-                </div>
-                <div className="my-achieves__checkpoint">
-                  <div className="my-achieves__checkpoint-name">
-                    Підтвердження пошти <span className="my-achieves__checkpoint-goal">Ціль</span>
-                  </div>
-                  <div className="my-achieves__checkpoint-proggress">
-                    <div className="my-achieves__status-done"></div>
-                    <span>100%</span>
-
-                    <div className="my-achieves__progress-line-wrapper">
-                      <Progress percent={100} showInfo={false} strokeColor="#5ddfa9" />
-                    </div>
-                    <span>100%</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="my-achieves__skill-block">
-              <div className="my-achieves__skill-block-title">
-                <div className="my-achieves__img-wrapper">
-                  <img src="/assets/img/achieves/beginer.png" alt="" className="my-achieves__img" />
-                </div>
-                <p className="my-achieves__current-rank">
-                  Наступний рівень &quot;Початківець&quot;
-                </p>
-              </div>
-              <div className="my-achieves__checkpoints-list">
-                <div className="my-achieves__checkpoint">
-                  <div className="my-achieves__checkpoint-name">
-                    Заповнення профілю <span className="my-achieves__checkpoint-goal">Ціль</span>
-                  </div>
-                  <div className="my-achieves__checkpoint-proggress">
-                    <div className="my-achieves__status-done my-achieves__status-no-done"></div>
-                    <span>0%</span>
-
-                    <div className="my-achieves__progress-line-wrapper">
-                      <Progress percent={0} showInfo={false} strokeColor="#5ddfa9" />
-                    </div>
-                    <span>100%</span>
-                  </div>
-                </div>
-                <div className="my-achieves__checkpoint">
-                  <div className="my-achieves__checkpoint-name">
-                    Створення першої послуги
-                    <span className="my-achieves__checkpoint-goal">Ціль</span>
-                  </div>
-                  <div className="my-achieves__checkpoint-proggress">
-                    <div className="my-achieves__status-done"></div>
-                    <span>100%</span>
-
-                    <div className="my-achieves__progress-line-wrapper">
-                      <Progress percent={100} showInfo={false} strokeColor="#5ddfa9" />
-                    </div>
-                    <span>100%</span>
-                  </div>
-                </div>
-                <div className="my-achieves__checkpoint">
-                  <div className="my-achieves__checkpoint-name">
-                    Закриття першої угоди
-                    <span className="my-achieves__checkpoint-goal">Ціль</span>
-                  </div>
-                  <div className="my-achieves__checkpoint-proggress">
-                    <div className="my-achieves__status-done my-achieves__status-no-done"></div>
-                    <span>0%</span>
-
-                    <div className="my-achieves__progress-line-wrapper">
-                      <Progress percent={0} showInfo={false} strokeColor="#5ddfa9" />
-                    </div>
-                    <span>100%</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Achieves />
       </div>
     </div>
   )
 }
 
-export { authUser as getServerSideProps } from '../../../utils/auth'
+export { authUser as getServerSideProps } from '../../utils/auth'
 
 export default HomeContainer

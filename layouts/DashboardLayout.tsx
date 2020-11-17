@@ -14,11 +14,12 @@ type DashboardLayoutProps = {
 
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, title, userData }) => {
   const { user } = userData
+
   const { isMenuOpen } = useContext(MainContext)
   return (
     <>
       <Head>
-        <title>{`${title ? `${title} | Profiroom` : 'Profiroom - фриланс биржа'}`}</title>
+        <title>{`${title ? `${title} | Profiroom` : 'Profiroom - фріланс біржа'}`}</title>
         <link rel="icon" href="/favicon.ico" />
         <link
           rel="stylesheet"
@@ -26,10 +27,15 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, title, user
         />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <DashboardHeader userData={user} />
-      <main className={`dashboard-content ${isMenuOpen ? 'dashboard-content--blur' : ''}`}>
-        {children}
-      </main>
+      <div className="main-wrapper">
+        <DashboardHeader userData={user} />
+        <main
+          // style={{ overflowY: 'scroll' }}
+          className={`dashboard-content ${isMenuOpen ? 'dashboard-content--blur' : ''}`}
+        >
+          {children}
+        </main>
+      </div>
     </>
   )
 }

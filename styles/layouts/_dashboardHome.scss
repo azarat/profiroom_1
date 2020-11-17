@@ -1,6 +1,11 @@
 .home {
+  transition: filter 0.3s ease;
+  &--blur {
+    filter: blur(5px);
+  }
   &__statistic {
     width: 100%;
+    margin-bottom: 15px;
 
     &--desktop {
       display: none;
@@ -9,7 +14,7 @@
   &__statistic-item {
     display: flex;
     align-items: center;
-    width: auto;
+    width: 260px;
     margin: 0 auto;
     padding: 10px;
     border: 1px solid #ebeeff;
@@ -487,7 +492,7 @@
 
   & .my-achieves {
     display: none;
-    padding: 0 30px;
+    padding: 0 15px;
     background: #fff;
     border-radius: 4px;
     box-shadow: 0 0 21px rgba(128, 152, 213, 0.074983);
@@ -653,7 +658,7 @@
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      padding: 0 15px 0 30px;
+      padding: 0 15px;
     }
 
     &__status-block-wrapper {
@@ -664,7 +669,7 @@
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      padding: 0 30px;
+      padding: 0 15px;
     }
 
     & .offers-graphic {
@@ -684,6 +689,7 @@
     }
 
     & .comments {
+      padding: 0 15px;
       &__tabs {
         display: none;
         &--desktop {
@@ -801,7 +807,12 @@
 @media screen and(min-width:1440px) {
   .home {
     &__statistic-item {
-      width: 260px;
+      width: 210px;
     }
   }
+}
+
+.main-wrapper {
+  height: 100vh;
+  overflow: hidden;
 }

@@ -7,7 +7,7 @@ import { MobileMenuProps } from './Types'
 import { StarOutlined, RightOutlined } from '@ant-design/icons'
 
 import { dataArray } from '../../../constants/dashboardMenu'
-import Link from 'next/link'
+import ActiveLink from './ActiveLink'
 
 const Menu: React.FC<MobileMenuProps> = ({ isOpenMenu, openMenu, userData }): JSX.Element => {
   const [activeButton, setActiveButton] = useState<number>()
@@ -77,48 +77,28 @@ const Menu: React.FC<MobileMenuProps> = ({ isOpenMenu, openMenu, userData }): JS
         {dataArray.map(({ id, image, title, link, active }) => (
           <div key={id} onClick={() => selectActiveButton(id)} role="presentation">
             {
-              // <ActiveLink
-              //   activeClassName="dashboard-menu__link"
-              //   href={`/dashboard/${link}`}
-              //   as={`dashboard${link}`}
-              // >
-              //   <div className={`dashboard-menu__button ${'dashboard-menu__button-open'}`}>
-              //     <div
-              //       className={`dashboard-menu__button-image-container  ${
-              //         activeButton === id && 'dashboard-menu__button-image-container-active'
-              //       } ${isOpenMenu && 'dashboard-menu__button-image-container-open'}`}
-              //     >
-              //       <div
-              //         className={`dashboard-menu__button-image ${image} ${
-              //           activeButton === id && `${active}`
-              //         }`}
-              //       ></div>
-              //       {isOpenMenu && <p className="dashboard-menu__button-text-open">{title}</p>}
-              //       <p className="dashboard-menu__button-text-large">{title}</p>
-              //     </div>
-              //     <p className="dashboard-menu__button-text">{title}</p>
-              //   </div>
-              // </ActiveLink>
-              <Link href={`/dashboard${link}`}>
-                <a>
-                  <div className={`dashboard-menu__button ${'dashboard-menu__button-open'}`}>
+              <ActiveLink
+                activeClassName="dashboard-menu__link"
+                href={`/dashboard${link}`}
+                as={`/dashboard${link}`}
+              >
+                <div className={`dashboard-menu__button ${'dashboard-menu__button-open'}`}>
+                  <div
+                    className={`dashboard-menu__button-image-container  ${
+                      activeButton === id && 'dashboard-menu__button-image-container-active'
+                    } ${isOpenMenu && 'dashboard-menu__button-image-container-open'}`}
+                  >
                     <div
-                      className={`dashboard-menu__button-image-container  ${
-                        activeButton === id && 'dashboard-menu__button-image-container-active'
-                      } ${isOpenMenu && 'dashboard-menu__button-image-container-open'}`}
-                    >
-                      <div
-                        className={`dashboard-menu__button-image ${image} ${
-                          activeButton === id && `${active}`
-                        }`}
-                      ></div>
-                      {isOpenMenu && <p className="dashboard-menu__button-text-open">{title}</p>}
-                      <p className="dashboard-menu__button-text-large">{title}</p>
-                    </div>
-                    <p className="dashboard-menu__button-text">{title}</p>
+                      className={`dashboard-menu__button-image ${image} ${
+                        activeButton === id && `${active}`
+                      }`}
+                    ></div>
+                    {isOpenMenu && <p className="dashboard-menu__button-text-open">{title}</p>}
+                    <p className="dashboard-menu__button-text-large">{title}</p>
                   </div>
-                </a>
-              </Link>
+                  <p className="dashboard-menu__button-text">{title}</p>
+                </div>
+              </ActiveLink>
             }
           </div>
         ))}

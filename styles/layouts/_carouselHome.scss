@@ -1,4 +1,4 @@
-.carousel {
+.carousel--home {
   position: relative;
   overflow: hidden;
   &-list {
@@ -12,9 +12,10 @@
   }
 }
 
-.carousel-buttons {
+.carousel--home-buttons {
   position: absolute;
   top: 45px;
+  z-index: -1;
   display: flex;
   align-items: center;
   width: 100%;
@@ -36,7 +37,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  .carousel {
+  .carousel--home {
     position: static;
     width: 33%;
     margin: 0 auto;
@@ -49,7 +50,7 @@
     }
   }
 
-  .carousel-buttons {
+  .carousel--home-buttons {
     top: 30px;
     right: 0;
     &-left {
@@ -62,13 +63,13 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .carousel-buttons {
+  .carousel--home-buttons {
     top: 20px;
   }
 }
 
 @media screen and (min-width: 1200px) {
-  .carousel {
+  .carousel--home {
     display: none;
   }
 }

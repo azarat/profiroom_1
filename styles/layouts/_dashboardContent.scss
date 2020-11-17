@@ -1,12 +1,13 @@
 .dashboard-content {
-  &--blur {
-    filter: blur(10px);
-  }
+  position: relative;
+  height: calc(100vh - 70px);
+  padding: 15px 0px;
+  overflow-y: scroll;
 }
 
 @media screen and (min-width: 768px) {
   .dashboard-content {
-    margin-top: 90px;
+    margin-top: 10px;
     margin-left: 75px;
   }
 }
