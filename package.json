@@ -24,7 +24,7 @@
 		"react": "latest",
 		"react-dom": "latest",
 		"sass": "^1.27.0",
-		"socket.io-client": "2.3.0s",
+		"socket.io-client": "2.3.0",
 		"socketio-wildcard": "^2.0.0"
 	},
 	"scripts": {
@@ -66,10 +66,7 @@
 		"typescript": "^4.0.3"
 	},
 	"stylelint": {
-		"extends": [
-			"stylelint-config-recommended",
-			"stylelint-config-rational-order"
-		],
+		"extends": [ "stylelint-config-recommended", "stylelint-config-rational-order" ],
 		"plugins": [
 			"stylelint-order",
 			"stylelint-scss",
@@ -90,14 +87,7 @@
 					"severity": "warning"
 				}
 			],
-			"sh-waqar/declaration-use-variable": [
-				[
-					"/color/",
-					"font-size",
-					"font-family",
-					"font-weight"
-				]
-			],
+			"sh-waqar/declaration-use-variable": [ [ "/color/", "font-size", "font-family", "font-weight" ] ],
 			"order/properties-order": [],
 			"plugin/rational-order": [
 				true,
@@ -109,9 +99,7 @@
 			"selector-type-no-unknown": [
 				true,
 				{
-					"ignore": [
-						"custom-elements"
-					]
+					"ignore": [ "custom-elements" ]
 				}
 			],
 			"no-descending-specificity": true,

@@ -12,43 +12,6 @@ export const authUser: GetServerSideProps = async (
     context.res.writeHead(302, { Location: '/login' })
     context.res.end()
   }
-  // {
-  //   user: {
-  //     id: 87,
-  //     name: 'Denis',
-  //     surname: 'Davylo',
-  //     nikname: '',
-  //     email: 'vadrhtyelcjfkwoyjp@upived.com',
-  //     checked: 0,
-  //     role_id: 1,
-  //     avatar: 'http://142.93.233.236/Backend//public/storage/avatar/noAva.jpg',
-  //     rank_id: 0,
-  //     rating: 0,
-  //     country: null,
-  //     city: null,
-  //     description: '',
-  //     gender: null,
-  //     socketId: '14fa3786-fc29-457d-b3f0-1fdd79b61720',
-  //     birthday: null,
-  //     email_verified_at: '2020-10-19 08:51:48',
-  //     inRoom: null,
-  //     busy: 0,
-  //     answerTime: null,
-  //     levelChanged: null,
-  //     created_at: '2020-10-19 08:51:00',
-  //     updated_at: '2020-10-19 08:51:48',
-  //     dealsCounts: {
-  //       inProgressOffers: 0,
-  //       QueuedOffers: 0,
-  //       EndedWorks: 0,
-  //       dealsAsCustomer: 0
-  //     },
-  //     averageRating: { freelancer: [Object], customer: [Object] },
-  //     arbitration: { freelancer: 0, customer: 0, all: 0 },
-  //     views: 0,
-  //     online: true
-  //   }
-  // }
 
   const url = `${process.env.NEXT_PUBLIC_API}/api/user`
   try {
@@ -67,7 +30,59 @@ export const authUser: GetServerSideProps = async (
     console.error(e.message)
   }
   return { props: { message: 'undefined token' } }
-  //   if (!token) {
-  //     Router.push('login')
-  //   }
+}
+
+export const chatProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+): Promise<GetServerSidePropsResult<any>> => {
+  const { jwt_token } = nextCookie(context)
+  if (context.req && !jwt_token) {
+    context.res.writeHead(302, { Location: '/login' })
+    context.res.end()
+  }
+  const userUrl = `${process.env.NEXT_PUBLIC_API}/api/user`
+  const checkAuthUrl = `${process.env.NEXT_PUBLIC_API}api/checkAuthorization`
+
+  try {
+    const response = await fetch(userUrl, {
+      mode: 'cors',
+      credentials: 'include',
+      headers: {
+        Authorization: `bearer ${jwt_token}`,
+      },
+    })
+    const jsonResponse = await response.json()
+    const checkAuthRes = await fetch(checkAuthUrl, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${jwt_token}`,
+      },
+    })
+    const { socketId } = await checkAuthRes.json()
+    const classicRoomsResponse = await fetch(
+      `http://test.profiroom.com/Backend/api/getChatclassicRooms`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${jwt_token}`,
+        },
+      }
+    )
+    const classicRoomsJson = await classicRoomsResponse.json()
+    const classicRooms = classicRoomsJson.sort((a: any, b: any) =>
+      new Date(a.message[0]?.dateTime) > new Date(b.message[0]?.dateTime) ? -1 : 1
+    )
+
+    return {
+      props: {
+        jsonResponse,
+        socketId,
+        classicRooms,
+      },
+    }
+  } catch (e) {
+    return { props: { message: 'undefined token' } }
+  }
+
+  return { props: { message: 'undefined token' } }
 }

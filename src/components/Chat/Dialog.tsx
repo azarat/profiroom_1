@@ -4,7 +4,6 @@ import React from 'react'
 import { DialogPreviewProps } from './Types'
 
 const Dialog: React.FC<DialogPreviewProps> = ({
-  roomId,
   id,
   activeDialog,
   collocutorAva,
@@ -12,14 +11,14 @@ const Dialog: React.FC<DialogPreviewProps> = ({
   collocutorName,
   collocutorSurname,
   user,
-  getDialogMessages,
+  onClick,
 }) => {
   return (
     <div
-      onClick={() => getDialogMessages(roomId, id)}
+      onClick={onClick}
       role="presentation"
       className={`dialogs-preview__dialog ${
-        activeDialog?.dialog == id ? 'dialogs-preview__dialog-active' : undefined
+        activeDialog?.dialog === id ? 'dialogs-preview__dialog-active' : ''
       }`}
     >
       <div className="dialogs-preview__image-container">

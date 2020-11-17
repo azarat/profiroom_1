@@ -1,6 +1,7 @@
 .dashboard-menu {
   position: absolute;
   left: -200px;
+  z-index: 100;
   display: flex;
   flex-direction: column;
   width: 200px;
@@ -14,8 +15,9 @@
 
   &__button {
     display: flex;
-    margin-top: 10px;
-    margin-left: 15px;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    padding-left: 15px;
     text-transform: uppercase;
   }
 
@@ -23,11 +25,14 @@
     width: 35px;
     height: 35px;
     padding: 7px 5px;
+    color: $light-gray-color;
+    font-size: $font-20;
     text-align: center;
     background-color: $white-color;
     border-radius: 10px;
-    color: #bfc5d1;
-    font-size: $font-20;
+    & .icon-dashboard {
+      width: 100%;
+    }
   }
 
   &__button-image-container-active {
@@ -49,7 +54,7 @@
 
   &__stars {
     display: none;
-    color: orange;
+    color: $orange-color;
   }
 
   &__button-text-open {
@@ -62,6 +67,7 @@
 
   &__button-text-large {
     display: none;
+    font-weight: $font-weight-500;
   }
 
   &__open-button {
@@ -70,15 +76,10 @@
 }
 
 .message {
-  width: 25px;
+  width: auto;
   color: $white-color;
-  background-color: #bfc5d1;
+  background-color: $light-gray-color;
   border-radius: 5px;
-}
-
-.message-active {
-  color: $secondary-color;
-  background-color: $white-color;
 }
 
 .anticon-bell {
@@ -90,7 +91,8 @@
     top: 0;
     left: 0;
     width: 75px;
-    background-color: $white-color;
+    background-color: $white-fa-color;
+    box-shadow: $gray-shadow-100y;
 
     &__open {
       width: 250px;
@@ -105,14 +107,46 @@
       margin: 0 auto;
       margin-top: -40px;
     }
+    .message {
+      width: 30px;
+      .dashboard-menu__button-image-container-open & {
+        width: 40px;
+      }
+    }
+    &__button-image-container {
+      width: 100%;
+      height: 55px;
+      padding: 0 0;
+      font-size: $font-22;
+      cursor: pointer;
+    }
 
     &__button {
-      width: 100px;
-      margin-left: -5px;
+      padding: 0;
+      &-active {
+        .dashboard-menu__button-image-container {
+          color: $white-color;
+          background-color: $secondary-color;
+
+          & .message {
+            color: $secondary-color;
+            background-color: $white-color;
+          }
+        }
+      }
     }
 
     &__open-button {
+      position: absolute;
+      top: 10px;
+      left: 95%;
       display: block;
+      width: 20px;
+      height: 20px;
+      padding-left: 4px;
+      color: $white-color;
+      background-color: $secondary-color;
+      border-radius: 50%;
     }
 
     &__button-open {
@@ -123,22 +157,14 @@
       display: none;
     }
 
-    &__button-image-container {
-      width: 60px;
-      height: 55px;
-      margin-left: 10px;
-      padding: 0 0;
-      font-size: $font-22;
-      cursor: pointer;
-    }
-
     &__button-image {
       display: block;
       margin: 15px auto;
     }
 
     &__avatar {
-      display: block;
+      display: flex;
+      justify-content: center;
       width: 100%;
       height: 230px;
       padding: 50px 15px;
@@ -152,6 +178,7 @@
       justify-content: center;
       width: 40px;
       height: 40px;
+      margin: 0 auto;
       overflow: hidden;
       border-radius: 50%;
       transition: 0.3s;
@@ -180,7 +207,6 @@
     &__avatar-aura {
       position: absolute;
       top: 55px;
-      left: -15px;
       width: 100%;
       transition: 0.3s;
     }
@@ -205,21 +231,9 @@
       display: block;
       margin: 15px auto;
       color: $white-color;
+      font-weight: $font-weight-700;
       font-size: $font-13;
-      font-weight: bold;
       text-align: center;
-    }
-
-    &__open-button {
-      position: absolute;
-      top: 10px;
-      left: 95%;
-      width: 20px;
-      height: 20px;
-      padding-left: 4px;
-      color: $white-color;
-      background-color: $secondary-color;
-      border-radius: 50%;
     }
 
     &__button-container {
@@ -234,18 +248,17 @@
     }
 
     &__button-image-container-open {
-      width: 90px;
       height: 70px;
-      margin-left: 20px;
       font-size: $font-30;
       border-radius: 10px;
+      box-shadow: $gray-shadow-05;
     }
 
     &__button-text-open {
       display: block;
-      width: 90px;
       margin-top: -10px;
       font-size: $font-10;
+
       text-align: center;
       user-select: none;
     }
@@ -253,12 +266,25 @@
     &__nav {
       display: flex;
       flex-wrap: wrap;
+      align-content: flex-start;
+      justify-content: space-between;
+      height: 100%;
       margin: 0 auto;
+      padding: 0 10px;
       transition: 0.3s;
+      & > div {
+        width: 100%;
+        height: min-content;
+        margin-bottom: 10px;
+        transition: width 0.3s;
+      }
     }
 
     &__nav-open {
       max-width: 90%;
+      & > div {
+        width: 45%;
+      }
     }
 
     &__open-button-icon {
@@ -268,10 +294,6 @@
 
   .anticon-right {
     display: block;
-  }
-
-  .message {
-    width: 45%;
   }
 }
 
@@ -283,16 +305,17 @@
 @media (min-width: 1200px) {
   .dashboard-menu {
     top: 55px;
-    width: 250px;
+    width: 20%;
+    transition: none;
 
     &__open-button {
       display: none;
     }
 
     &__avatar {
+      width: 100%;
       padding-top: 0px;
       transition: 0.3s;
-      width: 100vw;
     }
 
     &__user-info {
@@ -309,7 +332,6 @@
 
     &__avatar-border {
       top: 45px;
-      left: 25px;
       width: 180px;
       transition: 0.3s;
     }
@@ -324,8 +346,8 @@
       display: block;
       margin: 15px auto;
       color: $white-color;
-      font-size: $font-13;
-      font-weight: bold;
+      font-weight: $font-weight-700;
+      font-size: $font-18;
       text-align: center;
     }
 
@@ -338,7 +360,11 @@
     }
 
     &__nav {
-      max-width: 90%;
+      display: grid;
+      grid-column-gap: 20px;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      padding: 25px 30px;
     }
 
     &__button {
@@ -346,17 +372,13 @@
     }
 
     &__button-image-container {
-      width: 90px;
-      height: 70px;
-      margin-left: 20px;
+      height: auto;
       font-size: $font-30;
       border-radius: 10px;
     }
 
     &__button-text-large {
       display: block;
-      width: 90px;
-      margin-top: -10px;
       font-size: $font-10;
       text-align: center;
       user-select: none;
@@ -364,6 +386,9 @@
 
     &__button-text-open {
       display: none;
+    }
+    .message {
+      width: 40px;
     }
   }
 }

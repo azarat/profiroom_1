@@ -1,34 +1,26 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 
 //types
 import { MessageProps } from './Types'
 
 const Message: React.FC<MessageProps> = ({ author, user, message, dateTime }) => {
+  const date = useMemo<Date>(() => new Date(dateTime), [])
+  const currentDate = useMemo<number>(() => new Date().getTime(), [])
   return (
-    <div
-      className={` ${
-        +author === user?.id ? 'messages-window__message' : 'messages-window__message-collocutor'
-      }`}
-    >
-      {message}
+    <>
       <div
         className={` ${
-          +author === user?.id
-            ? 'messages-window__message-time-user'
-            : 'messages-window__message-time-collocutor'
+          +author === user?.id ? 'messages-window__message' : 'messages-window__message-collocutor'
         }`}
       >
-        <p>
-          {' '}
-          {new Date(dateTime).setHours(new Date(dateTime).getHours() + new Date().getHours()) >
-          new Date().getTime()
-            ? undefined
-            : new Date(dateTime).toLocaleDateString()}
-          {` `}
-          {new Date(dateTime).toTimeString().substring(0, 5)}
-        </p>
+        {message}
       </div>
-    </div>
+      <div className="messages-window__message-date">
+        {date.getTime() > currentDate + 1000 * 60 * 60 * 24
+          ? `${date.toLocaleDateString()}`
+          : `${date.toLocaleTimeString().slice(0, -3)}`}
+      </div>
+    </>
   )
 }
 

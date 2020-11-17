@@ -18,8 +18,47 @@
 @import './layouts/chat';
 @import '../node_modules/emoji-mart/css/emoji-mart.css';
 
+* {
+  outline: none;
+  -webkit-tap-highlight-color: $transparent;
+}
+
 body {
   font-family: $font-roboto;
+  &.fixed {
+    overflow: hidden;
+  }
+}
+
+.dashboard-main {
+  position: relative;
+  height: calc(100vh - 70px);
+  background-color: $white-color;
+  border-radius: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  .dashboard-main {
+    margin-left: 75px;
+    box-shadow: $gray-shadow;
+    &::before {
+      position: absolute;
+      top: 0;
+      left: -20%;
+      z-index: -1;
+      width: 100vw;
+      height: 230px;
+      background-color: $primary-color;
+      content: '';
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .dashboard-main {
+    width: 75%;
+    margin-left: 20%;
+  }
 }
 
 @media screen and (min-width: 1200px) {

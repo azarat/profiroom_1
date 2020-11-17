@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router'
-import PropTypes from 'prop-types'
 import Link from 'next/link'
 import React, { Children } from 'react'
 
@@ -12,14 +11,15 @@ type ActiveLinkProps = {
 
 const ActiveLink: React.FC<ActiveLinkProps> = ({ children, activeClassName, ...props }) => {
   const { asPath } = useRouter()
+  console.log(asPath)
   const child = Children.only(children)
   const childClassName = child.props.className || ''
-
   const className =
     asPath === props.href || asPath === props.as
       ? `${childClassName} ${activeClassName}`.trim()
       : childClassName
-
+  console.log(props.href === asPath || props.as === props.href)
+  console.log(activeClassName, props.href, props.as)
   return (
     <Link {...props}>
       {React.cloneElement(child, {
@@ -27,10 +27,6 @@ const ActiveLink: React.FC<ActiveLinkProps> = ({ children, activeClassName, ...p
       })}
     </Link>
   )
-}
-
-ActiveLink.propTypes = {
-  activeClassName: PropTypes.string.isRequired,
 }
 
 export default ActiveLink
