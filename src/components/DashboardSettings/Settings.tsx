@@ -7,6 +7,7 @@ import moment from 'moment'
 import Language from './settingInfo/Language'
 import Education from './settingInfo/Education'
 import ComplEduc from './settingInfo/ComplEduc'
+import Security from './Security/Security'
 
 const { TextArea } = Input
 const dateFormatList: Array<string> = ['DD/MM/YYYY']
@@ -24,10 +25,10 @@ const Settings: React.FC = (): JSX.Element => {
     (e) => {
       if (e.target.id == 'next') {
         const left: any = tabMenu.current?.scrollLeft
-        tabMenu.current?.scrollTo(left + 30, 0)
+        tabMenu.current?.scrollTo({ behavior: 'smooth', left: left + 100 })
       } else if (e.target.id == 'prev') {
         const left: any = tabMenu.current?.scrollLeft
-        tabMenu.current?.scrollTo(left - 30, 0)
+        tabMenu.current?.scrollTo({ behavior: 'smooth', left: left - 100 })
       }
     },
     [tabMenu.current]
@@ -111,6 +112,8 @@ const Settings: React.FC = (): JSX.Element => {
           </div>
         </div>
       </section>
+
+      <Security />
 
       <section className="setting__main">
         <div className="setting__form setting__block">

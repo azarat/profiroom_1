@@ -9,7 +9,7 @@ import Projects from '../src/components/DashboardComponents/Projects'
 import Chat from '../src/components/DashboardComponents/Chat'
 import Services from '../src/components/DashboardComponents/Services'
 import Finance from '../src/components/DashboardComponents/Finance'
-import Settings from '../src/components/DashboardComponents/Settings'
+import Settings from '../src/components/DashboardSettings/Settings'
 
 import { JsonResponseType } from '../src/components/Header/DashboardHeader/Types'
 
