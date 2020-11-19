@@ -1,12 +1,9 @@
-import Link from 'next/link'
 import React from 'react'
-import { commentsType } from '../../DashboardComponents/HomeTypes'
+import Link from 'next/link'
+//types
+import { CommentsProps } from './Types'
 
-type CommentsType = {
-  comments: commentsType[]
-}
-
-const Comments: React.FC<CommentsType> = ({ comments }) => {
+const Comments: React.FC<CommentsProps> = ({ comments }) => {
   return (
     <>
       {comments.length === 0 ? (

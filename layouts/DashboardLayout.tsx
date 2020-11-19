@@ -29,10 +29,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, title, user
       </Head>
       <div className="main-wrapper">
         <DashboardHeader userData={user} />
-        <main
-          // style={{ overflowY: 'scroll' }}
-          className={`dashboard-content ${isMenuOpen ? 'dashboard-content--blur' : ''}`}
-        >
+        <main className={`dashboard-content ${isMenuOpen ? 'dashboard-content--blur' : ''}`}>
           {children}
         </main>
       </div>

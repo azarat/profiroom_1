@@ -1,11 +1,11 @@
 import React from 'react'
+//charts
 import Highcharts, { Options } from 'highcharts/highstock'
 import PieChart from 'highcharts-react-official'
+//types
+import { PieChartProps } from './Types'
 
-type PieChartTypes = {
-  pieData: number[] | any
-}
-const PieChartCircle: React.FC<PieChartTypes> = ({ pieData }): JSX.Element => {
+const PieChartCircle: React.FC<PieChartProps> = ({ pieData }): JSX.Element => {
   const options: Options = {
     chart: {
       type: 'pie',

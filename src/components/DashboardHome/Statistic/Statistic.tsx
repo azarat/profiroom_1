@@ -1,15 +1,7 @@
 import React from 'react'
+import { StatisticProps } from './Types'
 
-type StatisticTypes = {
-  purse: PurseTypes[]
-}
-type PurseTypes = {
-  name: string
-  id: number
-  img: string
-  amount: number
-}
-const Statistic: React.FC<StatisticTypes> = ({ purse }) => {
+const Statistic: React.FC<StatisticProps> = ({ purse }): JSX.Element => {
   return (
     <div className="home__statistic--desktop">
       {purse.map(({ name, img, amount, id }) => (

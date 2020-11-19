@@ -13,7 +13,7 @@ const Carousel: React.FC<ICarousel> = ({
   const carousel = useRef<any>()
   const [slide, setSlide] = useState(0)
 
-  const handleNextSlide = () => {
+  const handleNextSlide = (): void => {
     if (slide + 1 < children.length) setSlide(slide + 1)
     else if (infinity) {
       setSlide(slide + 1)
@@ -27,7 +27,7 @@ const Carousel: React.FC<ICarousel> = ({
     }
   }
 
-  const handlePrevSlide = () => {
+  const handlePrevSlide = (): void => {
     if (slide - 1 >= 0) {
       setSlide(slide - 1)
     } else if (infinity) {
@@ -42,7 +42,7 @@ const Carousel: React.FC<ICarousel> = ({
     }
   }
 
-  const handleTouch = () => {
+  const handleTouch = (): (() => void) => {
     let startX = 0
     const handleTouchStart: React.TouchEventHandler = (e) => {
       const { screenX } = e.touches[0]
@@ -50,7 +50,7 @@ const Carousel: React.FC<ICarousel> = ({
       carousel.current.style.transition = 'none'
     }
 
-    const handleTouchMove: React.TouchEventHandler = (e) => {
+    const handleTouchMove: React.TouchEventHandler = (e): void => {
       e.preventDefault()
       const { screenX } = e.changedTouches[0]
       const { offsetWidth } = carousel.current

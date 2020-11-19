@@ -1,11 +1,11 @@
 import React from 'react'
+//charts
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
-type LineChartTypes = {
-  data: number[]
-}
+//type
+import { LineChartProps } from './Types'
 
-const LineChart: React.FC<LineChartTypes> = ({ data }): JSX.Element => {
+const LineChart: React.FC<LineChartProps> = ({ data }): JSX.Element => {
   const options = {
     title: {
       text: '',

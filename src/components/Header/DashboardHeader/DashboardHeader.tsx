@@ -4,25 +4,22 @@ import Link from 'next/link'
 //components
 import Menu from './Menu'
 import SwitchComponent from './Switch'
+import LangSelect from '../MainHeader/LangSelect'
 
 //antd
 import { Popover } from 'antd'
 import { BellFilled } from '@ant-design/icons'
-import { Response } from './Types'
+//ctx
 import { MainContext } from '../../../context/MainContext'
-import LangSelect from '../MainHeader/LangSelect'
 
-type DashboardProps = {
-  userData: Response
-}
+//type
+import { DashboardHeaderProps } from './Types'
 
-const DashboardHeader: React.FC<DashboardProps> = (props): JSX.Element => {
+const DashboardHeader: React.FC<DashboardHeaderProps> = (props): JSX.Element => {
   const [isClient, setIsClient] = useState<boolean>(false)
   const { userData } = props
 
-  const { lang, setLang, isMenuOpen: isMenuOpen, setMenuOpen: setMenuOpen } = useContext(
-    MainContext
-  )
+  const { lang, setLang, isMenuOpen, setMenuOpen } = useContext(MainContext)
 
   const selectRole = useCallback(() => {
     setIsClient(!isClient)

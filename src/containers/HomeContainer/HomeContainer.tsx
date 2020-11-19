@@ -26,31 +26,31 @@ const HomeContainer: React.FC<dashboardProps> = ({ dashboardResponse }): JSX.Ele
   const statistic = [
     {
       name: 'к-ть виконаних замовлень',
-      amount: dashboardResponse.purse.deals_done_count,
+      amount: dashboardResponse.purse ? dashboardResponse.purse.deals_done_count : 0,
       img: '/assets/img/finance/deals_count.png',
       id: 1,
     },
     {
       name: 'к-ть всіх замовників',
-      amount: dashboardResponse.purse.customers_count,
+      amount: dashboardResponse.purse ? dashboardResponse.purse.customers_count : 0,
       img: '/assets/img/finance/dealers_count.png',
       id: 2,
     },
     {
       name: 'заморожені кошти',
-      amount: dashboardResponse.purse.hold,
+      amount: dashboardResponse.purse ? dashboardResponse.purse.hold : 0,
       img: '/assets/img/finance/hold.png',
       id: 3,
     },
     {
       name: 'виведені кошти',
-      amount: dashboardResponse.purse.withdrawn,
+      amount: dashboardResponse.purse ? dashboardResponse.purse.withdrawn : 0,
       img: '/assets/img/finance/withdrawn.png',
       id: 4,
     },
     {
       name: 'стан рахунку',
-      amount: dashboardResponse.purse.summ,
+      amount: dashboardResponse.purse ? dashboardResponse.purse.summ : 0,
       img: '/assets/img/finance/current.png',
       id: 5,
     },

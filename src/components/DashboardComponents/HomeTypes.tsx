@@ -1,17 +1,17 @@
 export type HomeTypes = {
   allDealsPerYears: number[]
   allDealsperMonths: number[]
-  dealsCounts: DealsCountResponse
+  dealsCounts: IDealsCountResponse
   pieChart: number[]
   purse: PurseTypes
   views: number
   avatar: string
-  offerViews: offerView[]
-  positiveCommentsFreelancer: commentsType[]
-  negativeCommentsFreelancer: commentsType[]
+  offerViews: IOfferView[]
+  positiveCommentsFreelancer: IComments[]
+  negativeCommentsFreelancer: IComments[]
 }
 
-export interface offerView {
+export interface IOfferView {
   Views: number
   averageRating?: {
     averageMark: number
@@ -25,7 +25,7 @@ export interface offerView {
   title: string
 }
 
-export interface commentsType {
+export interface IComments {
   author: {
     id: number
     name: string
@@ -58,7 +58,7 @@ export interface commentsType {
   termMark: number
 }
 
-interface DealsCountResponse {
+interface IDealsCountResponse {
   EndedWorks: number
   QueuedOffers: number
   dealsAsCustomer: number
@@ -66,7 +66,7 @@ interface DealsCountResponse {
 }
 
 export type DealsCountsTypes = {
-  dealsCounts: DealsCountResponse
+  dealsCounts: IDealsCountResponse
 }
 
 export type PurseTypes = {
