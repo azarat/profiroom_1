@@ -199,7 +199,7 @@ const index: NextPage = (props): JSX.Element => {
         <div className="questions">
           <div className="container">
             <div className="questions__wrapper">
-              <div>
+              <div className="questions__description-container">
                 <p className="questions__subtitle">З&#39;ЯВИЛИСЯ ПИТАННЯ?</p>
                 <strong className="questions__title">Поширені запитання</strong>
                 <div className="questions__description">
@@ -319,16 +319,18 @@ const index: NextPage = (props): JSX.Element => {
         </div>
         <div className="container">
           <div className="get-start">
-            <div>
-              <strong className="get-start__title">
-                Зареєструватися зараз і вже через 10 хвилин почніть отримувати перші заявки від
-                фрілансерів.
-              </strong>
-              <p className="get-start__subtitle">Готові почати?</p>
+            <div className="get-start__info">
+              <div>
+                <strong className="get-start__title">
+                  Зареєструватися зараз і вже через 10 хвилин почніть отримувати перші заявки від
+                  фрілансерів.
+                </strong>
+                <p className="get-start__subtitle">Готові почати?</p>
+              </div>
+              <Link href="/login?isRegister=true">
+                <a className="button get-start__button">СТВОРИТИ АКАУНТ</a>
+              </Link>
             </div>
-            <Link href="/login?isRegister=true">
-              <a className="button get-start__button">СТВОРИТИ АКАУНТ</a>
-            </Link>
           </div>
         </div>
       </div>

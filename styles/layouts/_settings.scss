@@ -1,13 +1,97 @@
+.settings-page {
+  overflow: auto;
+  &--overflow {
+    overflow: hidden;
+  }
+  .password-success {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    height: auto;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    max-width: 350px;
+    padding: 30px 50px;
+    background: #fff;
+    box-shadow: 0 15px 30px rgba(16, 27, 79, 0.15);
+    border-radius: 10px;
+    z-index: 9;
+
+    &__icon-wrapper {
+      height: 60px;
+      width: 60px;
+      background-color: green;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__text {
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 30px;
+      text-align: center;
+      color: #323c47;
+      margin: 0 auto;
+      width: 240px;
+    }
+
+    &__close-icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 25px;
+      height: 25px;
+      font-size: 25px;
+      cursor: pointer;
+      z-index: 9;
+      &::before {
+        content: '';
+        width: 20px;
+        height: 2px;
+        background-color: #bfc5d1;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      &::after {
+        content: '';
+        width: 20px;
+        height: 2px;
+        background-color: #bfc5d1;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+    }
+  }
+}
+
 .setting {
   position: relative;
   display: flex;
   flex-direction: column;
   font-family: $font-roboto;
+  pointer-events: visible;
+
+  &--blur {
+    filter: blur(5px);
+    pointer-events: none;
+  }
 
   //security block
   & .security {
-    width: 425px;
+    min-width: 320px;
     margin: 0 auto;
+
     .password {
       &__wrapper {
         border-bottom: 1px solid #ebeeff;
@@ -61,28 +145,25 @@
         position: relative;
         z-index: 3;
         display: flex;
-        display: -webkit-box;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-between;
         width: 100%;
         margin-top: 5px;
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-        -webkit-box-pack: justify;
+
         padding: 2px 0 9px;
       }
 
       &__unvalidate {
         order: 1;
-        width: 19%;
+        width: 24%;
         height: 5px;
         background: rgba(100, 154, 243, 0.4);
         border-radius: 2px;
       }
 
       &__validate {
-        width: 19%;
+        width: 24%;
         height: 5px;
         background: #649af3;
         border-radius: 2px;
@@ -117,7 +198,6 @@
 
       &__btn {
         display: flex;
-        display: -webkit-box;
         align-items: center;
         margin: 30px auto 20px;
         padding: 17px 35px 15px;
@@ -208,9 +288,6 @@
     }
   }
 
-  &__main {
-    display: none;
-  }
   &__main-field.ant-input {
     padding: 10px;
     color: $gray-color;

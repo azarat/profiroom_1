@@ -1,9 +1,15 @@
 import { Button, Form, Input } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
-import React, { useState } from 'react'
-const Secutity: React.FC = (): JSX.Element => {
+import React, { Dispatch, SetStateAction, useState } from 'react'
+import nextCookie from 'next-cookies'
+
+type SecurityProps = {
+  email: string
+  setModalOpen: Dispatch<SetStateAction<boolean>>
+}
+const Security: React.FC<SecurityProps> = ({ email, setModalOpen }): JSX.Element => {
   const [form] = useForm()
-  const [line, setLine] = useState<boolean[]>(Array(5).fill(false))
+  const [line, setLine] = useState<boolean[]>(Array(4).fill(false))
 
   const handleFormChange = () => {
     form
@@ -18,24 +24,48 @@ const Secutity: React.FC = (): JSX.Element => {
         setLine((prev) => [...prev.map((_, idx) => idx >= field.errors.length)])
       })
   }
+  const { jwt_token } = nextCookie('ctx')
 
-  console.log(line)
+  const handleNewPassword = async (): Promise<void> => {
+    const oldPassword = form.getFieldValue('old_password')
+    const newPassword = form.getFieldValue('password')
+    const repeatPassword = form.getFieldValue('password')
+
+    const url = `${process.env.NEXT_PUBLIC_API}api/password/updatePass`
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Authorization: `bearer ${jwt_token}`,
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        oldPassword: oldPassword,
+        passwords: {
+          newPassword: newPassword,
+          newPassword_confirmation: repeatPassword,
+        },
+      }),
+    })
+    const result = await response.json()
+    if (result.message === 'succes') {
+      setModalOpen(true)
+    }
+  }
 
   return (
-    <div className="security">
+    <div className={'security'}>
       <div className="security__wrapper">
         <div className="security__password password">
           <div className="password__wrapper">
             <div className="password__inner">
               <h3 className="password__title">зміна пароля</h3>
-              <Form form={form}>
+              <Form form={form} onFinish={() => handleNewPassword()}>
                 <div className="password__item">
                   <h5 className="password__item-title">Введіть старий пароль</h5>
                   <Form.Item name="old_password">
-                    <Input type="password" className="password__input" />
+                    <Input type="text" className="password__input" />
                   </Form.Item>
                 </div>
-
                 <div className="password__item">
                   <h5 className="password__item-title">Введіть новий пароль</h5>
                   <Form.Item
@@ -46,17 +76,9 @@ const Secutity: React.FC = (): JSX.Element => {
                       { pattern: /[A-Z]{1,}/, message: 'Використовуйте великі літери A-Z' },
                       { pattern: /[a-z]{1,}/, message: 'Використовуйте літери a-z' },
                       { pattern: /[0-9]{1,}/, message: 'Використовуйте цифри' },
-                      {
-                        pattern: /[-!$%^&*()_+|~=`{}\[\]:";'<>?,.\/]/,
-                        message: 'Використовуйте символи',
-                      },
                     ]}
                   >
-                    <Input
-                      type="password"
-                      className="password__input"
-                      onChange={handleFormChange}
-                    />
+                    <Input type="text" className="password__input" onChange={handleFormChange} />
                   </Form.Item>
                 </div>
                 <div className="password__validation">
@@ -69,16 +91,33 @@ const Secutity: React.FC = (): JSX.Element => {
                 </div>
                 <div className="password__item">
                   <h5 className="password__item-title">Підтвердіть новий пароль</h5>
-
-                  <Form.Item name="repeat_password">
-                    <Input type="password" className="password__input" />
+                  <Form.Item
+                    name="repeat_password"
+                    dependencies={['password']}
+                    hasFeedback
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Будь ласка підтвердіть Ваш пароль!',
+                      },
+                      ({ getFieldValue }) => ({
+                        validator(_, value) {
+                          if (!value || getFieldValue('password') === value) {
+                            return Promise.resolve()
+                          }
+                          return Promise.reject('Паролі не співпадають')
+                        },
+                      }),
+                    ]}
+                  >
+                    <Input type="text" className="password__input" />
                   </Form.Item>
                 </div>
-                <Form.Item className="password__btn-wrapper">
+                <div className="password__btn-wrapper">
                   <Button htmlType="submit" className="password__btn">
                     Зберегти зміни
                   </Button>
-                </Form.Item>
+                </div>
               </Form>
             </div>
           </div>
@@ -91,7 +130,7 @@ const Secutity: React.FC = (): JSX.Element => {
                 <div className="email__item">
                   <h5 className="email__item-title">Ваш поточний e-mail</h5>
                   <Form.Item>
-                    <Input type="email" className="email__input" />
+                    <Input value={email} type="email" className="email__input" />
                   </Form.Item>
                 </div>
                 <div className="email__item">
@@ -106,11 +145,11 @@ const Secutity: React.FC = (): JSX.Element => {
                     <Input type="email" className="email__input" />
                   </Form.Item>
                 </div>
-                <Form.Item className="password__btn-wrapper">
+                <div className="password__btn-wrapper">
                   <Button htmlType="submit" className="password__btn">
                     Зберегти зміни
                   </Button>
-                </Form.Item>
+                </div>
               </Form>
             </div>
           </div>
@@ -120,4 +159,4 @@ const Secutity: React.FC = (): JSX.Element => {
   )
 }
 
-export default Secutity
+export default Security
