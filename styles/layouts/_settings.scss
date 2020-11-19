@@ -1,75 +1,74 @@
 .settings-page {
-  overflow: auto;
+  overflow-y: scroll;
   &--overflow {
-    overflow: hidden;
+    overflow-y: hidden;
   }
   .password-success {
     position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     top: 50%;
     left: 50%;
-    height: auto;
+    z-index: 9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    transform: translate(-50%, -50%);
-    max-width: 350px;
+    height: auto;
     padding: 30px 50px;
     background: #fff;
-    box-shadow: 0 15px 30px rgba(16, 27, 79, 0.15);
     border-radius: 10px;
-    z-index: 9;
+    box-shadow: 0 15px 30px rgba(16, 27, 79, 0.15);
+    transform: translate(-50%, -50%);
 
     &__icon-wrapper {
-      height: 60px;
-      width: 60px;
-      background-color: green;
-      border-radius: 50%;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      background-color: green; // add color
+      border-radius: 50%;
     }
 
     &__text {
-      font-weight: 600;
-      font-size: 24px;
+      width: 240px;
+      margin: 0 auto;
+      color: $gray-color-title;
+      font-weight: $font-weight-600;
+      font-size: $font-24;
       line-height: 30px;
       text-align: center;
-      color: #323c47;
-      margin: 0 auto;
-      width: 240px;
     }
 
     &__close-icon {
       position: absolute;
       top: 20px;
       right: 20px;
+      z-index: 9;
       width: 25px;
       height: 25px;
-      font-size: 25px;
+      font-size: $font-25;
       cursor: pointer;
-      z-index: 9;
       &::before {
-        content: '';
-        width: 20px;
-        height: 2px;
-        background-color: #bfc5d1;
         position: absolute;
         top: 50%;
         left: 50%;
+        width: 20px;
+        height: 2px;
+        background: #bfc5d1;
         transform: translate(-50%, -50%) rotate(45deg);
+        content: '';
       }
 
       &::after {
-        content: '';
-        width: 20px;
-        height: 2px;
-        background-color: #bfc5d1;
         position: absolute;
         top: 50%;
         left: 50%;
+        width: 20px;
+        height: 2px;
+        background: #bfc5d1;
         transform: translate(-50%, -50%) rotate(-45deg);
+        content: '';
       }
     }
   }
@@ -744,6 +743,39 @@
     position: relative;
     z-index: 8;
     margin-left: 356px;
+
+    & .security {
+      width: 90%;
+      .password {
+        &__title {
+          font-size: $font-14;
+        }
+        &__inner {
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          width: 90%;
+        }
+        .ant-form.ant-form-horizontal {
+          width: 70%;
+        }
+      }
+
+      .email {
+        &__title {
+          font-size: $font-14;
+        }
+        &__inner {
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          width: 90%;
+        }
+        .ant-form.ant-form-horizontal {
+          width: 70%;
+        }
+      }
+    }
 
     &__header-title {
       margin: 30px auto 0 15px;
