@@ -1,14 +1,13 @@
 .services {
   &__wrapper {
-    max-width: 390px;
+    max-width: 100%;
     min-height: 480px;
-    margin: auto;
-    padding: 0 5px;
+    padding: 0 10px;
   }
 
   &__breadcrumb.ant-breadcrumb {
     display: none;
-    margin: 35px 0 35px;
+    margin: 35px 0;
   }
 
   .ant-breadcrumb a {
@@ -23,8 +22,7 @@
   }
 
   &__title {
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin: 15px 0;
     font-size: $font-18;
     line-height: 23px;
     text-align: center;
@@ -273,13 +271,15 @@
     }
   }
 
-  &__budget-filter-arrow {
-    transform: rotate(180deg);
-    transition: all 0.5s ease;
-  }
-  &__budget-filter-arrow--open {
-    transform: rotate(0deg);
-    transition: all 0.5s ease;
+  &__budget {
+    &-filter-arrow {
+      transform: rotate(180deg);
+      transition: all 0.5s ease;
+      &--open {
+        transform: rotate(0deg);
+        transition: all 0.5s ease;
+      }
+    }
   }
   &__term-filter-options {
     position: absolute;
@@ -363,6 +363,7 @@
   &__load-more-wrapper {
     display: flex;
     justify-content: center;
+    margin: 15px 0 0;
   }
 
   &__load-more {
@@ -380,6 +381,7 @@
     background-color: $transparent;
     border: 1px solid $secondary-color;
     border-radius: 4px;
+    outline: $secondary-color;
   }
 }
 
@@ -400,14 +402,14 @@
     }
 
     .ant-checkbox-group-item {
+      width: 100%;
       margin: 0;
       padding: 10px 0px;
       border: 1px solid #f4f7fc;
     }
 
     &__wrapper {
-      max-width: 690px;
-      padding: 0;
+      padding: 0 25px;
     }
     &__title {
       margin-bottom: 60px;
