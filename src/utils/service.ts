@@ -4,7 +4,10 @@ import {
   GetStaticPaths,
   GetStaticProps,
   GetStaticPropsContext,
+  GetServerSidePropsResult,
 } from 'next'
+
+import nextCookie from 'next-cookies'
 
 export async function getStaticProps(): Promise<any> {
   const res = await fetch('http://test.profiroom.com/Backend/api/categories')
@@ -119,4 +122,51 @@ export const getOfferSideProps: GetServerSideProps = async (
       json,
     },
   }
+}
+
+export const userFinance: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+): Promise<GetServerSidePropsResult<any>> => {
+  const { jwt_token } = nextCookie(context)
+
+  const userFinanceUrl = `${process.env.NEXT_PUBLIC_API}api/userFinance`
+  const userFinanceGraphUrl = `${process.env.NEXT_PUBLIC_API}api/userFinanceGraph`
+  const url = `${process.env.NEXT_PUBLIC_API}api/user`
+
+  try {
+    const userFinance = await fetch(userFinanceUrl, {
+      headers: {
+        Authorization: `bearer ${jwt_token}`,
+      },
+    })
+    const userFinanceGraph = await fetch(userFinanceGraphUrl, {
+      method: 'POST',
+      body: JSON.stringify({
+        year: 2020,
+      }),
+      headers: {
+        Authorization: `bearer ${jwt_token}`,
+        'Content-Type': 'application/json',
+      },
+    })
+    const response = await fetch(url, {
+      mode: 'cors',
+      credentials: 'include',
+      headers: {
+        Authorization: `bearer ${jwt_token}`,
+      },
+    })
+    console.log('Allo: ', userFinanceGraph)
+    const userFinanceResponse = await userFinance.json()
+    const userFinanceGraphResponse = await userFinanceGraph.json()
+    const jsonResponse = await response.json()
+    console.log('Alyyylo: ', userFinanceGraphResponse)
+
+    return {
+      props: { userFinanceResponse, jsonResponse, userFinanceGraphResponse },
+    }
+  } catch (e) {
+    console.error(e.message)
+  }
+  return { props: { message: 'undefined token' } }
 }

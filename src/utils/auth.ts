@@ -31,7 +31,6 @@ export const authUser: GetServerSideProps = async (
     })
     const jsonResponse = await response.json()
     const dashboardResponse = await dashboard.json()
-    console.log(dashboardResponse)
     return {
       props: { jsonResponse, dashboardResponse },
     }

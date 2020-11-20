@@ -1,12 +1,10 @@
 import React from 'react'
-//charts
-import Highcharts from 'highcharts'
+import Highcharts, { Options } from 'highcharts/highstock'
 import HighchartsReact from 'highcharts-react-official'
-//type
-import { LineChartProps } from './Types'
+import { utimes } from 'fs/promises'
 
-const LineChart: React.FC<LineChartProps> = ({ data }): JSX.Element => {
-  const options = {
+const Graphic = ({ history }) => {
+  const options: Options = {
     title: {
       text: '',
     },
@@ -23,7 +21,11 @@ const LineChart: React.FC<LineChartProps> = ({ data }): JSX.Element => {
     series: [
       {
         name: 'Дохід',
-        data: data,
+        data: history.map((item) => {
+          if (item.trnsactonType === 'income') {
+            return item.amount
+          }
+        }),
       },
     ],
 
@@ -48,9 +50,12 @@ const LineChart: React.FC<LineChartProps> = ({ data }): JSX.Element => {
     lang: {},
     xAxis: {
       title: {},
-      labels: {
-        format: 'Месяц',
-      },
+      categories: history.map((item) => {
+        if (item.trnsactonType === 'income') {
+          return new Date(item.isoDate).toLocaleDateString()
+        }
+      }),
+      //   labels: {},
     },
     credits: {
       enabled: false,
@@ -60,4 +65,4 @@ const LineChart: React.FC<LineChartProps> = ({ data }): JSX.Element => {
   return <HighchartsReact highcharts={Highcharts} options={options} />
 }
 
-export default LineChart
+export default Graphic
