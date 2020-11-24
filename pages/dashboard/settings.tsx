@@ -151,50 +151,54 @@ const Settings: NextPage<SettingsProps> = ({ jsonResponse }): JSX.Element => {
                 onValuesChange={onFormLayoutChange}
                 className="setting__main-form"
               >
-                <Form.Item
-                  name="firstName"
-                  label="Ім'я"
-                  className="setting__main-item setting__firstname"
-                >
-                  <Input className="setting__main-field" />
-                </Form.Item>
+                <div className="setting__userInfo">
+                  <div className="setting__nameInfo">
+                    <Form.Item
+                      name="firstName"
+                      label="Ім'я"
+                      className="setting__main-item setting__firstname"
+                    >
+                      <Input className="setting__main-field" />
+                    </Form.Item>
 
-                <Form.Item
-                  name="surName"
-                  label="Прізвище"
-                  className="setting__main-item setting__surname"
-                >
-                  <Input className="setting__main-field" />
-                </Form.Item>
-                <div className="setting__avatar">
-                  <Form.Item name="avatar" label="" className="setting__main-item-avatar">
-                    <p>Аватар</p>
-                    <label htmlFor="avatarImg">
-                      <div className="setting__main-field-img-block">
-                        <img
-                          className="setting__main-item-avatar-img"
-                          src="https://profiroom.com/Backend/public/storage/avatar/noAva.jpg"
-                          alt="avatar"
-                        />
-                        <div className="setting__main-item-avatar-edit">
-                          <EditFilled />
+                    <Form.Item
+                      name="surName"
+                      label="Прізвище"
+                      className="setting__main-item setting__surname"
+                    >
+                      <Input className="setting__main-field" />
+                    </Form.Item>
+                  </div>
+                  <div className="setting__avatar">
+                    <Form.Item name="avatar" label="" className="setting__main-item-avatar">
+                      <p>Аватар</p>
+                      <label htmlFor="avatarImg">
+                        <div className="setting__main-field-img-block">
+                          <img
+                            className="setting__main-item-avatar-img"
+                            src="https://profiroom.com/Backend/public/storage/avatar/noAva.jpg"
+                            alt="avatar"
+                          />
+                          <div className="setting__main-item-avatar-edit">
+                            <EditFilled />
+                          </div>
                         </div>
-                      </div>
-                    </label>
-                    <input
-                      accept="image/png, image/jpeg"
-                      type="file"
-                      className="setting__main-form-item-avatar-input"
-                      id="avatarImg"
-                    />
-                  </Form.Item>
+                      </label>
+                      <input
+                        accept="image/png, image/jpeg"
+                        type="file"
+                        className="setting__main-form-item-avatar-input"
+                        id="avatarImg"
+                      />
+                    </Form.Item>
+                  </div>
                 </div>
                 <Form.Item
                   name="gender"
                   label="Стать"
                   className="setting__main-item setting__gender"
                 >
-                  <Radio.Group onChange={onChange} value={gender}>
+                  <Radio.Group onChange={onChange} value={gender} className="setting__gender-value">
                     <Radio value={'male'}>Чоловіча</Radio>
                     <Radio value={'fimale'}>Жіноча</Radio>
                   </Radio.Group>
@@ -208,18 +212,20 @@ const Settings: NextPage<SettingsProps> = ({ jsonResponse }): JSX.Element => {
                     size="large"
                   />
                 </Form.Item>
-                <Form.Item
-                  name="aboutYourself"
-                  label="Розкажіть про себе"
-                  className="setting__main-item"
-                >
-                  <TextArea
-                    className="setting__textarea"
-                    showCount
-                    maxLength={1200}
-                    autoSize={{ minRows: 7 }}
-                  />
-                </Form.Item>
+                <div className="setting__info-textarea">
+                  <Form.Item
+                    name="aboutYourself"
+                    label="Розкажіть про себе"
+                    className="setting__main-item"
+                  >
+                    <TextArea
+                      className="setting__textarea"
+                      showCount
+                      maxLength={1200}
+                      autoSize={{ minRows: 7 }}
+                    />
+                  </Form.Item>
+                </div>
               </Form>
             </div>
           </div>

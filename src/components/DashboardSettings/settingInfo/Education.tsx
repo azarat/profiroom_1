@@ -19,21 +19,23 @@ const Education: React.FC<IEducationProps> = ({ deleteComponent }: any): JSX.Ele
   return (
     <>
       <Form>
-        <div className="setting__education-form-univer">
-          <Form.Item name="university" label="Навчальний заклад" className="setting__main-item">
-            <Input className="setting__main-field" />
-          </Form.Item>
-        </div>
-        <div className="setting__button-editor setting__education-btns">
-          <div
-            role="presentation"
-            onClick={() => setShowEduc((prev) => !prev)}
-            className="setting__button-edit setting__education-button-edit"
-          >
-            <EditFilled />
+        <div className="setting__education-form-edit">
+          <div className="setting__education-form-univer">
+            <Form.Item name="university" label="Навчальний заклад" className="setting__main-item">
+              <Input className="setting__main-field" />
+            </Form.Item>
           </div>
-          <div className="setting__button-delete setting__education-button-delete">
-            <DeleteFilled onClick={deleteComponent} />
+          <div className="setting__button-editor setting__education-btns">
+            <div
+              role="presentation"
+              onClick={() => setShowEduc((prev) => !prev)}
+              className="setting__button-edit setting__education-button-edit"
+            >
+              <EditFilled />
+            </div>
+            <div className="setting__button-delete setting__education-button-delete">
+              <DeleteFilled onClick={deleteComponent} />
+            </div>
           </div>
         </div>
         <div
@@ -41,24 +43,26 @@ const Education: React.FC<IEducationProps> = ({ deleteComponent }: any): JSX.Ele
             showEduc ? 'setting__education-form-univer-info-hidden' : ''
           }`}
         >
-          <div className="setting__education-level setting__select">
-            <label htmlFor="scienceDegree">
-              <p>Наукова ступінь</p>
-            </label>
-            <select id="scienceDegree">
-              {scienceDegree.map((level, i) => {
-                return (
-                  <option key={i} value={level}>
-                    {level}
-                  </option>
-                )
-              })}
-            </select>
-          </div>
-          <div>
-            <Form.Item name="specialty" label="Спеціальність" className="setting__main-item">
-              <Input className="setting__main-field" />
-            </Form.Item>
+          <div className="setting__education-specialty">
+            <div className="setting__education-level setting__select">
+              <label htmlFor="scienceDegree">
+                <p>Наукова ступінь</p>
+              </label>
+              <select id="scienceDegree">
+                {scienceDegree.map((level, i) => {
+                  return (
+                    <option key={i} value={level}>
+                      {level}
+                    </option>
+                  )
+                })}
+              </select>
+            </div>
+            <div>
+              <Form.Item name="specialty" label="Спеціальність" className="setting__main-item">
+                <Input className="setting__main-field" />
+              </Form.Item>
+            </div>
           </div>
           <div className="setting__education-yaer">
             <div className="setting__select">

@@ -1025,5 +1025,253 @@
     &__complement-delete {
       margin-left: 30px;
     }
+
+    p {
+        margin-left: 0px;
+    }
   }
+
+
+}
+
+@media screen and (min-width: 575px) {
+    .setting {
+        
+        background: #fbfcfd;
+        box-shadow: 0 9px 21px rgba(128, 152, 213, 0.1);
+        border-radius: 4px;
+        position: relative;
+        z-index: 8;
+
+
+        & .security {
+            width: 90%;
+            .password {
+              &__title {
+                font-size: $font-14;
+              }
+              &__inner {
+                display: flex;
+                align-items: baseline;
+                justify-content: space-between;
+                width: 90%;
+              }
+              .ant-form.ant-form-horizontal {
+                width: 70%;
+              }
+            }
+      
+            .email {
+              &__title {
+                font-size: $font-14;
+              }
+              &__inner {
+                display: flex;
+                align-items: baseline;
+                justify-content: space-between;
+                width: 90%;
+              }
+              .ant-form.ant-form-horizontal {
+                width: 70%;
+              }
+            }
+          }
+        &__main {
+            display: flex;
+            flex-direction: column;
+        }
+
+        &__block {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        &__block-title {
+            grid-row: 1;
+            grid-column: 1;
+            padding-left: 30px;
+        }
+
+       &__block-info{
+           grid-row: 1;
+           grid-column: 2/4;
+           justify-content: start;
+       } 
+
+       &__main-form,
+       &__country-container,
+       &__form-education,
+       &__complement-section  {
+         max-width:700px;
+       }
+
+       &__userInfo {
+           display: grid;
+           grid-template-columns: repeat(2, 1fr);
+           grid-template-rows: 1fr;
+           justify-content: center;
+           align-items: center;
+       }
+
+       &__nameInfo {
+           place-content: center;
+           grid-row: 1;
+            grid-column: 2;   
+            width: auto;
+
+            .ant-row {
+                display: flex;
+                flex-direction: column;
+                margin: 10px 0px 30px 30px;
+            }
+
+            .ant-row input {
+                max-width: 100%;
+            }
+       }
+
+       &__avatar {
+           place-content: center;
+           grid-row: 1;
+           grid-column: 1;
+           grid-column-gap: 10px;
+       }
+
+       &__avatar {
+       
+           max-width: 200px;
+
+           p {
+            margin-left: 0px;
+          }
+       }
+
+       &__gender.ant-row {
+        display: flex;
+        flex-direction: column;
+       }
+
+        .ant-radio-group{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-bottom: 10px;
+        }
+
+        &__data  {
+            height: 80px;
+            margin: 10px 0 10px 0;
+        }
+
+        &__main-item.ant-row {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        &__main-item textarea {
+            width: 100%;
+        }
+
+        &__info-textarea .setting__main-item{
+            width: auto;
+        }
+
+        &__country-container-info {
+            max-width: 600px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-column-gap: 20px;
+        }
+
+        &__country-container-info  .setting__main-item {
+            width: 100%;
+        }
+
+        &__country-container-info input,
+        &__language-item {
+            max-width: 280px;  
+        }
+
+        &__language {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            justify-content: center;
+            align-items: center;
+            grid-column-gap: 20px;
+        }
+
+        &__language-item input {
+            max-width: 280px;  
+        }
+
+        &__language-value {
+            display: grid;
+            grid-template-columns: repeat(2, 280px);
+            align-self: end;
+
+        }
+
+        &__button-delete {
+            display: block;
+            align-items: center;
+        }
+
+        &__education {
+            max-width: 100%;
+          }
+
+        &__education-form-edit{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-column-gap: 10px;
+            align-self: center;
+        }     
+
+        &__education-form-univer .ant-input{
+            max-width: 100%;
+        }
+
+        &__education-btns {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            align-self: center;
+        }
+
+        &__education-specialty {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        &__education-level {
+            grid-column: 1;
+        }
+        
+        &__education-level {
+            margin-right: 20px;;
+        }
+
+        p {
+            margin-left: 0px;
+        }
+
+        &__complement {
+            max-width: 100%;
+        }
+
+        &__complement-form-university {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-column-gap: 10px;
+            align-self: center;
+        }
+
+        &__complement-form  {
+            max-width: 100%;
+        }
+
+        &__complement-univer .ant-input{
+            max-width: 100%;
+        }
+    }
 }
