@@ -34,7 +34,9 @@ const Language: React.FC<ILanguageProps> = ({ deleteComponent }: any): JSX.Eleme
           </select>
         </div>
         <div className="setting__button-delete">
-          <DeleteFilled onClick={deleteComponent} />
+          <div>
+            <DeleteFilled onClick={deleteComponent} />
+          </div>
         </div>
       </div>
     </>

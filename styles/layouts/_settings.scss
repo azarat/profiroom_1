@@ -1,7 +1,10 @@
 .settings-page {
   overflow-y: scroll;
+  
   &--overflow {
     overflow-y: hidden;
+
+   
   }
   .password-success {
     position: absolute;
@@ -75,6 +78,10 @@
 }
 
 .setting {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  overflow: auto;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -540,6 +547,9 @@
   &__country-container {
     margin: 10px;
     padding: 10px;
+    & .ant-form {
+      width: 100%;
+    }
   }
 
   &__country-container-info {
@@ -620,6 +630,11 @@
         display: none;
       }
     }
+  }
+
+  &__education-form {
+    max-width: 700px;
+    width: 100%;
   }
 
   &__education-button {
@@ -817,6 +832,8 @@
   .setting {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    overflow: auto;
 
     &__tab {
       width: 100%;
@@ -951,14 +968,11 @@
       display: flex;
       flex-direction: column;
       margin: 0 auto;
+      max-width: 445px;
     }
 
     &__education .setting__main-title {
       text-align: left;
-    }
-
-    &__form-education {
-      max-width: 445px;
     }
 
     &__education-form-univer .ant-input {
@@ -1005,6 +1019,7 @@
     }
 
     &__complement-section {
+      width: 100%;
       display: flex;
       flex-direction: column;
       margin: 0 auto;
@@ -1036,6 +1051,10 @@
 
 @media screen and (min-width: 575px) {
     .setting {
+
+      height: 100%;
+      overflow: auto;
+     
         
         background: #fbfcfd;
         box-shadow: 0 9px 21px rgba(128, 152, 213, 0.1);
@@ -1094,22 +1113,21 @@
 
        &__block-info{
            grid-row: 1;
-           grid-column: 2/4;
+           grid-column: 2/ span 3;
            justify-content: start;
        } 
 
-       &__main-form,
-       &__country-container,
-       &__form-education,
-       &__complement-section  {
-         max-width:700px;
-       }
 
+      &__language-item .setting__main-item {
+        width: 100%;
+      }
+ 
        &__userInfo {
            display: grid;
-           grid-template-columns: repeat(2, 1fr);
+           grid-template-columns: 125px calc(100% - 125px - 30px) ;
            grid-template-rows: 1fr;
            justify-content: center;
+           grid-column-gap:30px;
            align-items: center;
        }
 
@@ -1117,12 +1135,10 @@
            place-content: center;
            grid-row: 1;
             grid-column: 2;   
-            width: auto;
-
+            
             .ant-row {
                 display: flex;
                 flex-direction: column;
-                margin: 10px 0px 30px 30px;
             }
 
             .ant-row input {
@@ -1163,14 +1179,21 @@
             height: 80px;
             margin: 10px 0 10px 0;
         }
+        &__main-item {
+          max-width: 100%;
+          &.ant-row input {
+            width: 100%;
+          }
+        }
 
         &__main-item.ant-row {
             display: grid;
-            grid-template-columns: repeat(1, 1fr);
+            grid-template-columns: 100%;
         }
 
         &__main-item textarea {
-            width: 100%;
+          max-width: 100%;  
+          width: 100%;
         }
 
         &__info-textarea .setting__main-item{
@@ -1197,7 +1220,7 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             justify-content: center;
-            align-items: center;
+            align-items: end;
             grid-column-gap: 20px;
         }
 
@@ -1207,40 +1230,56 @@
 
         &__language-value {
             display: grid;
-            grid-template-columns: repeat(2, 280px);
-            align-self: end;
-
+            grid-template-columns: repeat(2, 110%);
+            align-self: flex-end;
         }
 
         &__button-delete {
-            display: block;
-            align-items: center;
+            display: flex;
+            align-items: flex-end;
         }
 
         &__education {
+          padding-right: 10px;
             max-width: 100%;
+            justify-content: start;
           }
 
         &__education-form-edit{
+          width: 100%;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 65% 20%;
             grid-column-gap: 10px;
-            align-self: center;
-        }     
+            align-items: center;
+            justify-content: start;
+        }  
 
-        &__education-form-univer .ant-input{
-            max-width: 100%;
+        &__education-form-edit .ant-row input {
+          max-width: 550px;
         }
 
-        &__education-btns {
+        &__education-form-univer {
+          width: 100%;
+        }
+
+        &__education-form-univer .setting__education-btns {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             align-self: center;
         }
 
         &__education-specialty {
+          width: 100%;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 150px calc(100% - 150px);
+            grid-column-gap: 10px;
+            align-items: flex-end;
+        }
+
+        &__education-button-edit {
+          display: flex;
+          justify-content: flex-end;
+          align-items: flex-end;
         }
 
         &__education-level {
@@ -1248,7 +1287,7 @@
         }
         
         &__education-level {
-            margin-right: 20px;;
+            margin-right: 20px;
         }
 
         p {
@@ -1261,17 +1300,55 @@
 
         &__complement-form-university {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             grid-column-gap: 10px;
             align-self: center;
         }
 
+        &__main-form, .setting__country-container {
+          width: auto;
+          max-width: 700px; 
+        }
+
         &__complement-form  {
+          border: 2px solid green;
             max-width: 100%;
         }
 
         &__complement-univer .ant-input{
             max-width: 100%;
         }
+
+        &__form-education {
+          max-width: 700px;
+          border: 2px solid red;
+          width: 100%;
+          margin: 0;
+        }
+
+        &__form-education .setting__education-button {
+          justify-content: start;
+        }
+
+        &__complement-section  .setting__complement-add-button {
+          max-width: 100%;
+          display: flex;
+          justify-content: start;
+        }
     }
+}
+
+@media screen and (min-width: 1200px){
+  .setting {
+    width: 100%;
+    margin-left: 0px;
+
+    height: 100%;
+    overflow: auto;
+
+
+    &__form-education {
+      margin: 0;
+    }
+  }
 }

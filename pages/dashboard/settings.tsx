@@ -300,25 +300,27 @@ const Settings: NextPage<SettingsProps> = ({ jsonResponse }): JSX.Element => {
             <div className="setting__main-title setting__block-title">ДОДАТКОВА ОСВІТА</div>
             <div className="setting__complement-section   setting__block-info">
               <div className="setting__complement-form">{complEducArr.map((i) => i)}</div>
-              <div
-                role="presentation"
-                onClick={() => {
-                  setComplEducArr((arr) => [
-                    ...arr,
-                    <ComplEduc
-                      key={arr.length}
-                      deleteComponent={() => {
-                        deleteComplEduc(arr.length)
-                      }}
-                    />,
-                  ])
-                }}
-                className="setting__education-button"
-              >
-                <button className="setting__button-add">
-                  <PlusCircleOutlined />
-                  <span className="setting__button-add-label ">ДОДАТИ ОСВІТУ</span>
-                </button>
+              <div className="setting__complement-add-button">
+                <div
+                  role="presentation"
+                  onClick={() => {
+                    setComplEducArr((arr) => [
+                      ...arr,
+                      <ComplEduc
+                        key={arr.length}
+                        deleteComponent={() => {
+                          deleteComplEduc(arr.length)
+                        }}
+                      />,
+                    ])
+                  }}
+                  className="setting__education-button"
+                >
+                  <button className="setting__button-add">
+                    <PlusCircleOutlined />
+                    <span className="setting__button-add-label">ДОДАТИ ОСВІТУ</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>

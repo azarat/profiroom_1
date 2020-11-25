@@ -32,6 +32,7 @@ body {
 }
 
 .dashboard-main {
+  overflow: visible;
   position: relative;
   height: calc(100vh - 70px);
   background-color: $white-color;
