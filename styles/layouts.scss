@@ -1,4 +1,4 @@
-@import '../public/fonts/roboto.css';
+@import '../public/fonts/sansPro.css';
 @import '../public/fonts/icomoon.css';
 @import './variables';
 @import './layouts/header';
@@ -20,7 +20,7 @@
 @import './pages/carousel';
 
 body {
-  font-family: $font-roboto;
+  font-family: $font-sans !important;
 }
 html {
   scroll-behavior: smooth;
@@ -30,5 +30,10 @@ html {
   .container {
     width: 1200px;
     margin: 0 auto;
+  }
+}
+@media screen and (min-width: 1800px) {
+  .container {
+    width: 1600px;
   }
 }
