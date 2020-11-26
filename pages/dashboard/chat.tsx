@@ -87,17 +87,20 @@ const Сhat: NextPage<ChatProps> = ({ jsonResponse, socketId, classicRooms }): J
     })
       .then((res) => res.json())
       .then((res) => {
-        if (activeDialog?.room)
-          socket.emit('leave', 'gigroom_database_private-' + activeDialog.room)
+        if (activeDialog?.room) {
+          socket.emit('leave', 'gigroom_database_private-' + activeDialog.room).off('message')
+        }
         setActiveMessagesList(res[0])
         setActiveDialog({ dialog: idDialog, room: roomId })
-        socket.emit('join', 'gigroom_database_private-' + roomId)
-        socket.emit('typing', 'gigroom_database_private-' + roomId)
-
-        socket.on('message', (data: any) => {
+        socket.emit('join', 'gigroom_database_private-' + roomId).on('message', (data: any) => {
           setActiveMessagesList((prev) => [...prev, data])
           scrollToBottom()
         })
+
+        socket.on('disconnect', () => {
+          return
+        })
+
         const newArr: Array<MessageType> = []
         res[0].forEach(({ type, message }: MessageType) => {
           if (type === 'file') {
@@ -110,27 +113,30 @@ const Сhat: NextPage<ChatProps> = ({ jsonResponse, socketId, classicRooms }): J
       })
   }
 
-  const sendMessage = (content: string, typeMessage: string) => {
-    fetch(`http://test.profiroom.com/Backend/api/message`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${jwt_token}`,
-      },
-      body: JSON.stringify({
-        author: jsonResponse.user.id,
-        roomId: activeDialog?.room,
-        chatType: 'classic',
-        type: typeMessage,
-        message: content,
-      }),
-    })
-      .then((res) => res.json())
-      .then(() => {
-        scrollToBottom()
-        setInputValue('')
+  const sendMessage = useCallback(
+    (content: string, typeMessage: string) => {
+      fetch(`http://test.profiroom.com/Backend/api/message`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${jwt_token}`,
+        },
+        body: JSON.stringify({
+          author: jsonResponse.user.id,
+          roomId: activeDialog?.room,
+          chatType: 'classic',
+          type: typeMessage,
+          message: content,
+        }),
       })
-  }
+        .then((res) => res.json())
+        .then(() => {
+          scrollToBottom()
+          setInputValue('')
+        })
+    },
+    [activeDialog]
+  )
 
   const fetchColluctor = useCallback(async (id: number) => {
     try {

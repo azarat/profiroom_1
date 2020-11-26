@@ -34,7 +34,7 @@ body {
   position: relative;
   height: calc(100vh - 70px);
   background-color: $white-color;
-  border-radius: 10px;
+  border-radius: 10px 10px 0 0;
 }
 
 @media only screen and (min-width: 768px) {

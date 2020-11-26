@@ -127,6 +127,7 @@
         .dashboard-menu__button-image-container {
           color: $white-color;
           background-color: $secondary-color;
+          box-shadow: $blue-shadow;
 
           & .message {
             color: $secondary-color;
