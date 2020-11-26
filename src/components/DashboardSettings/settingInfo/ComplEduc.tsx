@@ -1,8 +1,10 @@
 import React, { useState, useMemo } from 'react'
 import { NextPage } from 'next'
-import { Form, Input } from 'antd'
+import { Form, Input, Select } from 'antd'
 import { IComplEducProps } from './Types'
 import { DeleteFilled, EditFilled, PaperClipOutlined } from '@ant-design/icons'
+
+const { Option } = Select
 
 const ComplEduc: NextPage<IComplEducProps> = ({ deleteComponent }: any): JSX.Element => {
   const [showEduc, setShowEduc] = useState(false)
@@ -73,26 +75,26 @@ const ComplEduc: NextPage<IComplEducProps> = ({ deleteComponent }: any): JSX.Ele
                 <label htmlFor="startMonth">
                   <p>Рік старту</p>
                 </label>
-                <select id="startMonth">
+                <Select id="startMonth" defaultValue="Січень" bordered={false}>
                   {months.map((month, ind) => {
                     return (
-                      <option key={ind + 1} value={ind}>
+                      <Option key={ind} value={ind}>
                         {month}
-                      </option>
+                      </Option>
                     )
                   })}
-                </select>
+                </Select>
               </div>
               <div className="setting__select">
-                <select id="startYear">
+                <Select id="startYear" defaultValue="1960" bordered={false}>
                   {years.map((year, ind) => {
                     return (
-                      <option key={ind} value={year}>
+                      <Option key={ind} value={year}>
                         {year}
-                      </option>
+                      </Option>
                     )
                   })}
-                </select>
+                </Select>
               </div>
             </div>
 
@@ -101,26 +103,26 @@ const ComplEduc: NextPage<IComplEducProps> = ({ deleteComponent }: any): JSX.Ele
                 <label htmlFor="endMonth">
                   <p>Рік закінчення</p>
                 </label>
-                <select id="endMonth">
+                <Select id="endMonth" defaultValue="Січень" bordered={false}>
                   {months.map((month, ind) => {
                     return (
-                      <option key={ind + 1} value={ind}>
+                      <Option key={ind} value={ind}>
                         {month}
-                      </option>
+                      </Option>
                     )
                   })}
-                </select>
+                </Select>
               </div>
               <div className="setting__select">
-                <select id="endYear">
+                <Select id="endtYear" defaultValue="1960" bordered={false}>
                   {years.map((year, ind) => {
                     return (
-                      <option key={ind} value={year}>
+                      <Option key={ind} value={year}>
                         {year}
-                      </option>
+                      </Option>
                     )
                   })}
-                </select>
+                </Select>
               </div>
             </div>
             <div></div>

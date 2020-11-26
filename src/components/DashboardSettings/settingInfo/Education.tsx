@@ -1,7 +1,9 @@
 import React, { useState, useMemo } from 'react'
-import { Form, Input } from 'antd'
+import { Form, Input, Select } from 'antd'
 import { IEducationProps } from './Types'
 import { DeleteFilled, EditFilled, PaperClipOutlined } from '@ant-design/icons'
+
+const { Option } = Select
 
 const Education: React.FC<IEducationProps> = ({ deleteComponent }: any): JSX.Element => {
   const [showEduc, setShowEduc] = useState(false)
@@ -48,15 +50,20 @@ const Education: React.FC<IEducationProps> = ({ deleteComponent }: any): JSX.Ele
               <label htmlFor="scienceDegree">
                 <p>Наукова ступінь</p>
               </label>
-              <select id="scienceDegree">
+              <Select
+                id="cienceDegree"
+                className="setting__language-level-select"
+                defaultValue="Бакалавр"
+                bordered={false}
+              >
                 {scienceDegree.map((level, i) => {
                   return (
-                    <option key={i} value={level}>
+                    <Option key={i} value={level}>
                       {level}
-                    </option>
+                    </Option>
                   )
                 })}
-              </select>
+              </Select>
             </div>
             <div>
               <Form.Item name="specialty" label="Спеціальність" className="setting__main-item">
@@ -69,29 +76,29 @@ const Education: React.FC<IEducationProps> = ({ deleteComponent }: any): JSX.Ele
               <label htmlFor="startYear">
                 <p>Рік старту</p>
               </label>
-              <select id="startYear">
+              <Select id="startYear" defaultValue="1960" bordered={false}>
                 {years.map((year, ind) => {
                   return (
-                    <option key={ind} value={year}>
+                    <Option key={ind} value={year}>
                       {year}
-                    </option>
+                    </Option>
                   )
                 })}
-              </select>
+              </Select>
             </div>
             <div className="setting__select">
               <label htmlFor="endYear">
                 <p>Рік закінчення</p>
               </label>
-              <select id="endYear">
+              <Select id="endYear" defaultValue="1960" bordered={false}>
                 {years.map((year, ind) => {
                   return (
-                    <option key={ind} value={year}>
+                    <Option key={ind} value={year}>
                       {year}
-                    </option>
+                    </Option>
                   )
                 })}
-              </select>
+              </Select>
             </div>
           </div>
           <div className="setting__education-downloads">

@@ -1,8 +1,10 @@
 import React from 'react'
 
-import { Form, Input } from 'antd'
+import { Form, Input, Select } from 'antd'
 import { DeleteFilled } from '@ant-design/icons'
 import { ILanguageProps } from './Types'
+
+const { Option } = Select
 
 const Language: React.FC<ILanguageProps> = ({ deleteComponent }: any): JSX.Element => {
   // function handleChange(value: any) {
@@ -23,15 +25,20 @@ const Language: React.FC<ILanguageProps> = ({ deleteComponent }: any): JSX.Eleme
           <label htmlFor="langLevel">
             <p>Рівень володіння</p>
           </label>
-          <select id="langLevel" className="setting__language-level-select">
+          <Select
+            id="langLevel"
+            className="setting__language-level-select"
+            defaultValue="Початковий"
+            bordered={false}
+          >
             {langLevel.map((item, i) => {
               return (
-                <option key={i} value={i}>
+                <Option key={i} value={item}>
                   {item}
-                </option>
+                </Option>
               )
             })}
-          </select>
+          </Select>
         </div>
         <div className="setting__button-delete">
           <div>

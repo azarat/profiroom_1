@@ -316,10 +316,12 @@ const Settings: NextPage<SettingsProps> = ({ jsonResponse }): JSX.Element => {
                   }}
                   className="setting__education-button"
                 >
-                  <button className="setting__button-add">
-                    <PlusCircleOutlined />
-                    <span className="setting__button-add-label">ДОДАТИ ОСВІТУ</span>
-                  </button>
+                  <div>
+                    <button className="setting__button-add">
+                      <PlusCircleOutlined />
+                      <span className="setting__button-add-label">ДОДАТИ ОСВІТУ</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
