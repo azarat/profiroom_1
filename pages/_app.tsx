@@ -10,9 +10,12 @@ import '../styles/layouts.scss'
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const [lang, setLang] = useState<string>('uk')
   const [isMenuOpen, setMenuOpen] = useState<boolean>(false)
+  const [isHistoryOpen, setHistoryOpen] = useState<boolean>(false)
 
   return (
-    <MainContext.Provider value={{ lang, setLang, isMenuOpen, setMenuOpen }}>
+    <MainContext.Provider
+      value={{ lang, setLang, isMenuOpen, setMenuOpen, isHistoryOpen, setHistoryOpen }}
+    >
       <Component {...pageProps} />
     </MainContext.Provider>
   )

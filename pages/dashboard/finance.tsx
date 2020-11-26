@@ -1,11 +1,16 @@
 import React from 'react'
 import { NextPage } from 'next'
+//layout
 import DashboardLayout from '../../layouts/DashboardLayout'
-import FinanceContainer from '../../src/containers/HomeContainer/FinanceContainer'
+//components
+import FinanceContainer from '../../src/containers/FinanceContainer'
+//ant
 import { ConfigProvider } from 'antd'
 import ukUA from 'antd/lib/locale/uk_UA'
+//types
+import { DashboardFinanceProps } from '../../src/components/DashboardFinance/Types'
 
-const Finance: NextPage = ({
+const Finance: NextPage<DashboardFinanceProps> = ({
   userFinanceResponse,
   jsonResponse,
   userFinanceGraphResponse,

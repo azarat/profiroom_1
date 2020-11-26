@@ -1,9 +1,32 @@
 import React from 'react'
+//svg
+import FullSize from '../../../../public/svg/full-size.svg'
+//types
+import { PaymenHistoryProps } from '../Types'
 
-const PaymentHistory = ({ history }) => {
+const PaymentHistory: React.FC<PaymenHistoryProps> = ({
+  history,
+  openHistory,
+  isHistoryOpen,
+}): JSX.Element => {
+  console.log(isHistoryOpen)
+
   return (
-    <div className="finance__history history">
-      <h3 className="history__title">історія платежів</h3>
+    <div className={`finance__history history`}>
+      <h3 className="history__title">
+        історія платежів
+        <div
+          role="presentation"
+          className="history__fullsize-icon"
+          onClick={() => {
+            document.body.scrollIntoView()
+            openHistory(true)
+          }}
+        >
+          <FullSize />
+        </div>
+      </h3>
+
       <div className="history__list">
         {history.map((item, index) => (
           <div className="history__list-item" key={index}>

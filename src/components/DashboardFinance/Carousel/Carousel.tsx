@@ -1,4 +1,5 @@
 import React, { useState, useRef, useLayoutEffect } from 'react'
+//types
 import { ICarousel } from './Types'
 
 const TRANSITION = 200

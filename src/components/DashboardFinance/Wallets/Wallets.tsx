@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+//ant
 import { Form, Input, Select } from 'antd'
-const Wallets = () => {
+
+const Wallets: React.FC = (): JSX.Element => {
   const [operation, setOperation] = useState<string | null>(null)
   const handleChange = (value: string) => {
     setOperation(value)
@@ -8,7 +10,7 @@ const Wallets = () => {
   return (
     <div className="finance__wallets wallets">
       <div className="wallets__wrapper">
-        <h3 className="wallets__title">введеня і виведення грошей</h3>
+        <h3 className="wallets__title">введення і виведення грошей</h3>
         <Form className="wallets__transactions">
           <Select
             placeholder="Оберіть операцію"

@@ -1,9 +1,26 @@
 import React from 'react'
+//charts
 import Highcharts, { Options } from 'highcharts/highstock'
 import HighchartsReact from 'highcharts-react-official'
-import { utimes } from 'fs/promises'
+//types
+import { UserFinanceGraphResponseTypes } from '../Types'
 
-const Graphic = ({ history }) => {
+const Graphic: React.FC<UserFinanceGraphResponseTypes> = ({ graph }): JSX.Element => {
+  const months = [
+    'Січень',
+    'Лютий',
+    'Березень',
+    'Квітень',
+    'Травень',
+    'Червень',
+    'Липень',
+    'Серпень',
+    'Вересень',
+    'Жовтень',
+    'Листопад',
+    'Грудень',
+  ]
+
   const options: Options = {
     title: {
       text: '',
@@ -15,17 +32,19 @@ const Graphic = ({ history }) => {
       enabled: false,
     },
     chart: {
-      type: 'line',
+      type: 'column',
       inverted: false,
     },
     series: [
       {
         name: 'Дохід',
-        data: history.map((item) => {
-          if (item.trnsactonType === 'income') {
-            return item.amount
-          }
-        }),
+        type: 'column',
+        data: graph.graph.map((i) => i.up) as any[],
+      },
+      {
+        name: 'Недохід',
+        type: 'column',
+        data: graph.graph.map((i) => i.down) as any[],
       },
     ],
 
@@ -50,11 +69,8 @@ const Graphic = ({ history }) => {
     lang: {},
     xAxis: {
       title: {},
-      categories: history.map((item) => {
-        if (item.trnsactonType === 'income') {
-          return new Date(item.isoDate).toLocaleDateString()
-        }
-      }),
+      categories: months,
+
       //   labels: {},
     },
     credits: {
@@ -62,7 +78,12 @@ const Graphic = ({ history }) => {
     },
   }
 
-  return <HighchartsReact highcharts={Highcharts} options={options} />
+  return (
+    <div className="finance__graphic">
+      <h3 className="finance__graphic-title">мій дохід(uah)</h3>
+      <HighchartsReact highcharts={Highcharts} options={options} />
+    </div>
+  )
 }
 
 export default Graphic

@@ -2,7 +2,7 @@ import React from 'react'
 import { NextPage } from 'next'
 import DashboardLayout from '../../layouts/DashboardLayout'
 import { dashboardProps } from './index'
-import ContainerHome from '../../src/containers/HomeContainer/HomeContainer'
+import ContainerHome from '../../src/containers/HomeContainer'
 
 const Home: NextPage<dashboardProps> = ({ jsonResponse, dashboardResponse }): JSX.Element => {
   return (

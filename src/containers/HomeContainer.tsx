@@ -2,18 +2,20 @@ import React, { useContext, useState } from 'react'
 //antd
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 //components
-import Carousel from '../../components/DashboardHome/CarouselHome/CarouselHome'
-import PieChartCircle from '../../components/DashboardHome/Charts/PieChart/PieChart'
-import LineChart from '../../components/DashboardHome/Charts/Line/LineChart'
-import { dashboardProps } from '../../../pages/dashboard/index'
-import StatusBlock from '../../components/DashboardHome/StatusBlock/StatusBlock'
-import Statistic from '../../components/DashboardHome/Statistic/Statistic'
-import ProfileStat from '../../components/DashboardHome/ProfileStat/ProfileStat'
-import Comments from '../../components/DashboardHome/Comments/Comments'
-import ArrowSVG from '../../../public/assets/img/arrow-down.svg'
+import Carousel from '../components/DashboardHome/CarouselHome/CarouselHome'
+import PieChartCircle from '../components/DashboardHome/Charts/PieChart/PieChart'
+import LineChart from '../components/DashboardHome/Charts/Line/LineChart'
+import StatusBlock from '../components/DashboardHome/StatusBlock/StatusBlock'
+import Statistic from '../components/DashboardHome/Statistic/Statistic'
+import ProfileStat from '../components/DashboardHome/ProfileStat/ProfileStat'
+import Comments from '../components/DashboardHome/Comments/Comments'
+import Achieves from '../components/DashboardHome/Achieves/Achieves'
+//types
+import { dashboardProps } from '../../pages/dashboard/index'
+//svg
+import ArrowSVG from '../../public/assets/img/arrow-down.svg'
 //context
-import { MainContext } from '../../context/MainContext'
-import Achieves from '../../components/DashboardHome/Achieves/Achieves'
+import { MainContext } from '../context/MainContext'
 
 const HomeContainer: React.FC<dashboardProps> = ({ dashboardResponse }): JSX.Element => {
   const [activeTab, setActiveTab] = useState<number>(1)
@@ -268,6 +270,6 @@ const HomeContainer: React.FC<dashboardProps> = ({ dashboardResponse }): JSX.Ele
   )
 }
 
-export { authUser as getServerSideProps } from '../../utils/auth'
+export { authUser as getServerSideProps } from '../utils/auth'
 
 export default HomeContainer

@@ -39,7 +39,13 @@ const login: NextPage = (): JSX.Element => {
 
   return (
     <>
-      {!mobile && <div className="login">{renderData}</div>}
+      {!mobile && (
+        <>
+          <Header />
+          <div className="login">{renderData}</div>
+        </>
+      )}
+
       {mobile && (
         <div className={`login ${isRegistration && 'right-panel-active'}`}>
           <div className="container__form container__signup">
