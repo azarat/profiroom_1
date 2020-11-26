@@ -1,11 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
 // Styles
-import { Form, Input, Space, Button, Checkbox, notification } from 'antd'
-
-// Icons
-import { UserOutlined, MailOutlined, LockOutlined, UserAddOutlined } from '@ant-design/icons'
-
+import { Form, Space, Button, Checkbox, notification } from 'antd'
+import FormField from '../FormField/FormField'
 // Types
 import { RegistrationFormProps, RegistrationValues } from './Types'
 import { RuleObject } from 'antd/lib/form'
@@ -34,27 +31,8 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
     notification.open(args)
   }
 
-  const formItemLayout = {
-    labelCol: {
-      xs: { span: 24 },
-      sm: { span: 8 },
-    },
-    wrapperCol: {
-      xs: { span: 24 },
-      sm: { span: 16 },
-    },
-  }
-  const tailFormItemLayout = {
-    wrapperCol: {
-      xs: {
-        span: 24,
-        offset: 0,
-      },
-      sm: {
-        span: 16,
-        offset: 8,
-      },
-    },
+  const handleRegistration = (): void => {
+    registrationHandler()
   }
 
   const validatePassword = (_: RuleObject, value: string, callback: (arg0?: string) => void) => {
@@ -72,10 +50,6 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
     } else {
       callback()
     }
-  }
-
-  const handleRegistration = (): void => {
-    registrationHandler()
   }
 
   const onFinish = async (values: RegistrationValues): Promise<void> => {
@@ -104,7 +78,6 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
         Ласкаво просимо на кращу платформу для фрілансу Profiroom!
       </h4>
       <Form
-        {...formItemLayout}
         className="registration__form"
         form={form}
         onFinish={onFinish}
@@ -112,9 +85,11 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
         scrollToFirstError
       >
         <Space direction="vertical">
-          <Form.Item
+          <FormField
             label="Ваше ім`я"
             name="name"
+            type="text"
+            id="FirstNameField"
             rules={[
               {
                 required: true,
@@ -125,12 +100,12 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                 message: 'Ім`я має бути не менше двух символів',
               },
             ]}
-          >
-            <Input size="large" prefix={<UserOutlined />} />
-          </Form.Item>
-          <Form.Item
+          />
+          <FormField
             label="Ваше прізвище"
             name="surname"
+            type="text"
+            id="SurNameField"
             rules={[
               {
                 required: true,
@@ -141,12 +116,12 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                 message: 'Прізвище має бути не менше двух символів',
               },
             ]}
-          >
-            <Input size="large" prefix={<UserAddOutlined />} />
-          </Form.Item>
-          <Form.Item
+          />
+          <FormField
+            id="EmailField"
             name="email"
             label="Ваш E-mail"
+            type="email"
             rules={[
               {
                 type: 'email',
@@ -157,10 +132,10 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                 message: 'Поле E-mail є обов`язковим',
               },
             ]}
-          >
-            <Input size="large" prefix={<MailOutlined />} />
-          </Form.Item>
-          <Form.Item
+          />
+          <FormField
+            id="RegistrationPasswordField"
+            type="password"
             label="Ваш пароль"
             name="password"
             rules={[
@@ -176,16 +151,15 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                 validator: validatePassword,
               },
             ]}
-            hasFeedback
-          >
-            <Input.Password size="large" prefix={<LockOutlined />} />
-          </Form.Item>
+          />
           <p className="registration__password-information">
             Пароль повинен складатися з не менш ніж 8 символів, містити цифри та латинські літери, у
             тому числі великі літери
           </p>
 
-          <Form.Item
+          <FormField
+            id="ConfirmPasswordRegistration"
+            type="password"
             label="Підтвердіть пароль"
             name="password_confirmation"
             dependencies={['password']}
@@ -195,8 +169,8 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                 required: true,
                 message: 'Будь ласка підтвердіть Ваш пароль!',
               },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
+              ({ getFieldValue }: any) => ({
+                validator(_: any, value: any) {
                   if (!value || getFieldValue('password') === value) {
                     return Promise.resolve()
                   }
@@ -204,38 +178,31 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
                 },
               }),
             ]}
-          >
-            <Input.Password size="large" prefix={<LockOutlined />} />
-          </Form.Item>
-          <Form.Item
-            {...tailFormItemLayout}
-            name="agreed"
-            rules={[
-              {
-                validator: validateCheckBox,
-                message: 'Це поле є обовʼязковим',
-              },
-            ]}
-            valuePropName="checked"
-          >
-            <Checkbox>
-              Я згоден(-на) з {/* TODO: add link to offer politics */}
-              <Link href="/">
-                <a className="registration__offer">Політикою конфіденційності</a>
-              </Link>
-            </Checkbox>
-          </Form.Item>
-          <Form.Item {...tailFormItemLayout}>
-            <Space direction="horizontal">
-              <Button type="primary" htmlType="submit" className="login-form-button">
-                Зареєструватись
-              </Button>
-              або
-              <Button onClick={handleRegistration} name="login" type="link">
-                Увійти
-              </Button>
-            </Space>
-          </Form.Item>
+          ></FormField>
+          <div className="login__form-checkbox">
+            <Form.Item
+              name="agreed"
+              rules={[
+                {
+                  validator: validateCheckBox,
+                  message: 'Це поле є обовʼязковим',
+                },
+              ]}
+              valuePropName="checked"
+            >
+              <Checkbox className="registration__checkbox">
+                Я згоден(-на) з {/* TODO: add link to offer politics */}
+                <Link href="/">
+                  <a className="registration__offer">Політикою конфіденційності</a>
+                </Link>
+              </Checkbox>
+            </Form.Item>
+          </div>
+          <div className="login__form-wrapper-btn">
+            <Button type="primary" htmlType="submit" className="login__form-button">
+              Зареєструватись
+            </Button>
+          </div>
         </Space>
       </Form>
     </>
