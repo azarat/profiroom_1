@@ -100,7 +100,6 @@ const UserDropDown: React.FC<UserDropDownProps> = ({
             </div>
           </div>
           <span className="header__user-greetings" role="presentation" onClick={handleDropDown}>
-            {/*TODO: Имя юзера*/}
             Привіт, {userInfo.name}
           </span>
           <div className="header__user-avatar-wrapper" role="presentation" onClick={handleDropDown}>

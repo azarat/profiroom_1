@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useContext } from 'react'
 import Link from 'next/link'
+import Cookies from 'js-cookie'
 
 //components
 import Menu from './Menu'
@@ -9,15 +10,12 @@ import SwitchComponent from './Switch'
 import { Popover } from 'antd'
 import { BellFilled } from '@ant-design/icons'
 
-import { Response } from './Types'
+//types
+import { DashboardHeaderProps } from './Types'
+//ctx
 import { MainContext } from '../../../context/MainContext'
-import Cookies from 'js-cookie'
 
-type DashboardProps = {
-  userData: Response
-}
-
-const DashboardHeader: React.FC<DashboardProps> = (props): JSX.Element => {
+const DashboardHeader: React.FC<DashboardHeaderProps> = (props): JSX.Element => {
   const [isClient, setIsClient] = useState<boolean>(false)
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false)
   const { userData } = props

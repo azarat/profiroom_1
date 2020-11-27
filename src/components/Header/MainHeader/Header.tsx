@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import Cookies from 'js-cookie'
 // Context
 import { MainContext } from '../../../context/MainContext'
 // Components
@@ -11,7 +12,6 @@ import UserDrowDown from './UserDropDown'
 // Antd
 import { Input } from 'antd'
 
-import Cookies from 'js-cookie'
 import { decodeFunc } from '../../../utils/decode'
 
 const Header = (): JSX.Element => {

@@ -8,8 +8,6 @@ export const authUser: GetServerSideProps = async (
 ): Promise<GetServerSidePropsResult<any>> => {
   const { jwt_token } = nextCookie(context)
 
-  console.log()
-
   if (context.req.url?.split('?')[0] === '/login') {
     if (context.req && jwt_token) {
       context.res.writeHead(302, { Location: '/dashboard' })
