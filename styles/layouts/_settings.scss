@@ -1,10 +1,8 @@
 .settings-page {
   overflow-y: scroll;
-  
+
   &--overflow {
     overflow-y: hidden;
-
-   
   }
   .password-success {
     position: absolute;
@@ -78,13 +76,13 @@
 }
 
 .setting {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: 100%;
   height: 100%;
   overflow: auto;
-  position: relative;
-  display: flex;
-  flex-direction: column;
   font-family: $font-roboto;
   pointer-events: visible;
 
@@ -304,6 +302,14 @@
     border-radius: 5px;
   }
 
+  &__firstname-error {
+    width: auto;
+    color: $error-color;
+    font-weight: $font-weight-600;
+    font-size: $font-13;
+    line-height: 1;
+  }
+
   &__main-title {
     position: relative;
     margin: 15px 0 0 10px;
@@ -341,6 +347,33 @@
     padding-right: 10px;
   }
 
+  &__select .ant-select {
+    display: flex;
+    width: 90%;
+    padding: 3px 0 3px 0;
+    font-size: $font-14;
+    line-height: 20px;
+    background-color: $white-color;
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 0 10px 16px rgba(128, 152, 213, 0.2);
+  }
+
+  &__education-yaer {
+    display: grid;
+    grid-column-gap: 20px;
+    grid-template-columns: repeat(2, 50%);
+    width: 300px;
+  }
+
+  &__education-yaer &__select .ant-select {
+    width: 106px;
+  }
+
+  &__education-specialty &__select .ant-select {
+    width: 138px;
+  }
+
   &__select select {
     display: flex;
     padding: 10px;
@@ -358,6 +391,10 @@
     font-weight: $font-weight-400;
     font-size: $font-14;
     line-height: 18px;
+  }
+
+  &__complement-form-info-yaers .ant-select {
+    width: 104px;
   }
 
   &__button-delete .anticon {
@@ -444,14 +481,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 30px;
-
     height: 40px;
+    padding: 0 30px;
     font-weight: $font-weight-400;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-style: normal;
     font-size: $font-16;
     color: $gray-color-title;
+
+    font-style: normal;
+    font-family: 'Source Sans Pro', sans-serif;
   }
 
   &__tab-menu-label_active {
@@ -472,8 +509,8 @@
   }
 
   &__main-item.ant-row {
-    color: $black-color;
     margin-bottom: 5px;
+    color: $black-color;
     line-height: 20px;
   }
 
@@ -482,25 +519,29 @@
   }
 
   &__main-item .ant-radio-wrapper span {
+    font-size: $font-14;
     color: #3c7eea;
-    font-size: &font-14;
   }
 
   &__main-item textarea {
+    background-color: $gray-background;
     border: 0;
     border-radius: 5px;
-    background-color: $gray-background;
   }
 
   &__datapicker.ant-picker {
     border-radius: 5px;
   }
 
+  &__main-item textarea {
+    resize: none;
+  }
+
   //avatar
   &__avatar {
-    width: 100%;
     display: flex;
     justify-content: center;
+    width: 100%;
   }
 
   &__main-item-avatar {
@@ -509,9 +550,9 @@
   }
 
   &__main-field-img-block {
+    align-content: center;
     width: 125px;
     height: 125px;
-    align-content: center;
   }
 
   &__main-form-item-avatar-input {
@@ -519,23 +560,23 @@
   }
 
   &__main-item-avatar-img {
-    border-radius: 50%;
-    height: 96%;
     width: 100%;
+    height: 96%;
+    border-radius: 50%;
   }
 
   &__main-item-avatar-edit .anticon {
     position: absolute;
     top: 120px;
+    right: 0;
+    bottom: 0;
     left: 93px;
-    font-size: $font-20;
-    border-color: #fff;
-    border-radius: 50%;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.08);
     width: 28px;
     height: 28px;
-    bottom: 0;
-    right: 0;
+    font-size: $font-20;
+    border-radius: 50%;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.08);
+    border-color: #fff;
   }
 
   //country
@@ -586,16 +627,16 @@
   &__language-level {
     display: flex;
     flex-direction: column;
-    border-radius: 5px;
     font-size: $font-14;
     line-height: 20px;
     border: 0;
+    border-radius: 5px;
   }
 
   &__language-level label {
-    font-style: normal;
     font-weight: $font-weight-400;
     font-size: $font-14;
+    font-style: normal;
     line-height: 18px;
     color: #707683;
   }
@@ -633,8 +674,8 @@
   }
 
   &__education-form {
-    max-width: 700px;
     width: 100%;
+    max-width: 700px;
   }
 
   &__education-button {
@@ -646,8 +687,8 @@
   }
 
   &__education-form-univer {
-    width: 70%;
     float: left;
+    width: 70%;
     margin-right: 10px;
   }
 
@@ -671,8 +712,8 @@
     display: flex;
     align-items: center;
     justify-content: start;
-    margin-top: 20px;
     height: 41px;
+    margin-top: 20px;
   }
 
   &__education-downloads-input input {
@@ -680,9 +721,9 @@
   }
 
   &__education-downloads-input span.anticon {
+    margin-right: 10px;
     color: $primary-color;
     font-size: $font-20;
-    margin-right: 10px;
   }
 
   &__education-downloads-input label {
@@ -716,7 +757,13 @@
 
   &__complement-form-university-name {
     width: 70%;
-    padding-right: 5px;
+  }
+  &__language-value {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    align-items: flex-end;
+    justify-content: start;
+    max-width: 420px;
   }
 
   &__complement-form-info-yaers {
@@ -729,35 +776,45 @@
     margin-right: 25px;
   }
 
+  &__complement-btns {
+    margin-left: 20px;
+  }
+
   &__save-btn {
+    display: flex;
+    align-items: center;
+    margin: 30px auto 20px;
+    padding: 17px 35px 15px;
+    color: $white-color;
     font-weight: $font-weight-600;
     font-size: $font-14;
     line-height: 20px;
-    display: flex;
     -webkit-box-align: center;
-    align-items: center;
-    text-align: center;
     letter-spacing: 1px;
-    color: $white-color;
-    background: $secondary-color;
-    box-shadow: 0 2px 4px rgba(60, 9, 179, 0.3);
-    border-radius: 4px;
-    border: none;
-    margin: 30px auto 20px;
-    padding: 17px 35px 15px;
+    text-align: center;
     text-transform: uppercase;
+    background: $secondary-color;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(60, 9, 179, 0.3);
+  }
+}
+
+.ant-form-item-has-error {
+  & .ant-input.setting__main-field {
+    border: 1px solid red;
   }
 }
 
 @media screen and (min-width: 1200px) {
   .setting {
-    width: 77%;
-    background: #fbfcfd;
-    box-shadow: 0 9px 21px rgba(128, 152, 213, 0.1);
-    border-radius: 4px;
     position: relative;
     z-index: 8;
+    width: 77%;
     margin-left: 356px;
+    background: #fbfcfd;
+    border-radius: 4px;
+    box-shadow: 0 9px 21px rgba(128, 152, 213, 0.1);
 
     & .security {
       width: 90%;
@@ -801,9 +858,9 @@
     }
 
     &__tab {
-      width: 100%;
       display: flex;
       justify-content: center;
+      width: 100%;
       margin-top: 30px;
     }
 
@@ -818,8 +875,8 @@
     }
 
     &__block-title {
-      padding: 40px 25px;
       width: 27%;
+      padding: 40px 25px;
     }
 
     &__block-info {
@@ -836,9 +893,9 @@
     overflow: auto;
 
     &__tab {
-      width: 100%;
       display: flex;
       justify-content: center;
+      width: 100%;
     }
 
     &__tab-btns {
@@ -846,14 +903,14 @@
     }
 
     &__block-title {
-      width: 100%;
       align-items: left;
+      width: 100%;
     }
 
     &__block-info {
-      width: 100%;
       display: flex;
       justify-content: center;
+      width: 100%;
     }
 
     &__main-form,
@@ -868,7 +925,7 @@
     }
 
     &__main-item.ant-row input {
-      width: 425px;
+      width: 400px;
     }
 
     //AVATAR
@@ -889,23 +946,23 @@
     }
 
     &__main-field-img-block {
+      align-content: center;
       width: 125px;
       height: 125px;
-      align-content: center;
     }
 
     &__main-item-avatar-edit .anticon {
-      z-index: 1;
       top: 115px;
+      right: 0;
+      bottom: 0;
       left: 93px;
-      font-size: $font-20;
-      border-color: #fff;
-      border-radius: 50%;
-      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.08);
+      z-index: 1;
       width: 28px;
       height: 28px;
-      bottom: 0;
-      right: 0;
+      font-size: $font-20;
+      border-radius: 50%;
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.08);
+      border-color: #fff;
     }
 
     &__gender.ant-row {
@@ -938,15 +995,15 @@
     }
 
     &__language-value {
-      width: 100%;
       display: flex;
       justify-content: start;
+      width: 100%;
     }
 
     &__language-level {
-      width: 100%;
       display: flex;
       justify-content: start;
+      width: 100%;
     }
 
     .setting__language-level select {
@@ -967,8 +1024,8 @@
     &__form-education {
       display: flex;
       flex-direction: column;
-      margin: 0 auto;
       max-width: 445px;
+      margin: 0 auto;
     }
 
     &__education .setting__main-title {
@@ -977,6 +1034,11 @@
 
     &__education-form-univer .ant-input {
       max-width: 300px;
+    }
+
+    &__complement-form-university .ant-input {
+      width: 100%;
+      max-width: 350px;
     }
 
     &__education-button-edit {
@@ -1002,7 +1064,7 @@
 
     &__form-education .setting__education-button {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
     }
 
     //complement
@@ -1014,23 +1076,15 @@
       text-align: left;
     }
 
-    .setting__complement-section.setting__block-info {
-      align-items: center;
-    }
-
     &__complement-section {
-      width: 100%;
       display: flex;
       flex-direction: column;
+      width: 100%;
       margin: 0 auto;
     }
 
     &__complement-form {
       max-width: 445px;
-    }
-
-    &__complement-univer .ant-input {
-      max-width: 300px;
     }
 
     &__complement-edit {
@@ -1042,313 +1096,351 @@
     }
 
     p {
-        margin-left: 0px;
+      margin-left: 0px;
     }
   }
-
-
 }
 
 @media screen and (min-width: 575px) {
-    .setting {
-
-      height: 100%;
-      overflow: auto;
-     
-        
-        background: #fbfcfd;
-        box-shadow: 0 9px 21px rgba(128, 152, 213, 0.1);
-        border-radius: 4px;
-        position: relative;
-        z-index: 8;
-
-
-        & .security {
-            width: 90%;
-            .password {
-              &__title {
-                font-size: $font-14;
-              }
-              &__inner {
-                display: flex;
-                align-items: baseline;
-                justify-content: space-between;
-                width: 90%;
-              }
-              .ant-form.ant-form-horizontal {
-                width: 70%;
-              }
-            }
-      
-            .email {
-              &__title {
-                font-size: $font-14;
-              }
-              &__inner {
-                display: flex;
-                align-items: baseline;
-                justify-content: space-between;
-                width: 90%;
-              }
-              .ant-form.ant-form-horizontal {
-                width: 70%;
-              }
-            }
-          }
-        &__main {
-            display: flex;
-            flex-direction: column;
-        }
-
-        &__block {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        &__block-title {
-            grid-row: 1;
-            grid-column: 1;
-            padding-left: 30px;
-        }
-
-       &__block-info{
-           grid-row: 1;
-           grid-column: 2/ span 3;
-           justify-content: start;
-       } 
-
-
-      &__language-item .setting__main-item {
-        width: 100%;
-      }
- 
-       &__userInfo {
-           display: grid;
-           grid-template-columns: 125px calc(100% - 125px - 30px) ;
-           grid-template-rows: 1fr;
-           justify-content: center;
-           grid-column-gap:30px;
-           align-items: center;
-       }
-
-       &__nameInfo {
-           place-content: center;
-           grid-row: 1;
-            grid-column: 2;   
-            
-            .ant-row {
-                display: flex;
-                flex-direction: column;
-            }
-
-            .ant-row input {
-                max-width: 100%;
-            }
-       }
-
-       &__avatar {
-           place-content: center;
-           grid-row: 1;
-           grid-column: 1;
-           grid-column-gap: 10px;
-       }
-
-       &__avatar {
-       
-           max-width: 200px;
-
-           p {
-            margin-left: 0px;
-          }
-       }
-
-       &__gender.ant-row {
-        display: flex;
-        flex-direction: column;
-       }
-
-        .ant-radio-group{
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        margin-bottom: 10px;
-        }
-
-        &__data  {
-            height: 80px;
-            margin: 10px 0 10px 0;
-        }
-        &__main-item {
-          max-width: 100%;
-          &.ant-row input {
-            width: 100%;
-          }
-        }
-
-        &__main-item.ant-row {
-            display: grid;
-            grid-template-columns: 100%;
-        }
-
-        &__main-item textarea {
-          max-width: 100%;  
-          width: 100%;
-        }
-
-        &__info-textarea .setting__main-item{
-            width: auto;
-        }
-
-        &__country-container-info {
-            max-width: 600px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-column-gap: 20px;
-        }
-
-        &__country-container-info  .setting__main-item {
-            width: 100%;
-        }
-
-        &__country-container-info input,
-        &__language-item {
-            max-width: 280px;  
-        }
-
-        &__language {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            justify-content: center;
-            align-items: end;
-            grid-column-gap: 20px;
-        }
-
-        &__language-item input {
-            max-width: 280px;  
-        }
-
-        &__language-value {
-            display: grid;
-            grid-template-columns: repeat(2, 110%);
-            align-self: flex-end;
-        }
-
-        &__button-delete {
-            display: flex;
-            align-items: flex-end;
-        }
-
-        &__education {
-          padding-right: 10px;
-            max-width: 100%;
-            justify-content: start;
-          }
-
-        &__education-form-edit{
-          width: 100%;
-            display: grid;
-            grid-template-columns: 65% 20%;
-            grid-column-gap: 10px;
-            align-items: center;
-            justify-content: start;
-        }  
-
-        &__education-form-edit .ant-row input {
-          max-width: 550px;
-        }
-
-        &__education-form-univer {
-          width: 100%;
-        }
-
-        &__education-form-univer .setting__education-btns {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            align-self: center;
-        }
-
-        &__education-specialty {
-          width: 100%;
-            display: grid;
-            grid-template-columns: 150px calc(100% - 150px);
-            grid-column-gap: 10px;
-            align-items: flex-end;
-        }
-
-        &__education-button-edit {
-          display: flex;
-          justify-content: flex-end;
-          align-items: flex-end;
-        }
-
-        &__education-level {
-            grid-column: 1;
-        }
-        
-        &__education-level {
-            margin-right: 20px;
-        }
-
-        p {
-            margin-left: 0px;
-        }
-
-        &__complement {
-            max-width: 100%;
-        }
-
-        &__complement-form-university {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-column-gap: 10px;
-            align-self: center;
-        }
-
-        &__main-form, .setting__country-container {
-          width: auto;
-          max-width: 700px; 
-        }
-
-        &__complement-form  {
-          border: 2px solid green;
-            max-width: 100%;
-        }
-
-        &__complement-univer .ant-input{
-            max-width: 100%;
-        }
-
-        &__form-education {
-          max-width: 700px;
-          border: 2px solid red;
-          width: 100%;
-          margin: 0;
-        }
-
-        &__form-education .setting__education-button {
-          justify-content: start;
-        }
-
-        &__complement-section  .setting__complement-add-button {
-          max-width: 100%;
-          display: flex;
-          justify-content: start;
-        }
-    }
-}
-
-@media screen and (min-width: 1200px){
   .setting {
-    width: 100%;
-    margin-left: 0px;
-
+    position: relative;
+    z-index: 8;
     height: 100%;
     overflow: auto;
+    background: #fbfcfd;
 
+    border-radius: 4px;
+
+    box-shadow: 0 9px 21px rgba(128, 152, 213, 0.1);
+
+    & .security {
+      width: 90%;
+      .password {
+        &__title {
+          font-size: $font-14;
+        }
+        &__inner {
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          width: 90%;
+        }
+        .ant-form.ant-form-horizontal {
+          width: 70%;
+        }
+      }
+
+      .email {
+        &__title {
+          font-size: $font-14;
+        }
+        &__inner {
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          width: 90%;
+        }
+        .ant-form.ant-form-horizontal {
+          width: 70%;
+        }
+      }
+    }
+    &__main {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__block {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    &__block-title {
+      grid-row: 1;
+      grid-column: 1;
+      padding-left: 30px;
+    }
+
+    &__block-info {
+      grid-row: 1;
+      grid-column: 2 / span 3;
+      justify-content: start;
+    }
+
+    &__language-item .setting__main-item {
+      width: 100%;
+    }
+
+    &__userInfo {
+      display: grid;
+      grid-column-gap: 30px;
+      grid-template-rows: 1fr;
+      grid-template-columns: 125px calc(100% - 125px - 30px);
+      align-items: center;
+      justify-content: center;
+    }
+
+    &__nameInfo {
+      place-content: center;
+      grid-row: 1;
+      grid-column: 2;
+
+      .ant-row {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .ant-row input {
+        max-width: 100%;
+      }
+    }
+
+    &__avatar {
+      place-content: center;
+      grid-row: 1;
+      grid-column: 1;
+      grid-column-gap: 10px;
+    }
+
+    &__avatar {
+      max-width: 200px;
+
+      p {
+        margin-left: 0px;
+      }
+    }
+
+    &__gender.ant-row {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ant-radio-group {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    &__data {
+      height: 80px;
+      margin: 10px 0 10px 0;
+    }
+    &__main-item {
+      max-width: 100%;
+      &.ant-row input {
+        width: 100%;
+      }
+    }
+
+    &__main-item.ant-row {
+      display: grid;
+      grid-template-columns: 100%;
+    }
+
+    &__main-item textarea {
+      width: 100%;
+      max-width: 100%;
+      max-height: 150px;
+    }
+
+    &__info-textarea .setting__main-item {
+      width: auto;
+    }
+    &__country-container .ant-form {
+      padding-left: 0;
+    }
+
+    &__country-container-info {
+      display: grid;
+      grid-column-gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 600px;
+    }
+
+    &__country-container-info .setting__main-item {
+      width: 100%;
+    }
+
+    &__country-container-info input,
+    &__language-item {
+      max-width: 280px;
+    }
+
+    &__language {
+      display: grid;
+      grid-column-gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    &__language-item input {
+      max-width: 280px;
+    }
+
+    &__language-value {
+      display: grid;
+      grid-template-columns: repeat(2, 110%);
+      align-self: flex-end;
+    }
+
+    &__button-delete {
+      display: flex;
+      align-items: flex-end;
+    }
+
+    &__education {
+      justify-content: start;
+      max-width: 100%;
+      padding-right: 10px;
+    }
+
+    &__education-form-edit {
+      display: grid;
+      grid-column-gap: 10px;
+      grid-template-columns: 65% 20%;
+      align-items: center;
+      justify-content: start;
+      width: 100%;
+    }
+
+    &__education-form-edit .ant-row input {
+      max-width: 550px;
+    }
+
+    &__education-form-univer {
+      width: 100%;
+    }
+
+    &__education-form-univer .setting__education-btns {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      align-self: center;
+    }
+
+    &__education-specialty {
+      display: grid;
+      grid-column-gap: 10px;
+      grid-template-columns: 150px calc(100% - 150px);
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    &__form-education .setting__education-button {
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    &__education-button-edit {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+
+    &__education-level {
+      grid-column: 1;
+    }
+
+    &__education-level {
+      margin-right: 20px;
+    }
+
+    &__education-specialty .setting__main-item.ant-row input {
+      max-width: 260px;
+    }
+
+    p {
+      margin-left: 0px;
+    }
+
+    &__complement {
+      max-width: 100%;
+    }
+
+    &__complement-form-university-name {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      align-items: center;
+      justify-content: start;
+    }
+
+    &__complement-form-university {
+      display: grid;
+      grid-column-gap: 20px;
+      grid-template-columns: 65% 20%;
+    }
+
+    &__main-form .setting__country-container {
+      width: auto;
+      max-width: 700px;
+    }
+
+    &__form-education {
+      width: 100%;
+      max-width: 700px;
+      margin: 0;
+    }
+
+    &__complement-section .setting__complement-add-button {
+      display: flex;
+      justify-content: start;
+      max-width: 100%;
+    }
+
+    &__complement .setting__complement-add-button {
+      display: flex;
+      justify-content: start;
+      width: 100%;
+    }
+
+    &__complement-form {
+      max-width: 700px;
+      margin: 0;
+    }
+
+    &__complement-btns {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+
+    &__complement-form-info #startYear,
+    &__complement-form-info #endYear {
+      width: 106px;
+    }
+    &__complement-form-university .ant-input {
+      width: 100%;
+      max-width: 330px;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .setting {
+    width: 100%;
+    height: 100%;
+    margin-left: 0px;
+
+    &__main-form,
+    &__country-container {
+      max-width: 600px;
+    }
+
+    overflow: auto;
 
     &__form-education {
       margin: 0;
+    }
+
+    &__complement-section {
+      padding: 10px;
+    }
+
+    &__complement-form-university .ant-input {
+      width: 100%;
+      max-width: 550px;
     }
   }
 }

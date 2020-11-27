@@ -1,8 +1,10 @@
 import React from 'react'
 
-import { Form, Input } from 'antd'
+import { Form, Input, Select } from 'antd'
 import { DeleteFilled } from '@ant-design/icons'
 import { ILanguageProps } from './Types'
+
+const { Option } = Select
 
 const Language: React.FC<ILanguageProps> = ({ deleteComponent }: any): JSX.Element => {
   // function handleChange(value: any) {
@@ -14,7 +16,17 @@ const Language: React.FC<ILanguageProps> = ({ deleteComponent }: any): JSX.Eleme
   return (
     <>
       <div className="setting__language-item">
-        <Form.Item name="language" label="Мова" className="setting__main-item">
+        <Form.Item
+          name="language"
+          label="Мова"
+          className="setting__main-item"
+          rules={[
+            {
+              pattern: /^[a-zA-Zа-яА-ЯёЁЇїІіЄєҐґ' '-]{3,15}$/,
+              message: 'Поле заповнене невірно. Спецсимволи і цифри заборонені.',
+            },
+          ]}
+        >
           <Input className="setting__main-field" pattern="^[a-zA-Zа-яА-ЯёЁЇїІіЄєҐґ' '-]{3,15}$" />
         </Form.Item>
       </div>
@@ -23,15 +35,20 @@ const Language: React.FC<ILanguageProps> = ({ deleteComponent }: any): JSX.Eleme
           <label htmlFor="langLevel">
             <p>Рівень володіння</p>
           </label>
-          <select id="langLevel" className="setting__language-level-select">
+          <Select
+            id="langLevel"
+            className="setting__language-level-select"
+            defaultValue="Початковий"
+            bordered={false}
+          >
             {langLevel.map((item, i) => {
               return (
-                <option key={i} value={i}>
+                <Option key={i} value={item}>
                   {item}
-                </option>
+                </Option>
               )
             })}
-          </select>
+          </Select>
         </div>
         <div className="setting__button-delete">
           <div>
