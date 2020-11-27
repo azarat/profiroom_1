@@ -32,9 +32,9 @@ body {
 }
 
 .dashboard-main {
-  overflow: visible;
   position: relative;
   height: calc(100vh - 70px);
+  overflow: visible;
   background-color: $white-color;
   border-radius: 10px;
 }

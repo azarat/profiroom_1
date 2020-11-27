@@ -118,7 +118,6 @@ export type FormProps = {
   addEmoji: (e: any) => void
   handleImageChange: (e: ChangeEvent<HTMLInputElement>) => void
   openEmoji: () => any
-  preview?: string
 }
 
 export type ColluctorInfoProps = {
@@ -166,4 +165,10 @@ export type CollocutorType = {
   roomId: string
   surname: string
   views: number
+}
+
+export interface IChatFileUploadProps {
+  setIsFileUploadModalOpen: (arg0: boolean) => void
+  room: string
+  sendMessage: (content: string, type: string) => void
 }
