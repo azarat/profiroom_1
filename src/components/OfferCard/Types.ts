@@ -45,7 +45,7 @@ export type UserOfferTypes = {
   }
 }
 
-type BasicTypes = {
+export type BasicTypes = {
   changes: number
   description: string
   id: number
@@ -55,7 +55,7 @@ type BasicTypes = {
   title: string
 }
 
-type ExtraChangesTypes = {
+export type ExtraChangesTypes = {
   count: number
   id: number
   offers_id: number
@@ -63,14 +63,14 @@ type ExtraChangesTypes = {
   published: number
 }
 
-type ExtraCommercialTypes = {
+export type ExtraCommercialTypes = {
   id: number
   offers_id: number
   price: number
   published: number
 }
 
-type ExtraTermsTypes = {
+export type ExtraTermsTypes = {
   conditions: number
   count_days: number
   id: number
@@ -80,20 +80,20 @@ type ExtraTermsTypes = {
   published: number
 }
 
-type AverageTypes = {
+export type AverageTypes = {
   averageMark: number
   politenessMark: number
   qualityMark: number
   termMark: number
 }
-type OfferFaqTypes = {
+export type OfferFaqTypes = {
   answer: string
   id: number
   offers_id: number
   question: 'string'
 }
 
-type UserTypes = {
+export type UserTypes = {
   avatar: string
   country: string
   description: string
@@ -103,7 +103,7 @@ type UserTypes = {
   userOffers?: UserOffersTypes[]
 }
 
-type UserOffersTypes = {
+export type UserOffersTypes = {
   comments_count: number
   id: number
   mainImage: 'https://profiroom.com/Backend/public/storage/offerFiles/big/qiASz4t4enw3fCpaf25a1f4nDCSIXEDmq1DlpxTC.jpeg'
