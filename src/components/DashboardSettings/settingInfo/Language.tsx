@@ -16,7 +16,17 @@ const Language: React.FC<ILanguageProps> = ({ deleteComponent }: any): JSX.Eleme
   return (
     <>
       <div className="setting__language-item">
-        <Form.Item name="language" label="Мова" className="setting__main-item">
+        <Form.Item
+          name="language"
+          label="Мова"
+          className="setting__main-item"
+          rules={[
+            {
+              pattern: /^[a-zA-Zа-яА-ЯёЁЇїІіЄєҐґ' '-]{3,15}$/,
+              message: 'Поле заповнене невірно. Спецсимволи і цифри заборонені.',
+            },
+          ]}
+        >
           <Input className="setting__main-field" pattern="^[a-zA-Zа-яА-ЯёЁЇїІіЄєҐґ' '-]{3,15}$" />
         </Form.Item>
       </div>

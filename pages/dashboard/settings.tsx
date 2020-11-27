@@ -8,6 +8,8 @@ import Language from '../../src/components/DashboardSettings/settingInfo/Languag
 import Education from '../../src/components/DashboardSettings/settingInfo/Education'
 import ComplEduc from '../../src/components/DashboardSettings/settingInfo/ComplEduc'
 import Security from '../../src/components/DashboardSettings/Security/Security'
+import Notification from '../../src/components/DashboardSettings/Notification/Notification'
+
 import DashboardLayout from '../../layouts/DashboardLayout'
 import { NextPage } from 'next'
 import { SettingsProps } from '../../src/common/Types'
@@ -157,6 +159,20 @@ const Settings: NextPage<SettingsProps> = ({ jsonResponse }): JSX.Element => {
                       name="firstName"
                       label="Ім'я"
                       className="setting__main-item setting__firstname"
+                      rules={[
+                        {
+                          min: 2,
+                          message: 'Ім`я має бути не менше двух символів',
+                        },
+                        {
+                          required: true,
+                          message: 'Введіть ваше ім`я!',
+                        },
+                        {
+                          pattern: /^[a-zA-Zа-яА-ЯёЁЇїІіЄєҐґ' '-]/,
+                          message: 'Поле заповнене невірно. Спецсимволи і цифри заборонені.',
+                        },
+                      ]}
                     >
                       <Input className="setting__main-field" />
                     </Form.Item>
@@ -165,8 +181,25 @@ const Settings: NextPage<SettingsProps> = ({ jsonResponse }): JSX.Element => {
                       name="surName"
                       label="Прізвище"
                       className="setting__main-item setting__surname"
+                      rules={[
+                        {
+                          min: 2,
+                          message: 'Ім`я має бути не менше двух символів',
+                        },
+                        {
+                          required: true,
+                          message: 'Введіть ваше прізвище!',
+                        },
+                        {
+                          pattern: /^[a-zA-Zа-яА-ЯёЁЇїІіЄєҐґ' '-]/,
+                          message: 'Поле заповнене невірно. Спецсимволи і цифри заборонені.',
+                        },
+                      ]}
                     >
-                      <Input className="setting__main-field" />
+                      <Input
+                        pattern="^[a-zA-Zа-яА-ЯёЁЇїІіЄєҐґ' '-]{3,20}$"
+                        className="setting__main-field"
+                      />
                     </Form.Item>
                   </div>
                   <div className="setting__avatar">
@@ -234,11 +267,31 @@ const Settings: NextPage<SettingsProps> = ({ jsonResponse }): JSX.Element => {
             <div className="setting__country-container setting__block-info">
               <Form>
                 <div className="setting__country-container-info">
-                  <Form.Item name="country" label="Країна" className="setting__main-item">
+                  <Form.Item
+                    name="country"
+                    label="Країна"
+                    className="setting__main-item"
+                    rules={[
+                      {
+                        pattern: /^[a-zA-Zа-яА-ЯёЁЇїІіЄєҐґ' '-]{3,255}$/,
+                        message: 'Поле заповнене невірно. Спецсимволи і цифри заборонені.',
+                      },
+                    ]}
+                  >
                     <Input className="setting__main-field" />
                   </Form.Item>
 
-                  <Form.Item name="city" label="Місто" className="setting__main-item">
+                  <Form.Item
+                    name="city"
+                    label="Місто"
+                    className="setting__main-item"
+                    rules={[
+                      {
+                        pattern: /^[a-zA-Zа-яА-ЯёЁЇїІіЄєҐґ' '-]{3,255}$/,
+                        message: 'Поле заповнене невірно. Спецсимволи і цифри заборонені.',
+                      },
+                    ]}
+                  >
                     <Input className="setting__main-field" />
                   </Form.Item>
                 </div>
@@ -330,6 +383,7 @@ const Settings: NextPage<SettingsProps> = ({ jsonResponse }): JSX.Element => {
             <button className="setting__save-btn">ЗБЕРЕГТИ ЗМІНИ</button>
           </div>
         </section>
+        <Notification />
       </div>
     </DashboardLayout>
   )

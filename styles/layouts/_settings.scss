@@ -1,10 +1,8 @@
 .settings-page {
   overflow-y: scroll;
-  
+
   &--overflow {
     overflow-y: hidden;
-
-   
   }
   .password-success {
     position: absolute;
@@ -304,6 +302,14 @@
     border-radius: 5px;
   }
 
+  &__firstname-error {
+    width: auto;
+    color: $error-color;
+    font-weight: $font-weight-600;
+    font-size: $font-13;
+    line-height: 1;
+  }
+
   &__main-title {
     position: relative;
     margin: 15px 0 0 10px;
@@ -360,7 +366,7 @@
     width: 300px;
   }
 
-  &__education-yaer  &__select .ant-select {
+  &__education-yaer &__select .ant-select {
     width: 106px;
   }
 
@@ -387,7 +393,7 @@
     line-height: 18px;
   }
 
-  &__complement-form-info-yaers  .ant-select {
+  &__complement-form-info-yaers .ant-select {
     width: 104px;
   }
 
@@ -480,7 +486,7 @@
     font-weight: $font-weight-400;
     font-size: $font-16;
     color: $gray-color-title;
-    
+
     font-style: normal;
     font-family: 'Source Sans Pro', sans-serif;
   }
@@ -525,6 +531,10 @@
 
   &__datapicker.ant-picker {
     border-radius: 5px;
+  }
+
+  &__main-item textarea {
+    resize: none;
   }
 
   //avatar
@@ -670,7 +680,6 @@
 
   &__education-button {
     margin: 10px 0 20px 20px;
-    
   }
 
   &__education-btns {
@@ -755,7 +764,6 @@
     align-items: flex-end;
     justify-content: start;
     max-width: 420px;
-   
   }
 
   &__complement-form-info-yaers {
@@ -767,7 +775,6 @@
   &__complement-form-info-yaers &__select {
     margin-right: 25px;
   }
-
 
   &__complement-btns {
     margin-left: 20px;
@@ -790,6 +797,12 @@
     border: none;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(60, 9, 179, 0.3);
+  }
+}
+
+.ant-form-item-has-error {
+  & .ant-input.setting__main-field {
+    border: 1px solid red;
   }
 }
 
@@ -905,9 +918,7 @@
     &__education,
     &__complement {
       max-width: 500px;
-      
     }
-
 
     &__main-item {
       width: 420px;
@@ -1027,7 +1038,7 @@
 
     &__complement-form-university .ant-input {
       width: 100%;
-      max-width: 300px;
+      max-width: 350px;
     }
 
     &__education-button-edit {
@@ -1053,7 +1064,7 @@
 
     &__form-education .setting__education-button {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
     }
 
     //complement
@@ -1085,360 +1096,351 @@
     }
 
     p {
-        margin-left: 0px;
+      margin-left: 0px;
     }
-  
   }
-
-
 }
 
 @media screen and (min-width: 575px) {
-    .setting {
+  .setting {
+    position: relative;
+    z-index: 8;
+    height: 100%;
+    overflow: auto;
+    background: #fbfcfd;
 
-      position: relative;
-      z-index: 8;
-      height: 100%;
-      overflow: auto;
-      background: #fbfcfd;
-     
-      border-radius: 4px;
-        
-        box-shadow: 0 9px 21px rgba(128, 152, 213, 0.1);
+    border-radius: 4px;
 
+    box-shadow: 0 9px 21px rgba(128, 152, 213, 0.1);
 
-        & .security {
-            width: 90%;
-            .password {
-              &__title {
-                font-size: $font-14;
-              }
-              &__inner {
-                display: flex;
-                align-items: baseline;
-                justify-content: space-between;
-                width: 90%;
-              }
-              .ant-form.ant-form-horizontal {
-                width: 70%;
-              }
-            }
-      
-            .email {
-              &__title {
-                font-size: $font-14;
-              }
-              &__inner {
-                display: flex;
-                align-items: baseline;
-                justify-content: space-between;
-                width: 90%;
-              }
-              .ant-form.ant-form-horizontal {
-                width: 70%;
-              }
-            }
-          }
-        &__main {
-            display: flex;
-            flex-direction: column;
+    & .security {
+      width: 90%;
+      .password {
+        &__title {
+          font-size: $font-14;
         }
-
-        &__block {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+        &__inner {
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          width: 90%;
         }
-
-        &__block-title {
-            grid-row: 1;
-            grid-column: 1;
-            padding-left: 30px;
+        .ant-form.ant-form-horizontal {
+          width: 70%;
         }
-
-       &__block-info{
-           grid-row: 1;
-           grid-column: 2/ span 3;
-           justify-content: start;
-       } 
-
-
-      &__language-item .setting__main-item {
-        width: 100%;
       }
- 
-       &__userInfo {
-           display: grid;
-           grid-column-gap:30px;
-           grid-template-rows: 1fr;
-           grid-template-columns: 125px calc(100% - 125px - 30px) ;
-           align-items: center;
-           justify-content: center;
-       }
 
-       &__nameInfo {
-           place-content: center;
-           grid-row: 1;
-            grid-column: 2;   
-            
-            .ant-row {
-                display: flex;
-                flex-direction: column;
-            }
+      .email {
+        &__title {
+          font-size: $font-14;
+        }
+        &__inner {
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          width: 90%;
+        }
+        .ant-form.ant-form-horizontal {
+          width: 70%;
+        }
+      }
+    }
+    &__main {
+      display: flex;
+      flex-direction: column;
+    }
 
-            .ant-row input {
-                max-width: 100%;
-            }
-       }
+    &__block {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
 
-       &__avatar {
-           place-content: center;
-           grid-row: 1;
-           grid-column: 1;
-           grid-column-gap: 10px;
-       }
+    &__block-title {
+      grid-row: 1;
+      grid-column: 1;
+      padding-left: 30px;
+    }
 
-       &__avatar {
-       
-           max-width: 200px;
+    &__block-info {
+      grid-row: 1;
+      grid-column: 2 / span 3;
+      justify-content: start;
+    }
 
-           p {
-            margin-left: 0px;
-          }
-       }
+    &__language-item .setting__main-item {
+      width: 100%;
+    }
 
-       &__gender.ant-row {
+    &__userInfo {
+      display: grid;
+      grid-column-gap: 30px;
+      grid-template-rows: 1fr;
+      grid-template-columns: 125px calc(100% - 125px - 30px);
+      align-items: center;
+      justify-content: center;
+    }
+
+    &__nameInfo {
+      place-content: center;
+      grid-row: 1;
+      grid-column: 2;
+
+      .ant-row {
         display: flex;
         flex-direction: column;
-       }
+      }
 
-        .ant-radio-group{
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
-          width: 100%;
-        margin-bottom: 10px;
-        }
-
-        &__data  {
-            height: 80px;
-            margin: 10px 0 10px 0;
-        }
-        &__main-item {
-          max-width: 100%;
-          &.ant-row input {
-            width: 100%;
-          }
-        }
-
-        &__main-item.ant-row {
-            display: grid;
-            grid-template-columns: 100%;
-        }
-
-        &__main-item textarea {
-          width: 100%;
-          max-width: 100%;  
-        }
-
-        &__info-textarea .setting__main-item{
-            width: auto;
-        }
-        &__country-container  .ant-form{
-          padding-left: 0;
-        }
-
-        &__country-container-info {
-          display: grid;
-          grid-column-gap: 20px;
-          grid-template-columns: repeat(2, 1fr);
-            max-width: 600px;
-        }
-
-        &__country-container-info  .setting__main-item {
-            width: 100%;
-        }
-
-        &__country-container-info input,
-        &__language-item {
-            max-width: 280px;  
-        }
-
-        &__language {
-         
-            display: grid;
-            grid-column-gap: 20px;
-            grid-template-columns: repeat(2, 1fr);
-            align-items: flex-end;
-            justify-content: center;
-        }
-
-        &__language-item input {
-            max-width: 280px;  
-        }
-
-        &__language-value {
-            display: grid;
-            grid-template-columns: repeat(2, 110%);
-            align-self: flex-end;
-        }
-
-        &__button-delete {
-            display: flex;
-            align-items: flex-end;
-        }
-
-        &__education {
-          justify-content: start;
-          max-width: 100%;
-          padding-right: 10px;
-          }
-
-        &__education-form-edit{
-          display: grid;
-          grid-column-gap: 10px;
-          grid-template-columns: 65% 20%;
-          align-items: center;
-          justify-content: start;
-          width: 100%;
-        }  
-
-        &__education-form-edit .ant-row input {
-          max-width: 550px;
-        }
-
-        &__education-form-univer {
-          width: 100%;
-        }
-
-        &__education-form-univer .setting__education-btns {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            align-self: center;
-        }
-
-        &__education-specialty {
-          display: grid;
-          grid-column-gap: 10px;
-          grid-template-columns: 150px calc(100% - 150px);
-          align-items: flex-start;
-          width: 100%;
-        }
-
-
-        &__form-education .setting__education-button {
-          display: flex;
-          justify-content: flex-start;
-        }
-
-        &__education-button-edit {
-          display: flex;
-          align-items: flex-end;
-          justify-content: flex-end;
-        }
-
-        &__education-level {
-            grid-column: 1;
-        }
-        
-        &__education-level {
-            margin-right: 20px;
-        }
-
-        &__education-specialty .setting__main-item.ant-row input {
-          max-width: 260px;
-        }
-
-        p {
-            margin-left: 0px;
-        }
-
-        &__complement {
-            max-width: 100%;
-        }
-
-        &__complement-form-university-name  {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            align-items: center;
-            justify-content: start;
-        }
-
-        &__complement-form-university {
-          display: grid;
-          grid-column-gap: 20px;
-          grid-template-columns: 65% 20%;
-        }
-        
-        &__main-form .setting__country-container {
-          width: auto;
-          max-width: 700px; 
-        }
-
-        &__form-education {
-          width: 100%;
-          max-width: 700px;
-          margin: 0;
-          
-        }
-       
-
-        &__complement-section  .setting__complement-add-button {
-          display: flex;
-          justify-content: start;
-          max-width: 100%;
-        }
-
-
-        &__complement .setting__complement-add-button{
-          display: flex;
-          justify-content: start;
-          width: 100%;
-        }
-
-        &__complement-form {
-          max-width: 700px;
-          margin: 0;
-        }
-        
-        &__complement-btns {
-          display: flex;
-          align-items: flex-end;
-          justify-content: flex-end;
-        }
-
-        &__complement-form-info  #startYear,
-        &__complement-form-info #endYear {
-          width: 106px;
-        }
-        &__complement-form-university .ant-input {
-          width: 100%;
-          max-width: 330px;
-        }
-
+      .ant-row input {
+        max-width: 100%;
+      }
     }
+
+    &__avatar {
+      place-content: center;
+      grid-row: 1;
+      grid-column: 1;
+      grid-column-gap: 10px;
+    }
+
+    &__avatar {
+      max-width: 200px;
+
+      p {
+        margin-left: 0px;
+      }
+    }
+
+    &__gender.ant-row {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ant-radio-group {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    &__data {
+      height: 80px;
+      margin: 10px 0 10px 0;
+    }
+    &__main-item {
+      max-width: 100%;
+      &.ant-row input {
+        width: 100%;
+      }
+    }
+
+    &__main-item.ant-row {
+      display: grid;
+      grid-template-columns: 100%;
+    }
+
+    &__main-item textarea {
+      width: 100%;
+      max-width: 100%;
+      max-height: 150px;
+    }
+
+    &__info-textarea .setting__main-item {
+      width: auto;
+    }
+    &__country-container .ant-form {
+      padding-left: 0;
+    }
+
+    &__country-container-info {
+      display: grid;
+      grid-column-gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 600px;
+    }
+
+    &__country-container-info .setting__main-item {
+      width: 100%;
+    }
+
+    &__country-container-info input,
+    &__language-item {
+      max-width: 280px;
+    }
+
+    &__language {
+      display: grid;
+      grid-column-gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    &__language-item input {
+      max-width: 280px;
+    }
+
+    &__language-value {
+      display: grid;
+      grid-template-columns: repeat(2, 110%);
+      align-self: flex-end;
+    }
+
+    &__button-delete {
+      display: flex;
+      align-items: flex-end;
+    }
+
+    &__education {
+      justify-content: start;
+      max-width: 100%;
+      padding-right: 10px;
+    }
+
+    &__education-form-edit {
+      display: grid;
+      grid-column-gap: 10px;
+      grid-template-columns: 65% 20%;
+      align-items: center;
+      justify-content: start;
+      width: 100%;
+    }
+
+    &__education-form-edit .ant-row input {
+      max-width: 550px;
+    }
+
+    &__education-form-univer {
+      width: 100%;
+    }
+
+    &__education-form-univer .setting__education-btns {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      align-self: center;
+    }
+
+    &__education-specialty {
+      display: grid;
+      grid-column-gap: 10px;
+      grid-template-columns: 150px calc(100% - 150px);
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    &__form-education .setting__education-button {
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    &__education-button-edit {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+
+    &__education-level {
+      grid-column: 1;
+    }
+
+    &__education-level {
+      margin-right: 20px;
+    }
+
+    &__education-specialty .setting__main-item.ant-row input {
+      max-width: 260px;
+    }
+
+    p {
+      margin-left: 0px;
+    }
+
+    &__complement {
+      max-width: 100%;
+    }
+
+    &__complement-form-university-name {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      align-items: center;
+      justify-content: start;
+    }
+
+    &__complement-form-university {
+      display: grid;
+      grid-column-gap: 20px;
+      grid-template-columns: 65% 20%;
+    }
+
+    &__main-form .setting__country-container {
+      width: auto;
+      max-width: 700px;
+    }
+
+    &__form-education {
+      width: 100%;
+      max-width: 700px;
+      margin: 0;
+    }
+
+    &__complement-section .setting__complement-add-button {
+      display: flex;
+      justify-content: start;
+      max-width: 100%;
+    }
+
+    &__complement .setting__complement-add-button {
+      display: flex;
+      justify-content: start;
+      width: 100%;
+    }
+
+    &__complement-form {
+      max-width: 700px;
+      margin: 0;
+    }
+
+    &__complement-btns {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+
+    &__complement-form-info #startYear,
+    &__complement-form-info #endYear {
+      width: 106px;
+    }
+    &__complement-form-university .ant-input {
+      width: 100%;
+      max-width: 330px;
+    }
+  }
 }
 
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 1200px) {
   .setting {
     width: 100%;
     height: 100%;
     margin-left: 0px;
 
-    overflow: auto;
+    &__main-form,
+    &__country-container {
+      max-width: 600px;
+    }
 
+    overflow: auto;
 
     &__form-education {
       margin: 0;
     }
 
     &__complement-section {
-      padding-left: 0;
+      padding: 10px;
     }
 
     &__complement-form-university .ant-input {
       width: 100%;
       max-width: 550px;
     }
-
   }
 }
