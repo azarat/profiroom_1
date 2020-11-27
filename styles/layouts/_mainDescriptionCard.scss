@@ -1,0 +1,127 @@
+.main-description {
+  &__card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 275px;
+    max-height: 75px;
+    margin: 8px auto;
+    overflow: hidden;
+    background-color: $white-color;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(128, 152, 213, 0.3);
+    transition: $transition-height;
+  }
+
+  &__card-close {
+    max-height: 76px;
+    transition: $transition-height;
+  }
+
+  &__card-open {
+    max-height: 300px;
+    transition: $transition-height;
+  }
+  &__card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 15px;
+  }
+
+  &__card-title {
+    margin: 0;
+    font-weight: $font-weight-700;
+    font-size: $font-14;
+    user-select: none;
+  }
+
+  &__card-button {
+    transition: 0.7s;
+  }
+
+  &__card-button-open {
+    transform: rotate(180deg);
+    transition: 0.7s;
+  }
+
+  &__card-description {
+    height: 100%;
+    padding: 10px 25px;
+    color: $gray-color;
+    text-align: justify;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .main-description {
+    &__card {
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      width: 220px;
+      min-height: 220px;
+      margin: 0px 10px 20px;
+      padding: 20px 0 0;
+      cursor: pointer;
+      transition: all 0.3s;
+      user-select: none;
+      &::after {
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+        display: block;
+        width: 30%;
+        height: 30%;
+        background-color: $secondary-color;
+        border-radius: 20px;
+        box-shadow: 0 0 40px rgba(128, 152, 213, 0.2);
+        transform: rotate(70deg);
+        transition: 0.7s;
+        content: '';
+      }
+
+      &:hover {
+        overflow: visible;
+        &::after {
+          top: 0;
+          right: 0;
+          width: 100%;
+          height: 100%;
+          transition: 0.3s;
+        }
+      }
+      &-button {
+        display: none;
+      }
+
+      &-header {
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        padding: 0 25px;
+      }
+      &-title {
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .main-description {
+    &__card {
+      &-title {
+        font-size: $font-16;
+        letter-spacing: -1px;
+      }
+      &-description {
+        font-size: $font-14;
+        letter-spacing: -0.5px;
+      }
+    }
+  }
+}

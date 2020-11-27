@@ -18,6 +18,9 @@
 @import './layouts/dashboardHeader';
 @import './layouts/dashboardMenu';
 @import './pages/carousel';
+@import './layouts/promo';
+@import './layouts/mainDescription';
+@import './layouts/mainDescriptionCard';
 
 body {
   font-family: $font-sans !important;
