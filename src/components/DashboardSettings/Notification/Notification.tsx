@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Checkbox, Switch } from 'antd'
+import { Form, Checkbox, Switch } from 'antd'
 
 const Notification: React.FC = (): JSX.Element => {
   //function onChange(e) {
@@ -8,62 +8,67 @@ const Notification: React.FC = (): JSX.Element => {
   //}
 
   return (
-    <div className="notification-wrapper">
-      <section className="notification-all">
-        <div>
-          <p>ВСІ СПОВІЩЕННЯ ПО ЕЛЕКТРОННІЙ ПОШТІ</p>
-        </div>
-        <div>
-          <div>
-            <p>
-              Підпишіться на електронні листи, щоб дізнаватися що відбувається, коли ви перебуваєте
-              не в мережі. Розсилку можна змінити в будь-який час.
-            </p>
+    <div className="notification">
+      <Form className="notification__wrapper">
+        <section className="notification__all notification__block">
+          <div className="notification__title">
+            <h3>ВСІ СПОВІЩЕННЯ ПО ЕЛЕКТРОННІЙ ПОШТІ</h3>
           </div>
-          <div>
-            <Switch defaultChecked />
+          <div className="notification__all-info notification__block-info">
+            <div>
+              <p>
+                Підпишіться на електронні листи, щоб дізнаватися що відбувається, коли ви перебуваєтене в мережі. Розсилку можна змінити в будь-який час.
+              </p>
+            </div>
+            <div className="notification__all-info-switch">
+              <Switch defaultChecked />
+            </div>
           </div>
-        </div>
-      </section>
-      <section>
-        <div>
-          <p>БАЗОВІ СПОВІЩЕННЯ</p>
-        </div>
-        <div>
-          <div>
-            <Checkbox>Нові приватні повідомлення</Checkbox>
+        </section>
+        <section className="notification__maim notification__block">
+          <div className="notification__title">
+            <h3>БАЗОВІ СПОВІЩЕННЯ</h3>
           </div>
-          <div>
-            <Checkbox>Нові замовлення</Checkbox>
+          <div className="notification__maim-info notification__block-info">
+            <div className="notification__checkbox">
+              <Checkbox>Нові приватні повідомлення</Checkbox>
+            </div>
+            <div className="notification__checkbox">
+              <Checkbox>Нові замовлення</Checkbox>
+            </div>
+            <div className="notification__checkbox">
+              <Checkbox>Зміна рівня</Checkbox>
+            </div>
+            <div className="notification__checkbox">
+              <Checkbox>Сервісні сповіщення</Checkbox>
+            </div>
           </div>
-          <div>
-            <Checkbox>Зміна рівня</Checkbox>
+        </section>
+        <section className="notification__project notification__block">
+          <div className="notification__title">
+            <h3>ПРОЕКТНІ СПОВІЩЕННЯ</h3>
           </div>
-          <div>
-            <Checkbox>Сервісні сповіщення</Checkbox>
+          <div className="notification__project-info notification__block-info">
+            <div className="notification__checkbox">
+              <Checkbox>Нові повідомлення в активному проекті</Checkbox>
+            </div>
+            <div className="notification__checkbox">
+              <Checkbox>Зміна статусу проекту</Checkbox>
+            </div>
+            <div className="notification__checkbox">
+              <Checkbox>Провалені терміни</Checkbox>
+            </div>
+            <div className="notification__checkbox">
+              <Checkbox>Відгук до замовлення</Checkbox>
+            </div>
           </div>
-        </div>
-      </section>
-      <section>
-        <div>
-          <p>ПРОЕКТНІ СПОВІЩЕННЯ</p>
-        </div>
-        <div>
-          <div>
-            <Checkbox>Нові повідомлення в активному проекті</Checkbox>
+        </section>
+        <section className="notification__button">
+          <div className="setting__save">
+            <button className="setting__save-btn">зберегти і продовжити</button>
           </div>
-          <div>
-            <Checkbox>Зміна статусу проекту</Checkbox>
-          </div>
-          <div>
-            <Checkbox>Провалені терміни</Checkbox>
-          </div>
-          <div>
-            <Checkbox>Відгук до замовлення</Checkbox>
-          </div>
-        </div>
-      </section>
-      <section></section>
+        </section>
+      </Form>
     </div>
   )
 }
