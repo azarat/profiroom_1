@@ -8,11 +8,7 @@ import { Space, Form, Button, Checkbox } from 'antd'
 // Types
 import { LoginValues } from './Types'
 
-const decodeFunc = (token: string): any => {
-  const tokenSplit = token.split('.')[1]
-  const decodeToken = JSON.parse(atob(tokenSplit))
-  return decodeToken.sub
-}
+import { decodeFunc } from '../../utils/decode'
 
 const LoginForm: React.FC = (): JSX.Element => {
   const [form] = Form.useForm()
@@ -33,7 +29,7 @@ const LoginForm: React.FC = (): JSX.Element => {
       body: JSON.stringify(values),
     })
     const { token } = await response.json()
-    const userId = decodeFunc(token)
+    const userId = decodeFunc(token).sub
     document.cookie = `jwt_token=${token}`
     document.cookie = `user_id=${userId}`
     router.push('/dashboard')

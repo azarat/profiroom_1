@@ -1,0 +1,232 @@
+.how-its-work {
+  padding: 10px 15px;
+  &__subtitle {
+    margin: 0;
+    color: $green-color;
+    font-size: $font-10;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    margin: 0;
+    margin-top: 10px;
+    font-weight: $font-weight-700;
+    font-size: $font-24;
+  }
+
+  &__description {
+    text-align: justify;
+  }
+
+  &__card-container {
+    width: 100%;
+    height: 170px;
+    margin-top: 10px;
+    perspective: 1000px;
+  }
+
+  &__number-card {
+    width: 30px;
+    height: 30px;
+    color: $white-color;
+    border: 0.5px solid $secondary-color;
+    border-radius: 50%;
+  }
+
+  &__number-card-child {
+    width: 22px;
+    height: 22px;
+    margin: 3px auto;
+    padding-left: 25%;
+    background-color: $secondary-color;
+    border-radius: 50%;
+  }
+
+  &__card-flipper {
+    position: relative;
+    width: 270px;
+    height: 170px;
+    margin: 0 auto;
+    padding: 10px 10px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 0 40px rgba(128, 152, 213, 0.3);
+    transform-style: preserve-3d;
+    transition: transform 0.8s;
+  }
+
+  &__card-front {
+    position: absolute;
+    width: 250px;
+    height: 150px;
+    background-color: $white-color;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+    transition: 0.3s;
+  }
+
+  &__card-back {
+    position: absolute;
+    width: 250px;
+    height: 150px;
+    background-color: $white-color;
+    transform: rotateY(180deg);
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+  }
+
+  &__slider-card {
+    width: 190px;
+    height: 120px;
+    margin-left: 40px;
+    padding: 10px 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 40px rgba(128, 152, 213, 0.1);
+  }
+
+  &__slider-card-content {
+    width: 80%;
+    margin: 20px auto;
+    color: $gray-color;
+  }
+
+  &__slider-button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 90px;
+    margin: 0px auto;
+  }
+
+  &__slider-button {
+    width: 33px;
+    height: 33px;
+    padding-top: 5px;
+    padding-left: 10px;
+    background-color: $white-color;
+    border: 0.5px solid $gray-trans-color;
+    border-radius: 50%;
+    box-shadow: 0 0 40px rgba(128, 152, 213, 0.6);
+  }
+
+  &__slider-button-left {
+    transform: rotate(90deg);
+  }
+
+  &__slider-button-right {
+    transform: rotate(270deg);
+  }
+
+  &__slider-button-disable {
+    opacity: 0.3;
+  }
+
+  &__desktop {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .how-its-work {
+    padding: 0 30px;
+
+    &__wrapper {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 auto;
+    }
+
+    &__row {
+      display: flex;
+      justify-content: space-around;
+      width: 450px;
+      max-height: 80px;
+      margin-top: 30px;
+    }
+
+    &__card-container {
+      width: 140px;
+      height: 90px;
+      margin-left: 35px;
+    }
+
+    &__card-flipper {
+      width: 140px;
+      height: 90px;
+    }
+
+    &__slider-card-content {
+      width: 180px;
+      margin-top: 20px;
+      font-size: $font-12;
+    }
+
+    &__main-mobile {
+      display: none;
+    }
+
+    &__desktop {
+      display: block;
+    }
+
+    &__card-front {
+      width: 120px;
+      height: 70px;
+    }
+
+    &__card-back {
+      width: 120px;
+      height: 70px;
+    }
+
+    &__number-card {
+      margin-top: 40px;
+      margin-left: 20px;
+    }
+
+    &::after {
+      position: absolute;
+      left: 90%;
+      width: 70px;
+      height: 120px;
+      margin-top: -170px;
+      background-image: url('/dots-advantages.svg');
+      content: '';
+    }
+  }
+}
+@media screen and (min-width: 1024px) {
+  .how-its-work {
+    &__wrapper {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    &__text {
+      width: 50%;
+    }
+
+    &__desktop {
+      width: 60%;
+    }
+  }
+}
+@media screen and (min-width: 1200px) {
+  .how-its-work {
+    &__wrapper {
+      max-width: 1000px;
+    }
+    &__desktop {
+      width: auto;
+      margin-left: auto;
+    }
+  }
+}
+@media screen and (min-width: 1800px) {
+  .how-its-work {
+    // &__wrapper {
+    //   max-width: 1400px;
+    // }
+    &::after {
+      left: 70%;
+    }
+  }
+}

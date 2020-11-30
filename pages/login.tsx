@@ -86,6 +86,6 @@ const login: NextPage = (): JSX.Element => {
   )
 }
 
-export { getStaticProps } from '../src/utils/service'
+export { authUser as getServerSideProps } from '../src/utils/auth'
 
 export default login

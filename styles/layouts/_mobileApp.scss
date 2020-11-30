@@ -1,0 +1,191 @@
+.mobile-app {
+  width: 100%;
+  margin-top: 20px;
+  padding: 20px 15px;
+  overflow: hidden;
+  background-color: $secondary-color;
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__subtitle {
+    margin-bottom: 10px;
+    color: $white-trans-color;
+    font-size: $font-10;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    margin: 0;
+    color: $white-color;
+    font-weight: $font-weight-700;
+    font-size: $font-18;
+  }
+
+  &__description {
+    margin: 0;
+    margin-top: 20px;
+    color: $white-trans-color;
+    font-size: $font-14;
+  }
+
+  &__phone {
+    width: 100px;
+    height: 200px;
+    padding: 0 5px;
+    background-color: $white-color;
+    border-radius: 10px;
+  }
+
+  &__phone-screen {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  &__phone-button {
+    width: 15px;
+    height: 15px;
+    margin: 2px auto;
+    border: 3px solid $gray-trans-color;
+    border-radius: 50%;
+  }
+
+  &__phone-message-small {
+    position: relative;
+    width: 30px;
+    height: 35px;
+    margin-top: -120px;
+    margin-left: -20px;
+    padding: 3px 3px;
+    background-color: $white-color;
+    border-radius: 5px;
+  }
+
+  &__phone-message-big {
+    position: relative;
+    width: 90px;
+    height: 40px;
+    margin-left: 50px;
+    padding: 5px 5px;
+    background-color: $white-color;
+    border-radius: 5px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .mobile-app {
+    position: relative;
+    max-height: 250px;
+    padding-left: 25px;
+    overflow: visible;
+    &__wrapper {
+      align-items: start;
+      justify-content: space-around;
+      width: 100%;
+    }
+
+    &__subtitle {
+      font-size: $font-12;
+    }
+
+    &__title {
+      font-size: $font-22;
+    }
+
+    &__description {
+      max-width: 350px;
+      font-size: $font-14;
+    }
+
+    &__phone {
+      width: 160px;
+      height: 330px;
+      margin-top: -60px;
+      margin-left: -70px;
+      padding-top: 10px;
+      border-radius: 20px;
+      box-shadow: 0 0 40px rgba(128, 152, 213, 0.3);
+    }
+
+    &__phone-button {
+      width: 25px;
+      height: 25px;
+    }
+
+    &__phone-message-small {
+      width: 50px;
+      height: 60px;
+      margin-top: -200px;
+      margin-left: -30px;
+    }
+
+    &__phone-message-big {
+      width: 150px;
+      height: 60px;
+      margin-left: 60px;
+    }
+
+    &::before {
+      position: absolute;
+      left: 0;
+      display: block;
+      width: 400px;
+      height: 400px;
+      background-image: url('/pseudo-elements.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+      content: '';
+    }
+  }
+}
+@media screen and (min-width: 1024px) {
+  .mobile-app {
+    padding: 20px 0;
+    &__wrapper {
+      justify-content: space-between;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+  }
+}
+@media screen and (min-width: 1200px) {
+  .mobile-app {
+    min-height: 420px;
+    &__wrapper {
+      justify-content: space-between;
+      max-width: 1000px;
+    }
+
+    &__subtitle {
+      margin-top: 60px;
+      font-size: $font-12;
+    }
+
+    &__description {
+      max-width: 500px;
+      font-size: $font-18;
+    }
+
+    &__title {
+      font-size: $font-24;
+    }
+
+    &__phone {
+      margin-top: 20px;
+    }
+
+    &__phone-button {
+      margin: 4px auto;
+    }
+
+    &::before {
+      top: -50px;
+      left: -200px;
+      width: 730px;
+      height: 560px;
+    }
+  }
+}
