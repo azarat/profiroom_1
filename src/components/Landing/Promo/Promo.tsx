@@ -6,7 +6,7 @@ const Promo = (): JSX.Element => {
     <div className="promo">
       <div className="container">
         <div className="promo__wrapper">
-          <p className="promo__description">PROFIROOM ДЛЯ БІЗНЕСУ - БІРЖА ФРІЛАНСУ</p>
+          <p className="promo__description">Profiroom для бізнесу - біржа фрілансу</p>
           <h1 className="promo__title">
             Найміть фрілансера швидко з будь-якої точки по оптимальній для вас ціні
           </h1>

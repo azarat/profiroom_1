@@ -1,9 +1,9 @@
 import React, { MouseEventHandler, useState } from 'react'
 
 // Types
-import { CardContent } from './Types'
+import { CardContent } from '../Types'
 // Svg
-import Image from '../../assets/svg/shevron-blue.inline.svg'
+import Image from '../../../assets/svg/shevron-blue.inline.svg'
 
 const Card: React.FC<CardContent> = ({ image, title, description }): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false)

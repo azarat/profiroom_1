@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
-import Slider from '../../components/Landing/Slider'
+import Slider from './HowItWorksSlider'
 
-import { sliderCardContent } from '../../constants/landing'
+import { sliderCardContent } from '../../../constants/landing'
 
 const HowItsWorks: React.FC = (): JSX.Element => {
   const [client, setClient] = useState<boolean>(true)
   const [activeSlide, setActiveSlide] = useState<number>(0)
   const [fadeIn, setFadeIn] = useState<boolean>(false)
-  //   const [activeButton, setActiveButton] = useState<number>()
 
   const selectRole = (str: string): void => {
     const y = document.querySelectorAll('.how-its-work__card-flipper')
@@ -20,12 +19,10 @@ const HowItsWorks: React.FC = (): JSX.Element => {
       }
     })
 
-    setClient(!client)
-    // setActiveButton(undefined)
+    setClient((prev) => !prev)
   }
 
   const nextSlide = (str: string): void => {
-    console.log(str)
     if (str === 'right') {
       if (activeSlide < sliderCardContent.length - 1) {
         setActiveSlide(activeSlide + 1)
@@ -46,8 +43,8 @@ const HowItsWorks: React.FC = (): JSX.Element => {
       <div className="container">
         <div className="how-its-work__wrapper">
           <div className="how-its-work__text">
-            <p className="how-its-work__subtitle">ПРАЦЮЙ З ВПЕВНЕНІСТЮ</p>
-            <strong className="how-its-work__title">Як це працює?</strong>
+            <h3 className="how-its-work__subtitle">Працюй з впевненістю</h3>
+            <h2 className="how-its-work__title">Як це працює?</h2>
             <Slider
               client={client}
               activeSlide={activeSlide}

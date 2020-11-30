@@ -1,0 +1,7 @@
+export { default as GetStart } from './GetStart/GetStart'
+export { default as HowItWorks } from './HowItWorks/HowItsWorks'
+export { default as MainCategories } from './MainCategories/MainCategories'
+export { default as MainDescription } from './MainDescription/MainDescription'
+export { default as MobileApp } from './MobileApp/MobileApp'
+export { default as Promo } from './Promo/Promo'
+export { default as Questions } from './Questions/Questions'

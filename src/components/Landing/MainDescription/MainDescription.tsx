@@ -1,6 +1,6 @@
 import React from 'react'
-import Card from '../../components/Landing/Card'
-import { cardContent, cardContentNext } from '../../constants/landing'
+import Card from './MainDescriptionCard'
+import { cardContent, cardContentNext } from '../../../constants/landing'
 import Link from 'next/link'
 
 const MainDescription: React.FC = (): JSX.Element => {
