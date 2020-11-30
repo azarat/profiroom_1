@@ -1,6 +1,4 @@
 .finance {
-  padding: 0 15px;
-
   &--blur {
     filter: blur(5px);
   }
@@ -37,7 +35,6 @@
     }
 
     &__transactions {
-      min-height: 330px;
       padding: 20px 14px;
       background: #fff;
       border-radius: 0 0 4px 4px;
@@ -107,7 +104,6 @@
   }
 
   & .calendar {
-    width: 300px;
     margin-top: 20px;
     border: 1px solid #f0f0f0;
     border-radius: 2px;
@@ -323,15 +319,12 @@
       top: 35px;
     }
   }
-
-  .history-full {
-  }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1440px) {
   .finance {
     &__inner {
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: 1fr 1fr;
     }
 
     &__wallets-calendar-wrapper {

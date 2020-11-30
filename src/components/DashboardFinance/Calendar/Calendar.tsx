@@ -4,7 +4,7 @@ import { Calendar, Select, Col, Row } from 'antd'
 
 const CalendarHah: React.FC = (): JSX.Element => {
   return (
-    <div className="finance__calender calendar">
+    <div className="finance__calendar calendar">
       <Calendar
         fullscreen={false}
         headerRender={({ value, onChange }) => {

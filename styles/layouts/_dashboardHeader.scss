@@ -31,8 +31,8 @@
 
   &__logo {
     color: $white-color;
+    font-weight: $font-weight-700;
     font-size: $font-18;
-    font-weight: bold;
   }
 
   &__bell-icon {
@@ -102,6 +102,8 @@
 
 @media (min-width: 768px) {
   .dashboard-header {
+    position: relative;
+    height: 70px;
     padding: 15px 20px;
 
     &__nav {
@@ -146,10 +148,9 @@
   border: none;
   border-radius: none;
   box-shadow: none;
-  appearance: none;
-  font-size: 0;
   cursor: pointer;
   transition: 0.3s;
+  appearance: none;
 }
 
 .c-hamburger:focus {
@@ -163,7 +164,7 @@
   left: 18px;
   display: block;
   height: 2px;
-  background: white;
+  background-color: $white-color;
 }
 
 .c-hamburger span::before,
@@ -173,7 +174,7 @@
   display: block;
   width: 100%;
   height: 2px;
-  background-color: #fff;
+  background-color: $white-color;
   content: '';
 }
 

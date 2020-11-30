@@ -1,21 +1,28 @@
-import React, { useContext } from 'react'
+import React, { useEffect } from 'react'
 import Head from 'next/head'
 
 //components
 import DashboardHeader from '../src/components/Header/DashboardHeader/DashboardHeader'
-import { MainContext } from '../src/context/MainContext'
 
 // Types
-type DashboardLayoutProps = {
-  children: React.ReactNode
-  title?: string
-  userData: any
-}
+import { DashboardLayoutProps } from '../src/common/Types'
 
-const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, title, userData }) => {
+const DashboardLayout: React.FC<DashboardLayoutProps> = ({
+  className = '',
+  children,
+  title,
+  userData,
+}) => {
   const { user } = userData
 
-  const { isMenuOpen } = useContext(MainContext)
+  useEffect(() => {
+    const body = document.querySelector('body')
+    body?.classList.add('fixed')
+    return () => {
+      body?.classList.remove('fixed')
+    }
+  }, [])
+
   return (
     <>
       <Head>
@@ -23,12 +30,12 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, title, user
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <div className="main-wrapper">
-        <DashboardHeader userData={user} />
-        <main className={`dashboard-content ${isMenuOpen ? 'dashboard-content--blur' : ''}`}>
+      <DashboardHeader userData={user} />
+      <main className={`dashboard-main ${className}`}>
+        <div style={{ height: '100%', width: '100%', overflowY: 'scroll', padding: '15px' }}>
           {children}
-        </main>
-      </div>
+        </div>
+      </main>
     </>
   )
 }
