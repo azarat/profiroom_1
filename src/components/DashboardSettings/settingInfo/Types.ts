@@ -1,3 +1,4 @@
+import { UserType } from '../../Chat/Types'
 export interface ILanguageProps {
   deleteComponent: () => void
 }
@@ -8,4 +9,8 @@ export interface IEducationProps {
 
 export interface IComplEducProps {
   deleteComponent: () => void
+}
+
+export interface IBasicComponentProps {
+  user: UserType
 }

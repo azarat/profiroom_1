@@ -1,100 +1,95 @@
 .notification {
-     font-family: $font-roboto;
-    
-    &__wrapper .ant-form {
-        display: grid;
-        grid-template-columns: 1fr;
-        font-family: $font-roboto;
-        color: #323c47;
-    }
+  font-family: $font-roboto;
 
-    &__block-info, 
-    &__title {
-         border-bottom: 1px solid #ebeeff;
-    }
+  &__wrapper .ant-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    color: $gray-color-title;
+    font-family: $font-roboto;
+  }
 
-    .ant-form h3 {
-        padding: 35px 20px 20px;
-        margin: 0;
-        font-style: normal;
-        font-weight: $font-weight-400;
-        line-height: 143%;
-        text-transform: uppercase;
-         font-size: $font-12;
-    }
+  &__block-info,
+  &__title {
+    border-bottom: 1px solid #ebeeff;
+  }
 
+  .ant-form h3 {
+    margin: 0;
+    padding: 35px 20px 20px;
+    font-weight: $font-weight-400;
+    font-size: $font-12;
+    font-style: normal;
+    line-height: 143%;
+    text-transform: uppercase;
+  }
 
+  &__all-info p,
+  .ant-form label {
+    font-weight: $font-weight-400;
+    font-size: $font-16;
+    font-style: normal;
+  }
 
-    &__all-info p,
-    .ant-form label {
-        font-size: $font-16;
-        font-weight: $font-weight-400;
-        font-style: normal;
-    }
+  &__block-info {
+    padding: 15px 15px 20px;
+    color: $gray-color-title;
+  }
 
+  &__all-info {
+    display: grid;
+    grid-template-columns: 75% 25%;
+  }
 
-    &__block-info {
-        padding: 15px 15px 20px;
-        color: $gray-color-title;
-    }
+  &__all-info-switch {
+    display: flex;
+    justify-content: flex-end;
+  }
 
-    &__all-info {
-        display: grid;
-        grid-template-columns: 75% 25%;
-    }
+  &__maim-info,
+  &__project-info {
+    display: flex;
+    flex-direction: column;
+  }
 
-    &__all-info-switch {
-        display: flex;
-        justify-content: flex-end;
-    }
+  &__checkbox {
+    height: 37px;
+    margin-bottom: 10px;
+  }
 
-    &__maim-info,
-    &__project-info {
-        display: flex;
-        flex-direction: column;
-    }
+  &__checkbox span {
+    height: 20px;
+    padding-right: 8px;
+    padding-left: 8px;
+  }
 
-    &__checkbox{
-        margin-bottom: 10px;
-        height: 37px;
-    }
-
-    &__checkbox span{
-        height: 20px;
-        padding-right: 8px;
-        padding-left: 8px;
-    }
-
-    &__checkbox .ant-checkbox {
-        border: 3px;
-    }
+  &__checkbox .ant-checkbox {
+    border: 3px;
+  }
 }
 
 @media screen and (min-width: 768px) {
-    .notification {
-        &__block {
-            padding-left: 20px;
-        }
-
-        &__all-info-switch {
-            display: flex;
-            justify-content: center;
-        }
+  .notification {
+    &__block {
+      padding-left: 20px;
     }
+
+    &__all-info-switch {
+      display: flex;
+      justify-content: center;
+    }
+  }
 }
 
 @media screen and (min-width: 1024px) {
-    .notification {
-        &__block {
-            display: grid;
-            grid-template-columns: 23% 77%;
-            margin-left: 0;
-        }
-
-        &__all-info {
-            max-width: 800px;
-        }
+  .notification {
+    &__block {
+      display: grid;
+      grid-template-columns: 23% 77%;
+      margin-left: 0;
     }
+
+    &__all-info {
+      max-width: 800px;
+    }
+  }
 }
-
-

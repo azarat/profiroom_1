@@ -17,7 +17,8 @@ const Notification: React.FC = (): JSX.Element => {
           <div className="notification__all-info notification__block-info">
             <div>
               <p>
-                Підпишіться на електронні листи, щоб дізнаватися що відбувається, коли ви перебуваєтене в мережі. Розсилку можна змінити в будь-який час.
+                Підпишіться на електронні листи, щоб дізнаватися що відбувається, коли ви
+                перебуваєтене в мережі. Розсилку можна змінити в будь-який час.
               </p>
             </div>
             <div className="notification__all-info-switch">
