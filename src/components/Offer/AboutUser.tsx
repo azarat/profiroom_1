@@ -24,7 +24,13 @@ const AboutUser: React.FC<UserOfferTypes> = ({ userOffer }): JSX.Element => {
             <span className="about-user__comments">({userOffer.comments_count} відгуків)</span>
           </div>
           <div className="about-user__online-status-wrapper">
-            <span className="about-user__online-status">
+            <span
+              className={
+                userOffer.user.online
+                  ? 'about-user__online-status--online'
+                  : 'about-user__online-status'
+              }
+            >
               {userOffer.user.online ? 'Онлайн' : 'Офлайн'}
             </span>
           </div>

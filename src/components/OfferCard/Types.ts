@@ -42,6 +42,10 @@ export type UserOfferTypes = {
     extra_terms: ExtraTermsTypes[]
     averageRating: AverageTypes
     offer_faq: OfferFaqTypes[]
+    positive_comments_count: number
+    negative_comments_count: number
+    positiveComments: IComments[]
+    negativeComments: IComments[]
   }
 }
 
@@ -110,4 +114,50 @@ export type UserOffersTypes = {
   minPrice: number
   title: 'Test'
   averageRating: AverageTypes
+}
+
+export interface IComments {
+  commentText: string
+  commentator_id: number
+  created_at: string
+  id: number
+  offers_id: number
+  parent: number
+  politenessMark: number
+  qualityMark: number
+  termMark: number
+  updated_at: string
+  author: {
+    avatar: string
+    id: number
+    name: string
+    online: boolean
+    surname: string
+    views: number
+  }
+  arbitration: {
+    all: number
+    customer: number
+    freelancer: number
+  }
+  averageRating: {
+    customer: {
+      averageMark: number
+      contactLevel: number
+      requirementsClarity: number
+      taskClarity: number
+    }
+    freelancer: {
+      averageMark: number
+      politenessMark: number
+      qualityMark: number
+      termMark: number
+    }
+  }
+  dealsCounts: {
+    EndedWorks: number
+    QueuedOffers: number
+    dealsAsCustomer: number
+    inProgressOffers: number
+  }
 }

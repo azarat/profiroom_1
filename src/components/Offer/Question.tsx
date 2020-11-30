@@ -29,9 +29,10 @@ const Question: React.FC<UserOfferTypes> = ({ userOffer }): JSX.Element => {
             onClick={() => handleActiveIndex(index)}
           >
             <p className="question__text">{question.question}</p>
-            <p className={`question__answer ${index === activeIndex && 'question__answer--open '}`}>
-              {question.answer}
-            </p>
+            <p
+              className={`question__answer ${index === activeIndex && 'question__answer--open '}`}
+              dangerouslySetInnerHTML={{ __html: question.answer }}
+            ></p>
             <span className="question__toggler"></span>
           </div>
         ))}

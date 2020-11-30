@@ -36,3 +36,8 @@ interface IUserOffer {
   averageRating: AverageTypes
   offer_faq: OfferFaqTypes[]
 }
+
+export type CompareProps = {
+  userOffer: IUserOffer
+  setAddExtraOpen: (arg0: boolean) => void
+}

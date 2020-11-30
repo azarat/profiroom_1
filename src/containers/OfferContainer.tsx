@@ -15,6 +15,7 @@ import Rating from '../components/Offer/Rating'
 import Question from '../components/Offer/Question'
 import AboutUser from '../components/Offer/AboutUser'
 import AnotherOffer from '../components/Offer/AnotherOffer'
+import Comments from '../components/Offer/Comments/Comments'
 
 const OfferContainer: React.FC<UserOfferTypes> = ({ userOffer }): JSX.Element => {
   const [isExtraOpen, setExtraOpen] = useState<boolean>(false)
@@ -87,7 +88,7 @@ const OfferContainer: React.FC<UserOfferTypes> = ({ userOffer }): JSX.Element =>
               <div className="offer__about about" id="about">
                 <h4 className="about__title">Опис послуги</h4>
                 <div className="about__text">
-                  <p>{userOffer.description}</p>
+                  <p dangerouslySetInnerHTML={{ __html: userOffer.description }}></p>
                 </div>
               </div>
 
@@ -206,8 +207,9 @@ const OfferContainer: React.FC<UserOfferTypes> = ({ userOffer }): JSX.Element =>
                   </div>
                 </div>
               </div>
-              <Compare userOffer={userOffer} />
+              <Compare userOffer={userOffer} setAddExtraOpen={setAddExtraOpen} />
               <Rating userOffer={userOffer} />
+              <Comments userOffer={userOffer} />
               <Question userOffer={userOffer} />
               <AboutUser userOffer={userOffer} />
               <AnotherOffer userOffer={userOffer} />
