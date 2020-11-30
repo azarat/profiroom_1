@@ -5,17 +5,38 @@
   height: 100vh;
   overflow: hidden;
   background-color: $white-color;
+  &.login__desktop {
+    display: none;
+  }
+  &.login__mobile {
+    overflow: scroll;
+  }
+  &__handle-button {
+    &.ant-btn.ant-btn-primary {
+      width: 100%;
+      max-width: 200px;
+      height: 42px;
+      margin-bottom: 25px;
+      color: $black-color;
+      font-weight: $font-weight-700;
+      font-size: $font-14;
+      text-transform: uppercase;
+      background: $transparent;
+      border: 2px solid $primary-color;
+      border-radius: 8px;
+    }
+  }
 }
 
 .container__form {
   position: absolute;
   top: 0;
-  height: 100%;
-  transition: all 0.6s ease-in-out;
   display: flex;
-  place-items: center;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  place-items: center;
+  transition: all 0.6s ease-in-out;
 }
 
 .container__signin {
@@ -31,13 +52,12 @@
 .container__signup {
   z-index: 1;
   width: 60%;
-  padding-right: 10px;
   opacity: 0;
 }
 
 .login.right-panel-active .container__signup {
   z-index: 5;
-  transform: translateX(60%);
+  transform: translateX(67%);
   opacity: 1;
   animation: show 0.6s;
 }
@@ -91,8 +111,7 @@
   &-title {
     color: $white-color;
     font-weight: $font-weight-700;
-    font-size: $font-24;
-    text-transform: uppercase;
+    font-size: $font-28;
   }
   &-description {
     color: $white-color;
@@ -121,10 +140,9 @@
   padding: 0.9rem 2rem;
   color: $white-color;
   font-weight: $font-weight-700;
-  letter-spacing: 0.1rem;
+  letter-spacing: 0;
   text-transform: uppercase;
-  background-color: $primary-color;
-  background-image: linear-gradient(90deg, $primary-color 0%, $secondary-color 74%);
+  background: $transparent;
   border: 1px solid $white-color;
   border-radius: 5px;
   cursor: pointer;
@@ -153,13 +171,24 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
+  .login {
+    &.login__mobile {
+      display: none;
+    }
+    &.login__desktop {
+      display: block;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
   .overlay__panel {
     &-title {
       font-size: $font-36;
     }
     &-description {
-      font-size: $font-24;
+      font-size: $font-21;
     }
   }
 }
