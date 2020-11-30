@@ -1,8 +1,8 @@
 import React, { TouchEventHandler, useState } from 'react'
 
-import Image from '../../assets/svg/shevron-blue.inline.svg'
+import Image from '../../../assets/svg/shevron-blue.inline.svg'
 
-import { SliderProps } from './Types'
+import { SliderProps } from '../Types'
 
 const Slider: React.FC<SliderProps> = ({
   client,
@@ -39,25 +39,26 @@ const Slider: React.FC<SliderProps> = ({
 
   return (
     <div>
-      {' '}
-      <div className="select-role">
+      <div className="slider__select-role">
         <p
-          className={client ? 'slider-title-active slider-title' : 'slider-title'}
+          className={client ? 'slider__title-active slider__title' : 'slider__title'}
           onClick={() => selectRole('client')}
           role="presentation"
         >
           Для замовника
         </p>
         <p
-          className={client ? 'slider-title' : 'slider-title slider-title-active'}
+          className={client ? 'slider__title' : 'slider__title slider__title-active'}
           onClick={() => selectRole('freelancer')}
           role="presentation"
         >
           Для фрілансера
         </p>
       </div>
-      <div className={client ? 'indicator' : ' indicator indicator-active'}></div>
-      <hr className="indicator-bottom" />
+      <div
+        className={client ? 'slider__indicator' : 'slider__indicator slider__indicator-active'}
+      ></div>
+      <hr className="slider__indicator-bottom" />
       {client ? (
         <div className="how-its-work__description">
           <p>

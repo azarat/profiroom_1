@@ -1,0 +1,137 @@
+.promo {
+  position: relative;
+  min-height: 280px;
+  padding: 40px 15px 60px;
+  overflow: hidden;
+  background-image: url('/pseudo-elements3.svg');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: auto 100%;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__title {
+    margin: 0;
+    margin-top: 20px;
+    color: $white-color;
+    font-weight: $font-weight-700;
+    font-size: $font-18;
+    line-height: 18px;
+    text-align: center;
+  }
+
+  &__description {
+    margin: 0;
+    margin-top: 20px;
+    color: $white-trans-color;
+    font-size: $font-10;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 190px;
+    height: 44px;
+    margin-top: 20px;
+    color: $white-trans-color;
+    font-size: $font-13;
+    letter-spacing: 0px;
+    text-align: center;
+    border: 1px solid $white-color;
+    border-radius: 3px;
+    &:hover {
+      color: $white-trans-color;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .promo {
+    width: 100%;
+    max-width: 100%;
+    min-height: 330px;
+    background-size: cover;
+
+    &__description {
+      margin-top: 40px;
+      font-size: $font-10;
+    }
+    &__title {
+      max-width: 480px;
+      font-size: $font-24;
+      line-height: 28px;
+    }
+    &__button {
+      margin-top: 25px;
+    }
+
+    &::before {
+      position: absolute;
+      top: -160px;
+      right: 0;
+      display: block;
+      width: 350px;
+      height: 350px;
+      background-image: url('/pseudo-elements2.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+      content: '';
+    }
+
+    &::after {
+      position: absolute;
+      top: 0;
+      left: -20px;
+      display: block;
+      width: 400px;
+      height: 400px;
+      background-image: url('/pseudo-elements.svg');
+      background-repeat: no-repeat;
+      background-size: contain;
+      content: '';
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .promo {
+    min-height: 540px;
+    padding-top: 100px;
+
+    &__description {
+      font-size: $font-13;
+    }
+
+    &__title {
+      max-width: 700px;
+      margin-top: 30px;
+      font-size: $font-36;
+      line-height: 44px;
+    }
+
+    &__button {
+      margin-top: 40px;
+    }
+
+    &::before {
+      top: -200px;
+      right: 125px;
+      width: 500px;
+      height: 500px;
+    }
+
+    &::after {
+      left: -120px;
+      width: 750px;
+      height: 750px;
+    }
+  }
+}

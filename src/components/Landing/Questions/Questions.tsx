@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 //constants
-import { questionMenuData } from '../../constants/landing'
+import { questionMenuData } from '../../../constants/landing'
 
 const Questions: React.FC = (): JSX.Element => {
   const [client, setClient] = useState<boolean>(true)
@@ -34,8 +34,8 @@ const Questions: React.FC = (): JSX.Element => {
       <div className="container">
         <div className="questions__wrapper">
           <div className="questions__description-container">
-            <p className="questions__subtitle">З&#39;ЯВИЛИСЯ ПИТАННЯ?</p>
-            <strong className="questions__title">Поширені запитання</strong>
+            <h3 className="questions__subtitle">З&#39;явилися питання?</h3>
+            <h2 className="questions__title">Поширені запитання</h2>
             <div className="questions__description">
               <p>Виберіть необхідну категорію: Замовникам / фрілансерам</p>
               <br />
@@ -45,24 +45,28 @@ const Questions: React.FC = (): JSX.Element => {
             </div>
           </div>
           <div className="questions__button-block">
-            <div className="select-role">
+            <div className="slider__select-role">
               <p
-                className={client ? 'slider-title-active slider-title' : 'slider-title'}
+                className={client ? 'slider__title-active slider__title' : 'slider__title'}
                 onClick={() => selectRole('client')}
                 role="presentation"
               >
                 Для замовника
               </p>
               <p
-                className={client ? 'slider-title' : 'slider-title slider-title-active'}
+                className={client ? 'slider__title' : 'slider__title slider__title-active'}
                 onClick={() => selectRole('freelancer')}
                 role="presentation"
               >
                 Для фрілансера
               </p>
             </div>
-            <div className={client ? 'indicator' : ' indicator indicator-active'}></div>
-            <hr className="indicator-bottom" />
+            <div
+              className={
+                client ? 'slider__indicator' : 'slider__indicator slider__indicator-active'
+              }
+            ></div>
+            <hr className="slider__indicator-bottom" />
             <div>
               <div className="questions__button-container">
                 {client

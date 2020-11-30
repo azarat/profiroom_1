@@ -1,15 +1,15 @@
 import React from 'react'
-import { categories } from '../../constants/landing'
+import { categories } from '../../../constants/landing'
 
 const MainCategories: React.FC = (): JSX.Element => {
   return (
     <div className="main-categories">
       <div className="container">
         <div className="main-categories__wrapper">
-          <p className="main-categories__subtitle">КАТЕГОРІЇ РОБІТ</p>
-          <strong className="main-categories__title">
+          <h3 className="main-categories__subtitle">Категорії робіт</h3>
+          <h2 className="main-categories__title">
             На біржі працюють фрілансери в наступних категоріях
-          </strong>
+          </h2>
           <div className="main-categories__card-container">
             {categories.map((el) => (
               <div className="main-categories__card" key={el.id}>
