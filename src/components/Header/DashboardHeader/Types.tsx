@@ -43,3 +43,7 @@ export type Response = {
 export type JsonResponseType = {
   jsonResponse: Response
 }
+
+export type DashboardHeaderProps = {
+  userData: Response
+}
