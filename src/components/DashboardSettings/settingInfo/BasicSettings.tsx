@@ -1,6 +1,7 @@
-import React, { useState, useMemo, useCallback } from 'react'
-import { Form, Input, Radio, DatePicker } from 'antd'
+import React, { useState, useMemo, useCallback, Dispatch, SetStateAction } from 'react'
+import nextCookie from 'next-cookies'
 
+import { Form, Input, Radio, DatePicker } from 'antd'
 import { PlusCircleOutlined, EditFilled } from '@ant-design/icons'
 import moment from 'moment'
 
@@ -8,39 +9,84 @@ import Language from './Language'
 import Education from './Education'
 import ComplEduc from './ComplEduc'
 
-const dateFormatList: Array<string> = ['DD/MM/YYYY']
+const dateFormatList: Array<string> = ['YYYY/MM/DD']
 const { TextArea } = Input
 
 type BasicSettingsChangeProps = {
   user: any
+  setModalOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const BasicSettings: React.FC<BasicSettingsChangeProps> = ({ user }): JSX.Element => {
+const BasicSettings: React.FC<BasicSettingsChangeProps> = ({ user, setModalOpen }): JSX.Element => {
   const [form] = Form.useForm()
-  const [formLayout, setFormLayout] = useState<string>('horizontal')
-  const [gender, setGender] = useState<string>('male')
+
+  //const [formLayout, setFormLayout] = useState<string>('horizontal')
+  const [gender, setGender] = useState<string>(`${user.gender}`)
   const [langArr, setLangArr] = useState<React.ReactNode[]>([]) //тут должен быть язык
   const [educationArr, setEducationArr] = useState<React.ReactNode[]>([])
   const [complEducArr, setComplEducArr] = useState<React.ReactNode[]>([])
 
-  console.log(user.name)
+  const { jwt_token } = nextCookie('ctx')
+
+  const handleUpdateInfo = async (): Promise<void> => {
+    const name = form.getFieldValue('name')
+    const surname = form.getFieldValue('surname')
+    const description = form.getFieldValue('description')
+    const country = form.getFieldValue('country')
+    const city = form.getFieldValue('city')
+    const birthDay = form.getFieldValue('birthday')
+    const formValues = form.getFieldsValue()
+    console.log(formValues)
+    const languages = Object.keys(formValues)
+      .filter((key) => /^language_\d{1}/.test(key))
+      .map((key) => ({
+        langName: formValues[key],
+        langLevel: formValues[`language_level_${key.split('_')[1]}`],
+      }))
+    console.log(languages)
+    const body = {
+      languages,
+    }
+    JSON.stringify(body)
+
+    const url = `${process.env.NEXT_PUBLIC_API}api/updateUserSettings`
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Authorization: `bearer ${jwt_token}`,
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        name: name,
+        surname: surname,
+        gender: gender,
+        description: description,
+        country: country,
+        city: city,
+
+        'birthDay.year': birthDay.getFullYear(),
+        'birthDay.month': birthDay.getMonth(),
+        'birthDay.day': birthDay.getDate(),
+      }),
+    })
+    const result = await response.json()
+    if (result.message === 'succes') {
+      setModalOpen(true)
+    }
+  }
 
   const onChange = (e: any): void => {
     setGender(e.target.value)
   }
 
-  const onFormLayoutChange = ({ layout }: any) => {
-    setFormLayout(layout)
-  }
-
-  const formItemLayout = useMemo(() => {
-    formLayout === 'horizontal'
-      ? {
-          labelCol: { span: 4 },
-          wrapperCol: { span: 14 },
-        }
-      : null
-  }, [formLayout])
+  // const formItemLayout = useMemo(() => {
+  //   formLayout === 'horizontal'
+  //     ? {
+  //         labelCol: { span: 4 },
+  //         wrapperCol: { span: 14 },
+  //       }
+  //     : null
+  // }, [formLayout])
 
   const deleteEducation = useCallback(
     (idx) => {
@@ -70,17 +116,18 @@ const BasicSettings: React.FC<BasicSettingsChangeProps> = ({ user }): JSX.Elemen
         </div>
         <div className="setting__main-form  setting__block-info">
           <Form
-            {...formItemLayout}
+            onFinish={handleUpdateInfo}
+            //{...formItemLayout}
             //layout ={formLayout}
             form={form}
-            initialValues={{ layout: formLayout }}
-            onValuesChange={onFormLayoutChange}
+            // initialValues={{ layout: formLayout }}
+            // onValuesChange={onFormLayoutChange}
             className="setting__main-form"
           >
             <div className="setting__userInfo">
               <div className="setting__nameInfo">
                 <Form.Item
-                  name="firstName"
+                  name="name"
                   label="Ім'я"
                   className="setting__main-item setting__firstname"
                   rules={[
@@ -98,11 +145,11 @@ const BasicSettings: React.FC<BasicSettingsChangeProps> = ({ user }): JSX.Elemen
                     },
                   ]}
                 >
-                  <Input value={user.name} type="text" className="setting__main-field" />
+                  <Input defaultValue={user.name} type="text" className="setting__main-field" />
                 </Form.Item>
 
                 <Form.Item
-                  name="surName"
+                  name="surname"
                   label="Прізвище"
                   className="setting__main-item setting__surname"
                   rules={[
@@ -120,17 +167,17 @@ const BasicSettings: React.FC<BasicSettingsChangeProps> = ({ user }): JSX.Elemen
                     },
                   ]}
                 >
-                  <Input type="text" className="setting__main-field" />
+                  <Input defaultValue={user.surname} type="text" className="setting__main-field" />
                 </Form.Item>
               </div>
               <div className="setting__avatar">
-                <Form.Item name="avatar" label="" className="setting__main-item-avatar">
+                <Form.Item name="avatar" className="setting__main-item-avatar">
                   <p>Аватар</p>
                   <label htmlFor="avatarImg">
                     <div className="setting__main-field-img-block">
                       <img
                         className="setting__main-item-avatar-img"
-                        src="https://profiroom.com/Backend/public/storage/avatar/noAva.jpg"
+                        src={`${user.avatar}`}
                         alt="avatar"
                       />
                       <div className="setting__main-item-avatar-edit">
@@ -157,18 +204,24 @@ const BasicSettings: React.FC<BasicSettingsChangeProps> = ({ user }): JSX.Elemen
             <Form.Item name="birthday" label="Дата народження" className="setting__data">
               <DatePicker
                 className="setting__datapicker"
-                defaultValue={moment('01/01/2015', dateFormatList[0])}
+                defaultValue={moment(
+                  user.birthday == ''
+                    ? '1970/01/01'
+                    : user.birthday.slice(0, 10).replace(/-/gi, '/'),
+                  dateFormatList[0]
+                )}
                 format={dateFormatList}
                 size="large"
               />
             </Form.Item>
             <div className="setting__info-textarea">
               <Form.Item
-                name="aboutYourself"
+                name="description"
                 label="Розкажіть про себе"
                 className="setting__main-item"
               >
                 <TextArea
+                  defaultValue={user.description}
                   className="setting__textarea"
                   showCount
                   maxLength={1200}
@@ -176,6 +229,7 @@ const BasicSettings: React.FC<BasicSettingsChangeProps> = ({ user }): JSX.Elemen
                 />
               </Form.Item>
             </div>
+            <button type="submit">SSSSSS</button>
           </Form>
         </div>
       </div>
@@ -184,7 +238,7 @@ const BasicSettings: React.FC<BasicSettingsChangeProps> = ({ user }): JSX.Elemen
           <h3>МІСЦЕЗНАХОДЖЕННЯ ТА МОВИ</h3>
         </div>
         <div className="setting__country-container setting__block-info">
-          <Form>
+          <Form onFinish={handleUpdateInfo} form={form}>
             <div className="setting__country-container-info">
               <Form.Item
                 name="country"
@@ -197,7 +251,7 @@ const BasicSettings: React.FC<BasicSettingsChangeProps> = ({ user }): JSX.Elemen
                   },
                 ]}
               >
-                <Input className="setting__main-field" />
+                <Input defaultValue={user.country} className="setting__main-field" />
               </Form.Item>
 
               <Form.Item
@@ -211,7 +265,7 @@ const BasicSettings: React.FC<BasicSettingsChangeProps> = ({ user }): JSX.Elemen
                   },
                 ]}
               >
-                <Input className="setting__main-field" />
+                <Input defaultValue={user.city} className="setting__main-field" />
               </Form.Item>
             </div>
 
@@ -226,6 +280,7 @@ const BasicSettings: React.FC<BasicSettingsChangeProps> = ({ user }): JSX.Elemen
                     setLangArr((arr) => [
                       ...arr,
                       <Language
+                        id={arr.length}
                         key={arr.length}
                         deleteComponent={() => {
                           deleteLanguage(arr.length)
@@ -309,5 +364,5 @@ const BasicSettings: React.FC<BasicSettingsChangeProps> = ({ user }): JSX.Elemen
   )
 }
 
-export { authUser as getServerSideProps } from '../../../utils/auth'
 export default BasicSettings
+export { authUser as getServerSideProps } from '../../../utils/auth'

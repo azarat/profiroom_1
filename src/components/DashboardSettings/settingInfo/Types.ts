@@ -1,6 +1,7 @@
 import { UserType } from '../../Chat/Types'
 export interface ILanguageProps {
   deleteComponent: () => void
+  id: number
 }
 
 export interface IEducationProps {

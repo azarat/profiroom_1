@@ -47,7 +47,7 @@ const Settings: NextPage<SettingsProps> = ({ jsonResponse }): JSX.Element => {
               <div className="setting__tab-menu">
                 <Tabs tabPosition="top" defaultActiveKey="1">
                   <TabPane tab="Загальні" key="1">
-                    <BasicSettings user={user} />
+                    <BasicSettings user={user} setModalOpen={setIsModelOpen} />
                   </TabPane>
                   <TabPane tab="Сповіщення" key="2">
                     <Notification />
