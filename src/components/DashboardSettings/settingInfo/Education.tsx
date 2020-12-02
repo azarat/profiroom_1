@@ -2,10 +2,11 @@ import React, { useState, useMemo } from 'react'
 import { Form, Input, Select } from 'antd'
 import { IEducationProps } from './Types'
 import { DeleteFilled, EditFilled, PaperClipOutlined } from '@ant-design/icons'
+import FormItem from 'antd/lib/form/FormItem'
 
 const { Option } = Select
 
-const Education: React.FC<IEducationProps> = ({ deleteComponent }: any): JSX.Element => {
+const Education: React.FC<IEducationProps> = ({ id, deleteComponent }: any): JSX.Element => {
   const [showEduc, setShowEduc] = useState(false)
 
   const today = new Date()
@@ -20,34 +21,38 @@ const Education: React.FC<IEducationProps> = ({ deleteComponent }: any): JSX.Ele
 
   return (
     <>
-      <Form>
-        <div className="setting__education-form-edit">
-          <div className="setting__education-form-univer">
-            <Form.Item name="university" label="Навчальний заклад" className="setting__main-item">
-              <Input className="setting__main-field" />
-            </Form.Item>
+      <div className="setting__education-form-edit">
+        <div className="setting__education-form-univer">
+          <Form.Item
+            name={`institution_${id}`}
+            label="Навчальний заклад"
+            className="setting__main-item"
+          >
+            <Input className="setting__main-field" />
+          </Form.Item>
+        </div>
+        <div className="setting__button-editor setting__education-btns">
+          <div
+            role="presentation"
+            onClick={() => setShowEduc((prev) => !prev)}
+            className="setting__button-edit setting__education-button-edit"
+          >
+            <EditFilled />
           </div>
-          <div className="setting__button-editor setting__education-btns">
-            <div
-              role="presentation"
-              onClick={() => setShowEduc((prev) => !prev)}
-              className="setting__button-edit setting__education-button-edit"
-            >
-              <EditFilled />
-            </div>
-            <div className="setting__button-delete setting__education-button-delete">
-              <DeleteFilled onClick={deleteComponent} />
-            </div>
+          <div className="setting__button-delete setting__education-button-delete">
+            <DeleteFilled onClick={deleteComponent} />
           </div>
         </div>
-        <div
-          className={`setting__education-form-univer-info ${
-            showEduc ? 'setting__education-form-univer-info-hidden' : ''
-          }`}
-        >
-          <div className="setting__education-specialty">
-            <div className="setting__education-level setting__select">
-              <label htmlFor="scienceDegree">
+      </div>
+      <div
+        className={`setting__education-form-univer-info ${
+          showEduc ? 'setting__education-form-univer-info-hidden' : ''
+        }`}
+      >
+        <div className="setting__education-specialty">
+          <div className="setting__education-level setting__select">
+            <Form.Item name={`academicDegree_${id}`}>
+              <label htmlFor="academicDegree">
                 <p>Наукова ступінь</p>
               </label>
               <Select
@@ -58,21 +63,27 @@ const Education: React.FC<IEducationProps> = ({ deleteComponent }: any): JSX.Ele
               >
                 {scienceDegree.map((level, i) => {
                   return (
-                    <Option key={i} value={level}>
+                    <Option key={i} value={i}>
                       {level}
                     </Option>
                   )
                 })}
               </Select>
-            </div>
-            <div>
-              <Form.Item name="specialty" label="Спеціальність" className="setting__main-item">
-                <Input className="setting__main-field" />
-              </Form.Item>
-            </div>
+            </Form.Item>
           </div>
-          <div className="setting__education-yaer">
-            <div className="setting__select">
+          <div>
+            <Form.Item
+              name={`specialty_${id}`}
+              label="Спеціальність"
+              className="setting__main-item"
+            >
+              <Input className="setting__main-field" />
+            </Form.Item>
+          </div>
+        </div>
+        <div className="setting__education-yaer">
+          <div className="setting__select">
+            <Form.Item name={`startEducation_${id}`}>
               <label htmlFor="startYear">
                 <p>Рік старту</p>
               </label>
@@ -85,8 +96,10 @@ const Education: React.FC<IEducationProps> = ({ deleteComponent }: any): JSX.Ele
                   )
                 })}
               </Select>
-            </div>
-            <div className="setting__select">
+            </Form.Item>
+          </div>
+          <div className="setting__select">
+            <Form.Item name={`finishEducation_${id}`}>
               <label htmlFor="endYear">
                 <p>Рік закінчення</p>
               </label>
@@ -99,22 +112,22 @@ const Education: React.FC<IEducationProps> = ({ deleteComponent }: any): JSX.Ele
                   )
                 })}
               </Select>
-            </div>
-          </div>
-          <div className="setting__education-downloads">
-            <div className="setting__education-downloads-input">
-              <PaperClipOutlined />
-              <label htmlFor="doc">Завантажити файл/фото диплома</label>
-              <input id="doc" type="file" accept=".png, .jpg, .jpeg"></input>
-            </div>
-            <div>
-              <p className="setting__education-downloads-formats">
-                Можливі формати файлів jpg, jpeg, png
-              </p>
-            </div>
+            </Form.Item>
           </div>
         </div>
-      </Form>
+        <div className="setting__education-downloads">
+          <div className="setting__education-downloads-input">
+            <PaperClipOutlined />
+            <label htmlFor="doc">Завантажити файл/фото диплома</label>
+            <input id="doc" type="file" accept=".png, .jpg, .jpeg"></input>
+          </div>
+          <div>
+            <p className="setting__education-downloads-formats">
+              Можливі формати файлів jpg, jpeg, png
+            </p>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

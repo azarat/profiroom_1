@@ -6,6 +6,7 @@ export interface ILanguageProps {
 
 export interface IEducationProps {
   deleteComponent: () => void
+  id: number
 }
 
 export interface IComplEducProps {

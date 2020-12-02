@@ -16,17 +16,7 @@ const Language: React.FC<ILanguageProps> = ({ id, deleteComponent }: any): JSX.E
   return (
     <>
       <div className="setting__language-item">
-        <Form.Item
-          name={`language_${id}`}
-          label="Мова"
-          className="setting__main-item"
-          rules={[
-            {
-              pattern: /^[a-zA-Zа-яА-ЯёЁЇїІіЄєҐґ' '-]{3,15}$/,
-              message: 'Поле заповнене невірно. Спецсимволи і цифри заборонені.',
-            },
-          ]}
-        >
+        <Form.Item name={`langName_${id}`} label="Мова" className="setting__main-item">
           <Input className="setting__main-field" pattern="^[a-zA-Zа-яА-ЯёЁЇїІіЄєҐґ' '-]{3,15}$" />
         </Form.Item>
       </div>
@@ -35,7 +25,7 @@ const Language: React.FC<ILanguageProps> = ({ id, deleteComponent }: any): JSX.E
           <label htmlFor="langLevel">
             <p>Рівень володіння</p>
           </label>
-          <Form.Item name={`language__level_${id}`}>
+          <Form.Item name={`langLevel_${id}`}>
             <Select
               id="langLevel"
               className="setting__language-level-select"
@@ -44,7 +34,7 @@ const Language: React.FC<ILanguageProps> = ({ id, deleteComponent }: any): JSX.E
             >
               {langLevel.map((item, i) => {
                 return (
-                  <Option key={i} value={item}>
+                  <Option key={i} value={i}>
                     {item}
                   </Option>
                 )
