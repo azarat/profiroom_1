@@ -8,9 +8,16 @@ export const authUser: GetServerSideProps = async (
 ): Promise<GetServerSidePropsResult<any>> => {
   const { jwt_token } = nextCookie(context)
 
-  if (context.req && !jwt_token) {
-    context.res.writeHead(302, { Location: '/login' })
-    context.res.end()
+  if (context.req.url?.split('?')[0] === '/login') {
+    if (context.req && jwt_token) {
+      context.res.writeHead(302, { Location: '/dashboard' })
+      context.res.end()
+    }
+  } else {
+    if (context.req && !jwt_token) {
+      context.res.writeHead(302, { Location: '/login' })
+      context.res.end()
+    }
   }
 
   const url = `${process.env.NEXT_PUBLIC_API}api/user`

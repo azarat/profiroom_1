@@ -1,0 +1,139 @@
+.main-categories {
+  padding: 10px 15px;
+  background-image: url('/find-specialist-bg.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  &__subtitle {
+    margin: 0;
+    color: $green-color;
+    font-size: $font-10;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    margin: 0;
+    margin-top: 10px;
+    font-weight: $font-weight-700;
+    font-size: $font-24;
+  }
+  &__card {
+    width: 100%;
+    max-width: 240px;
+    max-height: 150px;
+    margin: 20px auto;
+    padding: 15px 10px 15px 20px;
+    background-color: $white-color;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(128, 152, 213, 0.2);
+  }
+
+  &__card-top {
+    display: flex;
+    align-items: center;
+  }
+
+  &__card-image {
+    width: 20px;
+    height: 20px;
+  }
+
+  &__card-title {
+    margin: 0;
+    margin-left: 20px;
+    font-weight: $font-weight-600;
+    font-size: $font-13;
+  }
+
+  &__card-description {
+    margin: 0;
+    margin-top: 20px;
+    color: $gray-color;
+    font-size: $font-13;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .main-categories {
+    margin-top: 50px;
+    padding: 0 30px;
+
+    &__title {
+      display: block;
+      width: 70%;
+    }
+
+    &__card-container {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    &__card {
+      z-index: 2;
+      width: 210px;
+      &:nth-of-type(1),
+      &:nth-of-type(4) {
+        margin-left: 0;
+      }
+      &:nth-of-type(3),
+      &:nth-of-type(6) {
+        margin-right: 0;
+      }
+    }
+
+    &::before {
+      position: absolute;
+      right: 0;
+      width: 130px;
+      height: 250px;
+      margin-top: 40px;
+      background-image: url('/dots-advantages.svg');
+      background-repeat: no-repeat;
+      content: '';
+    }
+  }
+}
+@media screen and (min-width: 1024px) {
+  .main-categories {
+    &__wrapper {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    &::before {
+      right: 10%;
+      left: unset;
+    }
+  }
+}
+@media screen and (min-width: 1200px) {
+  .main-categories {
+    &__wrapper {
+      max-width: 1000px;
+    }
+    &__card {
+      width: 100%;
+      max-width: 300px;
+      min-height: 140px;
+    }
+
+    &__card-image {
+      width: 30px;
+      height: 30px;
+    }
+
+    &__card-title {
+      font-size: $font-16;
+    }
+
+    &__card-description {
+      font-size: $font-14;
+    }
+  }
+}
+@media screen and (min-width: 1800px) {
+  .main-categories {
+    &::before {
+      right: 20%;
+    }
+  }
+}

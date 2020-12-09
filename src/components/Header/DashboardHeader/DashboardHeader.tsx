@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useContext } from 'react'
 import Link from 'next/link'
+import Cookies from 'js-cookie'
 
 //components
 import Menu from './Menu'
@@ -11,15 +12,16 @@ import { Popover } from 'antd'
 import { BellFilled } from '@ant-design/icons'
 //ctx
 import { MainContext } from '../../../context/MainContext'
-
-//type
+//types
 import { DashboardHeaderProps } from './Types'
+//ctx
+import { MainContext } from '../../../context/MainContext'
 
 const DashboardHeader: React.FC<DashboardHeaderProps> = (props): JSX.Element => {
   const [isClient, setIsClient] = useState<boolean>(false)
   const { userData } = props
 
-  const { lang, setLang, isMenuOpen, setMenuOpen } = useContext(MainContext)
+  const { lang, setLang, isMenuOpen, setMenuOpen, setLogin } = useContext(MainContext)
 
   const selectRole = useCallback(() => {
     setIsClient(!isClient)
@@ -28,6 +30,12 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = (props): JSX.Element => 
   const openMenu = useCallback(() => {
     setMenuOpen(!isMenuOpen)
   }, [isMenuOpen])
+
+  const handleExit = () => {
+    Cookies.remove('jwt_token')
+    Cookies.remove('user_id')
+    setLogin(false)
+  }
 
   return (
     <>
@@ -39,6 +47,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = (props): JSX.Element => 
               <BellFilled className="dashboard-header__bell-icon" />
             </Popover>
             <div className="dashboard-header__switch-desktop">
+
               <SwitchComponent isClient={isClient} selectRole={selectRole} />
             </div>
             <LangSelect language={lang} updateLanguage={setLang} />

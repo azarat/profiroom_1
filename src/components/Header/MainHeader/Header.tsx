@@ -1,6 +1,7 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import Cookies from 'js-cookie'
 // Context
 import { MainContext } from '../../../context/MainContext'
 // Components
@@ -11,12 +12,14 @@ import UserDrowDown from './UserDropDown'
 // Antd
 import { Input } from 'antd'
 
+import { decodeFunc } from '../../../utils/decode'
+
 const Header = (): JSX.Element => {
   const [openMenu, setOpenMenu] = useState<boolean>(false)
-  const [isLogined] = useState<boolean>(false)
+  const [userInfo, setUserInfo] = useState({})
   const router = useRouter()
 
-  const { lang: updateLang, setLang: setUpdateLang } = useContext(MainContext)
+  const { lang: updateLang, setLang: setUpdateLang, login, setLogin } = useContext(MainContext)
 
   const handleMenu = () => {
     setOpenMenu((prev) => !prev)
@@ -24,6 +27,22 @@ const Header = (): JSX.Element => {
 
   const updateLanguage = (value: string) => {
     setUpdateLang(value)
+  }
+
+  useEffect(() => {
+    const jwt_token = Cookies.get('jwt_token')
+
+    if (jwt_token) {
+      const userInfo = decodeFunc(jwt_token)
+      setUserInfo(userInfo)
+      setLogin(true)
+    }
+  }, [])
+
+  const handleExit = (): void => {
+    Cookies.remove('jwt_token')
+    Cookies.remove('user_id')
+    setLogin(false)
   }
 
   return (
@@ -70,10 +89,10 @@ const Header = (): JSX.Element => {
                 enterButton
               />
             </div>
-            <UserDrowDown isLogined={isLogined} />
+            <UserDrowDown handleExit={handleExit} isLogined={login} userInfo={userInfo} />
             <div className="header__select-auth-wrapper">
               <LangSelect updateLanguage={updateLanguage} language={updateLang} />
-              {!isLogined && (
+              {!login && (
                 <>
                   {router.pathname !== '/login' && (
                     <div className="header__login-anchor">

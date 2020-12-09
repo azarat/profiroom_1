@@ -8,6 +8,8 @@ interface IContext {
   setHistoryOpen: (arg0: boolean) => void
   categories?: any
   isMenuOpen: boolean
+  login: boolean
+  setLogin: (arg0: boolean) => void
 }
 
 export const MainContext = createContext<IContext>({
@@ -22,5 +24,9 @@ export const MainContext = createContext<IContext>({
   },
   setLang: (str) => {
     console.log(str)
+  },
+  login: false,
+  setLogin: (boolean) => {
+    console.log(boolean)
   },
 })

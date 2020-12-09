@@ -1,11 +1,12 @@
 .login__title {
   margin-top: 25px;
-  font-weight: $font-weight-700;
+  font-weight: $font-weight-900;
   font-size: $font-24;
   text-align: center;
   // text-transform: uppercase;
 }
 .login__subtitle {
+  margin-bottom: 50px;
   color: $gray-color;
   font-weight: $font-weight-400;
   font-size: $font-14;
@@ -15,20 +16,58 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   max-width: 280px;
+  margin-top: 50px;
   &.ant-form {
     margin: 0 auto;
+  }
+  &-checkbox {
+    display: flex;
+    justify-content: space-between;
+    max-width: 350px;
+    margin: auto;
+    & span {
+      color: $gray-color;
+      font-size: $font-16;
+    }
+  }
+  &-wrapper-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+  }
+  &-button.ant-btn.ant-btn-primary {
+    width: 100%;
+    max-width: 200px;
+    height: 42px;
+    font-weight: $font-weight-700;
+    font-size: $font-14;
+    text-transform: uppercase;
+    border-radius: 8px;
   }
 }
 
 @media screen and (min-width: 768px) {
   .login__form {
     max-width: 450px;
+    &.ant-form {
+      & .ant-form-item-explain.ant-form-item-explain-error {
+        padding-left: 50px;
+      }
+    }
+
   }
 }
 
 @media screen and (min-width: 1200px) {
   .login__form {
     max-width: 550px;
+    &.ant-form {
+      & .ant-form-item-explain.ant-form-item-explain-error {
+        padding-left: 100px;
+      }
+    }
   }
 }
