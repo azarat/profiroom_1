@@ -18,6 +18,7 @@ import { MessageType, ActiveDialogType } from '../../src/components/Chat/Types'
 import { ChatProps } from '../../src/common/Types'
 import ColluctorInfo from '../../src/components/Chat/ColluctorInfo'
 import { CollocutorType } from '../../src/components/Chat/Types'
+import ChatFileUpload from '../../src/components/Chat/ChatFileUpload'
 
 const socket = io('http://142.93.233.236:6001', {})
 
@@ -28,9 +29,8 @@ const Сhat: NextPage<ChatProps> = ({ jsonResponse, socketId, classicRooms }): J
   const [colluctor, setColluctor] = useState<CollocutorType>()
   const [activeDialog, setActiveDialog] = useState<ActiveDialogType>()
   const [isOpenDialogsPreview, setIsOpenDialogsPreview] = useState<boolean>(true)
+  const [isFileUploadModalOpen, setIsFileUploadModalOpen] = useState<boolean>(false)
   const [inputValue, setInputValue] = useState<string>('')
-  const [file, setFile] = useState<Blob>()
-  const [preview, setPreview] = useState<string>()
   const [openSmiles, setOpenSmiles] = useState<boolean>(false)
   const [isColluctorClosed, setColuctorClosed] = useState<boolean>(true)
 
@@ -40,12 +40,8 @@ const Сhat: NextPage<ChatProps> = ({ jsonResponse, socketId, classicRooms }): J
   const { jwt_token } = nextCookie('ctx')
 
   useEffect(() => {
-    console.log(classicRooms)
     socket.emit('join', 'gigroom_database_private-' + socketId)
     socket.emit('join', 'gigroom_database_private-bellRoom-' + socketId)
-    socket.on('DealInfo', (data: unknown) => {
-      console.log(data)
-    })
   }, [])
 
   useEffect(() => {
@@ -87,17 +83,20 @@ const Сhat: NextPage<ChatProps> = ({ jsonResponse, socketId, classicRooms }): J
     })
       .then((res) => res.json())
       .then((res) => {
-        if (activeDialog?.room)
-          socket.emit('leave', 'gigroom_database_private-' + activeDialog.room)
+        if (activeDialog?.room) {
+          socket.emit('leave', 'gigroom_database_private-' + activeDialog.room).off('message')
+        }
         setActiveMessagesList(res[0])
         setActiveDialog({ dialog: idDialog, room: roomId })
-        socket.emit('join', 'gigroom_database_private-' + roomId)
-        socket.emit('typing', 'gigroom_database_private-' + roomId)
-
-        socket.on('message', (data: any) => {
+        socket.emit('join', 'gigroom_database_private-' + roomId).on('message', (data: any) => {
           setActiveMessagesList((prev) => [...prev, data])
           scrollToBottom()
         })
+
+        socket.on('disconnect', () => {
+          return
+        })
+
         const newArr: Array<MessageType> = []
         res[0].forEach(({ type, message }: MessageType) => {
           if (type === 'file') {
@@ -110,27 +109,30 @@ const Сhat: NextPage<ChatProps> = ({ jsonResponse, socketId, classicRooms }): J
       })
   }
 
-  const sendMessage = (content: string, typeMessage: string) => {
-    fetch(`http://test.profiroom.com/Backend/api/message`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${jwt_token}`,
-      },
-      body: JSON.stringify({
-        author: jsonResponse.user.id,
-        roomId: activeDialog?.room,
-        chatType: 'classic',
-        type: typeMessage,
-        message: content,
-      }),
-    })
-      .then((res) => res.json())
-      .then(() => {
-        scrollToBottom()
-        setInputValue('')
+  const sendMessage = useCallback(
+    (content: string, typeMessage: string) => {
+      fetch(`http://test.profiroom.com/Backend/api/message`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${jwt_token}`,
+        },
+        body: JSON.stringify({
+          author: jsonResponse.user.id,
+          roomId: activeDialog?.room,
+          chatType: 'classic',
+          type: typeMessage,
+          message: content,
+        }),
       })
-  }
+        .then((res) => res.json())
+        .then(() => {
+          scrollToBottom()
+          setInputValue('')
+        })
+    },
+    [activeDialog]
+  )
 
   const fetchColluctor = useCallback(async (id: number) => {
     try {
@@ -166,43 +168,15 @@ const Сhat: NextPage<ChatProps> = ({ jsonResponse, socketId, classicRooms }): J
     if (inputValue?.length > 0) {
       sendMessage(inputValue, 'string')
     }
-    if (file) {
-      sendFile()
-    }
   }
-
-  const sendFile = useCallback(() => {
-    if (file && activeDialog?.room) {
-      const data: FormData = new FormData()
-      data.append('file', file)
-      data.append('roomId', activeDialog?.room)
-
-      fetch('http://test.profiroom.com/Backend/api/sendFile', {
-        method: 'POST',
-        body: data,
-        headers: {
-          Authorization: `Bearer ${jwt_token}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((res) => sendMessage(JSON.stringify(res), 'file'))
-    }
-  }, [])
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
-
+    /* 
     if (e.target.files?.length) {
-      const reader = new FileReader()
-      const newFile = e.target.files[0]
-
-      reader.onloadend = () => {
-        setFile(newFile)
-        setPreview(reader.result?.toString())
-      }
-
-      reader.readAsDataURL(newFile)
-    }
+      const formData = new FormData()
+      formData.append('roomId', roomId)
+    } */
   }
 
   const addEmoji = (e: any) => {
@@ -279,7 +253,7 @@ const Сhat: NextPage<ChatProps> = ({ jsonResponse, socketId, classicRooms }): J
               addEmoji={addEmoji}
               handleImageChange={handleImageChange}
               openEmoji={openEmoji}
-              preview={preview}
+              handleOpenModal={() => setIsFileUploadModalOpen(true)}
             />
           </div>
         )}
@@ -292,6 +266,13 @@ const Сhat: NextPage<ChatProps> = ({ jsonResponse, socketId, classicRooms }): J
           image={colluctor.collocutorAva}
           description={colluctor.description}
           commentsCount={colluctor.negative_comments_count + colluctor.positive_comments_count}
+        />
+      )}
+      {isFileUploadModalOpen && activeDialog?.room && (
+        <ChatFileUpload
+          setIsFileUploadModalOpen={setIsFileUploadModalOpen}
+          room={activeDialog?.room}
+          sendMessage={sendMessage}
         />
       )}
     </DashboardLayout>

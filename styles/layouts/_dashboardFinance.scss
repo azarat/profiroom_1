@@ -1,0 +1,336 @@
+.finance {
+  &--blur {
+    filter: blur(5px);
+  }
+  .carousel--home-buttons {
+    top: 55px;
+  }
+  & .wallets {
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 3px 21px rgba(128, 152, 213, 0.15);
+
+    &__title {
+      box-sizing: border-box;
+      padding: 10px 20px 14px;
+      font-weight: $font-weight-600;
+      font-size: $font-18;
+      font-variant: small-caps;
+      line-height: 23px;
+      background: #f4f7fc;
+      border-radius: 4px 4px 0 0;
+    }
+
+    &__transaction-select {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.918);
+      border-radius: 3px;
+      outline: $primary-color;
+      box-shadow: 0 10px 16px rgba(128, 152, 213, 0.1);
+    }
+
+    &__transaction-type {
+      border: none;
+      outline: none;
+    }
+
+    &__transactions {
+      padding: 20px 14px;
+      background: #fff;
+      border-radius: 0 0 4px 4px;
+    }
+
+    &__input-wrapper {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    &__input {
+      box-sizing: border-box;
+      width: 100%;
+      height: 45px;
+      padding: 0 15px;
+      color: $dark-gray-color;
+      font-weight: $font-weight-400;
+      font-size: $font-18;
+      font-style: normal;
+      line-height: 23px;
+      background: #f4f7fc;
+      border: 1px solid rgba(220, 224, 230, 0.1);
+      border-radius: 3px;
+      outline: 0;
+    }
+    &__input-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20%;
+      height: 45px;
+      text-align: center;
+      background: #e7ebf2;
+      border: 1px solid rgba(220, 224, 230, 0.1);
+      border-radius: 3px;
+    }
+
+    &__card-text {
+      margin: 0;
+      color: $deep-azure-color;
+      font-weight: $font-weight-400;
+      font-size: $font-12;
+      font-style: normal;
+      font-variant: initial;
+      line-height: 43px;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+
+    &__btn {
+      display: flex;
+      align-items: center;
+      margin: 18px auto;
+      padding: 13px 15px;
+      color: $white-color;
+      font-size: $font-13;
+      line-height: 16px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: $secondary-color;
+      border: none;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(60, 9, 179, 0.3);
+    }
+  }
+
+  & .calendar {
+    margin-top: 20px;
+    border: 1px solid #f0f0f0;
+    border-radius: 2px;
+  }
+
+  &__graphic {
+    margin-top: 20px;
+  }
+
+  &__graphic-title {
+    @extend .wallets__title;
+  }
+
+  .history {
+    margin-top: 20px;
+
+    &__title {
+      @extend .wallets__title;
+      position: relative;
+    }
+
+    &__fullsize-icon {
+      position: absolute;
+      top: 15px;
+      right: 10px;
+      cursor: pointer;
+    }
+
+    &__list {
+      &--fullsize {
+        padding: 10px 15px;
+      }
+    }
+
+    &__list-item {
+      border-bottom: 1px solid #ebeff2;
+      &:not(:first-child) {
+        margin-top: 15px;
+      }
+    }
+
+    &__list-item-info {
+      display: flex;
+      justify-content: space-between;
+    }
+    &__list-item-info-left {
+      color: $secondary-color;
+      font-weight: $font-weight-400;
+      font-size: $font-12;
+      font-style: normal;
+      font-variant: small-caps;
+      line-height: 18px;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+    &__list-item-info-right {
+      font-weight: $font-weight-400;
+      font-size: $font-14;
+      font-style: normal;
+      line-height: 23px;
+    }
+    &__fullsize-wrapper {
+      position: relative;
+      margin-top: 50px;
+
+      .history__list-item {
+        border-bottom: 1px solid #000000;
+      }
+      .history__fullsize-icon {
+        top: 15px;
+        right: 15px;
+      }
+    }
+  }
+}
+
+.history-full {
+  margin-top: 20px;
+
+  &__fullsize-wrapper {
+    margin: auto;
+    padding: 20px;
+    background-color: $white-color;
+  }
+
+  &__title {
+    position: relative;
+    margin: 0 auto;
+    padding: 10px 20px 14px;
+    font-weight: $font-weight-600;
+    font-size: $font-18;
+    font-variant: small-caps;
+    line-height: 23px;
+    background: #f4f7fc;
+    border-radius: 4px 4px 0 0;
+  }
+
+  &__fullsize-icon {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    cursor: pointer;
+  }
+  &__fullsize {
+    display: none;
+
+    &--open {
+      position: absolute;
+      top: 0px;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 25;
+      display: block;
+      height: 100vh;
+      background: rgba(224, 225, 249, 0.3);
+    }
+  }
+  &__list-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #ebeff2;
+  }
+  &__list-item-info {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__list-item-info-left {
+    color: $secondary-color;
+    font-weight: $font-weight-400;
+    font-size: $font-12;
+    font-style: normal;
+    font-variant: small-caps;
+    line-height: 18px;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+  &__list-item-info-right {
+    font-weight: $font-weight-400;
+    font-size: $font-14;
+    font-style: normal;
+    line-height: 23px;
+  }
+}
+
+@media screen and (min-width: 375px) {
+  .finance {
+    .carousel--home-buttons {
+      top: 45px;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .finance {
+    overflow: hidden;
+    &__inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    &__wallets-calendar-wrapper {
+      display: flex;
+      flex-direction: row-reverse;
+      grid-row: 2;
+      justify-content: space-between;
+    }
+    &__wallets {
+      flex: 0 0 50%;
+    }
+
+    &__calendar {
+      flex: 0 0 40%;
+    }
+
+    .history {
+      &__fullsize-wrapper {
+        background-color: $white-color;
+      }
+      &__list-item {
+        display: flex;
+        justify-content: space-between;
+      }
+      &__list-item-info {
+        flex-direction: column;
+      }
+    }
+  }
+
+  .history-full {
+    &__title {
+      width: 70%;
+    }
+    &__fullsize-wrapper {
+      width: 70%;
+    }
+    &__list-item {
+      display: flex;
+      justify-content: space-between;
+    }
+    &__list-item-info {
+      flex-direction: column;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .finance {
+    .carousel--home-buttons {
+      top: 35px;
+    }
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .finance {
+    &__inner {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    &__wallets-calendar-wrapper {
+      grid-row: 1;
+      grid-column: 2;
+      align-items: baseline;
+    }
+  }
+}

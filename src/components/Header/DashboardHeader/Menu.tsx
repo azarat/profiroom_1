@@ -1,5 +1,4 @@
 import React from 'react'
-import ActiveLink from './ActiveLink'
 
 //types
 import { MobileMenuProps } from './Types'
@@ -8,6 +7,7 @@ import { MobileMenuProps } from './Types'
 import { StarOutlined, RightOutlined } from '@ant-design/icons'
 
 import { dataArray } from '../../../constants/dashboardMenu'
+import ActiveLink from './ActiveLink'
 
 const Menu: React.FC<MobileMenuProps> = ({
   isOpenMenu,
@@ -81,7 +81,6 @@ const Menu: React.FC<MobileMenuProps> = ({
                   {isOpenMenu && <p className="dashboard-menu__button-text-open">{title}</p>}
                   <p className="dashboard-menu__button-text-large">{title}</p>
                 </div>
-                <p className="dashboard-menu__button-text">{title}</p>
               </div>
             </ActiveLink>
           </div>

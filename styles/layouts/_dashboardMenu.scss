@@ -1,5 +1,6 @@
 .dashboard-menu {
   position: absolute;
+  top: 73px;
   left: -200px;
   z-index: 100;
   display: flex;
@@ -10,7 +11,9 @@
   transition: 0.5s;
 
   &__open {
+    position: absolute;
     left: 0;
+    z-index: 15;
   }
 
   &__button {
@@ -88,8 +91,10 @@
 
 @media (min-width: 768px) {
   .dashboard-menu {
+    position: fixed;
     top: 0;
     left: 0;
+    z-index: 10;
     width: 75px;
     background-color: $white-fa-color;
     box-shadow: $gray-shadow-100y;
@@ -127,6 +132,7 @@
         .dashboard-menu__button-image-container {
           color: $white-color;
           background-color: $secondary-color;
+          box-shadow: $blue-shadow;
 
           & .message {
             color: $secondary-color;
@@ -197,6 +203,7 @@
     }
 
     &__avatar-border {
+      margin: 0 auto;
       position: relative;
       width: 70px;
       height: 70px;

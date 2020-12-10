@@ -5,12 +5,8 @@ import { Popover } from 'antd'
 //types
 import { TopProps } from './Types'
 //components
-import File from './FileComponent'
 
-const Top: React.FC<TopProps> = ({
-  collocutor: { collocutorName, collocutorSurname, online },
-  fileList,
-}) => {
+const Top: React.FC<TopProps> = ({ collocutor: { collocutorName, collocutorSurname, online } }) => {
   return (
     <div className="messages-window__top">
       <div className="messages-window__collocutor-info">
@@ -25,7 +21,7 @@ const Top: React.FC<TopProps> = ({
             title={'Файлы'}
             content={
               <div>
-                {fileList.map(({ fileName, link, fileType }, index: number) => (
+                {/*  {fileList.map(({ fileName, link, fileType }, index: number) => (
                   <File
                     key={index}
                     index={index}
@@ -34,7 +30,7 @@ const Top: React.FC<TopProps> = ({
                     nameFile={fileName}
                   />
                 ))}
-                {fileList.length <= 0 && 'Файлов нет'}
+                {fileList.length <= 0 && 'Файлов нет'} */}
               </div>
             }
             trigger="click"

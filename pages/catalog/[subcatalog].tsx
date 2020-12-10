@@ -17,7 +17,7 @@ type subCatalogProps = {
 
 const subcatalog: NextPage<subCatalogProps> = ({ categories, subcatalog }): JSX.Element => {
   const { lang } = useContext(MainContext)
-  console.log(lang)
+ 
 
   const { category } = subcatalog
 
@@ -46,10 +46,12 @@ const subcatalog: NextPage<subCatalogProps> = ({ categories, subcatalog }): JSX.
           <div className="sub-catalog-page__wrapper">
             <div className="sub-catalog-page__sidebar sidebar">
               <ul className="sidebar__list">
-                {category[0].sub_categories.map((subCategory) => (
-                  <li className="sidebar__item" key={subCategory.id}>
-                    <Link href={`${category[0].link}/${subCategory.link}`}>
-                      <a className="sidebar__link">{subCategory[`name_${lang}`]}</a>
+                {category[0].sub_categories.map(({ id, link, ...rest }) => (
+                  <li className="sidebar__item" key={id}>
+                    <Link
+                      href={`${encodeURIComponent(category[0].link)}/${encodeURIComponent(link)}`}
+                    >
+                      <a className="sidebar__link">{rest[`name_${lang}`]}</a>
                     </Link>
                   </li>
                 ))}
@@ -57,21 +59,19 @@ const subcatalog: NextPage<subCatalogProps> = ({ categories, subcatalog }): JSX.
             </div>
 
             <div className="sub-catalog-page__inner">
-              {category[0].sub_categories.map((subCategory) => {
+              {category[0].sub_categories.map(({ id, link, img, ...rest }) => {
                 return (
-                  <div className="sub-catalog-page__item" key={subCategory.id}>
-                    <Link href={`${category[0].link}/${subCategory.link}`}>
+                  <div className="sub-catalog-page__item" key={id}>
+                    <Link
+                      href={`${encodeURIComponent(category[0].link)}/${encodeURIComponent(link)}`}
+                    >
                       <a className="sub-catalog-page__link">
                         <div className="sub-catalog-page__img-wrapper">
-                          <img
-                            className="sub-catalog-page__img"
-                            src={subCategory.img}
-                            alt="subcatalog img"
-                          />
+                          <img className="sub-catalog-page__img" src={img} alt="subcatalog img" />
                         </div>
                       </a>
                     </Link>
-                    <h2 className="sub-catalog-page__sub-name">{subCategory[`name_${lang}`]}</h2>
+                    <h2 className="sub-catalog-page__sub-name">{rest[`name_${lang}`]}</h2>
                   </div>
                 )
               })}

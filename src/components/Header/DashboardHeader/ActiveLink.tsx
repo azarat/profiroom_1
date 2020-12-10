@@ -18,8 +18,6 @@ const ActiveLink: React.FC<ActiveLinkProps> = ({ children, activeClassName, ...p
     asPath === props.href || asPath === props.as
       ? `${childClassName} ${activeClassName}`.trim()
       : childClassName
-  console.log(props.href === asPath || props.as === props.href)
-  console.log(activeClassName, props.href, props.as)
   return (
     <Link {...props}>
       {React.cloneElement(child, {
