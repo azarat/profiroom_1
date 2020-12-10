@@ -60,6 +60,7 @@ const LoginForm: React.FC = (): JSX.Element => {
             type="password"
             id="passwordField"
             rules={[{ required: true, message: 'Поле пароль є обовʼязковим' }]}
+
           />
           <div className="login__form-checkbox">
             <Form.Item name="foreignComp" valuePropName="checked" noStyle>
