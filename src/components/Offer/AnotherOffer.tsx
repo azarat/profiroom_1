@@ -6,8 +6,6 @@ import { UserOfferTypes } from '../OfferCard/Types'
 const AnotherOffer: React.FC<UserOfferTypes> = ({ userOffer }): JSX.Element => {
   const router = useRouter()
 
-  console.log(userOffer)
-
   return (
     <div className="offer__another-offers another-offers">
       <h2 className="another-offers__title">
