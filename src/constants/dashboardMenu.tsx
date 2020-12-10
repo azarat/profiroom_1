@@ -1,5 +1,5 @@
 export const dataArray = [
-  { id: 1, image: 'icon-dashboard', title: 'дашбоард', link: '/home' },
+  { id: 1, image: 'icon-dashboard', title: 'дашбоард', link: '' },
   { id: 2, image: 'icon-projects1', title: 'проекти', link: '/projects' },
   {
     id: 3,
