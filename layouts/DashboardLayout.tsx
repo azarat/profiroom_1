@@ -31,11 +31,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <DashboardHeader userData={user} />
-      <main className={`dashboard-main ${className}`}>
-        {/* <div style={{ height: '100%', width: '100%', overflowY: 'scroll', padding: '15px' }}> */}
-        {children}
-        {/* </div> */}
-      </main>
+      <main className={`dashboard-main ${className}`}>{children}</main>
     </>
   )
 }

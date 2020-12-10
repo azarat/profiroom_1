@@ -18,10 +18,12 @@ const Finance: NextPage<DashboardFinanceProps> = ({
   return (
     <ConfigProvider locale={ukUA}>
       <DashboardLayout title="Finance Page" userData={jsonResponse}>
-        <FinanceContainer
-          userFinanceGraphResponse={userFinanceGraphResponse}
-          userFinanceResponse={userFinanceResponse}
-        />
+        <div style={{ height: '100%', width: '100%', overflowY: 'scroll', padding: '15px' }}>
+          <FinanceContainer
+            userFinanceGraphResponse={userFinanceGraphResponse}
+            userFinanceResponse={userFinanceResponse}
+          />
+        </div>
       </DashboardLayout>
     </ConfigProvider>
   )

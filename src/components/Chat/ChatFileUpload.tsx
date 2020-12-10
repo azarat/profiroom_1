@@ -81,7 +81,11 @@ const ChatFileUpload: React.FC<IChatFileUploadProps> = ({
           <button className="chat-page-upload__modal__buttons-button chat-page-upload__modal__buttons-button-outlined">
             Скасувати
           </button>
-          <button className="chat-page-upload__modal__buttons-button" onClick={handleSubmit}>
+          <button
+            className="chat-page-upload__modal__buttons-button"
+            onClick={handleSubmit}
+            disabled={fileList.length == 0}
+          >
             Завантажити
           </button>
         </div>

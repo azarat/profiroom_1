@@ -35,8 +35,6 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = (props): JSX.Element => 
     setLogin(false)
   }
 
-  console.log(handleExit)
-
   return (
     <>
       <header className="dashboard-header">
@@ -55,7 +53,14 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = (props): JSX.Element => 
                 <a className="dashboard-header__link dashboard-header__go-to-main">Головна</a>
               </Link>
               <Link href="/">
-                <a className="dashboard-header__link">Вийти</a>
+                <a
+                  className="dashboard-header__link"
+                  onClick={handleExit}
+                  role="button"
+                  tabIndex={0}
+                >
+                  Вийти
+                </a>
               </Link>
             </div>
           </div>

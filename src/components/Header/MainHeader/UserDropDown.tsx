@@ -18,10 +18,10 @@ const UserDropDown: React.FC<UserDropDownProps> = ({
   useOutsideClick(notificationRef, () => {
     setNotificationOpen(false)
   })
-
-  useOutsideClick(dropDownRef, () => {
-    setDropDown(false)
-  })
+  //todo fix outside click
+  // useOutsideClick(dropDownRef, () => {
+  //   setDropDown(false)
+  // })
 
   const UserMenu = (
     <div ref={dropDownRef} className="header__drop-down">

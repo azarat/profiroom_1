@@ -17,7 +17,7 @@ const MessagesList = forwardRef<HTMLDivElement, MessagesListProps>(
         <div className="messages-window__messages-list">
           {activeMessagesList.map(({ author, dateTime, message, type }, index: number) => {
             let files: FileType[] = []
-            if (type === 'file') {
+            if (type === 'file' && message !== '"wrong"') {
               files = JSON.parse(message)
             }
             return (

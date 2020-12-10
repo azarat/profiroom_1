@@ -17,8 +17,6 @@ const Settings: NextPage<SettingsProps> = ({ jsonResponse }): JSX.Element => {
 
   const { user } = jsonResponse
 
-  console.log(user)
-
   return (
     <DashboardLayout
       className={`${isModalOpen ? 'settings-page settings-page--overflow' : 'settings-page'}`}
