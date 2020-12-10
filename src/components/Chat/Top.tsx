@@ -5,12 +5,8 @@ import { Popover } from 'antd'
 //types
 import { TopProps } from './Types'
 //components
-import File from './FileComponent'
 
-const Top: React.FC<TopProps> = ({
-  collocutor: { collocutorName, collocutorSurname, online },
-  fileList,
-}) => {
+const Top: React.FC<TopProps> = ({ collocutor: { collocutorName, collocutorSurname, online } }) => {
   return (
     <div className="messages-window__top">
       <div className="messages-window__collocutor-info">

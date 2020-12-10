@@ -3,7 +3,7 @@ import React, { useMemo } from 'react'
 //types
 import { FileComponentProps } from './Types'
 
-const File: React.FC<FileComponentProps> = ({ index, fileLink, typeFile, nameFile }) => {
+const File: React.FC<FileComponentProps> = ({ index, fileLink, nameFile }) => {
   const src = useMemo(() => {
     return '/assets/img/file-types/unknown.png'
   }, [])
