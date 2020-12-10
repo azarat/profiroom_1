@@ -2,7 +2,6 @@ import React, { useState, useMemo } from 'react'
 import { Form, Input, Select } from 'antd'
 import { IEducationProps } from './Types'
 import { DeleteFilled, EditFilled, PaperClipOutlined } from '@ant-design/icons'
-import FormItem from 'antd/lib/form/FormItem'
 
 const { Option } = Select
 
