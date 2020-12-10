@@ -36,6 +36,11 @@
   -webkit-tap-highlight-color: $transparent;
 }
 
+* {
+  outline: none;
+  -webkit-tap-highlight-color: $transparent;
+}
+
 body {
   color: $black-color;
   font-family: $font-sans !important;
