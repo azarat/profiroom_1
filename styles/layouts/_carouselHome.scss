@@ -1,0 +1,76 @@
+.carousel--home {
+  position: relative;
+  overflow: hidden;
+  &-list {
+    display: flex;
+    transition: ease-in-out transform 0.2s;
+    &-item {
+      z-index: 1;
+      display: inline-flex;
+      min-width: 100%;
+      padding: 22px 32px 18px;
+    }
+  }
+}
+
+.carousel--home-buttons {
+  position: absolute;
+  top: 45px;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  &-right {
+    position: absolute;
+    right: 10px;
+  }
+  &-left {
+    position: absolute;
+    left: 10px;
+  }
+  & svg {
+    height: 20px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .carousel--home {
+    position: static;
+    width: 33%;
+    margin: 0 auto;
+    overflow: visible;
+
+    &-list {
+      &-item {
+        padding: 0px;
+      }
+    }
+  }
+
+  .carousel--home-buttons {
+    top: 30px;
+    right: 0;
+    &-left {
+      left: 5px;
+    }
+    &-right {
+      right: 5px;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .carousel--home-buttons {
+    top: 20px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .carousel--home {
+    display: none;
+  }
+}

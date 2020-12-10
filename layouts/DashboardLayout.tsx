@@ -26,12 +26,16 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   return (
     <>
       <Head>
-        <title>{`${title ? `${title} | Profiroom` : 'Profiroom - фриланс биржа'}`}</title>
+        <title>{`${title ? `${title} | Profiroom` : 'Profiroom - фріланс біржа'}`}</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <DashboardHeader userData={user} />
-      <main className={`dashboard-main ${className}`}>{children}</main>
+      <main className={`dashboard-main ${className}`}>
+        <div style={{ height: '100%', width: '100%', overflowY: 'scroll', padding: '15px' }}>
+          {children}
+        </div>
+      </main>
     </>
   )
 }

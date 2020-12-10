@@ -3,6 +3,8 @@ import React, { useRef, useState } from 'react'
 import useOutlineClick from '../../../hooks/useOutsideClick'
 //types
 import { LangSelectProps } from './Types'
+//svg
+import ArrowSVG from '../../../../public/assets/img/arrow-down.svg'
 
 export const languageOptions = ['ru', 'uk', 'en']
 
@@ -22,7 +24,7 @@ const LangSelect: React.FC<LangSelectProps> = ({ language, updateLanguage }): JS
       onClick={() => setOpen(!open)}
     >
       <span className="header__current-lang">{language}</span>
-      <img src="/assets/img/arrow-down.svg" alt="language selector" />
+      <ArrowSVG className="header__arrow-down" />
       {open && (
         <div className="header__lang">
           {languageOptions.map((lang, index) => (

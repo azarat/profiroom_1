@@ -8,7 +8,7 @@ export const dataArray = [
     link: '/chat',
     active: 'message-active',
   },
-  { id: 5, image: 'icon-my-services', title: 'послуги', link: '/services' },
+  { id: 5, image: 'icon-my-services', title: 'каталог', link: '/services' },
   { id: 6, image: 'icon-finance', title: 'фінанси', link: '/finance' },
   { id: 7, image: 'icon-Settings1', title: 'налаштування', link: '/settings' },
 ]

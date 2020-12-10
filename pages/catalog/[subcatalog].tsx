@@ -17,7 +17,7 @@ type subCatalogProps = {
 
 const subcatalog: NextPage<subCatalogProps> = ({ categories, subcatalog }): JSX.Element => {
   const { lang } = useContext(MainContext)
-  console.log(lang)
+ 
 
   const { category } = subcatalog
 

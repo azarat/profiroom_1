@@ -6,7 +6,6 @@ import LoginForm from '../src/components/LoginForm/LoginForm'
 import RegistrationForm from '../src/components/RegistrationForm/RegistrationForm'
 import Header from '../src/components/Header/MainHeader/Header'
 import { Button } from 'antd'
-// Style
 
 const login: NextPage = (): JSX.Element => {
   const [isRegistration, setIsRegistration] = useState<boolean>(false)
@@ -48,7 +47,6 @@ const login: NextPage = (): JSX.Element => {
   return (
     <>
       <div className="login login__mobile">{renderData}</div>
-
       <div className={`login login__desktop ${isRegistration && 'right-panel-active'}`}>
         <div className="container__form container__signup">
           <RegistrationForm registrationHandler={handleRegistration} />
