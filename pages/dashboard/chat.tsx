@@ -20,8 +20,6 @@ import ColluctorInfo from '../../src/components/Chat/ColluctorInfo'
 import { CollocutorType } from '../../src/components/Chat/Types'
 import ChatFileUpload from '../../src/components/Chat/ChatFileUpload'
 
-const socket = io('http://142.93.233.236:6001', {})
-
 const Сhat: NextPage<ChatProps> = ({ jsonResponse, socketId, classicRooms }): JSX.Element => {
   const messageListRef = useRef<HTMLDivElement>(null)
   const [activeMessagesList, setActiveMessagesList] = useState<Array<MessageType>>([])
@@ -33,6 +31,7 @@ const Сhat: NextPage<ChatProps> = ({ jsonResponse, socketId, classicRooms }): J
   const [inputValue, setInputValue] = useState<string>('')
   const [openSmiles, setOpenSmiles] = useState<boolean>(false)
   const [isColluctorClosed, setColuctorClosed] = useState<boolean>(true)
+  let socket: SocketIOClient.Socket
 
   const smilesBox = useRef<HTMLDivElement>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
@@ -40,6 +39,7 @@ const Сhat: NextPage<ChatProps> = ({ jsonResponse, socketId, classicRooms }): J
   const { jwt_token } = nextCookie('ctx')
 
   useEffect(() => {
+    socket = io('http://142.93.233.236:6001', {})
     socket.emit('join', 'gigroom_database_private-' + socketId)
     socket.emit('join', 'gigroom_database_private-bellRoom-' + socketId)
   }, [])
@@ -170,15 +170,6 @@ const Сhat: NextPage<ChatProps> = ({ jsonResponse, socketId, classicRooms }): J
     }
   }
 
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    /* 
-    if (e.target.files?.length) {
-      const formData = new FormData()
-      formData.append('roomId', roomId)
-    } */
-  }
-
   const addEmoji = (e: any) => {
     const emoji = e.native
     setInputValue(inputValue + emoji)
@@ -251,7 +242,6 @@ const Сhat: NextPage<ChatProps> = ({ jsonResponse, socketId, classicRooms }): J
               smilesBox={smilesBox}
               openSmiles={openSmiles}
               addEmoji={addEmoji}
-              handleImageChange={handleImageChange}
               openEmoji={openEmoji}
               handleOpenModal={() => setIsFileUploadModalOpen(true)}
             />

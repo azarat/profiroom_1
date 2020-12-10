@@ -116,7 +116,6 @@ export type FormProps = {
   smilesBox: RefObject<HTMLDivElement>
   openSmiles: boolean
   addEmoji: (e: any) => void
-  handleImageChange: (e: ChangeEvent<HTMLInputElement>) => void
   openEmoji: () => any
   handleOpenModal: () => void
 }
