@@ -1,11 +1,8 @@
 .notification {
-  font-family: $font-roboto;
-
   &__wrapper .ant-form {
     display: grid;
     grid-template-columns: 1fr;
     color: $gray-color-title;
-    font-family: $font-roboto;
   }
 
   &__block-info,
