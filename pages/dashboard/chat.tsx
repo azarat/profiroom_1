@@ -19,6 +19,7 @@ import { ChatProps } from '../../src/common/Types'
 import ColluctorInfo from '../../src/components/Chat/ColluctorInfo'
 import { CollocutorType } from '../../src/components/Chat/Types'
 import ChatFileUpload from '../../src/components/Chat/ChatFileUpload'
+let socket: SocketIOClient.Socket
 
 const Сhat: NextPage<ChatProps> = ({ jsonResponse, socketId, classicRooms }): JSX.Element => {
   const messageListRef = useRef<HTMLDivElement>(null)
@@ -31,7 +32,6 @@ const Сhat: NextPage<ChatProps> = ({ jsonResponse, socketId, classicRooms }): J
   const [inputValue, setInputValue] = useState<string>('')
   const [openSmiles, setOpenSmiles] = useState<boolean>(false)
   const [isColluctorClosed, setColuctorClosed] = useState<boolean>(true)
-  let socket: SocketIOClient.Socket
 
   const smilesBox = useRef<HTMLDivElement>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
