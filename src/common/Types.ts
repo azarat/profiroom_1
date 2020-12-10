@@ -5,6 +5,12 @@ export type DashboardProps = {
   jsonResponse: JsonResponseType
 }
 
+export type SettingsProps = {
+  jsonResponse: {
+    user: UserType
+  }
+}
+
 export type ChatProps = {
   socketId: string
   classicRooms: any[]

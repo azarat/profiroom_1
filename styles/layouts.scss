@@ -23,6 +23,7 @@
 @import './layouts/dashboardFinance';
 @import './layouts/chat';
 @import '../node_modules/emoji-mart/css/emoji-mart.css';
+@import './layouts/settings';
 @import './layouts/formField';
 @import './layouts/promo';
 @import './layouts/mainDescription';
@@ -42,7 +43,7 @@
 body {
   color: $black-color;
   font-family: $font-sans !important;
-    &.fixed {
+  &.fixed {
     overflow: hidden;
   }
 }
@@ -51,9 +52,29 @@ html {
   scroll-behavior: smooth;
 }
 
+.fade {
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .dashboard-main {
   position: relative;
   height: calc(100vh - 70px);
+  overflow: visible;
   background-color: $white-color;
   border-radius: 10px 10px 0 0;
 }
@@ -86,23 +107,4 @@ html {
   .container {
     max-width: 1600px;
   }
-}
-  
-  .fade {
-  animation: fadeIn 0.5s;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
 }

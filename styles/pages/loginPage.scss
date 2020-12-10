@@ -37,6 +37,10 @@
   height: 100%;
   place-items: center;
   transition: all 0.6s ease-in-out;
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .container__signin {
