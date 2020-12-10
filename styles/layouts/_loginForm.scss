@@ -21,6 +21,9 @@
   margin-top: 50px;
   &.ant-form {
     margin: 0 auto;
+    & .ant-form-item-explain.ant-form-item-explain-error {
+      font-size: $font-10;
+    }
   }
   &-checkbox {
     display: flex;
@@ -54,10 +57,9 @@
     max-width: 450px;
     &.ant-form {
       & .ant-form-item-explain.ant-form-item-explain-error {
-        padding-left: 50px;
+        padding-left: 0;
       }
     }
-
   }
 }
 
@@ -66,7 +68,7 @@
     max-width: 550px;
     &.ant-form {
       & .ant-form-item-explain.ant-form-item-explain-error {
-        padding-left: 100px;
+        padding-left: 0;
       }
     }
   }
