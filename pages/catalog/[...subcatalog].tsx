@@ -288,14 +288,14 @@ const subcatalog: NextPage<SubCatalogProps> = ({ catalog, ...props }): JSX.Eleme
                       />
                     </div>
                     <div className="services__budget-filter-buttons budget-buttons">
+                      <button className="budget-buttons__clear" onClick={clearBudgetFilter}>
+                        Очистити
+                      </button>
                       <button
                         className="budget-buttons__close"
                         onClick={() => setVisibleFilter(undefined)}
                       >
                         Закрити
-                      </button>
-                      <button className="budget-buttons__clear" onClick={clearBudgetFilter}>
-                        Очистити
                       </button>
                     </div>
                   </div>
@@ -599,26 +599,30 @@ const subcatalog: NextPage<SubCatalogProps> = ({ catalog, ...props }): JSX.Eleme
                 )}
             </div>
           </div>
-          <div className="services__pagination">
-            <Pagination
-              size="small"
-              total={catalog.total}
-              pageSize={12}
-              showSizeChanger={false}
-              onChange={handlerPage}
-              defaultCurrent={1}
-              current={router.query.page ? Number(router.query.page) : 1}
-            />
-          </div>
-          <div className="services__load-more-wrapper">
-            <button
-              disabled={page === catalog.last_page}
-              className="services__load-more"
-              onClick={() => handleLoadMore()}
-            >
-              {!loading ? 'Завантажити ще' : 'Завантаження...'}
-            </button>
-          </div>
+          {catalog.last_page !== 1 && (
+            <div className="services__pagination">
+              <Pagination
+                size="small"
+                total={catalog.total}
+                pageSize={12}
+                showSizeChanger={false}
+                onChange={handlerPage}
+                defaultCurrent={1}
+                current={router.query.page ? Number(router.query.page) : 1}
+              />
+            </div>
+          )}
+          {catalog.last_page !== 1 && (
+            <div className="services__load-more-wrapper">
+              <button
+                disabled={page === catalog.last_page}
+                className="services__load-more"
+                onClick={() => handleLoadMore()}
+              >
+                {!loading ? 'Завантажити ще' : 'Завантаження...'}
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </MainLayout>
