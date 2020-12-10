@@ -17,7 +17,8 @@ const Form: React.FC<FormProps> = ({
   openSmiles,
   addEmoji,
   openEmoji,
-}) => {
+  handleOpenModal,
+}): JSX.Element => {
   const handleEnter = useCallback(
     (e: React.KeyboardEvent) => {
       if (e.key == 'Enter') {
@@ -48,7 +49,7 @@ const Form: React.FC<FormProps> = ({
           <Picker onSelect={addEmoji} color="#397ae7" style={{ width: '100%' }} />
         </div>
         <div className="messages-window__tools-left">
-          <button className="messages-window__file-upload">
+          <button onClick={handleOpenModal} className="messages-window__file-upload">
             <span className="icon-file"></span>
           </button>
           <div className="messages-window__emoji-smiles-button">

@@ -118,6 +118,7 @@ export type FormProps = {
   addEmoji: (e: any) => void
   handleImageChange: (e: ChangeEvent<HTMLInputElement>) => void
   openEmoji: () => any
+  handleOpenModal: () => void
 }
 
 export type ColluctorInfoProps = {

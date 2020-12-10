@@ -29,7 +29,7 @@ const Сhat: NextPage<ChatProps> = ({ jsonResponse, socketId, classicRooms }): J
   const [colluctor, setColluctor] = useState<CollocutorType>()
   const [activeDialog, setActiveDialog] = useState<ActiveDialogType>()
   const [isOpenDialogsPreview, setIsOpenDialogsPreview] = useState<boolean>(true)
-  const [isFileUploadModalOpen, setIsFileUploadModalOpen] = useState<boolean>(true)
+  const [isFileUploadModalOpen, setIsFileUploadModalOpen] = useState<boolean>(false)
   const [inputValue, setInputValue] = useState<string>('')
   const [openSmiles, setOpenSmiles] = useState<boolean>(false)
   const [isColluctorClosed, setColuctorClosed] = useState<boolean>(true)
@@ -40,12 +40,8 @@ const Сhat: NextPage<ChatProps> = ({ jsonResponse, socketId, classicRooms }): J
   const { jwt_token } = nextCookie('ctx')
 
   useEffect(() => {
-    console.log(classicRooms)
     socket.emit('join', 'gigroom_database_private-' + socketId)
     socket.emit('join', 'gigroom_database_private-bellRoom-' + socketId)
-    socket.on('DealInfo', (data: unknown) => {
-      console.log(data)
-    })
   }, [])
 
   useEffect(() => {
@@ -257,6 +253,7 @@ const Сhat: NextPage<ChatProps> = ({ jsonResponse, socketId, classicRooms }): J
               addEmoji={addEmoji}
               handleImageChange={handleImageChange}
               openEmoji={openEmoji}
+              handleOpenModal={() => setIsFileUploadModalOpen(true)}
             />
           </div>
         )}

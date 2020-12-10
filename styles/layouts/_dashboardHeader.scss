@@ -12,6 +12,7 @@
     color: $white-color;
     font-weight: $font-weight-700;
     font-size: $font-18;
+    cursor: pointer;
   }
 
   &__bell-icon {
@@ -213,6 +214,9 @@
   .dashboard-header {
     &__nav {
       width: 95%;
+    }
+    &__logo {
+      z-index: 10;
     }
   }
 }

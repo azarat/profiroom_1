@@ -5,7 +5,7 @@ import Message from './Message'
 import File from './FileComponent'
 
 //types
-import { MessagesListProps } from './Types'
+import { MessagesListProps, FileType } from './Types'
 
 const MessagesList = forwardRef<HTMLDivElement, MessagesListProps>(
   ({ activeMessagesList, messagesEndRef, user }, ref) => {
@@ -16,7 +16,7 @@ const MessagesList = forwardRef<HTMLDivElement, MessagesListProps>(
       >
         <div className="messages-window__messages-list">
           {activeMessagesList.map(({ author, dateTime, message, type }, index: number) => {
-            let files
+            let files: FileType[] = []
             if (type === 'file') {
               files = JSON.parse(message)
             }
