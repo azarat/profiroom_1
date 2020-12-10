@@ -16,17 +16,9 @@ const MessagesList = forwardRef<HTMLDivElement, MessagesListProps>(
       >
         <div className="messages-window__messages-list">
           {activeMessagesList.map(({ author, dateTime, message, type }, index: number) => {
-            let file
-            let fileLink
-            let typeFile
-            let nameFile
-
+            let files
             if (type === 'file') {
-              file = JSON.parse(message)
-              const { link, fileName, fileType } = file[0]
-              fileLink = link
-              typeFile = fileType
-              nameFile = fileName
+              files = JSON.parse(message)
             }
             return (
               <div
@@ -40,7 +32,18 @@ const MessagesList = forwardRef<HTMLDivElement, MessagesListProps>(
                 {type === 'string' ? (
                   <Message author={author} dateTime={dateTime} message={message} user={user} />
                 ) : (
-                  <File index={index} fileLink={fileLink} typeFile={typeFile} nameFile={nameFile} />
+                  files.length &&
+                  files.map(({ id, link, fileName, fileType }) => {
+                    return (
+                      <File
+                        key={id}
+                        index={index}
+                        fileLink={link}
+                        typeFile={fileType}
+                        nameFile={fileName}
+                      />
+                    )
+                  })
                 )}
               </div>
             )

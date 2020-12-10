@@ -16,9 +16,7 @@ const Form: React.FC<FormProps> = ({
   smilesBox,
   openSmiles,
   addEmoji,
-  handleImageChange,
   openEmoji,
-  preview,
 }) => {
   const handleEnter = useCallback(
     (e: React.KeyboardEvent) => {
@@ -50,18 +48,9 @@ const Form: React.FC<FormProps> = ({
           <Picker onSelect={addEmoji} color="#397ae7" style={{ width: '100%' }} />
         </div>
         <div className="messages-window__tools-left">
-          <form encType="multipart/form-data">
-            <label htmlFor="file-upload" className="messages-window__file-upload">
-              <div className="icon-file"></div>
-            </label>
-            <input
-              id="file-upload"
-              className="fileInput"
-              type="file"
-              onChange={(e) => handleImageChange(e)}
-              style={{ display: 'none' }}
-            />
-          </form>
+          <button className="messages-window__file-upload">
+            <span className="icon-file"></span>
+          </button>
           <div className="messages-window__emoji-smiles-button">
             <SmileOutlined onClick={openEmoji} />
           </div>
@@ -70,9 +59,6 @@ const Form: React.FC<FormProps> = ({
           className="icon-send-message messages-window__submit-button"
           onClick={handleSubmit}
         ></button>
-        {preview && (
-          <img src={preview} alt="preview" className="messages-window__upload-file-preview" />
-        )}
       </div>
     </div>
   )

@@ -15,6 +15,7 @@
 @import './pages/subCatalog';
 @import './layouts/dashboardHeader';
 @import './layouts/dashboardMenu';
+@import './layouts/settings';
 @import './layouts/chat';
 @import '../node_modules/emoji-mart/css/emoji-mart.css';
 
@@ -33,6 +34,7 @@ body {
 .dashboard-main {
   position: relative;
   height: calc(100vh - 70px);
+  overflow: visible;
   background-color: $white-color;
   border-radius: 10px 10px 0 0;
 }

@@ -12,6 +12,10 @@
   top: 0;
   height: 100%;
   transition: all 0.6s ease-in-out;
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .container__signin {
@@ -25,7 +29,6 @@
 }
 
 .container__signup {
-  left: -150px;
   z-index: 1;
   width: 60%;
   padding-right: 10px;
@@ -34,7 +37,7 @@
 
 .login.right-panel-active .container__signup {
   z-index: 5;
-  transform: translateX(100%);
+  transform: translateX(60%);
   opacity: 1;
   animation: show 0.6s;
 }
@@ -151,9 +154,6 @@
 }
 
 @media screen and (min-width: 1024px) {
-  .container__signup {
-    left: -200px;
-  }
   .overlay__panel {
     &-title {
       font-size: $font-36;
@@ -161,23 +161,5 @@
     &-description {
       font-size: $font-24;
     }
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .container__signup {
-    left: -250px;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .container__signup {
-    left: -300px;
-  }
-}
-
-@media screen and (min-width: 2200px) {
-  .container__signup {
-    left: -500px;
   }
 }
