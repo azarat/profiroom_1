@@ -8,7 +8,6 @@ import Projects from '../../src/components/DashboardComponents/Projects'
 
 import Services from '../../src/components/DashboardComponents/Services'
 import Finance from '../../src/components/DashboardComponents/Finance'
-import Settings from '../../src/components/DashboardComponents/Settings'
 
 import { JsonResponseType } from '../../src/components/Header/DashboardHeader/Types'
 import { HomeTypes } from '../../src/components/DashboardComponents/HomeTypes'
@@ -25,7 +24,6 @@ const dashboard: NextPage<dashboardProps> = ({ jsonResponse }): JSX.Element => {
       {router.asPath === '/dashboard/projects' ? <Projects /> : undefined}
       {router.asPath === '/dashboard/services' ? <Services /> : undefined}
       {router.asPath === '/dashboard/finance' ? <Finance /> : undefined}
-      {router.asPath === '/dashboard/settings' ? <Settings /> : undefined}
     </DashboardLayout>
   )
 }

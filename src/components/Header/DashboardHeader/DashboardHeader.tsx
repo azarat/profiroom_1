@@ -14,8 +14,6 @@ import { BellFilled } from '@ant-design/icons'
 import { MainContext } from '../../../context/MainContext'
 //types
 import { DashboardHeaderProps } from './Types'
-//ctx
-import { MainContext } from '../../../context/MainContext'
 
 const DashboardHeader: React.FC<DashboardHeaderProps> = (props): JSX.Element => {
   const [isClient, setIsClient] = useState<boolean>(false)
@@ -37,6 +35,8 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = (props): JSX.Element => 
     setLogin(false)
   }
 
+  console.log(handleExit)
+
   return (
     <>
       <header className="dashboard-header">
@@ -47,7 +47,6 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = (props): JSX.Element => 
               <BellFilled className="dashboard-header__bell-icon" />
             </Popover>
             <div className="dashboard-header__switch-desktop">
-
               <SwitchComponent isClient={isClient} selectRole={selectRole} />
             </div>
             <LangSelect language={lang} updateLanguage={setLang} />
