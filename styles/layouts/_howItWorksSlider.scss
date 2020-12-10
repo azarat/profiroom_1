@@ -1,0 +1,34 @@
+.slider {
+  &__select-role {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  &__title {
+    font-weight: $font-weight-600;
+    font-size: $font-16;
+    transition: 0.5s;
+    user-select: none;
+    &-active {
+      color: $secondary-color;
+      transition: 0.5s;
+    }
+  }
+  &__indicator {
+    width: 50%;
+    height: 3px;
+    background-color: $secondary-color;
+    border-radius: 10px 10px 1px 1px;
+    transition: 0.3s;
+    &-active {
+      margin-left: 50%;
+      transition: 0.3s;
+    }
+    &-bottom {
+      height: 1px;
+      margin: 0;
+      background-color: $secondary-color;
+      border: none;
+    }
+  }
+}

@@ -7,6 +7,13 @@
     margin: 0 auto;
   }
 }
+.registration__checkbox {
+  &.ant-checkbox-wrapper {
+    & span {
+      font-size: $font-12;
+    }
+  }
+}
 .registration__password-information {
   color: $gray-color;
   font-size: $font-12;
@@ -18,29 +25,36 @@
   text-decoration: underline;
 }
 
-.ant-form label {
-  font-size: $font-12;
-}
-
 @media screen and (min-width: 768px) {
   .registration__form {
+    width: 100%;
     max-width: 450px;
-    width: 100%;
-  }
-  .ant-space.ant-space-vertical {
-    width: 100%;
-  }
-  .registration__password-information {
-    max-width: 300px;
-    margin-left: auto;
+    &.ant-form {
+      & .ant-form-item-explain.ant-form-item-explain-error {
+        padding-left: 50px;
+      }
+    padding-left: 50px;
   }
 }
 
 @media screen and (min-width: 1200px) {
   .registration__form {
     max-width: 600px;
+    &.ant-form {
+      & .ant-form-item-explain.ant-form-item-explain-error {
+        padding-left: 125px;
+      }
+    }
+  }
+  .registration__checkbox {
+    &.ant-checkbox-wrapper {
+      & span {
+        font-size: $font-14;
+      }
+    }
   }
   .registration__password-information {
     max-width: 400px;
+    padding-left: 125px;
   }
 }

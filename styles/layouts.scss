@@ -1,8 +1,7 @@
-@import '../public/fonts/roboto.css';
+@import './fonts/sansPro.css';
 @import '../public/fonts/icomoon.css';
 @import './variables';
 @import './layouts/header';
-@import './layouts/landing';
 @import './layouts/loginForm';
 @import './layouts/registrationForm';
 @import './layouts/mobile-menu';
@@ -10,11 +9,24 @@
 @import './layouts//mobile-menu';
 @import './layouts/footer';
 @import './layouts/categories';
-@import './pages/card';
+@import './pages/services';
 @import './layouts/catalogList';
 @import './pages/subCatalog';
+@import './layouts/servicesCard';
+@import './pages/offerPage';
 @import './layouts/dashboardHeader';
 @import './layouts/dashboardMenu';
+@import './pages/carousel';
+@import './layouts/formField';
+@import './layouts/promo';
+@import './layouts/mainDescription';
+@import './layouts/mainDescriptionCard';
+@import './layouts/howItWorks';
+@import './layouts/howItWorksSlider';
+@import './layouts/mainCategories';
+@import './layouts/questions';
+@import './layouts/mobileApp';
+@import './layouts/getStart';
 @import './layouts/settings';
 @import './layouts/chat';
 @import '../node_modules/emoji-mart/css/emoji-mart.css';
@@ -25,11 +37,35 @@
 }
 
 body {
-  font-family: $font-roboto;
+  color: $black-color;
+  font-family: $font-sans !important;
   &.fixed {
     overflow: hidden;
   }
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+.fade {
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  }
 
 .dashboard-main {
   position: relative;
@@ -61,11 +97,10 @@ body {
     width: 75%;
     margin-left: 20%;
   }
-}
-
-@media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1800px) {
   .container {
-    width: 1200px;
-    margin: 0 auto;
+    max-width: 1600px;
   }
 }
+
+
